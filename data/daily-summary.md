@@ -1,24 +1,28 @@
-## Daily Scan Summary (2026-04-22)
+## Daily Scan Summary (2026-04-23)
 - Scanned: 50 packages
-- CRITICAL: 6
-- HIGH: 2
-- CLEAN/LOW: 38
+- CRITICAL: 8
+- HIGH: 4
+- CLEAN/LOW: 32
 
 ### Flagged Packages:
-- [CRITICAL] @aaronsb/salesforce-cloud-mcp (score: 100)
-- [CRITICAL] @agentbrain/mcp-server (score: 100)
-- [CRITICAL] @ai-city/mcp (score: 70)
-- [HIGH] @akiojin/playfab-mcp-server (score: 45)
-- [CRITICAL] @alexsarrell/gitlab-mcp-server (score: 70)
-- [CRITICAL] @almanak/mcp-server (score: 95)
-- [HIGH] @alosies/gitlab-mcp-server (score: 45)
-- [CRITICAL] @altimateai/datamate (score: 100)
+- [CRITICAL] @addition-works/runway-mcp-server (score: 100)
+- [HIGH] @anyshift/anyshift-mcp-server (score: 40)
+- [CRITICAL] @aot-tech/jira-mcp-server (score: 80)
+- [CRITICAL] @apify/actors-mcp-server (score: 100)
+- [CRITICAL] @arabold/docs-mcp-server (score: 100)
+- [CRITICAL] @arkheia/mcp-server (score: 100)
+- [CRITICAL] @atelier-ai/mcp (score: 100)
+- [CRITICAL] @atezer/figma-mcp-bridge (score: 100)
+- [CRITICAL] @atoms-tech/atoms-mcp (score: 100)
+- [HIGH] @attackforge/mcp-server (score: 50)
+- [HIGH] @auth0/auth0-mcp-server (score: 48)
+- [HIGH] @automatalabs/mcp-server-playwright (score: 50)
 
 ### Cumulative:
-- Total scanned: 210
-  - CLEAN: 111
-  - CRITICAL: 25
+- Total scanned: 260
+  - CLEAN: 137
+  - CRITICAL: 33
   - ERROR: 1
-  - HIGH: 23
-  - LOW: 30
-  - MEDIUM: 20
+  - HIGH: 27
+  - LOW: 36
+  - MEDIUM: 26
