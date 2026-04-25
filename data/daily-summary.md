@@ -1,29 +1,23 @@
-## Daily Scan Summary (2026-04-24)
+## Daily Scan Summary (2026-04-25)
 - Scanned: 50 packages
-- CRITICAL: 5
-- HIGH: 8
-- CLEAN/LOW: 31
+- CRITICAL: 4
+- HIGH: 3
+- CLEAN/LOW: 35
 
 ### Flagged Packages:
-- [HIGH] @arimakouyou/spec-workflow-mcp (score: 50)
-- [HIGH] @avatarbook/mcp-server (score: 60)
-- [HIGH] @aztec/mcp-server (score: 40)
-- [HIGH] @baitong-dev/mcp-helpers (score: 60)
-- [HIGH] @baklib/baklib-mcp-server (score: 40)
-- [CRITICAL] @basilica/mcp (score: 100)
-- [HIGH] @beeper/desktop-mcp (score: 60)
-- [HIGH] @bgx4k3p/huly-mcp-server (score: 50)
-- [CRITICAL] @bigstrider/transcodes-mcp-server (score: 100)
-- [CRITICAL] @binalyze/air-mcp (score: 100)
-- [CRITICAL] @biolm/biolm-mcp (score: 100)
-- [HIGH] @bitatlas/mcp-server (score: 50)
-- [CRITICAL] @bitwarden/mcp-server (score: 96.66666666666666)
+- [HIGH] @agentlux/mcp-server (score: 50)
+- [CRITICAL] @botuyo/mcp (score: 100)
+- [HIGH] @bridge_gpt/mcp-server (score: 45)
+- [CRITICAL] @burakgoksu1/mip-mcp-server (score: 100)
+- [HIGH] @bytebase/dbhub (score: 50)
+- [CRITICAL] @cemalturkcann/mariadb-mcp-server (score: 95)
+- [CRITICAL] @chakra-ui/react-mcp (score: 80)
 
 ### Cumulative:
-- Total scanned: 310
-  - CLEAN: 162
-  - CRITICAL: 38
+- Total scanned: 360
+  - CLEAN: 191
+  - CRITICAL: 42
   - ERROR: 1
-  - HIGH: 35
-  - LOW: 42
-  - MEDIUM: 32
+  - HIGH: 38
+  - LOW: 48
+  - MEDIUM: 40
