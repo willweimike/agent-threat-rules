@@ -1,28 +1,26 @@
-## Daily Scan Summary (2026-04-26)
+## Daily Scan Summary (2026-04-27)
 - Scanned: 50 packages
-- CRITICAL: 6
-- HIGH: 6
-- CLEAN/LOW: 33
+- CRITICAL: 7
+- HIGH: 3
+- CLEAN/LOW: 36
 
 ### Flagged Packages:
-- [CRITICAL] @agent_fi/mcp-server (score: 100)
-- [CRITICAL] @calcis/mcp-server (score: 80)
-- [HIGH] @cjavdev/believe-mcp (score: 60)
-- [CRITICAL] @cloudflare/mcp-server-cloudflare (score: 100)
-- [HIGH] @cloveos/mcp-server (score: 55)
-- [HIGH] @cocal/google-calendar-mcp (score: 50)
-- [HIGH] @codesherlock/codesherlock-mcp-server (score: 50)
-- [HIGH] @cognistore/mcp-server (score: 40)
-- [HIGH] @coingecko/coingecko-mcp (score: 60)
-- [CRITICAL] @configcat/mcp-server (score: 100)
-- [CRITICAL] @contextstream/mcp-server (score: 75)
-- [CRITICAL] @cozyflux/mcp-server (score: 100)
+- [CRITICAL] @172ai/containers-mcp-server (score: 100)
+- [CRITICAL] @biqblue/mcp-server (score: 85)
+- [HIGH] @chain-lens/mcp-tool (score: 40)
+- [CRITICAL] @chatwork/mcp-server (score: 80)
+- [CRITICAL] @colorfront/shiitake-mcp (score: 100)
+- [HIGH] @cristip73/mcp-server-asana (score: 55)
+- [CRITICAL] @crush-protocol/mcp-client (score: 100)
+- [CRITICAL] @dalmasonto/taskflow-mcp (score: 70)
+- [CRITICAL] @dangerusslee/gitlab-mcp-server (score: 70)
+- [HIGH] @databrainhq/mcp-server (score: 50)
 
 ### Cumulative:
-- Total scanned: 410
-  - CLEAN: 216
-  - CRITICAL: 48
+- Total scanned: 460
+  - CLEAN: 246
+  - CRITICAL: 55
   - ERROR: 1
-  - HIGH: 44
-  - LOW: 56
-  - MEDIUM: 45
+  - HIGH: 47
+  - LOW: 62
+  - MEDIUM: 49
