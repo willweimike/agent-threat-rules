@@ -1,28 +1,27 @@
-## Daily Scan Summary (2026-04-29)
+## Daily Scan Summary (2026-04-30)
 - Scanned: 50 packages
-- CRITICAL: 8
+- CRITICAL: 7
 - HIGH: 4
-- CLEAN/LOW: 31
+- CLEAN/LOW: 34
 
 ### Flagged Packages:
-- [CRITICAL] @asterpay/mcp-server (score: 100)
-- [CRITICAL] @businys/mcp-server (score: 100)
-- [CRITICAL] @claude-code-best/mcp-chrome-bridge (score: 100)
-- [HIGH] @davoxi/mcp-server (score: 45)
-- [CRITICAL] @dwolla/mcp-server (score: 100)
-- [CRITICAL] @edubase/mcp (score: 100)
-- [CRITICAL] @elisym/mcp (score: 75)
-- [CRITICAL] @elixium.ai/mcp-server (score: 100)
-- [HIGH] @elizaos/plugin-mcp (score: 50)
-- [HIGH] @elvatis_com/elvatis-mcp (score: 40)
-- [CRITICAL] @emergent-wisdom/understanding-graph-mcp-server (score: 95)
-- [HIGH] @emuluxe/mcp-server (score: 40)
+- [CRITICAL] @astandrik/local-ydb-mcp (score: 100)
+- [CRITICAL] @basex-ui/mcp-server (score: 75)
+- [CRITICAL] @chandshantanu/agentbuilder-mcp-server (score: 100)
+- [HIGH] @ericthered926/duckduckgo-mcp-server (score: 60)
+- [CRITICAL] @execufunction/mcp-server (score: 100)
+- [HIGH] @executeautomation/database-server (score: 65)
+- [HIGH] @executeautomation/playwright-mcp-server (score: 45)
+- [HIGH] @expandai/mcp-server (score: 40)
+- [CRITICAL] @extentos/mcp-server (score: 100)
+- [CRITICAL] @firefly-iii-mcp/core (score: 100)
+- [CRITICAL] @flexprice/mcp-server (score: 100)
 
 ### Cumulative:
-- Total scanned: 560
-  - CLEAN: 304
-  - CRITICAL: 67
+- Total scanned: 610
+  - CLEAN: 334
+  - CRITICAL: 74
   - ERROR: 1
-  - HIGH: 57
-  - LOW: 71
-  - MEDIUM: 60
+  - HIGH: 61
+  - LOW: 75
+  - MEDIUM: 65
