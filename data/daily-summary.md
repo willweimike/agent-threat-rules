@@ -1,27 +1,28 @@
-## Daily Scan Summary (2026-04-30)
+## Daily Scan Summary (2026-05-01)
 - Scanned: 50 packages
-- CRITICAL: 7
+- CRITICAL: 8
 - HIGH: 4
-- CLEAN/LOW: 34
+- CLEAN/LOW: 32
 
 ### Flagged Packages:
-- [CRITICAL] @astandrik/local-ydb-mcp (score: 100)
-- [CRITICAL] @basex-ui/mcp-server (score: 75)
-- [CRITICAL] @chandshantanu/agentbuilder-mcp-server (score: 100)
-- [HIGH] @ericthered926/duckduckgo-mcp-server (score: 60)
-- [CRITICAL] @execufunction/mcp-server (score: 100)
-- [HIGH] @executeautomation/database-server (score: 65)
-- [HIGH] @executeautomation/playwright-mcp-server (score: 45)
-- [HIGH] @expandai/mcp-server (score: 40)
-- [CRITICAL] @extentos/mcp-server (score: 100)
-- [CRITICAL] @firefly-iii-mcp/core (score: 100)
-- [CRITICAL] @flexprice/mcp-server (score: 100)
+- [CRITICAL] @amitdeshmukh/google-jules-mcp (score: 75)
+- [CRITICAL] @bdmarvin/mcp-server-gbp (score: 100)
+- [CRITICAL] @beepflow/mcp (score: 100)
+- [CRITICAL] @blackhole-dex/blackhole-mcp-server (score: 85)
+- [HIGH] @cadcamfun/ai-service (score: 40)
+- [CRITICAL] @claude-flow/hooks (score: 100)
+- [HIGH] @claude-flow/shared (score: 60)
+- [CRITICAL] @claudeoverflow/mcp-server (score: 95)
+- [HIGH] @curdx/flow (score: 45)
+- [CRITICAL] @dguido/google-workspace-mcp (score: 80)
+- [CRITICAL] @drumnation/unsplash-smart-mcp-server (score: 100)
+- [HIGH] @fastmcp-me/agentops-mcp (score: 40)
 
 ### Cumulative:
-- Total scanned: 610
-  - CLEAN: 334
-  - CRITICAL: 74
+- Total scanned: 660
+  - CLEAN: 363
+  - CRITICAL: 82
   - ERROR: 1
-  - HIGH: 61
-  - LOW: 75
-  - MEDIUM: 65
+  - HIGH: 65
+  - LOW: 78
+  - MEDIUM: 71
