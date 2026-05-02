@@ -1,28 +1,22 @@
-## Daily Scan Summary (2026-05-01)
+## Daily Scan Summary (2026-05-02)
 - Scanned: 50 packages
-- CRITICAL: 8
-- HIGH: 4
-- CLEAN/LOW: 32
+- CRITICAL: 3
+- HIGH: 3
+- CLEAN/LOW: 40
 
 ### Flagged Packages:
-- [CRITICAL] @amitdeshmukh/google-jules-mcp (score: 75)
-- [CRITICAL] @bdmarvin/mcp-server-gbp (score: 100)
-- [CRITICAL] @beepflow/mcp (score: 100)
-- [CRITICAL] @blackhole-dex/blackhole-mcp-server (score: 85)
-- [HIGH] @cadcamfun/ai-service (score: 40)
-- [CRITICAL] @claude-flow/hooks (score: 100)
-- [HIGH] @claude-flow/shared (score: 60)
-- [CRITICAL] @claudeoverflow/mcp-server (score: 95)
-- [HIGH] @curdx/flow (score: 45)
-- [CRITICAL] @dguido/google-workspace-mcp (score: 80)
-- [CRITICAL] @drumnation/unsplash-smart-mcp-server (score: 100)
-- [HIGH] @fastmcp-me/agentops-mcp (score: 40)
+- [HIGH] @composer-app/mcp (score: 50)
+- [HIGH] @engram-mem/mcp (score: 60)
+- [CRITICAL] @f2c/mcp (score: 100)
+- [CRITICAL] @flowdot.ai/mcp-server (score: 100)
+- [HIGH] @fragmentfit/mcp-server (score: 60)
+- [CRITICAL] @fragments-sdk/cli (score: 100)
 
 ### Cumulative:
-- Total scanned: 660
-  - CLEAN: 363
-  - CRITICAL: 82
+- Total scanned: 710
+  - CLEAN: 399
+  - CRITICAL: 85
   - ERROR: 1
-  - HIGH: 65
-  - LOW: 78
-  - MEDIUM: 71
+  - HIGH: 68
+  - LOW: 82
+  - MEDIUM: 75
