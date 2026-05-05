@@ -29,6 +29,8 @@ const getArg = (flag: string) => {
 
 const inputPath = getArg('--input') ?? 'dynamic-audit-100.json';
 const tcUrl = (getArg('--tc-url') ?? 'http://localhost:8234').replace(/\/$/, '');
+// TC API key — env-only (never accept --key via CLI; argv leaks to ps).
+const tcApiKey = process.env['TC_API_KEY'] ?? '';
 const useLLM = args.includes('--llm');
 const llmApiUrl = getArg('--llm-url') ?? 'https://api.anthropic.com/v1/messages';
 const llmApiKey = getArg('--llm-key') ?? process.env['ANTHROPIC_API_KEY'] ?? '';
@@ -71,14 +73,18 @@ async function postJSON(endpoint: string, body: Record<string, unknown>): Promis
     return true;
   }
   try {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (tcApiKey) headers['x-api-key'] = tcApiKey;
     const resp = await fetch(`${tcUrl}${endpoint}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify(body),
     });
     if (!resp.ok) {
       const ct = resp.headers.get('content-type') ?? '';
-      if (!ct.includes('application/json')) {
+      if (resp.status === 401) {
+        console.error(`    TC auth failed (401). Check TC_API_KEY env var is set.`);
+      } else if (!ct.includes('application/json')) {
         console.error(`    TC returned non-JSON response (${resp.status}, ${ct})`);
       }
     }

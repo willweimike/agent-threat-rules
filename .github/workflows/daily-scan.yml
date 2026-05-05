@@ -89,6 +89,8 @@ jobs:
       # Step 5: Push to Threat Cloud (Layer 2 — detailed findings via API)
       - name: Push to Threat Cloud
         if: ${{ vars.TC_URL != '' }}
+        env:
+          TC_API_KEY: ${{ secrets.TC_API_KEY }}
         run: |
           BATCH_FILE="data/scan-batch-$(date +%Y%m%d).json"
           if [ -f "$BATCH_FILE" ]; then
