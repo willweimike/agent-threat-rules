@@ -1,26 +1,28 @@
-## Daily Scan Summary (2026-05-04)
+## Daily Scan Summary (2026-05-05)
 - Scanned: 50 packages
-- CRITICAL: 6
+- CRITICAL: 8
 - HIGH: 4
-- CLEAN/LOW: 30
+- CLEAN/LOW: 36
 
 ### Flagged Packages:
-- [CRITICAL] @hasna/mementos (score: 95)
-- [HIGH] @hasna/todos (score: 55)
-- [CRITICAL] @henkey/postgres-mcp-server (score: 100)
-- [HIGH] @henrylabs/mcp (score: 60)
-- [CRITICAL] @heroku/mcp-server (score: 75)
-- [CRITICAL] @heroui/native-mcp (score: 70)
-- [CRITICAL] @heroui/react-mcp (score: 100)
-- [CRITICAL] @hirey/hi-mcp-server (score: 100)
-- [HIGH] @hiveai/mcp (score: 60)
-- [HIGH] @honecrm/mcp-server (score: 60)
+- [CRITICAL] @adbutler/mcp-server (score: 100)
+- [HIGH] @antonytm/mcp-sitecore-server (score: 50)
+- [CRITICAL] @antv/mcp-server-antv (score: 85)
+- [CRITICAL] @berthojoris/mcp-mysql-server (score: 100)
+- [HIGH] @buywhere/mcp-server (score: 45)
+- [HIGH] @calx/selis-mcp (score: 45)
+- [CRITICAL] @cognitionai/metabase-mcp-server (score: 100)
+- [CRITICAL] @easecloudio/mcp-metabase-server (score: 100)
+- [HIGH] @f4ww4z/mcp-mysql-server (score: 65)
+- [CRITICAL] @fuzehq-io/mcp (score: 100)
+- [CRITICAL] @gopherhole/mcp (score: 100)
+- [CRITICAL] @goplausible/algorand-mcp (score: 100)
 
 ### Cumulative:
-- Total scanned: 810
-  - CLEAN: 459
-  - CRITICAL: 93
+- Total scanned: 860
+  - CLEAN: 485
+  - CRITICAL: 101
   - ERROR: 1
-  - HIGH: 76
-  - LOW: 95
-  - MEDIUM: 86
+  - HIGH: 80
+  - LOW: 105
+  - MEDIUM: 88
