@@ -1,28 +1,26 @@
-## Daily Scan Summary (2026-05-05)
+## Daily Scan Summary (2026-05-06)
 - Scanned: 50 packages
 - CRITICAL: 8
-- HIGH: 4
-- CLEAN/LOW: 36
+- HIGH: 2
+- CLEAN/LOW: 33
 
 ### Flagged Packages:
-- [CRITICAL] @adbutler/mcp-server (score: 100)
-- [HIGH] @antonytm/mcp-sitecore-server (score: 50)
-- [CRITICAL] @antv/mcp-server-antv (score: 85)
-- [CRITICAL] @berthojoris/mcp-mysql-server (score: 100)
-- [HIGH] @buywhere/mcp-server (score: 45)
-- [HIGH] @calx/selis-mcp (score: 45)
-- [CRITICAL] @cognitionai/metabase-mcp-server (score: 100)
-- [CRITICAL] @easecloudio/mcp-metabase-server (score: 100)
-- [HIGH] @f4ww4z/mcp-mysql-server (score: 65)
-- [CRITICAL] @fuzehq-io/mcp (score: 100)
-- [CRITICAL] @gopherhole/mcp (score: 100)
-- [CRITICAL] @goplausible/algorand-mcp (score: 100)
+- [CRITICAL] @199-bio/engram (score: 90)
+- [HIGH] @a2hmarket/a2h-mcp (score: 50)
+- [CRITICAL] @addition-works/figma-mcp-server (score: 100)
+- [CRITICAL] @afferens/mcp-server (score: 100)
+- [CRITICAL] @beosin/kyt-mcp-server (score: 100)
+- [CRITICAL] @cdmx/authentik-mcp (score: 100)
+- [HIGH] @channel47/google-ads-mcp (score: 45)
+- [CRITICAL] @citely/mcp-server (score: 100)
+- [CRITICAL] @desplega.ai/qa-use (score: 100)
+- [CRITICAL] @genlobe/mcp-server (score: 100)
 
 ### Cumulative:
-- Total scanned: 860
-  - CLEAN: 485
-  - CRITICAL: 101
+- Total scanned: 910
+  - CLEAN: 513
+  - CRITICAL: 109
   - ERROR: 1
-  - HIGH: 80
-  - LOW: 105
-  - MEDIUM: 88
+  - HIGH: 82
+  - LOW: 110
+  - MEDIUM: 95
