@@ -1,26 +1,29 @@
-## Daily Scan Summary (2026-05-06)
+## Daily Scan Summary (2026-05-07)
 - Scanned: 50 packages
-- CRITICAL: 8
-- HIGH: 2
+- CRITICAL: 4
+- HIGH: 9
 - CLEAN/LOW: 33
 
 ### Flagged Packages:
-- [CRITICAL] @199-bio/engram (score: 90)
-- [HIGH] @a2hmarket/a2h-mcp (score: 50)
-- [CRITICAL] @addition-works/figma-mcp-server (score: 100)
-- [CRITICAL] @afferens/mcp-server (score: 100)
-- [CRITICAL] @beosin/kyt-mcp-server (score: 100)
-- [CRITICAL] @cdmx/authentik-mcp (score: 100)
-- [HIGH] @channel47/google-ads-mcp (score: 45)
-- [CRITICAL] @citely/mcp-server (score: 100)
-- [CRITICAL] @desplega.ai/qa-use (score: 100)
-- [CRITICAL] @genlobe/mcp-server (score: 100)
+- [CRITICAL] @easy-mcps/clickhouse-mcp-server (score: 80)
+- [HIGH] @easy-mcps/mariadb-mcp-server (score: 40)
+- [HIGH] @easy-mcps/mysql-mcp-server (score: 40)
+- [HIGH] @easy-mcps/oceanbase-mcp-server (score: 40)
+- [HIGH] @easy-mcps/postgresql-mcp-server (score: 40)
+- [HIGH] @easy-mcps/sqlite-mcp-server (score: 40)
+- [HIGH] @easy-mcps/starrocks-mcp-server (score: 40)
+- [HIGH] @easy-mcps/tidb-mcp-server (score: 40)
+- [HIGH] @fl0w1nd/search-mcp (score: 50)
+- [CRITICAL] @gramatr/mcp (score: 75)
+- [CRITICAL] @illuminaresolutions/n8n-mcp-server (score: 100)
+- [CRITICAL] @inbetweenai/mcp (score: 100)
+- [HIGH] @instantdb/mcp (score: 55)
 
 ### Cumulative:
-- Total scanned: 910
-  - CLEAN: 513
-  - CRITICAL: 109
+- Total scanned: 960
+  - CLEAN: 543
+  - CRITICAL: 113
   - ERROR: 1
-  - HIGH: 82
-  - LOW: 110
-  - MEDIUM: 95
+  - HIGH: 91
+  - LOW: 113
+  - MEDIUM: 99
