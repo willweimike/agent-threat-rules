@@ -74,7 +74,12 @@ async function postJSON(endpoint: string, body: Record<string, unknown>): Promis
   }
   try {
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-    if (tcApiKey) headers['x-api-key'] = tcApiKey;
+    if (tcApiKey) {
+      // TC server expects Authorization: Bearer <token> (server.ts authHeader.replace('Bearer ', ''))
+      headers['Authorization'] = `Bearer ${tcApiKey}`;
+      // Also send x-api-key for backward compatibility with any older TC server build
+      headers['x-api-key'] = tcApiKey;
+    }
     const resp = await fetch(`${tcUrl}${endpoint}`, {
       method: 'POST',
       headers,
