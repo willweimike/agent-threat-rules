@@ -1,23 +1,31 @@
 ## Daily Scan Summary (2026-05-08)
 - Scanned: 50 packages
 - CRITICAL: 5
-- HIGH: 2
-- CLEAN/LOW: 35
+- HIGH: 10
+- CLEAN/LOW: 27
 
 ### Flagged Packages:
-- [CRITICAL] @cognisos/fabric-mcp (score: 100)
-- [CRITICAL] @dikshitrj/quickfill-mcp (score: 100)
-- [HIGH] @diskd-ai/email-client-mcp (score: 50)
-- [CRITICAL] @isteam/mcp (score: 75)
-- [HIGH] @kausalayer/mcp (score: 55)
-- [CRITICAL] @kernlang/mcp (score: 100)
-- [CRITICAL] @kernlang/mcp-server (score: 90)
+- [HIGH] @korfu/bitbucket-mcp (score: 40)
+- [CRITICAL] @kotocoop/tahti (score: 80)
+- [CRITICAL] @kryptsec/mcp-server (score: 100)
+- [HIGH] @kubb/plugin-mcp (score: 50)
+- [CRITICAL] @kud/mcp-datadog (score: 100)
+- [HIGH] @kylewadegrove/cutline-mcp-cli-staging (score: 55)
+- [CRITICAL] @laststance/electron-mcp-server (score: 100)
+- [HIGH] @lbruton/specflow (score: 50)
+- [HIGH] @leila329/nei-mcp-server (score: 50)
+- [HIGH] @leonardsellem/n8n-mcp-server (score: 60)
+- [HIGH] @leval/mcp-grafana (score: 50)
+- [HIGH] @line-harness/mcp-server (score: 50)
+- [HIGH] @lishenxydlgzs/aws-athena-mcp (score: 45)
+- [HIGH] @llamaindex/llama-cloud-mcp (score: 60)
+- [CRITICAL] @llui/mcp (score: 100)
 
 ### Cumulative:
-- Total scanned: 1110
-  - CLEAN: 640
-  - CRITICAL: 122
+- Total scanned: 1160
+  - CLEAN: 663
+  - CRITICAL: 127
   - ERROR: 1
-  - HIGH: 104
-  - LOW: 129
-  - MEDIUM: 114
+  - HIGH: 114
+  - LOW: 133
+  - MEDIUM: 122
