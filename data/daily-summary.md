@@ -1,29 +1,24 @@
-## Daily Scan Summary (2026-05-07)
+## Daily Scan Summary (2026-05-08)
 - Scanned: 50 packages
-- CRITICAL: 4
-- HIGH: 9
-- CLEAN/LOW: 33
+- CRITICAL: 3
+- HIGH: 5
+- CLEAN/LOW: 39
 
 ### Flagged Packages:
-- [CRITICAL] @easy-mcps/clickhouse-mcp-server (score: 80)
-- [HIGH] @easy-mcps/mariadb-mcp-server (score: 40)
-- [HIGH] @easy-mcps/mysql-mcp-server (score: 40)
-- [HIGH] @easy-mcps/oceanbase-mcp-server (score: 40)
-- [HIGH] @easy-mcps/postgresql-mcp-server (score: 40)
-- [HIGH] @easy-mcps/sqlite-mcp-server (score: 40)
-- [HIGH] @easy-mcps/starrocks-mcp-server (score: 40)
-- [HIGH] @easy-mcps/tidb-mcp-server (score: 40)
-- [HIGH] @fl0w1nd/search-mcp (score: 50)
-- [CRITICAL] @gramatr/mcp (score: 75)
-- [CRITICAL] @illuminaresolutions/n8n-mcp-server (score: 100)
-- [CRITICAL] @inbetweenai/mcp (score: 100)
-- [HIGH] @instantdb/mcp (score: 55)
+- [HIGH] @adisuryanathanael/mcp-server-filesystem2 (score: 55)
+- [HIGH] @agile-team/wl-skills-kit (score: 55)
+- [CRITICAL] @alerix/monobank-mcp (score: 95)
+- [HIGH] @apideck/mcp (score: 60)
+- [CRITICAL] @augmentcode/context-connectors (score: 80)
+- [CRITICAL] @beeos-ai/device-mcp-server (score: 100)
+- [HIGH] @boltmcp/mcp-sdk-express (score: 50)
+- [HIGH] @boltmcp/mcp-sdk-node (score: 50)
 
 ### Cumulative:
-- Total scanned: 960
-  - CLEAN: 543
-  - CRITICAL: 113
+- Total scanned: 1010
+  - CLEAN: 576
+  - CRITICAL: 116
   - ERROR: 1
-  - HIGH: 91
-  - LOW: 113
-  - MEDIUM: 99
+  - HIGH: 96
+  - LOW: 119
+  - MEDIUM: 102
