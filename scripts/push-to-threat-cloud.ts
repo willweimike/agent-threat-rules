@@ -579,7 +579,10 @@ async function main() {
           try {
             const resp = await fetch(`${tcUrl}/api/analyze-skills`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                ...(tcApiKey ? { Authorization: `Bearer ${tcApiKey}`, 'x-api-key': tcApiKey } : {}),
+              },
               body: JSON.stringify({ skills: batch }),
             });
 
@@ -649,7 +652,10 @@ async function main() {
             try {
               const resp = await fetch(`${tcUrl}/api/analyze-skills`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                  'Content-Type': 'application/json',
+                  ...(tcApiKey ? { Authorization: `Bearer ${tcApiKey}`, 'x-api-key': tcApiKey } : {}),
+                },
                 body: JSON.stringify({ skills: llmSkills }),
               });
 
@@ -760,7 +766,10 @@ async function main() {
       try {
         const resp = await fetch(`${tcUrl}/api/analyze-skills`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            ...(tcApiKey ? { Authorization: `Bearer ${tcApiKey}`, 'x-api-key': tcApiKey } : {}),
+          },
           body: JSON.stringify({ skills }),
         });
 
