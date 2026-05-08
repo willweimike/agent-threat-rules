@@ -1,23 +1,23 @@
 ## Daily Scan Summary (2026-05-08)
 - Scanned: 50 packages
-- CRITICAL: 1
-- HIGH: 6
-- CLEAN/LOW: 39
+- CRITICAL: 5
+- HIGH: 2
+- CLEAN/LOW: 35
 
 ### Flagged Packages:
-- [HIGH] @jiujiang/jishi-mcp-server (score: 60)
-- [HIGH] @johnson.lee/mysql-mcp-server (score: 45)
-- [HIGH] @joshuarileydev/supabase-mcp-server (score: 40)
-- [HIGH] @jpisnice/shadcn-ui-mcp-server (score: 40)
-- [HIGH] @jungho-dev/fs-mcp (score: 45)
-- [HIGH] @kajirita2002/honeycomb-mcp-server (score: 45)
-- [CRITICAL] @kb-labs/agent-mcp (score: 100)
+- [CRITICAL] @cognisos/fabric-mcp (score: 100)
+- [CRITICAL] @dikshitrj/quickfill-mcp (score: 100)
+- [HIGH] @diskd-ai/email-client-mcp (score: 50)
+- [CRITICAL] @isteam/mcp (score: 75)
+- [HIGH] @kausalayer/mcp (score: 55)
+- [CRITICAL] @kernlang/mcp (score: 100)
+- [CRITICAL] @kernlang/mcp-server (score: 90)
 
 ### Cumulative:
-- Total scanned: 1060
-  - CLEAN: 613
-  - CRITICAL: 117
+- Total scanned: 1110
+  - CLEAN: 640
+  - CRITICAL: 122
   - ERROR: 1
-  - HIGH: 102
-  - LOW: 121
-  - MEDIUM: 106
+  - HIGH: 104
+  - LOW: 129
+  - MEDIUM: 114
