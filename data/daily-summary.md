@@ -1,24 +1,23 @@
 ## Daily Scan Summary (2026-05-08)
 - Scanned: 50 packages
-- CRITICAL: 3
-- HIGH: 5
+- CRITICAL: 1
+- HIGH: 6
 - CLEAN/LOW: 39
 
 ### Flagged Packages:
-- [HIGH] @adisuryanathanael/mcp-server-filesystem2 (score: 55)
-- [HIGH] @agile-team/wl-skills-kit (score: 55)
-- [CRITICAL] @alerix/monobank-mcp (score: 95)
-- [HIGH] @apideck/mcp (score: 60)
-- [CRITICAL] @augmentcode/context-connectors (score: 80)
-- [CRITICAL] @beeos-ai/device-mcp-server (score: 100)
-- [HIGH] @boltmcp/mcp-sdk-express (score: 50)
-- [HIGH] @boltmcp/mcp-sdk-node (score: 50)
+- [HIGH] @jiujiang/jishi-mcp-server (score: 60)
+- [HIGH] @johnson.lee/mysql-mcp-server (score: 45)
+- [HIGH] @joshuarileydev/supabase-mcp-server (score: 40)
+- [HIGH] @jpisnice/shadcn-ui-mcp-server (score: 40)
+- [HIGH] @jungho-dev/fs-mcp (score: 45)
+- [HIGH] @kajirita2002/honeycomb-mcp-server (score: 45)
+- [CRITICAL] @kb-labs/agent-mcp (score: 100)
 
 ### Cumulative:
-- Total scanned: 1010
-  - CLEAN: 576
-  - CRITICAL: 116
+- Total scanned: 1060
+  - CLEAN: 613
+  - CRITICAL: 117
   - ERROR: 1
-  - HIGH: 96
-  - LOW: 119
-  - MEDIUM: 102
+  - HIGH: 102
+  - LOW: 121
+  - MEDIUM: 106
