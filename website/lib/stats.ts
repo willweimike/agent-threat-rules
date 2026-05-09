@@ -229,7 +229,7 @@ export function loadSiteStats(): SiteStats {
       {
         name: "Cisco AI Defense",
         type: "merged",
-        detail: "PR #79 + #99 merged. Full 314-rule pack in skill-scanner production. Upstream maintained.",
+        detail: "PR #79 + #99 merged. Full 330-rule pack in skill-scanner production. Upstream maintained.",
         url: "https://github.com/cisco-ai-defense/skill-scanner/pull/99",
       },
       {
@@ -288,7 +288,7 @@ export function loadSiteStats(): SiteStats {
       {
         name: "NVIDIA Garak",
         type: "open",
-        detail: "PR #1676. 314 ATR detectors. Two review rounds passed; final maintainer review in progress.",
+        detail: "PR #1676. 330 ATR detectors. Two review rounds passed; final maintainer review in progress.",
         url: "https://github.com/NVIDIA/garak/pull/1676",
       },
       {

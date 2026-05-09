@@ -281,8 +281,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                   Cisco AI Defense
                 </h3>
                 <p className="text-sm text-graphite mt-4 leading-[1.7]">
-                  {zh ? "PR #79 + #99 已合併 · 314 條完整規則集進入 skill-scanner 生產環境"
-                      : "PR #79 + #99 merged · full 314-rule pack in skill-scanner production"}
+                  {zh ? "PR #79 + #99 已合併 · 330 條完整規則集進入 skill-scanner 生產環境"
+                      : "PR #79 + #99 merged · full 330-rule pack in skill-scanner production"}
                 </p>
                 <a
                   href="https://github.com/cisco-ai-defense/skill-scanner/pull/99"
