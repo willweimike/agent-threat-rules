@@ -16,6 +16,13 @@ on:
     paths:
       - 'rules/**'
   workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Version bump type (patch/minor/major). Default patch.'
+        required: false
+        default: 'patch'
+        type: choice
+        options: [patch, minor, major]
 
 permissions:
   contents: write
@@ -52,17 +59,18 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Bump patch version
+      - name: Bump version
         id: bump
         run: |
           git config user.name "ATR Release Bot"
           git config user.email "release@agentthreatrule.org"
           OLD=$(node -p "require('./package.json').version")
-          NEW=$(npm version patch --no-git-tag-version --no-commit-hooks)
+          BUMP="${{ github.event.inputs.bump_type || 'patch' }}"
+          NEW=$(npm version "$BUMP" --no-git-tag-version --no-commit-hooks)
           NEW=${NEW#v}
           echo "old=$OLD" >> "$GITHUB_OUTPUT"
           echo "new=$NEW" >> "$GITHUB_OUTPUT"
-          echo "Bumped: $OLD → $NEW"
+          echo "Bumped ($BUMP): $OLD → $NEW"
 
       - name: Commit version bump
         run: |
