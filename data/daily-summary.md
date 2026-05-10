@@ -1,24 +1,27 @@
-## Daily Scan Summary (2026-05-09)
+## Daily Scan Summary (2026-05-10)
 - Scanned: 50 packages
-- CRITICAL: 6
-- HIGH: 2
-- CLEAN/LOW: 40
+- CRITICAL: 4
+- HIGH: 7
+- CLEAN/LOW: 32
 
 ### Flagged Packages:
-- [HIGH] @crscreditapi/finstack-mcp-server (score: 50)
-- [CRITICAL] @localstack/localstack-mcp-server (score: 100)
-- [HIGH] @lockon0927/woocommerce-mcp (score: 50)
-- [CRITICAL] @marwansaab/obsidian-modified-mcp-server (score: 100)
-- [CRITICAL] @masonl/strava-mcp-server (score: 70)
-- [CRITICAL] @mastra/mcp-docs-server (score: 75)
-- [CRITICAL] @mcp-apps/api-tools-mcp-server (score: 85)
-- [CRITICAL] @mcp-apps/azure-devops-mcp-server (score: 80)
+- [HIGH] @agonx402/protocol-mcp (score: 40)
+- [HIGH] @kevinwatt/mcp-webhook (score: 50)
+- [HIGH] @mcp-abap-adt/auth-providers (score: 40)
+- [HIGH] @mcp-s/mcp (score: 40)
+- [CRITICAL] @mcp-ui/client (score: 100)
+- [HIGH] @mcp-ui/server (score: 50)
+- [HIGH] @mcp-use/cli (score: 65)
+- [CRITICAL] @mcpmarket/mcp-auto-install (score: 100)
+- [HIGH] @mcpservers/openrouterai (score: 50)
+- [CRITICAL] @meewmeew/mcp (score: 100)
+- [CRITICAL] @memberjunction/ai-mcp-server (score: 100)
 
 ### Cumulative:
-- Total scanned: 1210
-  - CLEAN: 694
-  - CRITICAL: 133
+- Total scanned: 1260
+  - CLEAN: 719
+  - CRITICAL: 137
   - ERROR: 1
-  - HIGH: 116
-  - LOW: 142
-  - MEDIUM: 124
+  - HIGH: 123
+  - LOW: 149
+  - MEDIUM: 131
