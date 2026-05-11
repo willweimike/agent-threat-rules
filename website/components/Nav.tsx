@@ -28,6 +28,7 @@ export function Nav({ locale }: { locale: Locale }) {
     "coverage",
     "integrate",
     "ecosystem",
+    "red-team",
     "research",
     "about",
     "changelog",
@@ -44,11 +45,7 @@ export function Nav({ locale }: { locale: Locale }) {
         }`}
       >
         <Link href={prefix} className="flex items-center py-2.5 -my-2.5">
-          <img
-            src="/atr-logo-black.png"
-            alt="ATR"
-            className="h-7 md:h-8"
-          />
+          <img src="/atr-logo-black.png" alt="ATR" className="h-7 md:h-8" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -72,7 +69,9 @@ export function Nav({ locale }: { locale: Locale }) {
           <Link
             href={`/${otherLocale}${pathname.replace(/^\/(en|zh)/, "")}`}
             className="font-data text-xs text-stone hover:text-ink transition-colors tracking-wide inline-flex items-center justify-center min-w-[44px] min-h-[44px] -mx-2"
-            aria-label={otherLocale === "zh" ? "Switch to Chinese" : "Switch to English"}
+            aria-label={
+              otherLocale === "zh" ? "Switch to Chinese" : "Switch to English"
+            }
           >
             {otherLocale === "zh" ? "ZH" : "EN"}
           </Link>
@@ -88,9 +87,15 @@ export function Nav({ locale }: { locale: Locale }) {
             className="md:hidden flex flex-col gap-1.5 p-2 min-w-[44px] min-h-[44px] items-center justify-center -mr-2"
             aria-label="Toggle menu"
           >
-            <span className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[3.5px]" : ""}`} />
-            <span className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[3.5px]" : ""}`} />
+            <span
+              className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[3.5px]" : ""}`}
+            />
+            <span
+              className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[3.5px]" : ""}`}
+            />
           </button>
         </div>
       </nav>
@@ -98,7 +103,10 @@ export function Nav({ locale }: { locale: Locale }) {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-ink/10" onClick={() => setMenuOpen(false)} />
+          <div
+            className="absolute inset-0 bg-ink/10"
+            onClick={() => setMenuOpen(false)}
+          />
           <div className="absolute top-16 right-0 w-72 bg-paper border-l border-fog shadow-lg p-6 flex flex-col gap-4">
             {pages.map((page) => (
               <Link

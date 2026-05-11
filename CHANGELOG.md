@@ -2,6 +2,55 @@
 
 All notable changes to ATR will be documented in this file.
 
+## [2.1.3] - 2026-05-11
+
+### Added
+
+- 6 HackAPrompt-cluster rules (ATR-2026-00442..00447) + benchmark harness (PR #51). Auto-published via tc-pr-back release workflow after PR #51 merge.
+
+### Changed
+
+- Total rule count: 338 → 344.
+
+## [2.1.2] - 2026-05-11
+
+### Added
+
+- **ATR-2026-00440** (agent-manipulation): Microsoft Semantic Kernel CVE-2026-26030 — In-Memory Vector Store lambda+eval RCE. AST-traversal-via-mro primitives, BuiltinImporter reflective access, Function-constructor variants. 8 TP / 5 TN / 0 FP on 466-sample benign corpus.
+- **ATR-2026-00441** (privilege-escalation): Microsoft Semantic Kernel CVE-2026-25592 — SessionsPythonPlugin arbitrary file write to autostart paths. Windows Start Menu Startup, XDG autostart, systemd-user, cron, macOS LaunchAgents/Daemons, Windows Registry Run-key persistence. 7 TP / 5 TN / 0 FP.
+- **`src/redact.ts`** new module: `redactMatchedValue()` + `redactMatchedValues()` helpers. ATR-consuming integrations can run `ATRMatch.matchedPatterns` entries through this before logging. Recognises AWS keys, GitHub tokens, Slack tokens, OpenAI/Anthropic keys, Bearer creds, JWTs, PEM keys. 13 unit tests. Additive opt-in API — no existing API changes.
+
+### Changed
+
+- Total rule count: 336 → 338.
+
+### Loop closure
+
+- Microsoft Copilot SWE Agent opened `microsoft/agent-governance-toolkit#1981` 2026-05-11 06:07 UTC with regression-test fixtures presuming ATR detection. PR #50 merged + v2.1.2 npm + GitHub release published within 2h 16m. Closing-the-loop comment mapped each fixture to ATR rule IDs.
+
+## [2.1.1] - 2026-05-10
+
+### Added
+
+- 6 ATR rules covering 7 gap CVEs identified by Phase 1 audit (CVSS 9.1–10.0). PR #46 + follow-up batches.
+- STIX 2.1 extension for `x-atr-rule` custom SDO (PR #49) — self-published extension definition; ATR rules can now be expressed as STIX SDOs for STIX-compliant consumers.
+
+### Adopted (external)
+
+- **MISP/misp-taxonomies#323** merged 2026-05-10 by adulau (MISP project lead). 10 ATR predicates + 330 rule IDs as MISP machine tags.
+- **MISP/misp-galaxy#1207** merged 2026-05-10 by adulau. 336 cluster values with kill-chain, severity, CVE / OWASP LLM / MITRE ATLAS cross-refs. 10,408 lines.
+
+## [2.1.0] - 2026-05-09
+
+### Added
+
+- **NIST AI RMF mapping v0.2** — 100% coverage of all 4 AI RMF functions (Govern / Map / Measure / Manage), 72 controls + 31 cross-reference links + worked example profile. Schema-valid OSCAL catalog published under `Agent-Threat-Rule/ai-rmf-oscal-catalog` (PR #46).
+- Dedicated `/compliance/nist-ai-rmf` page on website with 314 → 330 rule count refresh sitewide.
+
+### Adopted (external)
+
+- **OWASP/Agent-Security-Regression-Harness#74** merged 2026-05-11 by mertsatilmaz (OWASP Project Lead): "Welcome to the team."
+
 ## [2.0.11] - 2026-04-21
 
 ### Added
@@ -132,6 +181,7 @@ All notable changes to ATR will be documented in this file.
 ## [0.3.0] - 2026-03-18
 
 ### Added
+
 - Evaluation framework (`src/eval/`):
   - `npm run eval`: 341-sample corpus (321 attacks + 20 benign), 9 attack categories
   - `npm run eval:pint`: 850-sample external PINT benchmark
@@ -147,15 +197,18 @@ All notable changes to ATR will be documented in this file.
 - PINT benchmark integration (deepset/prompt-injections + Lakera gandalf datasets)
 
 ### Changed
+
 - Embedding similarity threshold: 0.82 -> 0.65 (10 extra TP, 0 extra FP on PINT)
 - Test count: 225 -> 246 (+21 eval framework tests)
 
 ### Fixed
+
 - shadow-evaluator.ts type error (TS2352)
 - Removed external product references from ATR-FRAMEWORK-SPEC.md
 - Added temp file patterns to .gitignore
 
 ### Benchmark Results (honest numbers)
+
 - Self-corpus (341 samples): Precision 100%, Recall 99.4%, F1 99.5%
 - PINT external (850 samples): Precision 99.4%, Recall 39.9%, F1 57.0%
 - Only 6/61 rules fire on external attacks
@@ -164,6 +217,7 @@ All notable changes to ATR will be documented in this file.
 ## [0.2.3] - 2026-03-16
 
 ### Added
+
 - 9 new rules from Threat Cloud community promotion (ATR-2026-100~108):
   consent bypass, trust escalation, disguised analytics exfiltration,
   hidden safety bypass, persona hijacking, silent action concealment,
@@ -178,6 +232,7 @@ All notable changes to ATR will be documented in this file.
 - npm crawler with pagination (795 → 2,769 discoverable packages)
 
 ### Fixed
+
 - CLI test runner: handle tool_description field, fix event type mapping
 - All 61 rules pass embedded test cases (556/556, 100%)
 - CJK test cases moved to evasion_tests (honest: regex can't match them)
@@ -185,6 +240,7 @@ All notable changes to ATR will be documented in this file.
 - Fixed pyATR URLs pointing to wrong GitHub org
 
 ### Stats
+
 - 61 rules (44 experimental + 17 draft)
 - 556 test cases (100% pass rate)
 - 164 TypeScript tests + 48 Python tests = 212 engine tests
@@ -193,17 +249,20 @@ All notable changes to ATR will be documented in this file.
 ## [0.2.2] - 2026-03-14
 
 ### Fixed
+
 - ReDoS vulnerability in SSRF rule (ATR-2026-013) — O(n^2) backtracking on long hostnames
 - SSRF rule false positive on filesystem paths like /home/user/
 - tool_args field extraction fallback for tool_call events
 
 ### Added
+
 - True negatives for 21 rules with insufficient test coverage (7 had zero, 14 had only 1)
 - Vitest coverage reporting with v8 provider (60%+ threshold on core modules)
 
 ## [0.2.1] - 2026-03-10
 
 ### Changed
+
 - Standardized 17 predicted rule IDs (ATR-PRED → ATR-2026-080~096)
 - Fixed rule validator for skill-compromise category
 - Toned down coverage claims to reflect actual verification status
@@ -211,6 +270,7 @@ All notable changes to ATR will be documented in this file.
 ## [0.1.0-rc2] - 2026-03-09
 
 ### Added
+
 - 32 initial experimental detection rules across 9 attack categories
 - TypeScript reference engine with SessionTracker
 - OWASP Top 10 for Agentic Applications (2026) mapping (6 covered, 2 partial, 2 gaps)
@@ -223,6 +283,7 @@ All notable changes to ATR will be documented in this file.
 - Coverage report (COVERAGE.md)
 
 ### Attack Categories
+
 - Prompt Injection (5 rules)
 - Tool Poisoning (4 rules)
 - Context Exfiltration (3 rules)

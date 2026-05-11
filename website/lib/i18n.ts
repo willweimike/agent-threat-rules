@@ -15,6 +15,7 @@ export const messages: Record<Locale, Record<string, string>> = {
     "nav.contribute": "Contribute",
     "nav.wall": "Wall",
     "nav.ecosystem": "Ecosystem",
+    "nav.red-team": "Red Team",
     "nav.research": "Research",
     "nav.about": "About",
     "nav.changelog": "Changelog",
@@ -24,7 +25,8 @@ export const messages: Record<Locale, Record<string, string>> = {
     // Hero
     "hero.past": "We used to protect people.",
     "hero.now": "Now we protect agents.",
-    "hero.sub": "The open detection standard for AI agent threats. YAML rules. MIT Licensed. No lock-in.",
+    "hero.sub":
+      "The open detection standard for AI agent threats. YAML rules. MIT Licensed. No lock-in.",
     "hero.cta.primary": "Add ATR to Your Platform",
     "hero.cta.secondary": "Explore Rules",
     "hero.stat.rules": "Rules",
@@ -33,13 +35,17 @@ export const messages: Record<Locale, Record<string, string>> = {
 
     // Threat
     "threat.label": "MCP skills scanned for threats",
-    "threat.body": "AI agents now browse the web, execute code, and call external tools. Attackers trick them into <strong>leaking credentials</strong>, <strong>running reverse shells</strong>, and <strong>ignoring safety boundaries</strong>. The attack surface grows faster than any team can write rules by hand.",
+    "threat.body":
+      "AI agents now browse the web, execute code, and call external tools. Attackers trick them into <strong>leaking credentials</strong>, <strong>running reverse shells</strong>, and <strong>ignoring safety boundaries</strong>. The attack surface grows faster than any team can write rules by hand.",
 
     // Numbers
-    "numbers.rules.desc": "Across {categories} threat categories. Each mapped to real CVEs and OWASP standards.",
-    "numbers.precision.desc": "Precision on {samples} adversarial samples. External PINT benchmark.",
+    "numbers.rules.desc":
+      "Across {categories} threat categories. Each mapped to real CVEs and OWASP standards.",
+    "numbers.precision.desc":
+      "Precision on {samples} adversarial samples. External PINT benchmark.",
     "numbers.latency.desc": "99% of events resolve at Tier 0-2. Zero API cost.",
-    "numbers.scan.desc": "Scanned across OpenClaw + Skills.sh. {critical} CRITICAL. {high} HIGH.",
+    "numbers.scan.desc":
+      "Scanned across OpenClaw + Skills.sh. {critical} CRITICAL. {high} HIGH.",
     "numbers.owasp.desc": "OWASP Agentic Top 10 categories fully covered.",
     "numbers.safemcp.desc": "SAFE-MCP technique coverage. 78 of 85.",
 
@@ -47,23 +53,28 @@ export const messages: Record<Locale, Record<string, string>> = {
     "proof.label": "Already in production",
     "proof.heading.pre": "Cisco AI Defense",
     "proof.heading.post": " ships\n34 ATR rules as upstream.",
-    "proof.body": "Their engineer submitted a PR. We reviewed it. It merged in 3 days. 1,272 additions. Then they built a --rule-packs CLI specifically to consume ATR.",
+    "proof.body":
+      "Their engineer submitted a PR. We reviewed it. It merged in 3 days. 1,272 additions. Then they built a --rule-packs CLI specifically to consume ATR.",
     "proof.link": "View PR #79 on GitHub",
 
     // Ecosystem
     "ecosystem.label": "Ecosystem",
     "ecosystem.heading": "{merged} merged. {open} pending. {total} total PRs.",
-    "ecosystem.sub": "ATR spreads through PRs, not sales calls. Open source, MIT licensed, zero lock-in.",
+    "ecosystem.sub":
+      "ATR spreads through PRs, not sales calls. Open source, MIT licensed, zero lock-in.",
 
     // Future
     "future.label": "The Future",
     "future.heading": "ATR rules don't have to be written by hand.",
-    "future.sub": "Threat Cloud crystallization turns new attacks into detection rules automatically.",
-    "future.note": "Traditional rules are written by hand, on weekly cycles. Threat Cloud shrinks new rule turnaround from weeks to hours.",
+    "future.sub":
+      "Threat Cloud crystallization turns new attacks into detection rules automatically.",
+    "future.note":
+      "Traditional rules are written by hand, on weekly cycles. Threat Cloud shrinks new rule turnaround from weeks to hours.",
 
     // CTA
     "cta.heading": "Add ATR to your platform.",
-    "cta.sub": "Four paths. TypeScript, Python, raw YAML, or SIEM queries.\nThe same path Cisco walked.",
+    "cta.sub":
+      "Four paths. TypeScript, Python, raw YAML, or SIEM queries.\nThe same path Cisco walked.",
     "cta.primary": "Integration Guide",
     "cta.secondary": "Explore All Rules",
 
@@ -74,8 +85,10 @@ export const messages: Record<Locale, Record<string, string>> = {
 
     // Homepage data
     "categories.label": "What ATR Detects",
-    "categories.heading": "{categories} threat categories. {rules} rules. Real CVEs.",
-    "categories.sub": "Each rule links to OWASP, MITRE ATLAS, and documented exploits.",
+    "categories.heading":
+      "{categories} threat categories. {rules} rules. Real CVEs.",
+    "categories.sub":
+      "Each rule links to OWASP, MITRE ATLAS, and documented exploits.",
     "scan.label": "Live Scan Data",
     "scan.mega": "Mega Scan",
     "scan.threats": "Threats Found",
@@ -90,18 +103,23 @@ export const messages: Record<Locale, Record<string, string>> = {
     "crystal.4": "Community reviews + precision test",
     "crystal.5": "Merged into ATR. Every engine updates.",
     "path.01.title": "Report an Evasion",
-    "path.01.desc": "Found a bypass? File an issue. 15 minutes. Most valuable contribution.",
+    "path.01.desc":
+      "Found a bypass? File an issue. 15 minutes. Most valuable contribution.",
     "path.02.title": "Report a False Positive",
-    "path.02.desc": "Rule triggered on legit content? Help us tune precision. 20 minutes.",
+    "path.02.desc":
+      "Rule triggered on legit content? Help us tune precision. 20 minutes.",
     "path.03.title": "Submit a New Rule",
-    "path.03.desc": "Write a detection rule with the ATR schema. Full walkthrough. 1-2 hours.",
+    "path.03.desc":
+      "Write a detection rule with the ATR schema. Full walkthrough. 1-2 hours.",
     "path.04.title": "AI-Native Contribution",
-    "path.04.desc": "Use Claude Code or Cursor with ATR's MCP server. The AI writes the YAML. You review it.",
+    "path.04.desc":
+      "Use Claude Code or Cursor with ATR's MCP server. The AI writes the YAML. You review it.",
 
     // Rules page
     "rules.label": "Rule Explorer",
     "rules.heading": "{count} detection rules. Browse, filter, inspect.",
-    "rules.sub": "All rules parsed from YAML at build time. Click any rule to see details.",
+    "rules.sub":
+      "All rules parsed from YAML at build time. Click any rule to see details.",
     "rules.search": "Search rules... (name, ID, CVE)",
     "rules.all_categories": "All categories",
     "rules.all_severities": "All severities",
@@ -117,41 +135,53 @@ export const messages: Record<Locale, Record<string, string>> = {
     "rules.view_yaml": "View YAML on GitHub",
 
     // Integrate page
-    "integrate.ready": "{count} rules, ready to integrate. The same path Cisco walked.",
+    "integrate.ready":
+      "{count} rules, ready to integrate. The same path Cisco walked.",
     "integrate.schema.title": "Schema Stability Guarantee",
-    "integrate.schema.intro": "If you depend on ATR as upstream, you need to know the format won't break. Here's our commitment:",
+    "integrate.schema.intro":
+      "If you depend on ATR as upstream, you need to know the format won't break. Here's our commitment:",
     "integrate.schema.v1.title": "ATR Schema v1.0 (current)",
-    "integrate.schema.v1.desc": "Published and stable. All new fields are optional additions. No existing field will be removed or renamed without a major version bump.",
+    "integrate.schema.v1.desc":
+      "Published and stable. All new fields are optional additions. No existing field will be removed or renamed without a major version bump.",
     "integrate.schema.compat.title": "Backward Compatibility",
-    "integrate.schema.compat.desc": "Breaking changes only happen on major version transitions (v1 to v2). We provide migration guides and a minimum 6-month overlap period.",
+    "integrate.schema.compat.desc":
+      "Breaking changes only happen on major version transitions (v1 to v2). We provide migration guides and a minimum 6-month overlap period.",
     "integrate.schema.freq.title": "Update Frequency",
-    "integrate.schema.freq.desc": "New rules added continuously (avg 2-5 per week). Every rule passes CI validation + precision test before merge.",
+    "integrate.schema.freq.desc":
+      "New rules added continuously (avg 2-5 per week). Every rule passes CI validation + precision test before merge.",
     "integrate.schema.sync.title": "Sync Methods",
     "integrate.why.title": "Why ATR Instead of Writing Your Own?",
     "integrate.license.title": "License & Legal",
     "integrate.cisco.title": "Case Study: How Cisco Did It",
-    "integrate.cisco.body": "Cisco's DefenseClaw team integrated ATR rules as an upstream dependency. Their engineer submitted PR #79, we reviewed it, and it merged in 3 days. They then built a --rule-packs CLI feature (PR #80) specifically to consume ATR as a first-class rule source.",
+    "integrate.cisco.body":
+      "Cisco's DefenseClaw team integrated ATR rules as an upstream dependency. Their engineer submitted PR #79, we reviewed it, and it merged in 3 days. They then built a --rule-packs CLI feature (PR #80) specifically to consume ATR as a first-class rule source.",
 
     // Contribute page
     "contribute.crystal.title": "Threat Cloud Crystallization",
-    "contribute.crystal.sub": "Traditional rules take weeks to write, review, and ship. Threat Cloud targets hours.",
+    "contribute.crystal.sub":
+      "Traditional rules take weeks to write, review, and ship. Threat Cloud targets hours.",
     "contribute.governance": "Governance",
-    "contribute.governance.desc": "Rule review process, maintainer roles, decision-making.",
+    "contribute.governance.desc":
+      "Rule review process, maintainer roles, decision-making.",
     "contribute.contributors": "Contributors",
-    "contribute.contributors.desc": "Credit wall. Every confirmed evasion, FP report, and rule gets credited.",
+    "contribute.contributors.desc":
+      "Credit wall. Every confirmed evasion, FP report, and rule gets credited.",
     "contribute.guide": "Rule Writing Guide",
-    "contribute.guide.desc": "Complete walkthrough with examples and schema reference.",
+    "contribute.guide.desc":
+      "Complete walkthrough with examples and schema reference.",
 
     // Research page
     "research.paper": "Published Paper",
     "research.benchmarks": "Benchmarks",
-    "research.benchmarks.sub": "Tested with our own corpus AND external benchmarks we've never seen before.",
+    "research.benchmarks.sub":
+      "Tested with our own corpus AND external benchmarks we've never seen before.",
     "research.pint": "PINT (External, Adversarial)",
     "research.self": "Self-Test (Own Rules)",
     "research.precision": "Precision",
     "research.recall": "Recall",
     "research.samples": "Samples",
-    "research.gap_note": "The gap between {precision}% precision and {recall}% recall is expected. Regex catches known patterns but misses paraphrases and multilingual attacks.",
+    "research.gap_note":
+      "The gap between {precision}% precision and {recall}% recall is expected. Regex catches known patterns but misses paraphrases and multilingual attacks.",
     "research.scan": "Ecosystem Scan Data",
     "research.scan.sub": "Real scans of real MCP skill registries.",
     "research.scan.mega": "Mega Scan (OpenClaw + Skills.sh)",
@@ -162,36 +192,48 @@ export const messages: Record<Locale, Record<string, string>> = {
     "research.download.csv": "Download raw data (CSV)",
     "research.download.json": "Download stats (JSON)",
     "research.limits": "What ATR Cannot Detect",
-    "research.limits.sub": "We publish this section because honest limitations build more trust than false confidence.",
+    "research.limits.sub":
+      "We publish this section because honest limitations build more trust than false confidence.",
     "research.limits.full": "Full limitations document with 64 evasion tests",
     "research.limit.paraphrase": "Paraphrase Attacks",
-    "research.limit.paraphrase.desc": "Any regex rule can be bypassed by semantically equivalent rephrasing. \"Ignore previous instructions\" is detected; \"please set aside the guidance you were given earlier\" is not.",
+    "research.limit.paraphrase.desc":
+      'Any regex rule can be bypassed by semantically equivalent rephrasing. "Ignore previous instructions" is detected; "please set aside the guidance you were given earlier" is not.',
     "research.limit.multilang": "Multi-Language Attacks",
-    "research.limit.multilang.desc": "All patterns are English-only. Injection payloads in Spanish, Chinese, Arabic, or any other language bypass all rules completely.",
+    "research.limit.multilang.desc":
+      "All patterns are English-only. Injection payloads in Spanish, Chinese, Arabic, or any other language bypass all rules completely.",
     "research.limit.context": "Context-Dependent Attacks",
-    "research.limit.context.desc": "\"Delete all records\" might be legitimate or malicious. Regex matches patterns without understanding authorization context.",
+    "research.limit.context.desc":
+      '"Delete all records" might be legitimate or malicious. Regex matches patterns without understanding authorization context.',
     "research.limit.protocol": "Protocol-Level Attacks",
-    "research.limit.protocol.desc": "ATR inspects content, not transport. Message replay, schema manipulation, MCP transport-level MITM are invisible.",
+    "research.limit.protocol.desc":
+      "ATR inspects content, not transport. Message replay, schema manipulation, MCP transport-level MITM are invisible.",
     "research.limit.multiturn": "Multi-Turn Behavioral Patterns",
-    "research.limit.multiturn.desc": "Gradual trust escalation across 20 turns, where no single message is detectable, is not correlated. ATR evaluates events independently.",
+    "research.limit.multiturn.desc":
+      "Gradual trust escalation across 20 turns, where no single message is detectable, is not correlated. ATR evaluates events independently.",
     "research.limit.novel": "Novel Attacks",
-    "research.limit.novel.desc": "By definition, regex cannot detect attack patterns that don't exist yet. New techniques require new rules.",
+    "research.limit.novel.desc":
+      "By definition, regex cannot detect attack patterns that don't exist yet. New techniques require new rules.",
 
     // Subpages
     "coverage.label": "Standards Coverage",
     "coverage.heading": "ATR maps to every major AI security framework.",
-    "coverage.sub": "Go from \"understand the threat\" to \"detect it\" without building rules from scratch.",
+    "coverage.sub":
+      'Go from "understand the threat" to "detect it" without building rules from scratch.',
     "integrate.label": "Integrate",
     "integrate.heading": "Four paths. Same destination.",
     "research.label": "Research",
     "research.heading": "Data, benchmarks, and honest limitations.",
-    "research.sub": "ATR publishes evasion tests openly. We tell you what we can't catch.",
+    "research.sub":
+      "ATR publishes evasion tests openly. We tell you what we can't catch.",
     "contribute.label": "Contribute",
-    "contribute.heading": "ATR is MIT-licensed. Contributing requires a text editor and a YAML file.",
-    "contribute.sub": "No proprietary tooling. No telemetry. No CLA. Community-maintained and governed as an open standard.",
+    "contribute.heading":
+      "ATR is MIT-licensed. Contributing requires a text editor and a YAML file.",
+    "contribute.sub":
+      "No proprietary tooling. No telemetry. No CLA. Community-maintained and governed as an open standard.",
 
     // Footer
-    "footer.note": "ATR is a community-maintained open standard. MIT License. Not affiliated with any vendor.",
+    "footer.note":
+      "ATR is a community-maintained open standard. MIT License. Not affiliated with any vendor.",
   },
   zh: {
     // Nav
@@ -202,6 +244,7 @@ export const messages: Record<Locale, Record<string, string>> = {
     "nav.contribute": "\u8CA2\u737B",
     "nav.wall": "\u8CA2\u737B\u7246",
     "nav.ecosystem": "\u751F\u614B\u7CFB",
+    "nav.red-team": "\u7D05\u968A",
     "nav.research": "\u7814\u7A76",
     "nav.about": "\u95DC\u65BC",
     "nav.changelog": "\u7248\u672C\u6B77\u7A0B",
@@ -211,7 +254,8 @@ export const messages: Record<Locale, Record<string, string>> = {
     // Hero
     "hero.past": "\u6211\u5011\u904E\u53BB\u4FDD\u8B77\u4EBA\u3002",
     "hero.now": "\u73FE\u5728\u6211\u5011\u4FDD\u8B77 Agent\u3002",
-    "hero.sub": "AI Agent \u5A01\u8105\u7684\u958B\u653E\u5075\u6E2C\u6A19\u6E96\u3002YAML \u898F\u5247\u3001MIT \u6388\u6B0A\u3001\u96F6\u9396\u5B9A\u3002",
+    "hero.sub":
+      "AI Agent \u5A01\u8105\u7684\u958B\u653E\u5075\u6E2C\u6A19\u6E96\u3002YAML \u898F\u5247\u3001MIT \u6388\u6B0A\u3001\u96F6\u9396\u5B9A\u3002",
     "hero.cta.primary": "\u5C07 ATR \u52A0\u5165\u4F60\u7684\u5E73\u53F0",
     "hero.cta.secondary": "\u700F\u89BD\u898F\u5247",
     "hero.stat.rules": "Rules",
@@ -220,49 +264,66 @@ export const messages: Record<Locale, Record<string, string>> = {
 
     // Threat
     "threat.label": "MCP skills \u5A01\u8105\u6383\u63CF",
-    "threat.body": "AI Agent \u73FE\u5728\u80FD\u700F\u89BD\u7DB2\u9801\u3001\u57F7\u884C\u7A0B\u5F0F\u78BC\u3001\u547C\u53EB\u5916\u90E8\u5DE5\u5177\u3002\u653B\u64CA\u8005\u5229\u7528\u5B83\u5011<strong>\u6D29\u6F0F\u6191\u8B49</strong>\u3001<strong>\u57F7\u884C\u60E1\u610F\u6307\u4EE4</strong>\u3001<strong>\u7E5E\u904E\u5B89\u5168\u908A\u754C</strong>\u3002\u653B\u64CA\u9762\u7684\u589E\u9577\u901F\u5EA6\u8D85\u904E\u4EFB\u4F55\u5718\u968A\u624B\u5BEB\u898F\u5247\u7684\u901F\u5EA6\u3002",
+    "threat.body":
+      "AI Agent \u73FE\u5728\u80FD\u700F\u89BD\u7DB2\u9801\u3001\u57F7\u884C\u7A0B\u5F0F\u78BC\u3001\u547C\u53EB\u5916\u90E8\u5DE5\u5177\u3002\u653B\u64CA\u8005\u5229\u7528\u5B83\u5011<strong>\u6D29\u6F0F\u6191\u8B49</strong>\u3001<strong>\u57F7\u884C\u60E1\u610F\u6307\u4EE4</strong>\u3001<strong>\u7E5E\u904E\u5B89\u5168\u908A\u754C</strong>\u3002\u653B\u64CA\u9762\u7684\u589E\u9577\u901F\u5EA6\u8D85\u904E\u4EFB\u4F55\u5718\u968A\u624B\u5BEB\u898F\u5247\u7684\u901F\u5EA6\u3002",
 
     // Numbers
-    "numbers.rules.desc": "\u6A6B\u8DE8 {categories} \u500B\u5A01\u8105\u985E\u5225\u3002\u6BCF\u689D\u898F\u5247\u90FD\u5C0D\u61C9\u771F\u5BE6 CVE \u548C OWASP \u6A19\u6E96\u3002",
-    "numbers.precision.desc": "\u5728 {samples} \u500B\u5C0D\u6297\u6A23\u672C\u4E0A\u7684 Precision\u3002\u5916\u90E8 PINT benchmark\u3002",
-    "numbers.latency.desc": "99% \u7684\u4E8B\u4EF6\u5728 Tier 0-2 \u89E3\u6C7A\u3002\u96F6 API \u6210\u672C\u3002",
-    "numbers.scan.desc": "\u6383\u63CF OpenClaw + Skills.sh\u3002{critical} CRITICAL\u3001{high} HIGH\u3002",
+    "numbers.rules.desc":
+      "\u6A6B\u8DE8 {categories} \u500B\u5A01\u8105\u985E\u5225\u3002\u6BCF\u689D\u898F\u5247\u90FD\u5C0D\u61C9\u771F\u5BE6 CVE \u548C OWASP \u6A19\u6E96\u3002",
+    "numbers.precision.desc":
+      "\u5728 {samples} \u500B\u5C0D\u6297\u6A23\u672C\u4E0A\u7684 Precision\u3002\u5916\u90E8 PINT benchmark\u3002",
+    "numbers.latency.desc":
+      "99% \u7684\u4E8B\u4EF6\u5728 Tier 0-2 \u89E3\u6C7A\u3002\u96F6 API \u6210\u672C\u3002",
+    "numbers.scan.desc":
+      "\u6383\u63CF OpenClaw + Skills.sh\u3002{critical} CRITICAL\u3001{high} HIGH\u3002",
     "numbers.owasp.desc": "OWASP Agentic Top 10 \u5168\u90E8\u8986\u84CB\u3002",
-    "numbers.safemcp.desc": "SAFE-MCP \u6280\u8853\u8986\u84CB\u7387\u300278/85\u3002",
+    "numbers.safemcp.desc":
+      "SAFE-MCP \u6280\u8853\u8986\u84CB\u7387\u300278/85\u3002",
 
     // Proof
     "proof.label": "\u5DF2\u5728\u751F\u7522\u74B0\u5883\u904B\u884C",
     "proof.heading.pre": "Cisco AI Defense",
-    "proof.heading.post": " \u5C07\n34 \u689D ATR \u898F\u5247\u4F5C\u70BA\u4E0A\u6E38\u4F9D\u8CF4\u3002",
-    "proof.body": "\u4ED6\u5011\u7684\u5DE5\u7A0B\u5E2B\u63D0\u4E86 PR\u3002\u6211\u5011 review \u5B8C\u30023 \u5929\u5408\u4F75\u30021,272 \u884C\u65B0\u589E\u3002\u7136\u5F8C\u4ED6\u5011\u5EFA\u4E86 --rule-packs CLI \u5C08\u9580\u6D88\u8CBB ATR\u3002",
+    "proof.heading.post":
+      " \u5C07\n34 \u689D ATR \u898F\u5247\u4F5C\u70BA\u4E0A\u6E38\u4F9D\u8CF4\u3002",
+    "proof.body":
+      "\u4ED6\u5011\u7684\u5DE5\u7A0B\u5E2B\u63D0\u4E86 PR\u3002\u6211\u5011 review \u5B8C\u30023 \u5929\u5408\u4F75\u30021,272 \u884C\u65B0\u589E\u3002\u7136\u5F8C\u4ED6\u5011\u5EFA\u4E86 --rule-packs CLI \u5C08\u9580\u6D88\u8CBB ATR\u3002",
     "proof.link": "\u5728 GitHub \u67E5\u770B PR #79",
 
     // Ecosystem
     "ecosystem.label": "\u751F\u614B\u7CFB",
-    "ecosystem.heading": "{merged} \u500B\u5DF2\u5408\u4F75\u3002{open} \u500B\u5F85\u5BE9\u3002\u5171 {total} \u500B PR\u3002",
-    "ecosystem.sub": "ATR \u900F\u904E PR \u64F4\u6563\uff0c\u4E0D\u662F\u900F\u904E\u92B7\u552E\u3002\u958B\u6E90\u3001MIT \u6388\u6B0A\u3001\u96F6\u9396\u5B9A\u3002",
+    "ecosystem.heading":
+      "{merged} \u500B\u5DF2\u5408\u4F75\u3002{open} \u500B\u5F85\u5BE9\u3002\u5171 {total} \u500B PR\u3002",
+    "ecosystem.sub":
+      "ATR \u900F\u904E PR \u64F4\u6563\uff0c\u4E0D\u662F\u900F\u904E\u92B7\u552E\u3002\u958B\u6E90\u3001MIT \u6388\u6B0A\u3001\u96F6\u9396\u5B9A\u3002",
 
     // Future
     "future.label": "\u672A\u4F86",
     "future.heading": "ATR \u898F\u5247\u4E0D\u9700\u8981\u624B\u5BEB\u3002",
-    "future.sub": "Threat Cloud \u7D50\u6676\u6A5F\u5236\u81EA\u52D5\u5C07\u65B0\u653B\u64CA\u8F49\u5316\u70BA\u5075\u6E2C\u898F\u5247\u3002",
-    "future.note": "\u50B3\u7D71\u898F\u5247\u7531\u4EBA\u5DE5\u64B0\u5BEB\uff0c\u9031\u671F\u4EE5\u9031\u8A08\u3002Threat Cloud \u8B93\u65B0\u898F\u5247\u7684\u7522\u51FA\u5F9E\u6578\u9031\u7E2E\u77ED\u5230\u6578\u5C0F\u6642\u3002",
+    "future.sub":
+      "Threat Cloud \u7D50\u6676\u6A5F\u5236\u81EA\u52D5\u5C07\u65B0\u653B\u64CA\u8F49\u5316\u70BA\u5075\u6E2C\u898F\u5247\u3002",
+    "future.note":
+      "\u50B3\u7D71\u898F\u5247\u7531\u4EBA\u5DE5\u64B0\u5BEB\uff0c\u9031\u671F\u4EE5\u9031\u8A08\u3002Threat Cloud \u8B93\u65B0\u898F\u5247\u7684\u7522\u51FA\u5F9E\u6578\u9031\u7E2E\u77ED\u5230\u6578\u5C0F\u6642\u3002",
 
     // CTA
     "cta.heading": "\u5C07 ATR \u52A0\u5165\u4F60\u7684\u5E73\u53F0\u3002",
-    "cta.sub": "\u56DB\u689D\u8DEF\u5F91\u3002TypeScript\u3001Python\u3001\u539F\u59CB YAML\u3001\u6216 SIEM queries\u3002\n\u8DDF Cisco \u8D70\u7684\u540C\u4E00\u689D\u8DEF\u3002",
+    "cta.sub":
+      "\u56DB\u689D\u8DEF\u5F91\u3002TypeScript\u3001Python\u3001\u539F\u59CB YAML\u3001\u6216 SIEM queries\u3002\n\u8DDF Cisco \u8D70\u7684\u540C\u4E00\u689D\u8DEF\u3002",
     "cta.primary": "Integration Guide",
     "cta.secondary": "\u700F\u89BD\u6240\u6709\u898F\u5247",
 
     // Compare
     "compare.label": "\u70BA\u4EC0\u9EBC\u9078 ATR",
-    "compare.heading": "\u70BA\u4EC0\u9EBC\u4E0D\u81EA\u5DF1\u5BEB\u898F\u5247\uff1f",
-    "compare.sub": "ATR vs \u66FF\u4EE3\u65B9\u6848\u3002\u8AA0\u5BE6\u7684\u6BD4\u8F03\u3002",
+    "compare.heading":
+      "\u70BA\u4EC0\u9EBC\u4E0D\u81EA\u5DF1\u5BEB\u898F\u5247\uff1f",
+    "compare.sub":
+      "ATR vs \u66FF\u4EE3\u65B9\u6848\u3002\u8AA0\u5BE6\u7684\u6BD4\u8F03\u3002",
 
     // Homepage data
     "categories.label": "ATR \u5075\u6E2C\u4EC0\u9EBC",
-    "categories.heading": "{categories} \u500B\u5A01\u8105\u985E\u5225\u3002{rules} \u689D\u898F\u5247\u3002\u771F\u5BE6 CVE\u3002",
-    "categories.sub": "\u6BCF\u689D\u898F\u5247\u90FD\u9023\u7D50\u5230 OWASP\u3001MITRE ATLAS \u548C\u5DF2\u8A18\u9304\u7684\u6F0F\u6D1E\u3002",
+    "categories.heading":
+      "{categories} \u500B\u5A01\u8105\u985E\u5225\u3002{rules} \u689D\u898F\u5247\u3002\u771F\u5BE6 CVE\u3002",
+    "categories.sub":
+      "\u6BCF\u689D\u898F\u5247\u90FD\u9023\u7D50\u5230 OWASP\u3001MITRE ATLAS \u548C\u5DF2\u8A18\u9304\u7684\u6F0F\u6D1E\u3002",
     "scan.label": "\u5373\u6642\u6383\u63CF\u6578\u64DA",
     "scan.mega": "Mega Scan",
     "scan.threats": "\u767C\u73FE\u5A01\u8105",
@@ -271,29 +332,39 @@ export const messages: Record<Locale, Record<string, string>> = {
     "scan.skills_scanned": "skills \u5DF2\u6383\u63CF",
     "scan.flagged": "\u5DF2\u6A19\u8A18",
     "scan.per_skill": "\u6BCF skill \u6383\u63CF",
-    "crystal.1": "\u5728\u91CE\u5916\u5075\u6E2C\u5230\u65B0\u653B\u64CA\u6A21\u5F0F",
+    "crystal.1":
+      "\u5728\u91CE\u5916\u5075\u6E2C\u5230\u65B0\u653B\u64CA\u6A21\u5F0F",
     "crystal.2": "LLM \u5206\u6790\u653B\u64CA\u7D50\u69CB + \u610F\u5716",
     "crystal.3": "\u81EA\u52D5\u7522\u751F YAML \u898F\u5247\u63D0\u6848",
     "crystal.4": "\u793E\u7FA4\u5BE9\u67E5 + precision \u6E2C\u8A66",
-    "crystal.5": "\u5408\u4F75\u5230 ATR\u3002\u6240\u6709\u5F15\u64CE\u81EA\u52D5\u66F4\u65B0\u3002",
+    "crystal.5":
+      "\u5408\u4F75\u5230 ATR\u3002\u6240\u6709\u5F15\u64CE\u81EA\u52D5\u66F4\u65B0\u3002",
     "path.01.title": "\u56DE\u5831\u7E5E\u904E\u65B9\u6CD5",
-    "path.01.desc": "\u627E\u5230\u4E86\u7E5E\u904E\u65B9\u6CD5\uff1F\u63D0\u4E00\u500B issue\u3002\u53EA\u8981 15 \u5206\u9418\u3002\u6700\u6709\u50F9\u503C\u7684\u8CA2\u737B\u3002",
+    "path.01.desc":
+      "\u627E\u5230\u4E86\u7E5E\u904E\u65B9\u6CD5\uff1F\u63D0\u4E00\u500B issue\u3002\u53EA\u8981 15 \u5206\u9418\u3002\u6700\u6709\u50F9\u503C\u7684\u8CA2\u737B\u3002",
     "path.02.title": "\u56DE\u5831\u8AA4\u5224",
-    "path.02.desc": "\u898F\u5247\u5C0D\u5408\u6CD5\u5167\u5BB9\u89F8\u767C\u4E86\uff1F\u5E6B\u6211\u5011\u8ABF\u6574 precision\u300220 \u5206\u9418\u3002",
+    "path.02.desc":
+      "\u898F\u5247\u5C0D\u5408\u6CD5\u5167\u5BB9\u89F8\u767C\u4E86\uff1F\u5E6B\u6211\u5011\u8ABF\u6574 precision\u300220 \u5206\u9418\u3002",
     "path.03.title": "\u63D0\u4EA4\u65B0\u898F\u5247",
-    "path.03.desc": "\u7528 ATR schema \u5BEB\u4E00\u689D\u5075\u6E2C\u898F\u5247\u3002\u6709\u5B8C\u6574\u6559\u5B78\u30021-2 \u5C0F\u6642\u3002",
+    "path.03.desc":
+      "\u7528 ATR schema \u5BEB\u4E00\u689D\u5075\u6E2C\u898F\u5247\u3002\u6709\u5B8C\u6574\u6559\u5B78\u30021-2 \u5C0F\u6642\u3002",
     "path.04.title": "AI \u539F\u751F\u8CA2\u737B",
-    "path.04.desc": "\u7528 Claude Code \u6216 Cursor \u914D\u5408 ATR \u7684 MCP server\u3002AI \u5BEB YAML\uff0C\u4F60\u5BE9\u67E5\u3002",
+    "path.04.desc":
+      "\u7528 Claude Code \u6216 Cursor \u914D\u5408 ATR \u7684 MCP server\u3002AI \u5BEB YAML\uff0C\u4F60\u5BE9\u67E5\u3002",
 
     // Rules page
     "rules.label": "Rule Explorer",
-    "rules.heading": "{count} \u689D\u5075\u6E2C\u898F\u5247\u3002\u700F\u89BD\u3001\u904E\u6FFE\u3001\u6AA2\u67E5\u3002",
-    "rules.sub": "\u6240\u6709\u898F\u5247\u5728 build time \u5F9E YAML \u89E3\u6790\u3002\u9EDE\u64CA\u4EFB\u4F55\u898F\u5247\u67E5\u770B\u8A73\u60C5\u3002",
-    "rules.search": "\u641C\u7D22\u898F\u5247\u2026\uff08\u540D\u7A31\u3001ID\u3001CVE\uff09",
+    "rules.heading":
+      "{count} \u689D\u5075\u6E2C\u898F\u5247\u3002\u700F\u89BD\u3001\u904E\u6FFE\u3001\u6AA2\u67E5\u3002",
+    "rules.sub":
+      "\u6240\u6709\u898F\u5247\u5728 build time \u5F9E YAML \u89E3\u6790\u3002\u9EDE\u64CA\u4EFB\u4F55\u898F\u5247\u67E5\u770B\u8A73\u60C5\u3002",
+    "rules.search":
+      "\u641C\u7D22\u898F\u5247\u2026\uff08\u540D\u7A31\u3001ID\u3001CVE\uff09",
     "rules.all_categories": "\u6240\u6709\u985E\u5225",
     "rules.all_severities": "\u6240\u6709\u56B4\u91CD\u7B49\u7D1A",
     "rules.showing": "\u986F\u793A {filtered} / {total} \u689D\u898F\u5247",
-    "rules.no_match": "\u6C92\u6709\u898F\u5247\u7B26\u5408\u4F60\u7684\u904E\u6FFE\u689D\u4EF6\u3002",
+    "rules.no_match":
+      "\u6C92\u6709\u898F\u5247\u7B26\u5408\u4F60\u7684\u904E\u6FFE\u689D\u4EF6\u3002",
     "rules.clear": "\u6E05\u9664\u904E\u6FFE",
     "rules.col.id": "Rule ID",
     "rules.col.name": "\u540D\u7A31",
@@ -304,43 +375,58 @@ export const messages: Record<Locale, Record<string, string>> = {
     "rules.view_yaml": "\u5728 GitHub \u67E5\u770B YAML",
 
     // Integrate page
-    "integrate.ready": "{count} \u689D\u898F\u5247\uff0c\u96A8\u6642\u53EF\u6574\u5408\u3002\u8DDF Cisco \u8D70\u7684\u540C\u4E00\u689D\u8DEF\u3002",
+    "integrate.ready":
+      "{count} \u689D\u898F\u5247\uff0c\u96A8\u6642\u53EF\u6574\u5408\u3002\u8DDF Cisco \u8D70\u7684\u540C\u4E00\u689D\u8DEF\u3002",
     "integrate.schema.title": "Schema \u7A69\u5B9A\u6027\u4FDD\u8B49",
-    "integrate.schema.intro": "\u5982\u679C\u4F60\u4F9D\u8CF4 ATR \u4F5C\u70BA\u4E0A\u6E38\uff0C\u4F60\u9700\u8981\u77E5\u9053\u683C\u5F0F\u4E0D\u6703\u58DE\u6389\u3002\u9019\u662F\u6211\u5011\u7684\u627F\u8AFE\uff1A",
-    "integrate.schema.v1.title": "ATR Schema v1.0\uff08\u7576\u524D\u7248\u672C\uff09",
-    "integrate.schema.v1.desc": "\u5DF2\u767C\u5E03\u4E14\u7A69\u5B9A\u3002\u6240\u6709\u65B0\u6B04\u4F4D\u90FD\u662F\u53EF\u9078\u7684\u3002\u73FE\u6709\u6B04\u4F4D\u4E0D\u6703\u5728\u6C92\u6709 major version \u8B8A\u66F4\u7684\u60C5\u6CC1\u4E0B\u79FB\u9664\u6216\u91CD\u65B0\u547D\u540D\u3002",
+    "integrate.schema.intro":
+      "\u5982\u679C\u4F60\u4F9D\u8CF4 ATR \u4F5C\u70BA\u4E0A\u6E38\uff0C\u4F60\u9700\u8981\u77E5\u9053\u683C\u5F0F\u4E0D\u6703\u58DE\u6389\u3002\u9019\u662F\u6211\u5011\u7684\u627F\u8AFE\uff1A",
+    "integrate.schema.v1.title":
+      "ATR Schema v1.0\uff08\u7576\u524D\u7248\u672C\uff09",
+    "integrate.schema.v1.desc":
+      "\u5DF2\u767C\u5E03\u4E14\u7A69\u5B9A\u3002\u6240\u6709\u65B0\u6B04\u4F4D\u90FD\u662F\u53EF\u9078\u7684\u3002\u73FE\u6709\u6B04\u4F4D\u4E0D\u6703\u5728\u6C92\u6709 major version \u8B8A\u66F4\u7684\u60C5\u6CC1\u4E0B\u79FB\u9664\u6216\u91CD\u65B0\u547D\u540D\u3002",
     "integrate.schema.compat.title": "\u5411\u5F8C\u76F8\u5BB9\u6027",
-    "integrate.schema.compat.desc": "\u7834\u58DE\u6027\u8B8A\u66F4\u53EA\u5728 major version \u8F49\u63DB\u6642\u767C\u751F\uff08v1 \u2192 v2\uff09\u3002\u63D0\u4F9B\u9077\u79FB\u6307\u5357\u548C\u81F3\u5C11 6 \u500B\u6708\u7684\u91CD\u758A\u652F\u63F4\u671F\u3002",
+    "integrate.schema.compat.desc":
+      "\u7834\u58DE\u6027\u8B8A\u66F4\u53EA\u5728 major version \u8F49\u63DB\u6642\u767C\u751F\uff08v1 \u2192 v2\uff09\u3002\u63D0\u4F9B\u9077\u79FB\u6307\u5357\u548C\u81F3\u5C11 6 \u500B\u6708\u7684\u91CD\u758A\u652F\u63F4\u671F\u3002",
     "integrate.schema.freq.title": "\u66F4\u65B0\u983B\u7387",
-    "integrate.schema.freq.desc": "\u65B0\u898F\u5247\u6301\u7E8C\u65B0\u589E\uff08\u5E73\u5747\u6BCF\u9031 2-5 \u689D\uff09\u3002\u6BCF\u689D\u898F\u5247\u90FD\u901A\u904E CI \u9A57\u8B49 + precision \u6E2C\u8A66\u624D\u80FD merge\u3002",
+    "integrate.schema.freq.desc":
+      "\u65B0\u898F\u5247\u6301\u7E8C\u65B0\u589E\uff08\u5E73\u5747\u6BCF\u9031 2-5 \u689D\uff09\u3002\u6BCF\u689D\u898F\u5247\u90FD\u901A\u904E CI \u9A57\u8B49 + precision \u6E2C\u8A66\u624D\u80FD merge\u3002",
     "integrate.schema.sync.title": "\u540C\u6B65\u65B9\u6CD5",
-    "integrate.why.title": "\u70BA\u4EC0\u9EBC\u7528 ATR \u800C\u4E0D\u662F\u81EA\u5DF1\u5BEB\uff1F",
+    "integrate.why.title":
+      "\u70BA\u4EC0\u9EBC\u7528 ATR \u800C\u4E0D\u662F\u81EA\u5DF1\u5BEB\uff1F",
     "integrate.license.title": "\u6388\u6B0A\u8207\u6CD5\u5F8B",
     "integrate.cisco.title": "\u6848\u4F8B\uff1ACisco \u600E\u9EBC\u505A\u7684",
-    "integrate.cisco.body": "Cisco \u7684 DefenseClaw \u5718\u968A\u5C07 ATR rules \u4F5C\u70BA\u4E0A\u6E38\u4F9D\u8CF4\u6574\u5408\u3002\u4ED6\u5011\u7684\u5DE5\u7A0B\u5E2B\u63D0\u4EA4\u4E86 PR #79\uff0C\u6211\u5011 review \u5B8C\uff0C3 \u5929\u5408\u4F75\u3002\u7136\u5F8C\u4ED6\u5011\u5EFA\u4E86 --rule-packs CLI\uff08PR #80\uff09\u5C08\u9580\u6D88\u8CBB ATR\u3002",
+    "integrate.cisco.body":
+      "Cisco \u7684 DefenseClaw \u5718\u968A\u5C07 ATR rules \u4F5C\u70BA\u4E0A\u6E38\u4F9D\u8CF4\u6574\u5408\u3002\u4ED6\u5011\u7684\u5DE5\u7A0B\u5E2B\u63D0\u4EA4\u4E86 PR #79\uff0C\u6211\u5011 review \u5B8C\uff0C3 \u5929\u5408\u4F75\u3002\u7136\u5F8C\u4ED6\u5011\u5EFA\u4E86 --rule-packs CLI\uff08PR #80\uff09\u5C08\u9580\u6D88\u8CBB ATR\u3002",
 
     // Contribute page
     "contribute.crystal.title": "Threat Cloud \u7D50\u6676\u6A5F\u5236",
-    "contribute.crystal.sub": "\u50B3\u7D71\u898F\u5247\u9700\u8981\u6578\u9031\u64B0\u5BEB\u3001\u5BE9\u67E5\u3001\u767C\u5E03\u3002Threat Cloud \u76EE\u6A19\u6578\u5C0F\u6642\u3002",
+    "contribute.crystal.sub":
+      "\u50B3\u7D71\u898F\u5247\u9700\u8981\u6578\u9031\u64B0\u5BEB\u3001\u5BE9\u67E5\u3001\u767C\u5E03\u3002Threat Cloud \u76EE\u6A19\u6578\u5C0F\u6642\u3002",
     "contribute.governance": "\u6CBB\u7406",
-    "contribute.governance.desc": "\u898F\u5247\u5BE9\u67E5\u6D41\u7A0B\u3001\u7DAD\u8B77\u8005\u89D2\u8272\u3001\u6C7A\u7B56\u6A5F\u5236\u3002",
+    "contribute.governance.desc":
+      "\u898F\u5247\u5BE9\u67E5\u6D41\u7A0B\u3001\u7DAD\u8B77\u8005\u89D2\u8272\u3001\u6C7A\u7B56\u6A5F\u5236\u3002",
     "contribute.contributors": "\u8CA2\u737B\u8005",
-    "contribute.contributors.desc": "\u69AE\u8B7D\u724C\u3002\u6BCF\u500B\u78BA\u8A8D\u7684\u7E5E\u904E\u3001\u8AA4\u5224\u56DE\u5831\u548C\u898F\u5247\u90FD\u6703\u88AB\u8A18\u529F\u3002",
+    "contribute.contributors.desc":
+      "\u69AE\u8B7D\u724C\u3002\u6BCF\u500B\u78BA\u8A8D\u7684\u7E5E\u904E\u3001\u8AA4\u5224\u56DE\u5831\u548C\u898F\u5247\u90FD\u6703\u88AB\u8A18\u529F\u3002",
     "contribute.guide": "\u898F\u5247\u64B0\u5BEB\u6307\u5357",
-    "contribute.guide.desc": "\u5B8C\u6574\u6559\u5B78\uff0C\u9644\u7BC4\u4F8B\u548C schema \u53C3\u8003\u3002",
+    "contribute.guide.desc":
+      "\u5B8C\u6574\u6559\u5B78\uff0C\u9644\u7BC4\u4F8B\u548C schema \u53C3\u8003\u3002",
 
     // Research page
     "research.paper": "\u5DF2\u767C\u5E03\u8AD6\u6587",
     "research.benchmarks": "Benchmarks",
-    "research.benchmarks.sub": "\u7528\u6211\u5011\u81EA\u5DF1\u7684\u8A9E\u6599\u5EAB\u548C\u5F9E\u672A\u898B\u904E\u7684\u5916\u90E8 benchmark \u6E2C\u8A66\u3002",
+    "research.benchmarks.sub":
+      "\u7528\u6211\u5011\u81EA\u5DF1\u7684\u8A9E\u6599\u5EAB\u548C\u5F9E\u672A\u898B\u904E\u7684\u5916\u90E8 benchmark \u6E2C\u8A66\u3002",
     "research.pint": "PINT\uff08\u5916\u90E8\u5C0D\u6297\u6E2C\u8A66\uff09",
     "research.self": "Self-Test\uff08\u81EA\u6709\u898F\u5247\uff09",
     "research.precision": "Precision",
     "research.recall": "Recall",
     "research.samples": "\u6A23\u672C\u6578",
-    "research.gap_note": "{precision}% precision \u548C {recall}% recall \u4E4B\u9593\u7684\u5DEE\u8DDD\u662F\u9810\u671F\u7684\u3002Regex \u80FD\u6293\u5230\u5DF2\u77E5\u6A21\u5F0F\uff0C\u4F46\u6703\u6F0F\u6389\u91CD\u8FF0\u548C\u591A\u8A9E\u8A00\u653B\u64CA\u3002",
+    "research.gap_note":
+      "{precision}% precision \u548C {recall}% recall \u4E4B\u9593\u7684\u5DEE\u8DDD\u662F\u9810\u671F\u7684\u3002Regex \u80FD\u6293\u5230\u5DF2\u77E5\u6A21\u5F0F\uff0C\u4F46\u6703\u6F0F\u6389\u91CD\u8FF0\u548C\u591A\u8A9E\u8A00\u653B\u64CA\u3002",
     "research.scan": "\u751F\u614B\u7CFB\u6383\u63CF\u6578\u64DA",
-    "research.scan.sub": "\u771F\u5BE6\u6383\u63CF\u771F\u5BE6\u7684 MCP skill \u8A3B\u518A\u8868\u3002",
+    "research.scan.sub":
+      "\u771F\u5BE6\u6383\u63CF\u771F\u5BE6\u7684 MCP skill \u8A3B\u518A\u8868\u3002",
     "research.scan.mega": "Mega Scan\uff08OpenClaw + Skills.sh\uff09",
     "research.scan.clawhub": "ClawHub \u8A3B\u518A\u8868\u6383\u63CF",
     "research.scan.scanned": "skills \u5DF2\u6383\u63CF",
@@ -349,40 +435,60 @@ export const messages: Record<Locale, Record<string, string>> = {
     "research.download.csv": "\u4E0B\u8F09\u539F\u59CB\u6578\u64DA (CSV)",
     "research.download.json": "\u4E0B\u8F09\u7D71\u8A08 (JSON)",
     "research.limits": "ATR \u7121\u6CD5\u5075\u6E2C\u4EC0\u9EBC",
-    "research.limits.sub": "\u6211\u5011\u767C\u5E03\u9019\u500B\u7AE0\u7BC0\uff0C\u56E0\u70BA\u8AA0\u5BE6\u7684\u9650\u5236\u6BD4\u865B\u5047\u7684\u81EA\u4FE1\u66F4\u80FD\u5EFA\u7ACB\u4FE1\u4EFB\u3002",
-    "research.limits.full": "\u5B8C\u6574\u9650\u5236\u6587\u4EF6\uff0C\u5305\u542B 64 \u500B evasion test",
+    "research.limits.sub":
+      "\u6211\u5011\u767C\u5E03\u9019\u500B\u7AE0\u7BC0\uff0C\u56E0\u70BA\u8AA0\u5BE6\u7684\u9650\u5236\u6BD4\u865B\u5047\u7684\u81EA\u4FE1\u66F4\u80FD\u5EFA\u7ACB\u4FE1\u4EFB\u3002",
+    "research.limits.full":
+      "\u5B8C\u6574\u9650\u5236\u6587\u4EF6\uff0C\u5305\u542B 64 \u500B evasion test",
     "research.limit.paraphrase": "\u91CD\u8FF0\u653B\u64CA",
-    "research.limit.paraphrase.desc": "\u4EFB\u4F55 regex \u898F\u5247\u90FD\u53EF\u4EE5\u88AB\u8A9E\u7FA9\u7B49\u50F9\u7684\u91CD\u8FF0\u7E5E\u904E\u3002\u300CIgnore previous instructions\u300D\u6703\u88AB\u5075\u6E2C\uff1B\u300Cplease set aside the guidance you were given earlier\u300D\u4E0D\u6703\u3002",
+    "research.limit.paraphrase.desc":
+      "\u4EFB\u4F55 regex \u898F\u5247\u90FD\u53EF\u4EE5\u88AB\u8A9E\u7FA9\u7B49\u50F9\u7684\u91CD\u8FF0\u7E5E\u904E\u3002\u300CIgnore previous instructions\u300D\u6703\u88AB\u5075\u6E2C\uff1B\u300Cplease set aside the guidance you were given earlier\u300D\u4E0D\u6703\u3002",
     "research.limit.multilang": "\u591A\u8A9E\u8A00\u653B\u64CA",
-    "research.limit.multilang.desc": "\u6240\u6709\u6A21\u5F0F\u90FD\u662F\u82F1\u6587\u7684\u3002\u7528\u897F\u73ED\u7259\u8A9E\u3001\u4E2D\u6587\u3001\u963F\u62C9\u4F2F\u8A9E\u6216\u4EFB\u4F55\u5176\u4ED6\u8A9E\u8A00\u5BEB\u7684\u6CE8\u5165\u653B\u64CA\u6703\u5B8C\u5168\u7E5E\u904E\u3002",
+    "research.limit.multilang.desc":
+      "\u6240\u6709\u6A21\u5F0F\u90FD\u662F\u82F1\u6587\u7684\u3002\u7528\u897F\u73ED\u7259\u8A9E\u3001\u4E2D\u6587\u3001\u963F\u62C9\u4F2F\u8A9E\u6216\u4EFB\u4F55\u5176\u4ED6\u8A9E\u8A00\u5BEB\u7684\u6CE8\u5165\u653B\u64CA\u6703\u5B8C\u5168\u7E5E\u904E\u3002",
     "research.limit.context": "\u4E0A\u4E0B\u6587\u76F8\u95DC\u653B\u64CA",
-    "research.limit.context.desc": "\u300CDelete all records\u300D\u53EF\u80FD\u662F\u5408\u6CD5\u6216\u60E1\u610F\u7684\u3002Regex \u5339\u914D\u6A21\u5F0F\u4F46\u4E0D\u7406\u89E3\u6388\u6B0A\u4E0A\u4E0B\u6587\u3002",
+    "research.limit.context.desc":
+      "\u300CDelete all records\u300D\u53EF\u80FD\u662F\u5408\u6CD5\u6216\u60E1\u610F\u7684\u3002Regex \u5339\u914D\u6A21\u5F0F\u4F46\u4E0D\u7406\u89E3\u6388\u6B0A\u4E0A\u4E0B\u6587\u3002",
     "research.limit.protocol": "\u5354\u8B70\u5C64\u653B\u64CA",
-    "research.limit.protocol.desc": "ATR \u6AA2\u67E5\u5167\u5BB9\uff0C\u4E0D\u6AA2\u67E5\u50B3\u8F38\u3002Message replay\u3001schema manipulation\u3001MCP \u50B3\u8F38\u5C64 MITM \u662F\u4E0D\u53EF\u898B\u7684\u3002",
+    "research.limit.protocol.desc":
+      "ATR \u6AA2\u67E5\u5167\u5BB9\uff0C\u4E0D\u6AA2\u67E5\u50B3\u8F38\u3002Message replay\u3001schema manipulation\u3001MCP \u50B3\u8F38\u5C64 MITM \u662F\u4E0D\u53EF\u898B\u7684\u3002",
     "research.limit.multiturn": "\u591A\u8F2A\u884C\u70BA\u6A21\u5F0F",
-    "research.limit.multiturn.desc": "20 \u8F2A\u5C0D\u8A71\u4E2D\u7684\u6F38\u9032\u5F0F\u4FE1\u4EFB\u5347\u7D1A\uff0C\u55AE\u4E00\u8A0A\u606F\u7121\u6CD5\u5075\u6E2C\uff0CATR \u4E0D\u6703\u95DC\u806F\u3002ATR \u7368\u7ACB\u8A55\u4F30\u6BCF\u500B\u4E8B\u4EF6\u3002",
+    "research.limit.multiturn.desc":
+      "20 \u8F2A\u5C0D\u8A71\u4E2D\u7684\u6F38\u9032\u5F0F\u4FE1\u4EFB\u5347\u7D1A\uff0C\u55AE\u4E00\u8A0A\u606F\u7121\u6CD5\u5075\u6E2C\uff0CATR \u4E0D\u6703\u95DC\u806F\u3002ATR \u7368\u7ACB\u8A55\u4F30\u6BCF\u500B\u4E8B\u4EF6\u3002",
     "research.limit.novel": "\u65B0\u578B\u653B\u64CA",
-    "research.limit.novel.desc": "\u6839\u64DA\u5B9A\u7FA9\uff0Cregex \u7121\u6CD5\u5075\u6E2C\u9084\u4E0D\u5B58\u5728\u7684\u653B\u64CA\u6A21\u5F0F\u3002\u65B0\u6280\u8853\u9700\u8981\u65B0\u898F\u5247\u3002",
+    "research.limit.novel.desc":
+      "\u6839\u64DA\u5B9A\u7FA9\uff0Cregex \u7121\u6CD5\u5075\u6E2C\u9084\u4E0D\u5B58\u5728\u7684\u653B\u64CA\u6A21\u5F0F\u3002\u65B0\u6280\u8853\u9700\u8981\u65B0\u898F\u5247\u3002",
 
     // Subpages
     "coverage.label": "\u6A19\u6E96\u8986\u84CB",
-    "coverage.heading": "ATR \u5C0D\u61C9\u6BCF\u500B\u4E3B\u8981\u7684 AI \u5B89\u5168\u6846\u67B6\u3002",
-    "coverage.sub": "\u5F9E\u300C\u7406\u89E3\u5A01\u8105\u300D\u76F4\u63A5\u5230\u300C\u5075\u6E2C\u5A01\u8105\u300D\uff0C\u4E0D\u7528\u5F9E\u96F6\u5BEB\u898F\u5247\u3002",
+    "coverage.heading":
+      "ATR \u5C0D\u61C9\u6BCF\u500B\u4E3B\u8981\u7684 AI \u5B89\u5168\u6846\u67B6\u3002",
+    "coverage.sub":
+      "\u5F9E\u300C\u7406\u89E3\u5A01\u8105\u300D\u76F4\u63A5\u5230\u300C\u5075\u6E2C\u5A01\u8105\u300D\uff0C\u4E0D\u7528\u5F9E\u96F6\u5BEB\u898F\u5247\u3002",
     "integrate.label": "Integrate",
-    "integrate.heading": "\u56DB\u689D\u8DEF\u5F91\u3002\u540C\u4E00\u500B\u7D42\u9EDE\u3002",
+    "integrate.heading":
+      "\u56DB\u689D\u8DEF\u5F91\u3002\u540C\u4E00\u500B\u7D42\u9EDE\u3002",
     "research.label": "\u7814\u7A76",
-    "research.heading": "\u6578\u64DA\u3001Benchmark \u548C\u8AA0\u5BE6\u7684\u9650\u5236\u3002",
-    "research.sub": "ATR \u516C\u958B\u767C\u5E03 evasion test\u3002\u6211\u5011\u544A\u8A34\u4F60\u6211\u5011\u6293\u4E0D\u5230\u4EC0\u9EBC\u3002",
+    "research.heading":
+      "\u6578\u64DA\u3001Benchmark \u548C\u8AA0\u5BE6\u7684\u9650\u5236\u3002",
+    "research.sub":
+      "ATR \u516C\u958B\u767C\u5E03 evasion test\u3002\u6211\u5011\u544A\u8A34\u4F60\u6211\u5011\u6293\u4E0D\u5230\u4EC0\u9EBC\u3002",
     "contribute.label": "\u8CA2\u737B",
-    "contribute.heading": "ATR \u662F MIT \u6388\u6B0A\u3002\u8CA2\u737B\u53EA\u9700\u8981\u4E00\u500B\u6587\u5B57\u7DE8\u8F2F\u5668\u548C\u4E00\u500B YAML \u6A94\u6848\u3002",
-    "contribute.sub": "\u96F6\u5C08\u6709\u5DE5\u5177\u3001\u96F6\u9059\u6E2C\u3001\u96F6 CLA\u3002\u793E\u7FA4\u7DAD\u8B77\u7684\u958B\u653E\u6A19\u6E96\u3002",
+    "contribute.heading":
+      "ATR \u662F MIT \u6388\u6B0A\u3002\u8CA2\u737B\u53EA\u9700\u8981\u4E00\u500B\u6587\u5B57\u7DE8\u8F2F\u5668\u548C\u4E00\u500B YAML \u6A94\u6848\u3002",
+    "contribute.sub":
+      "\u96F6\u5C08\u6709\u5DE5\u5177\u3001\u96F6\u9059\u6E2C\u3001\u96F6 CLA\u3002\u793E\u7FA4\u7DAD\u8B77\u7684\u958B\u653E\u6A19\u6E96\u3002",
 
     // Footer
-    "footer.note": "ATR \u662F\u793E\u7FA4\u7DAD\u8B77\u7684\u958B\u653E\u6A19\u6E96\u3002MIT \u6388\u6B0A\u3002\u4E0D\u96B8\u5C6C\u65BC\u4EFB\u4F55\u5EE0\u5546\u3002",
+    "footer.note":
+      "ATR \u662F\u793E\u7FA4\u7DAD\u8B77\u7684\u958B\u653E\u6A19\u6E96\u3002MIT \u6388\u6B0A\u3002\u4E0D\u96B8\u5C6C\u65BC\u4EFB\u4F55\u5EE0\u5546\u3002",
   },
 };
 
-export function t(locale: Locale, key: string, vars?: Record<string, string | number>): string {
+export function t(
+  locale: Locale,
+  key: string,
+  vars?: Record<string, string | number>,
+): string {
   let text = messages[locale]?.[key] ?? messages.en[key] ?? key;
   if (vars) {
     for (const [k, v] of Object.entries(vars)) {

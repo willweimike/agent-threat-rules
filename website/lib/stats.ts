@@ -32,7 +32,11 @@ interface MegaScanReport {
   severity: { critical: number; high: number; medium: number };
   malware_campaign?: {
     confirmed_malware: number;
-    threat_actors: Array<{ name: string; skills: number; malicious_rate: number }>;
+    threat_actors: Array<{
+      name: string;
+      skills: number;
+      malicious_rate: number;
+    }>;
   };
 }
 
@@ -162,16 +166,28 @@ function isSafeUrl(url: string | undefined): boolean {
 }
 
 export function loadSiteStats(): SiteStats {
-  const clawhub = readJson<ClawHubStats>(join(DATA_DIR, "clawhub-scan", "ecosystem-stats.json"));
-  const mega = readJson<MegaScanReport>(join(DATA_DIR, "mega-scan-report.json"));
-  const pint = readJson<PintReport>(join(DATA_DIR, "pint-benchmark", "pint-eval-report.json"));
+  const clawhub = readJson<ClawHubStats>(
+    join(DATA_DIR, "clawhub-scan", "ecosystem-stats.json"),
+  );
+  const mega = readJson<MegaScanReport>(
+    join(DATA_DIR, "mega-scan-report.json"),
+  );
+  const pint = readJson<PintReport>(
+    join(DATA_DIR, "pint-benchmark", "pint-eval-report.json"),
+  );
   const eval_ = readJson<EvalReport>(join(DATA_DIR, "eval-report.json"));
-  const skillScan = readJson<SkillScanReport>(join(DATA_DIR, "skill-scan-report-full.json"));
-  const skillBench = readJson<SkillBenchmarkReport>(join(DATA_DIR, "skill-benchmark", "benchmark-report.json"));
+  const skillScan = readJson<SkillScanReport>(
+    join(DATA_DIR, "skill-scan-report-full.json"),
+  );
+  const skillBench = readJson<SkillBenchmarkReport>(
+    join(DATA_DIR, "skill-benchmark", "benchmark-report.json"),
+  );
 
   const rules = loadAllRules();
 
-  const categories = new Set(rules.map((r: { category: string }) => r.category));
+  const categories = new Set(
+    rules.map((r: { category: string }) => r.category),
+  );
 
   // Count unique CVEs across all rules
   const cves = new Set<string>();
@@ -203,13 +219,17 @@ export function loadSiteStats(): SiteStats {
     megaScanDate: mega?.scan_date ?? "2026-04-14",
 
     pintSamples: pint?.report?.corpusSize ?? 850,
-    pintPrecision: Math.round((pint?.report?.overall?.precision ?? 0.9964) * 1000) / 10, // 99.6%
-    pintRecall: Math.round((pint?.report?.overall?.recall ?? 0.6142) * 1000) / 10, // 61.4%
+    pintPrecision:
+      Math.round((pint?.report?.overall?.precision ?? 0.9964) * 1000) / 10, // 99.6%
+    pintRecall:
+      Math.round((pint?.report?.overall?.recall ?? 0.6142) * 1000) / 10, // 61.4%
     pintF1: Math.round((pint?.report?.overall?.f1 ?? 0.7599) * 1000) / 10, // 76.0%
 
     selfTestSamples: eval_?.report?.corpusSize ?? 341,
-    selfTestPrecision: Math.round((eval_?.report?.overall?.precision ?? 0.997) * 1000) / 10,
-    selfTestRecall: Math.round((eval_?.report?.overall?.recall ?? 0.994) * 1000) / 10,
+    selfTestPrecision:
+      Math.round((eval_?.report?.overall?.precision ?? 0.997) * 1000) / 10,
+    selfTestRecall:
+      Math.round((eval_?.report?.overall?.recall ?? 0.994) * 1000) / 10,
 
     skillsScanned: skillScan?.scan_metadata?.total_skills_scanned ?? 3115,
     skillPublishers: skillScan?.scan_metadata?.total_publishers ?? 104,
@@ -217,21 +237,60 @@ export function loadSiteStats(): SiteStats {
     skillAvgLatency: skillScan?.scan_metadata?.avg_latency_ms ?? 5.39,
 
     skillBenchSamples: skillBench?.corpus_size ?? 498,
-    skillBenchRecall: Math.round((skillBench?.overall_recall ?? 1.0) * 1000) / 10,
-    skillBenchPrecision: Math.round((skillBench?.overall_precision ?? 0.97) * 1000) / 10,
+    skillBenchRecall:
+      Math.round((skillBench?.overall_recall ?? 1.0) * 1000) / 10,
+    skillBenchPrecision:
+      Math.round((skillBench?.overall_precision ?? 0.97) * 1000) / 10,
     skillBenchF1: Math.round((skillBench?.overall_f1 ?? 0.984) * 1000) / 10,
     skillBenchFpRate: Math.round((skillBench?.fp_rate ?? 0) * 1000) / 10,
-    skillBenchLatency: Math.round((skillBench?.avg_latency_ms ?? 3.52) * 10) / 10,
+    skillBenchLatency:
+      Math.round((skillBench?.avg_latency_ms ?? 3.52) * 10) / 10,
 
     cveCount: cves.size || 16,
 
     ecosystemIntegrations: [
+      // === Tier-1 standards bodies (merged by external maintainer) ===
+      {
+        name: "MISP Taxonomies",
+        type: "merged",
+        detail:
+          "PR #323 merged 2026-05-10 by adulau (MISP project lead). 10 ATR predicates + 330 rule IDs as MISP machine tags. CIRCL adoption.",
+        url: "https://github.com/MISP/misp-taxonomies/pull/323",
+        logo: "https://github.com/MISP.png?size=128",
+      },
+      {
+        name: "MISP Galaxy",
+        type: "merged",
+        detail:
+          "PR #1207 merged 2026-05-10 by adulau. 336 cluster values with kill-chain, severity, CVE / OWASP LLM / MITRE ATLAS cross-refs. 10,408 lines.",
+        url: "https://github.com/MISP/misp-galaxy/pull/1207",
+        logo: "https://github.com/MISP.png?size=128",
+      },
+      {
+        name: "OWASP Agent-Security-Regression-Harness",
+        type: "merged",
+        detail:
+          'PR #74 merged 2026-05-11 by mertsatilmaz (OWASP Project Lead): "Welcome to the team." Detection rules wired into the OWASP regression harness.',
+        url: "https://github.com/OWASP/Agent-Security-Regression-Harness/pull/74",
+        logo: "https://github.com/OWASP.png?size=128",
+      },
+      {
+        name: "Microsoft Agent Governance Toolkit",
+        type: "merged",
+        detail:
+          "PR #908 + #1277 merged. Weekly auto-sync workflow runs against ATR main. AGT #1981 (Copilot SWE Agent) generated regression fixtures presuming ATR coverage — closed loop 2026-05-11 in 2h 16m.",
+        url: "https://github.com/microsoft/agent-governance-toolkit/pull/1277",
+        logo: "https://github.com/microsoft.png?size=128",
+      },
       {
         name: "Cisco AI Defense",
         type: "merged",
-        detail: "PR #79 + #99 merged. Full 330-rule pack in skill-scanner production. Upstream maintained.",
+        detail:
+          "PR #79 + #99 merged. Full 314-rule pack in skill-scanner production. Upstream maintained.",
         url: "https://github.com/cisco-ai-defense/skill-scanner/pull/99",
+        logo: "https://github.com/cisco-ai-defense.png?size=128",
       },
+      // === Curated awesome-list merges ===
       {
         name: "Awesome LM-SSP",
         type: "merged",
@@ -242,31 +301,11 @@ export function loadSiteStats(): SiteStats {
       {
         name: "Agentic AI Top 10 Vulnerability",
         type: "merged",
-        detail: "PR #14 merged. ATR detection mapping for 12 vulnerability categories.",
+        detail:
+          "PR #14 merged. ATR detection mapping for 12 vulnerability categories.",
         url: "https://github.com/precize/Agentic-AI-Top10-Vulnerability/pull/14",
         logo: "https://github.com/precize.png?size=128",
       },
-      {
-        name: "OWASP LLM Top 10",
-        type: "open",
-        detail: "PR #814 submitted. Detection mapping for ASI01-ASI10.",
-        url: "https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/pull/814",
-      },
-      {
-        name: "SAFE-MCP",
-        type: "open",
-        detail: "PR #187 to safe-agentic-framework/safe-mcp. Coverage mapping submitted.",
-        url: "https://github.com/safe-agentic-framework/safe-mcp/pull/187",
-      },
-      {
-        name: "Awesome LLM Security",
-        type: "open",
-        detail: "PR #117 submitted to curated security tools list.",
-        url: "https://github.com/corca-ai/awesome-llm-security/pull/117",
-      },
-      // removed 2026-04-18: target repos returned 404
-      // - nicobailon/awesome-mcp-security
-      // - nicobailon/safe-mcp
       {
         name: "Awesome LLM agent Security",
         type: "merged",
@@ -276,37 +315,119 @@ export function loadSiteStats(): SiteStats {
       {
         name: "Awesome Agentic Patterns",
         type: "merged",
-        detail: "PR #58 merged. Deterministic Threat Rule Scanning pattern accepted.",
+        detail:
+          "PR #58 merged. Deterministic Threat Rule Scanning pattern accepted.",
         url: "https://github.com/nibzard/awesome-agentic-patterns/pull/58",
       },
       {
-        name: "Microsoft AGT",
+        name: "Awesome AI Security",
         type: "merged",
-        detail: "PR #908 + #1277 merged. 287 ATR rules + weekly auto-sync workflow into Agent Governance Toolkit production.",
-        url: "https://github.com/microsoft/agent-governance-toolkit/pull/1277",
+        detail: "Merged into Agentic Systems section.",
+        url: "https://github.com/TalEliyahu/Awesome-AI-Security/pull/53",
       },
+      // === Open PRs / draft conversations (standards + frameworks) ===
+      {
+        name: "FINOS Common Cloud Controls",
+        type: "open",
+        detail:
+          "PR #986 draft open. ATR guideline-mappings for CN01/CN02/CN04/CN06 + Gemara MappingReference. CI green, CLA signed. Linux Foundation project.",
+        url: "https://github.com/finos/common-cloud-controls/pull/986",
+        logo: "https://github.com/finos.png?size=128",
+      },
+      {
+        name: "NIST OSCAL",
+        type: "open",
+        detail:
+          "PR #2234 conversation. iMichaela invited Path 1 community contribution; Adam reply 2026-05-11 with 4 technical questions, awaiting NIST reviewer.",
+        url: "https://github.com/usnistgov/OSCAL/pull/2234",
+        logo: "https://github.com/usnistgov.png?size=128",
+      },
+      {
+        name: "rulezet (CIRCL)",
+        type: "open",
+        detail:
+          "Issue #49 + PR #50 draft. atr_format.py converter mirroring sigma_format with 24 unit tests. CIRCL maintainer Théo GEFFE.",
+        url: "https://github.com/rulezet/rulezet-core/pull/50",
+      },
+      {
+        name: "OWASP LLM Top 10",
+        type: "open",
+        detail:
+          "PR #814 open. Detection mapping for ASI01-ASI10; engaged by reviewer desiorac with substantive feedback rounds.",
+        url: "https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/pull/814",
+        logo: "https://github.com/OWASP.png?size=128",
+      },
+      {
+        name: "SAFE-MCP",
+        type: "open",
+        detail:
+          "PR #187 to safe-agentic-framework/safe-mcp. Coverage mapping submitted.",
+        url: "https://github.com/safe-agentic-framework/safe-mcp/pull/187",
+      },
+      {
+        name: "Awesome LLM Security",
+        type: "open",
+        detail: "PR #117 submitted to curated security tools list.",
+        url: "https://github.com/corca-ai/awesome-llm-security/pull/117",
+      },
+      // === Red team tooling (open) ===
       {
         name: "NVIDIA Garak",
         type: "open",
-        detail: "PR #1676. 330 ATR detectors. Two review rounds passed; final maintainer review in progress.",
+        detail:
+          "PR #1676. 330 ATR detectors. Two review rounds passed; final maintainer review in progress.",
         url: "https://github.com/NVIDIA/garak/pull/1676",
+        logo: "https://github.com/NVIDIA.png?size=128",
+      },
+      {
+        name: "Microsoft PyRIT",
+        type: "open",
+        detail:
+          "PR #1715 draft. ATR dataset loader for PyRIT red-team orchestrators. Roman Lutz reviewed in 2 min; iterating on doc shape.",
+        url: "https://github.com/microsoft/PyRIT/pull/1715",
+        logo: "https://github.com/microsoft.png?size=128",
+      },
+      {
+        name: "NVIDIA NeMo Guardrails",
+        type: "open",
+        detail:
+          "Issue #1872. Colang rail loader proposal — turn ATR rules into reusable input/output rails inside NeMo Guardrails.",
+        url: "https://github.com/NVIDIA/NeMo-Guardrails/issues/1872",
+        logo: "https://github.com/NVIDIA.png?size=128",
+      },
+      {
+        name: "Protect AI llm-guard",
+        type: "open",
+        detail:
+          "Issue #340. ATRScanner input/output scanner proposal following existing scanner pattern.",
+        url: "https://github.com/protectai/llm-guard/issues/340",
+      },
+      {
+        name: "PromptInject (NeurIPS 2022)",
+        type: "open",
+        detail:
+          "Issue #9. Attack-source integration — turn PromptInject's adversarial corpus into ATR detection coverage.",
+        url: "https://github.com/agencyenterprise/PromptInject/issues/9",
       },
       {
         name: "Promptfoo",
         type: "open",
-        detail: "PR #8529 submitted. MCP red team example with ATR deterministic defense.",
+        detail:
+          "PR #8529 submitted. MCP red team example with ATR deterministic defense.",
         url: "https://github.com/promptfoo/promptfoo/pull/8529",
       },
       {
         name: "Cisco MCP Scanner",
         type: "open",
-        detail: "PR #151 submitted. ATR regex analyzer with 20 community rules.",
+        detail:
+          "PR #151 submitted. ATR regex analyzer with 20 community rules.",
         url: "https://github.com/cisco-ai-defense/mcp-scanner/pull/151",
       },
       {
         name: "Damn Vulnerable MCP Server",
         type: "open",
-        detail: "PR #29 submitted. Blue team detection guide for all 10 challenges.",
+        detail:
+          "PR #29 submitted. Blue team detection guide for all 10 challenges.",
         url: "https://github.com/harishsg993010/damn-vulnerable-MCP-server/pull/29",
       },
       {
@@ -324,26 +445,16 @@ export function loadSiteStats(): SiteStats {
       {
         name: "Sage (Gen Digital)",
         type: "open",
-        detail: "PR #33. 27 patterns. Maintainer-invited (vaclavbelak, Norton/Avast parent security team).",
+        detail:
+          "PR #33. 27 patterns. Maintainer-invited (vaclavbelak, Norton/Avast parent security team).",
         url: "https://github.com/gendigitalinc/sage/pull/33",
       },
       {
         name: "IBM mcp-context-forge",
         type: "open",
-        detail: "PR #4109. ATR threat detection plugin for IBM MCP runtime. 18 tests, follows secrets_detection template.",
+        detail:
+          "PR #4109. ATR threat detection plugin for IBM MCP runtime. 18 tests, follows secrets_detection template.",
         url: "https://github.com/IBM/mcp-context-forge/pull/4109",
-      },
-      {
-        name: "PanGuard Migrator (community)",
-        type: "using",
-        detail: "@panguard-ai/migrator-community v0.1.0 on npm (MIT). Sigma / YARA → ATR YAML converter — open-core complement to ATR ruleset.",
-        url: "https://www.npmjs.com/package/@panguard-ai/migrator-community",
-      },
-      {
-        name: "Awesome AI Security",
-        type: "merged",
-        detail: "Merged into Agentic Systems section.",
-        url: "https://github.com/TalEliyahu/Awesome-AI-Security/pull/53",
       },
       {
         name: "Awesome Cybersecurity Agentic AI",
