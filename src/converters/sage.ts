@@ -140,10 +140,18 @@ function mapAction(atr: ATRAction): SageAction | null {
 			return 'require_approval';
 		case 'alert':
 		case 'snapshot':
+		case 'shadow':
 			return 'log';
 		case 'reset_context':
 		case 'reduce_permissions':
 			return null;
+		default: {
+			// Exhaustiveness check — if a new ATRAction is added in the future
+			// and not handled above, TypeScript will flag this assignment.
+			const _exhaustive: never = atr;
+			void _exhaustive;
+			return null;
+		}
 	}
 }
 
