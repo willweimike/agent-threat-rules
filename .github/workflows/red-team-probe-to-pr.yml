@@ -1,0 +1,153 @@
+name: Red Team Probe → ATR Proposal PR
+
+on:
+  issues:
+    types: [opened, labeled, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: red-team-probe-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  probe-to-pr:
+    if: contains(github.event.issue.labels.*.name, 'red-team-probe')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Write issue body to disk
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          mkdir -p /tmp/probe
+          printf '%s' "$ISSUE_BODY" > /tmp/probe/body.txt
+          wc -l /tmp/probe/body.txt
+
+      - name: Run probe-to-atr converter
+        id: convert
+        run: |
+          set -e
+          OUTPUT=$(npx tsx scripts/probe-to-atr.ts --issue-body /tmp/probe/body.txt --write --force)
+          echo "$OUTPUT"
+          SUMMARY=$(echo "$OUTPUT" | grep -F '::probe-summary::' | sed 's/^.*::probe-summary:://')
+          echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
+          SLUG=$(echo "$SUMMARY" | python3 -c "import sys, json; print(json.load(sys.stdin)['slug'])")
+          OUT_PATH=$(echo "$SUMMARY" | python3 -c "import sys, json; print(json.load(sys.stdin)['out_path'])")
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+          echo "out_path=$OUT_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Configure git author
+        run: |
+          git config user.name "ATR Probe Bot"
+          git config user.email "probe-bot@agentthreatrule.org"
+
+      - name: Create branch + commit + push
+        id: push
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          BRANCH="probe/${{ steps.convert.outputs.slug }}-${{ github.event.issue.number }}"
+          git checkout -b "$BRANCH"
+          git add proposals/red-team-probes/
+          git commit -m "feat(proposals): red-team probe submission #${{ github.event.issue.number }} — ${{ steps.convert.outputs.slug }}"
+          git push origin "$BRANCH"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Open draft PR
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          PR_BODY=$(cat <<EOF
+          Auto-generated proposal from red-team probe submission #${{ github.event.issue.number }}.
+
+          ## What this PR does
+
+          Adds \`${{ steps.convert.outputs.out_path }}\` — a DRAFT ATR rule
+          proposal with the submitter's positive and negative examples
+          pre-populated as \`test_cases\`. The detection regex is empty and
+          must be filled in by a maintainer (or by the submitter in a
+          follow-up commit on this branch).
+
+          ## Reviewer checklist
+
+          - [ ] Read the submission notes in the linked issue.
+          - [ ] Write a regex (or compound condition) that:
+                - matches ALL \`test_cases.true_positives\`
+                - matches NONE of \`test_cases.true_negatives\`
+          - [ ] Run \`npx tsx scripts/check-rules-safety.ts proposals/red-team-probes/<file>\`
+                — must show 0 FP on the 432-skill benign corpus.
+          - [ ] If clean, move the file from \`proposals/red-team-probes/\`
+                into \`rules/<category>/<final-ATR-id>.yaml\` and assign
+                the next free \`ATR-2026-NNNNN\` id.
+          - [ ] Credit the submitter in the rule's \`author\` field — leave
+                \`metadata_provenance.discovered_by\` intact.
+
+          Closes #${{ github.event.issue.number }} when this proposal is
+          promoted into \`rules/\`.
+          EOF
+          )
+          PR_URL=$(gh pr create \
+            --title "feat(proposals): red-team probe — ${{ steps.convert.outputs.slug }}" \
+            --body "$PR_BODY" \
+            --label "red-team-probe,auto-generated,needs-detection-regex" \
+            --draft \
+            --base main \
+            --head "${{ steps.push.outputs.branch }}")
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on issue with PR link
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --body "$(cat <<EOF
+          Thanks for the probe! I converted it to a draft ATR proposal:
+          ${{ steps.pr.outputs.pr_url }}
+
+          The detection regex is still empty — a maintainer will write it,
+          run it through the benign-corpus FP gate, and promote the
+          proposal into \`rules/\`. You'll be credited via
+          \`metadata_provenance.discovered_by\` and the \`author\` field.
+
+          If you want to draft the regex yourself, push directly to
+          branch \`${{ steps.push.outputs.branch }}\` on the PR.
+          EOF
+          )"
+
+      - name: Failure comment on issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --body "$(cat <<EOF
+          The probe-to-ATR converter failed on this submission.
+          Common reasons:
+          - Fewer than 3 positive or 3 negative examples
+          - Attack category not in the allowlist
+          - Acknowledgement boxes not checked
+
+          See the workflow log for the exact error:
+          ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          Edit the issue (or open a new one) and re-trigger the workflow
+          by adding/removing the \`red-team-probe\` label.
+          EOF
+          )"
