@@ -1,18 +1,18 @@
 {
-  "version": "2.1.1",
-  "generatedAt": "2026-05-11T04:13:13.711Z",
+  "version": "2.1.3",
+  "generatedAt": "2026-05-11T17:54:33.376Z",
   "rules": {
-    "total": 336,
+    "total": 344,
     "categories": 10,
     "byCategory": {
-      "agent-manipulation": 104,
+      "agent-manipulation": 105,
       "context-exfiltration": 33,
       "data-poisoning": 1,
       "excessive-autonomy": 6,
       "model-abuse": 8,
       "model-security": 3,
-      "privilege-escalation": 10,
-      "prompt-injection": 109,
+      "privilege-escalation": 11,
+      "prompt-injection": 115,
       "skill-compromise": 40,
       "tool-poisoning": 22
     }
@@ -22,7 +22,7 @@
     "skillsFlagged": 1302
   },
   "benchmark": {
-    "pintRecall": 0.6164079822616408,
-    "pintPrecision": 0.996415770609319
+    "pintRecall": 0.6252771618625277,
+    "pintPrecision": 0.9964664310954063
   }
 }
