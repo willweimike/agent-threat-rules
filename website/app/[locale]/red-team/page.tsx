@@ -95,22 +95,95 @@ interface AttributionStat {
 
 const ATTRIBUTION_STATS: AttributionStat[] = [
   {
-    number: "344",
-    label: "ATR rules in production",
+    number: "2h 16m",
+    label: "Disclosure → npm publish",
     detail:
-      "Every one carries a discovered_by field. Microsoft AGT, Cisco AI Defense, MISP, OWASP A-S-R-H all preserve it when they sync.",
+      "2026-05-07 Microsoft Security disclosed Semantic Kernel CVE-2026-26030. 2026-05-11 06:07 UTC Microsoft Copilot SWE Agent opened a regression-test PR presuming ATR coverage. 08:24 UTC v2.1.2 published on npm with paired rules. End-to-end loop.",
   },
   {
-    number: "<24h",
-    label: "From PR merge to Microsoft AGT",
+    number: "7",
+    label: "Tier-1 institutions integrating",
     detail:
-      "AGT's weekly auto-sync workflow ingests ATR main within 24h of any rule merge. CVE-2026-26030 closed end-to-end in 2h 16m.",
+      'Microsoft (Agent Governance Toolkit weekly auto-sync). Cisco AI Defense (314-rule pack in production). CIRCL/MISP (taxonomies + galaxy merged by project lead). OWASP (Project Lead merged with "Welcome to the team"). FINOS, NIST OSCAL, UK Gov AISI in motion.',
+  },
+  {
+    number: "344",
+    label: "Rules. Each with your name attached forever",
+    detail:
+      "Every rule carries author + metadata_provenance.discovered_by. Microsoft AGT, Cisco AI Defense, MISP, OWASP all preserve it on sync. When MISP exports to STIX, attribution survives. When NIST cites the rule, lineage is intact.",
   },
   {
     number: "0 FP",
-    label: "Required on 1,784 benign samples",
+    label: "Required across 3,551 benign samples",
     detail:
-      "Quality gate blocks any rule that fires on benign skill descriptions, arxiv abstracts, npm/pypi READMEs, or research-mention text.",
+      "6-check quality gate: own-TP must match + 1,784 benign + 157 research-mention + 1,611 cross-rule conflict-free + own true_negative coverage. Rules that fire on the paper describing the attack don't ship.",
+  },
+];
+
+interface OnDeckTool {
+  name: string;
+  org: string;
+  why: string;
+  filing: string;
+  status: "queued" | "scheduled";
+}
+
+const ON_DECK: OnDeckTool[] = [
+  {
+    name: "HarmBench",
+    org: "Center for AI Safety · Dan Hendrycks",
+    why: "NeurIPS 2024 spotlight, 320-behavior standardized red-team benchmark used by Anthropic / OpenAI / Google safety teams.",
+    filing: "2026-05-13",
+    status: "scheduled",
+  },
+  {
+    name: "AgentDojo",
+    org: "ETH Zurich SPY Lab · Florian Tramèr",
+    why: "NeurIPS 2024 — the only agent-specific attack benchmark with a real tool-use harness. 78 attack tasks across 4 environments.",
+    filing: "2026-05-16",
+    status: "scheduled",
+  },
+  {
+    name: "JailbreakBench",
+    org: "Princeton · Patrick Chao",
+    why: "NeurIPS 2024 Datasets & Benchmarks. 100-behavior standardized jailbreak leaderboard, fixed eval interface.",
+    filing: "2026-05-20",
+    status: "scheduled",
+  },
+  {
+    name: "TextAttack",
+    org: "QData · ACL 2020",
+    why: "3.1k stars. The reference NLP-adversarial framework. Used in undergraduate security curricula.",
+    filing: "2026-05-22",
+    status: "scheduled",
+  },
+  {
+    name: "Microsoft Counterfit",
+    org: "Microsoft Azure Security",
+    why: "Microsoft's CLI-first AI red-teaming tool. Pairs with PyRIT (discovery) and AGT (governance) for a Microsoft trifecta on shared ATR backend.",
+    filing: "2026-05-26",
+    status: "scheduled",
+  },
+  {
+    name: "InjecAgent",
+    org: "UIUC Kang Lab",
+    why: "Cleanest direct-vs-indirect agent injection taxonomy. 1,054 attack cases, complements AgentDojo.",
+    filing: "2026-05-29",
+    status: "queued",
+  },
+  {
+    name: "GPTFuzz",
+    org: "NDSS 2024",
+    why: "First credible LLM fuzzer. Detection-evasion pass closes the loop on what their fuzzer finds.",
+    filing: "2026-06-02",
+    status: "queued",
+  },
+  {
+    name: "R-Judge",
+    org: "Tongxin Yuan et al.",
+    why: "162-scenario agent safety benchmark. LLM-as-judge + content-rule = complementary defense lanes.",
+    filing: "2026-06-05",
+    status: "queued",
   },
 ];
 
@@ -169,7 +242,7 @@ export default async function RedTeamPage({
   return (
     <div className="pt-20 pb-24">
       {/* ============================================================
-          HERO — bigger frame, less density
+          HERO — bolder claim, concrete cadence number up front
       ============================================================ */}
       <section className="px-6 max-w-[1120px] mx-auto mb-24 md:mb-32">
         <Reveal>
@@ -178,27 +251,44 @@ export default async function RedTeamPage({
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <h1 className="font-display text-[clamp(36px,6vw,72px)] font-extrabold tracking-[-3px] leading-[1.02] mb-8 max-w-[860px]">
+          <h1 className="font-display text-[clamp(40px,6.5vw,80px)] font-extrabold tracking-[-3px] leading-[0.98] mb-8 max-w-[920px]">
             {zh ? (
               <>
-                你找到的攻擊
+                你找到攻擊。
                 <br />
-                不該死在 PDF 裡。
+                我們發 detection 規則。
+                <br />
+                <span className="text-blue">2 小時 16 分鐘。</span>
               </>
             ) : (
               <>
-                Your attack
+                Find the attack.
                 <br />
-                shouldn&apos;t die in a PDF.
+                We ship the rule.
+                <br />
+                <span className="text-blue">2 hours 16 minutes.</span>
               </>
             )}
           </h1>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="font-display text-[clamp(18px,2.2vw,24px)] text-stone font-light leading-snug mb-10 max-w-[720px]">
-            {zh
-              ? "ATR 是唯一公開把紅隊研究變成偵測標準的橋。Microsoft Agent Governance Toolkit、Cisco AI Defense、MISP、OWASP A-S-R-H 每週自動同步。你的攻擊變成一條規則，幾小時內進每一個主要 AI 安全平台 — 你的名字一直在。"
-              : "ATR is the only public detection standard built from red-team research. Microsoft Agent Governance Toolkit, Cisco AI Defense, MISP, and OWASP A-S-R-H auto-sync weekly. Your attack becomes a rule that ships to every major AI security platform within hours. Your name stays attached. Forever."}
+          <p className="font-display text-[clamp(18px,2.2vw,24px)] text-stone font-light leading-snug mb-10 max-w-[760px]">
+            {zh ? (
+              <>
+                Microsoft Copilot SWE Agent 自己會開 PR 預設 ATR 存在。Cisco AI
+                Defense production 內建 314 條規則。MISP 全部 export 到 STIX
+                帶你的署名。NeurIPS 2024 的 HarmBench / AgentDojo /
+                JailbreakBench 下一個 wave 接進來。
+              </>
+            ) : (
+              <>
+                Microsoft&apos;s Copilot SWE Agent already opens PRs presuming
+                ATR exists. Cisco AI Defense ships 314 of our rules by default.
+                MISP exports them to STIX with your name on them. NeurIPS
+                2024&apos;s HarmBench, AgentDojo, JailbreakBench wire through
+                next.
+              </>
+            )}
           </p>
         </Reveal>
         <Reveal delay={0.3}>
@@ -212,17 +302,23 @@ export default async function RedTeamPage({
               {zh ? "送一個 probe →" : "Submit a probe →"}
             </a>
             <a
+              href="#on-deck"
+              className="border border-fog text-ink px-7 py-3 rounded-sm text-base font-semibold hover:bg-ash/40 transition-colors"
+            >
+              {zh ? "看下一波接什麼 →" : "See who&apos;s next →"}
+            </a>
+            <a
               href="#how-it-works"
               className="border border-fog text-ink px-7 py-3 rounded-sm text-base font-semibold hover:bg-ash/40 transition-colors"
             >
-              {zh ? "看流程 →" : "See how it works →"}
+              {zh ? "怎麼跑 →" : "How it works →"}
             </a>
           </div>
         </Reveal>
       </section>
 
       {/* ============================================================
-          THE BIG NUMBERS — three confident hits, lots of whitespace
+          THE BIG NUMBERS — 4 confident hits, expanded
       ============================================================ */}
       <section className="px-6 max-w-[1120px] mx-auto mb-24 md:mb-32">
         <Reveal>
@@ -230,11 +326,11 @@ export default async function RedTeamPage({
             {zh ? "為什麼這值得貢獻" : "Why this is worth your time"}
           </div>
         </Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
           {ATTRIBUTION_STATS.map((s, i) => (
-            <Reveal key={i} delay={0.1 + i * 0.1}>
+            <Reveal key={i} delay={0.1 + i * 0.08}>
               <div className="border-l-2 border-blue pl-6">
-                <div className="font-display text-[clamp(40px,5vw,64px)] font-extrabold tracking-[-2px] text-ink mb-2 leading-none">
+                <div className="font-display text-[clamp(36px,4.5vw,56px)] font-extrabold tracking-[-2px] text-ink mb-2 leading-none">
                   {s.number}
                 </div>
                 <div className="font-display text-base font-semibold text-ink mb-3">
@@ -516,6 +612,80 @@ export default async function RedTeamPage({
               </a>
             ))}
           </div>
+        </Reveal>
+      </section>
+
+      {/* ============================================================
+          ON DECK — the public pipeline
+      ============================================================ */}
+      <section
+        id="on-deck"
+        className="px-6 max-w-[1120px] mx-auto mb-24 md:mb-32"
+      >
+        <Reveal>
+          <div className="font-data text-xs font-medium text-stone tracking-[3px] uppercase mb-4">
+            {zh ? "下一波" : "On deck"}
+          </div>
+          <h2 className="font-display text-[clamp(28px,4vw,44px)] font-extrabold tracking-[-2px] leading-[1.05] mb-4 max-w-[760px]">
+            {zh
+              ? "已經排好的紅隊整合 — 一週一個，公開排程。"
+              : "Red-team integrations queued. One a week. Public schedule."}
+          </h2>
+          <p className="text-base text-stone font-light max-w-[680px] mb-12">
+            {zh
+              ? "ATR 不是只跟最大牌的整合。下面是接下來六週要送的 issue / PR — 真實日期、真實對象。Maintainer 看到自己被排上會優先 review，這是公開承諾的副作用。"
+              : "ATR doesn&apos;t only chase the biggest names. Here&apos;s the queue for the next six weeks — real dates, real targets. Maintainers who see themselves on the schedule tend to review faster. That&apos;s the side-effect of a public commitment."}
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="space-y-px bg-fog">
+            {ON_DECK.map((t, i) => (
+              <div key={t.name} className="bg-paper p-6 md:p-7">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
+                  <div className="md:col-span-1 font-data text-xs text-stone tracking-wide">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="md:col-span-4">
+                    <div className="font-display text-base font-bold text-ink mb-1">
+                      {t.name}
+                    </div>
+                    <div className="font-data text-xs text-stone">{t.org}</div>
+                  </div>
+                  <div className="md:col-span-5">
+                    <p className="text-sm text-ink leading-relaxed">{t.why}</p>
+                  </div>
+                  <div className="md:col-span-2 text-right">
+                    <div className="font-data text-xs text-stone uppercase tracking-wide mb-1">
+                      {zh ? "送出日" : "Filing"}
+                    </div>
+                    <div className="font-data text-sm text-blue font-medium">
+                      {t.filing}
+                    </div>
+                    <div
+                      className={`font-data text-xs uppercase tracking-wide mt-1 ${
+                        t.status === "scheduled" ? "text-green" : "text-stone"
+                      }`}
+                    >
+                      {t.status === "scheduled"
+                        ? zh
+                          ? "已排程"
+                          : "scheduled"
+                        : zh
+                          ? "佇列中"
+                          : "queued"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="text-xs text-stone mt-6 max-w-[640px]">
+            {zh
+              ? '排程從 GitHub issue / PR 同步。Merge 後從這裡移到 "Already Integrated"。Maintainer 若想插隊：security@agentthreatrule.org。'
+              : 'Schedule syncs from filed GitHub issues / PRs. Once merged, entries move to "Already Integrated" above. Maintainers wanting earlier engagement: security@agentthreatrule.org.'}
+          </p>
         </Reveal>
       </section>
 
