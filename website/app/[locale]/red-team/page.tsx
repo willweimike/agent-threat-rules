@@ -35,6 +35,56 @@ const RED_TEAM_TOOLS: RedTeamTool[] = [
       "Wrapped 330 ATR rules as garak detectors. PR #1676 cleared two review rounds; in-the-wild benchmark posted 97.1% recall (646/666) on garak's own community jailbreak corpus.",
   },
   {
+    name: "HarmBench",
+    org: "Center for AI Safety · Dan Hendrycks",
+    status: "in-review",
+    homepage: "https://github.com/centerforaisafety/HarmBench",
+    prUrl: "https://github.com/centerforaisafety/HarmBench/issues/93",
+    hook: "320-behavior standardized red-team benchmark — the citation when comparing attack methods across target models.",
+    what_atr_did:
+      "Issue #93 proposes pairing every behavior with a content-layer rule, adding detection-rate and bypass-rate columns next to ASR. Pre-PR gap-analysis offer attached.",
+  },
+  {
+    name: "AgentDojo",
+    org: "ETH Zurich SPY Lab · Florian Tramèr",
+    status: "in-review",
+    homepage: "https://github.com/ethz-spylab/agentdojo",
+    prUrl: "https://github.com/ethz-spylab/agentdojo/issues/160",
+    hook: "The only agent-specific attack benchmark with a real tool-use harness. 78 attack tasks across 4 environments.",
+    what_atr_did:
+      "Issue #160 proposes a detection-evaluator extension that runs ATR rules against AgentDojo attack tasks. Honest about regex limits against paraphrase / multilingual; reports per-task expected detection rate.",
+  },
+  {
+    name: "JailbreakBench",
+    org: "Princeton · Patrick Chao (PAIR / TAP)",
+    status: "in-review",
+    homepage: "https://github.com/JailbreakBench/jailbreakbench",
+    prUrl: "https://github.com/JailbreakBench/jailbreakbench/issues/48",
+    hook: "Standardized jailbreak leaderboard with fixed eval interface. JBB-Behaviors is the citation for 'attack X beats baseline'.",
+    what_atr_did:
+      "Issue #48 proposes a registered-detector backend interface (ATR as one possible reference implementation). Adds detection-rate + bypass-rate + agreement-with-refusal as new comparable axes.",
+  },
+  {
+    name: "TextAttack",
+    org: "QData · ACL 2020",
+    status: "in-review",
+    homepage: "https://github.com/QData/TextAttack",
+    prUrl: "https://github.com/QData/TextAttack/issues/824",
+    hook: "3.1k stars. The reference NLP-adversarial framework, used in undergraduate security curricula.",
+    what_atr_did:
+      "Issue #824 proposes a textattack-detection-atr companion PyPI package — plugin-shaped, zero core changes. Single ask: README cross-link.",
+  },
+  {
+    name: "Microsoft Counterfit",
+    org: "Microsoft Azure Security",
+    status: "in-review",
+    homepage: "https://github.com/Azure/counterfit",
+    prUrl: "https://github.com/Azure/counterfit/issues/96",
+    hook: "Metasploit-shape CLI for AI red-teaming. The clean abstraction for command-line attack runs.",
+    what_atr_did:
+      "Issue #96 proposes a counterfit-detection-atr companion package adding a detection lane to scan output. Plugin-first; respects the project's maintenance state.",
+  },
+  {
     name: "Microsoft PyRIT",
     org: "Microsoft AI Red Team",
     status: "in-review",
@@ -130,41 +180,6 @@ interface OnDeckTool {
 
 const ON_DECK: OnDeckTool[] = [
   {
-    name: "HarmBench",
-    org: "Center for AI Safety · Dan Hendrycks",
-    why: "320-behavior standardized red-team benchmark — the citation when comparing attack methods across target models. Detection lane gives papers a comparable defense metric.",
-    filing: "2026-05-13",
-    status: "scheduled",
-  },
-  {
-    name: "AgentDojo",
-    org: "ETH Zurich SPY Lab · Florian Tramèr",
-    why: "The only agent-specific attack benchmark with a real tool-use harness. 78 attack tasks × 4 environments — exactly what ATR rules need to be validated against in real agent execution.",
-    filing: "2026-05-13",
-    status: "scheduled",
-  },
-  {
-    name: "JailbreakBench",
-    org: "Princeton · Patrick Chao (PAIR / TAP author)",
-    why: "Standardized jailbreak leaderboard with fixed eval interface. Detection backend as a registered interface = first reproducible defense-comparison axis.",
-    filing: "2026-05-13",
-    status: "scheduled",
-  },
-  {
-    name: "TextAttack",
-    org: "QData · ACL 2020",
-    why: "3.1k stars, reference NLP-adversarial framework used in security curricula. Plugin-first companion package — discoverability via README link.",
-    filing: "2026-05-14",
-    status: "scheduled",
-  },
-  {
-    name: "Microsoft Counterfit",
-    org: "Microsoft Azure Security",
-    why: "Metasploit-shape CLI for AI red-teaming. Plugin-first companion that doesn't add core maintenance burden — gives the existing user base a content-layer detection lane.",
-    filing: "2026-05-14",
-    status: "scheduled",
-  },
-  {
     name: "InjecAgent",
     org: "UIUC Kang Lab",
     why: "Cleanest direct-vs-indirect agent injection taxonomy. 1,054 attack cases. Complements AgentDojo coverage.",
@@ -183,6 +198,20 @@ const ON_DECK: OnDeckTool[] = [
     org: "Tongxin Yuan et al.",
     why: "162-scenario agent safety benchmark with LLM-as-judge evaluator. ATR adds the complementary content-rule defense lane next to the judge layer.",
     filing: "2026-05-26",
+    status: "queued",
+  },
+  {
+    name: "PromptBench",
+    org: "Microsoft Research",
+    why: "MS Research LLM robustness eval framework. Second cross-link inside Microsoft after AGT + PyRIT.",
+    filing: "2026-06-02",
+    status: "queued",
+  },
+  {
+    name: "Giskard",
+    org: "YC W23",
+    why: "ML testing framework with red-team mode. Open-source core + commercial cloud — integrate at OSS core.",
+    filing: "2026-06-06",
     status: "queued",
   },
 ];
