@@ -3,50 +3,62 @@
  * @module agent-threat-rules/types
  */
 
-export type ATRStatus = 'draft' | 'experimental' | 'stable' | 'deprecated';
+export type ATRStatus = "draft" | "experimental" | "stable" | "deprecated";
 
-export type ATRSeverity = 'critical' | 'high' | 'medium' | 'low' | 'informational';
+export type ATRSeverity =
+  | "critical"
+  | "high"
+  | "medium"
+  | "low"
+  | "informational";
 
 export type ATRCategory =
-  | 'prompt-injection'
-  | 'tool-poisoning'
-  | 'context-exfiltration'
-  | 'agent-manipulation'
-  | 'privilege-escalation'
-  | 'excessive-autonomy'
-  | 'data-poisoning'
-  | 'model-abuse'
-  | 'skill-compromise';
+  | "prompt-injection"
+  | "tool-poisoning"
+  | "context-exfiltration"
+  | "agent-manipulation"
+  | "privilege-escalation"
+  | "excessive-autonomy"
+  | "data-poisoning"
+  | "model-abuse"
+  | "skill-compromise";
 
-export type ATRConfidence = 'high' | 'medium' | 'low';
+export type ATRConfidence = "high" | "medium" | "low";
 
 export type ATRSourceType =
-  | 'llm_io'
-  | 'tool_call'
-  | 'mcp_exchange'
-  | 'agent_behavior'
-  | 'multi_agent_comm'
-  | 'context_window'
-  | 'memory_access'
-  | 'skill_lifecycle'
-  | 'skill_permission'
-  | 'skill_chain';
+  | "llm_io"
+  | "tool_call"
+  | "mcp_exchange"
+  | "agent_behavior"
+  | "multi_agent_comm"
+  | "context_window"
+  | "memory_access"
+  | "skill_lifecycle"
+  | "skill_permission"
+  | "skill_chain";
 
-export type ATRMatchType = 'contains' | 'regex' | 'exact' | 'starts_with';
+export type ATRMatchType = "contains" | "regex" | "exact" | "starts_with";
 
-export type ATROperator = 'gt' | 'lt' | 'eq' | 'gte' | 'lte' | 'deviation_from_baseline';
+export type ATROperator =
+  | "gt"
+  | "lt"
+  | "eq"
+  | "gte"
+  | "lte"
+  | "deviation_from_baseline";
 
 export type ATRAction =
-  | 'block_input'
-  | 'block_output'
-  | 'block_tool'
-  | 'quarantine_session'
-  | 'reset_context'
-  | 'alert'
-  | 'snapshot'
-  | 'escalate'
-  | 'reduce_permissions'
-  | 'kill_agent';
+  | "block_input"
+  | "block_output"
+  | "block_tool"
+  | "quarantine_session"
+  | "reset_context"
+  | "alert"
+  | "shadow"
+  | "snapshot"
+  | "escalate"
+  | "reduce_permissions"
+  | "kill_agent";
 
 export interface ATRReferences {
   owasp_llm?: string[];
@@ -56,7 +68,7 @@ export interface ATRReferences {
   cve?: string[];
 }
 
-export type ATRScanTarget = 'mcp' | 'skill' | 'both' | 'runtime';
+export type ATRScanTarget = "mcp" | "skill" | "both" | "runtime";
 
 export interface ATRTags {
   category: ATRCategory;
@@ -111,7 +123,10 @@ export interface ATRArrayCondition {
 /** Named-map conditions or array conditions */
 export type ATRConditions =
   | ATRArrayCondition[]
-  | Record<string, ATRPatternCondition | ATRBehavioralCondition | ATRSequenceCondition>;
+  | Record<
+      string,
+      ATRPatternCondition | ATRBehavioralCondition | ATRSequenceCondition
+    >;
 
 export interface ATRDetection {
   conditions: ATRConditions;
@@ -132,7 +147,7 @@ export interface ATRTestCase {
   agent_output?: string;
   tool_name?: string;
   tool_args?: string;
-  expected: 'trigger' | 'no_trigger' | 'triggered' | 'not_triggered';
+  expected: "trigger" | "no_trigger" | "triggered" | "not_triggered";
 }
 
 export interface ATRTestCases {
@@ -177,20 +192,20 @@ export interface ATRRule {
 
 export interface ATREvasionTest {
   input: string;
-  expected: 'triggered' | 'not_triggered';
+  expected: "triggered" | "not_triggered";
   bypass_technique: string;
   notes?: string;
 }
 
 /** Event types that the ATR engine can evaluate */
 export type AgentEventType =
-  | 'llm_input'
-  | 'llm_output'
-  | 'tool_call'
-  | 'tool_response'
-  | 'agent_behavior'
-  | 'multi_agent_message'
-  | 'mcp_exchange';
+  | "llm_input"
+  | "llm_output"
+  | "tool_call"
+  | "tool_response"
+  | "agent_behavior"
+  | "multi_agent_message"
+  | "mcp_exchange";
 
 /** An agent event to evaluate against ATR rules */
 export interface AgentEvent {
@@ -210,11 +225,11 @@ export interface AgentEvent {
   metadata?: Record<string, unknown>;
   /** Scan context: when 'skill', all rules fire regardless of agent_source.type,
    *  with cross-context confidence downweighting for MCP-only rules. */
-  scanContext?: 'mcp' | 'skill';
+  scanContext?: "mcp" | "skill";
 }
 
 /** Result when an ATR rule matches an event */
-export type ScanContextType = 'native' | 'cross-context';
+export type ScanContextType = "native" | "cross-context";
 
 export interface ATRMatch {
   rule: ATRRule;
@@ -228,7 +243,7 @@ export interface ATRMatch {
 }
 
 /** Verdict outcome from evaluating matched rules */
-export type VerdictOutcome = 'allow' | 'ask' | 'deny';
+export type VerdictOutcome = "allow" | "ask" | "deny";
 
 /** Verdict returned after evaluating an event against all rules */
 export interface ATRVerdict {
@@ -268,6 +283,13 @@ export interface PlatformAdapter {
   quarantineSession(ctx: ExecutionContext): Promise<ActionResult>;
   resetContext(ctx: ExecutionContext): Promise<ActionResult>;
   alert(ctx: ExecutionContext): Promise<ActionResult>;
+  /**
+   * Log the match for later audit without surfacing it to the user.
+   * Used as the safe default for newly auto-generated rules
+   * (CVE collector, probe pipeline, TC crystallisation) until they
+   * accumulate FP-free production observation.
+   */
+  shadow(ctx: ExecutionContext): Promise<ActionResult>;
   snapshot(ctx: ExecutionContext): Promise<ActionResult>;
   escalate(ctx: ExecutionContext): Promise<ActionResult>;
   reducePermissions(ctx: ExecutionContext): Promise<ActionResult>;
@@ -276,7 +298,7 @@ export interface PlatformAdapter {
 
 /** Hook input from Claude Code / agent host */
 export interface HookInput {
-  readonly hook: 'PreToolUse' | 'PostToolUse';
+  readonly hook: "PreToolUse" | "PostToolUse";
   readonly tool_name: string;
   readonly tool_input: Readonly<Record<string, unknown>>;
   readonly session_id?: string;
@@ -292,7 +314,7 @@ export interface HookOutput {
 }
 
 /** Scan type: MCP runtime event scan vs SKILL.md static file scan */
-export type ScanType = 'mcp' | 'skill';
+export type ScanType = "mcp" | "skill";
 
 /** Unified scan result produced by both evaluate() and scanSkill() paths */
 export interface ScanResult {

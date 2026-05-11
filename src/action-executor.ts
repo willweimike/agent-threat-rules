@@ -13,7 +13,7 @@ import type {
   ActionResult,
   ExecutionContext,
   PlatformAdapter,
-} from './types.js';
+} from "./types.js";
 
 /** Priority order: lower number = higher priority (executed first) */
 const ACTION_PRIORITY: Readonly<Record<ATRAction, number>> = {
@@ -27,20 +27,22 @@ const ACTION_PRIORITY: Readonly<Record<ATRAction, number>> = {
   alert: 7,
   escalate: 8,
   snapshot: 9,
+  shadow: 10,
 };
 
 /** Map action names to PlatformAdapter method names */
 const ACTION_METHOD_MAP: Readonly<Record<ATRAction, keyof PlatformAdapter>> = {
-  block_input: 'blockInput',
-  block_output: 'blockOutput',
-  block_tool: 'blockTool',
-  quarantine_session: 'quarantineSession',
-  reset_context: 'resetContext',
-  alert: 'alert',
-  snapshot: 'snapshot',
-  escalate: 'escalate',
-  reduce_permissions: 'reducePermissions',
-  kill_agent: 'killAgent',
+  block_input: "blockInput",
+  block_output: "blockOutput",
+  block_tool: "blockTool",
+  quarantine_session: "quarantineSession",
+  reset_context: "resetContext",
+  alert: "alert",
+  shadow: "shadow",
+  snapshot: "snapshot",
+  escalate: "escalate",
+  reduce_permissions: "reducePermissions",
+  kill_agent: "killAgent",
 };
 
 export interface ActionExecutorConfig {
@@ -89,7 +91,7 @@ export class ActionExecutor {
    * Deduplicate actions and sort by priority (highest priority first).
    */
   private deduplicateAndSort(
-    actions: readonly ATRAction[]
+    actions: readonly ATRAction[],
   ): readonly ATRAction[] {
     const unique = [...new Set(actions)];
     return unique.sort((a, b) => {
@@ -104,7 +106,7 @@ export class ActionExecutor {
    */
   private async executeOne(
     action: ATRAction,
-    context: ExecutionContext
+    context: ExecutionContext,
   ): Promise<ActionResult> {
     const timestamp = new Date().toISOString();
 
@@ -132,7 +134,7 @@ export class ActionExecutor {
         | ((ctx: ExecutionContext) => Promise<ActionResult>)
         | undefined;
 
-      if (typeof method !== 'function') {
+      if (typeof method !== "function") {
         return Object.freeze({
           action,
           success: false,

@@ -45,6 +45,7 @@ const RESEARCH_MENTIONS_FILE = join(
   REPO_ROOT,
   "data/research-mentions/corpus.jsonl",
 );
+const BENIGN_EXTENDED_DIR = join(REPO_ROOT, "data/benign-corpus-extended");
 const RULES_DIR = join(REPO_ROOT, "rules");
 
 interface Failure {
@@ -125,6 +126,42 @@ function loadResearchMentions(): JsonlSample[] {
       out.push(JSON.parse(t) as JsonlSample);
     } catch {
       continue;
+    }
+  }
+  return out;
+}
+
+interface ExtendedBenignSample {
+  text: string;
+  source: string;
+  source_id: string;
+}
+
+/**
+ * Load the extended benign corpus (arxiv abstracts, npm / pypi package
+ * descriptions). One JSONL file per source under
+ * data/benign-corpus-extended/.
+ */
+function loadExtendedBenign(): ExtendedBenignSample[] {
+  if (!existsSync(BENIGN_EXTENDED_DIR)) return [];
+  const out: ExtendedBenignSample[] = [];
+  for (const entry of readdirSync(BENIGN_EXTENDED_DIR)) {
+    if (!entry.endsWith(".jsonl")) continue;
+    const f = join(BENIGN_EXTENDED_DIR, entry);
+    let raw: string;
+    try {
+      raw = readFileSync(f, "utf-8");
+    } catch {
+      continue;
+    }
+    for (const line of raw.split("\n")) {
+      const t = line.trim();
+      if (!t) continue;
+      try {
+        out.push(JSON.parse(t) as ExtendedBenignSample);
+      } catch {
+        continue;
+      }
     }
   }
   return out;
@@ -260,6 +297,37 @@ async function checkBenignCorpusFP(
       if (newRuleIds.has(id)) {
         if (!fps.has(id)) fps.set(id, []);
         fps.get(id)!.push(sample);
+      }
+    }
+  }
+  return fps;
+}
+
+/**
+ * Check 3b: scan the extended benign corpus. Larger and more diverse
+ * than the original 432-skill set — arxiv abstracts (cs.AI / cs.CR /
+ * cs.LG / cs.CL), plus npm and pypi package descriptions + READMEs.
+ * Same FP semantics: a new rule must produce 0 matches across the
+ * extended corpus.
+ */
+async function checkExtendedBenignFP(
+  engine: ATREngine,
+  newRuleIds: Set<string>,
+): Promise<Map<string, string[]>> {
+  const fps = new Map<string, string[]>();
+  const samples = loadExtendedBenign();
+  if (samples.length === 0) {
+    console.error(
+      `[safety-gate] extended-benign corpus empty (${BENIGN_EXTENDED_DIR}) — skipping extended-FP check`,
+    );
+    return fps;
+  }
+  for (const s of samples) {
+    const label = `${s.source}:${s.source_id.slice(0, 40)}`;
+    for (const id of matchAllRuleIds(engine, s.text)) {
+      if (newRuleIds.has(id)) {
+        if (!fps.has(id)) fps.set(id, []);
+        fps.get(id)!.push(label);
       }
     }
   }
@@ -436,12 +504,21 @@ async function main(): Promise<void> {
         });
     }
 
-    // Check 3 — benign skill corpus FP.
+    // Check 3 — benign skill corpus FP (432 SKILL.md samples).
     const benignFps = await checkBenignCorpusFP(engine, newRuleIds);
     for (const [id, samples] of benignFps) {
       failures.push({
         file: fileToId.get(id) ?? id,
         reason: `benign-corpus FP on ${samples.length} sample(s): ${samples.slice(0, 3).join(", ")}${samples.length > 3 ? ", ..." : ""}`,
+      });
+    }
+
+    // Check 3b — extended benign corpus FP (arxiv + npm + pypi).
+    const extendedFps = await checkExtendedBenignFP(engine, newRuleIds);
+    for (const [id, samples] of extendedFps) {
+      failures.push({
+        file: fileToId.get(id) ?? id,
+        reason: `extended-benign FP on ${samples.length} sample(s): ${samples.slice(0, 3).join(", ")}${samples.length > 3 ? ", ..." : ""}`,
       });
     }
 
