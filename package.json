@@ -22,6 +22,14 @@
       "import": "./dist/mcp-server.js",
       "types": "./dist/mcp-server.d.ts"
     },
+    "./converters/sage": {
+      "import": "./dist/converters/sage.js",
+      "types": "./dist/converters/sage.d.ts"
+    },
+    "./converters/sage-reverse": {
+      "import": "./dist/converters/sage-reverse.js",
+      "types": "./dist/converters/sage-reverse.d.ts"
+    },
     "./rules": "./rules",
     "./spec": "./spec/atr-schema.yaml"
   },
