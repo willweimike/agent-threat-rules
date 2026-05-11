@@ -1,27 +1,22 @@
 ## Daily Scan Summary (2026-05-11)
 - Scanned: 50 packages
-- CRITICAL: 10
-- HIGH: 1
-- CLEAN/LOW: 32
+- CRITICAL: 2
+- HIGH: 4
+- CLEAN/LOW: 39
 
 ### Flagged Packages:
-- [CRITICAL] @actwith-ai/mcp-server (score: 100)
-- [CRITICAL] @aithr-ai/mcp-server (score: 100)
-- [CRITICAL] @apexradius/apex-automation-mcp (score: 90)
-- [CRITICAL] @bromso/figma-mcp (score: 100)
-- [CRITICAL] @choplin/mcp-gemini-cli (score: 80)
-- [CRITICAL] @deepakd/tekionai-mcp-client (score: 90)
-- [CRITICAL] @dypai-ai/mcp (score: 100)
-- [CRITICAL] @fazer-ai/mcp-obsidian (score: 80)
-- [HIGH] @github/copilot (score: 43.333333333333336)
-- [CRITICAL] @haimkastner/workforce-ai-mcp (score: 80)
-- [CRITICAL] @hirey-ai/mcp-server (score: 100)
+- [CRITICAL] @1key4ai/mcp-lab (score: 100)
+- [HIGH] @agentica/core (score: 60)
+- [CRITICAL] @agenttrust-sdk/mcp (score: 85)
+- [HIGH] @auxiora/mcp (score: 40)
+- [HIGH] @ayga/mcp-client (score: 40)
+- [HIGH] @blacksandscyber/mcp-server-shield (score: 50)
 
 ### Cumulative:
-- Total scanned: 1310
-  - CLEAN: 745
-  - CRITICAL: 147
+- Total scanned: 1360
+  - CLEAN: 781
+  - CRITICAL: 149
   - ERROR: 1
-  - HIGH: 124
-  - LOW: 155
-  - MEDIUM: 138
+  - HIGH: 128
+  - LOW: 158
+  - MEDIUM: 143
