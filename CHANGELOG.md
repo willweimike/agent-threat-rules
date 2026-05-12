@@ -2,6 +2,24 @@
 
 All notable changes to ATR will be documented in this file.
 
+## [2.1.4] - 2026-05-12
+
+### Added
+
+- **ATR-2026-00448** (tool-poisoning): Spring AI MilvusVectorStore filter-expression injection (CVE-2026-41705). Tautology-based deletion-broadening, paren-breakout, in-clause chaining, terminator-DROP, like-ESCAPE bypass primitive. 8 TP / 6 TN / 0 FP on 431-sample benign corpus.
+- **ATR-2026-00449** (context-exfiltration): Spring AI PromptChatMemoryAdvisor cross-user memory leakage (CVE-2026-41712). Shared / singleton ChatMemory wiring, placeholder conversation_id, mismatched user-tag windows, wildcard-tenant scope. 8 TP / 6 TN / 0 FP.
+- **ATR-2026-00450** (data-poisoning): Spring AI PromptChatMemoryAdvisor memory poisoning (CVE-2026-41713). Persistence-aware ignore-previous, bracketed `[SYSTEM-MEMORY-PERSIST]` canaries, smuggled role-tag prefixes, REMEMBER:-shaped persona override, ChatMemory.add(SystemMessage) sink-level concat. 8 TP / 6 TN / 0 FP.
+- **ATR-2026-00451** (privilege-escalation): LiteLLM proxy admin endpoint SQL injection (CVE-2026-42208, CISA KEV 2026-05-08, CVSS 9.3, federal remediation due 2026-05-11). Tautology + comment-out, stacked DROP / TRUNCATE, UNION SELECT exfil, pg_sleep blind, Postgres metadata recon, error-based extractvalue / updatexml / load_extension. 8 TP / 6 TN / 0 FP.
+
+### Changed
+
+- Total rule count: 344 → 348.
+
+### Anchors
+
+- 3 Spring AI CVEs (CVE-2026-41705 / -41712 / -41713) disclosed 2026-05-08 in Spring Security Advisory; patches in Spring AI >= 1.0.0.
+- 1 CISA Known Exploited Vulnerabilities catalog entry: CVE-2026-42208 added 2026-05-08, federal remediation due 2026-05-11, active exploitation observed against financial services and healthcare deployments; patch in LiteLLM >= 1.48.3.
+
 ## [2.1.3] - 2026-05-11
 
 ### Added
