@@ -104,7 +104,7 @@ detection:
 
 response:
   actions:
-    - flag_for_review
+    - alert
   auto_response_threshold: low
   message_template: >
     [ATR-2026-00520] PromptBench checklist random-token suffix pattern detected. NLP classification

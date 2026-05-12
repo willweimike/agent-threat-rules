@@ -95,7 +95,7 @@ detection:
 
 response:
   actions:
-    - flag_for_review
+    - alert
     - alert
   auto_response_threshold: medium
   message_template: >
