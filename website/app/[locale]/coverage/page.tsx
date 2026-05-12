@@ -46,6 +46,48 @@ export default async function CoveragePage({ params }: { params: Promise<{ local
         </p>
       </Reveal>
 
+      {/* How to read this */}
+      <Reveal delay={0.25}>
+        <div className="bg-ash border border-fog p-5 md:p-6 mb-8">
+          <div className="font-data text-xs font-medium text-stone tracking-[3px] uppercase mb-3">
+            {locale === "zh" ? "如何解讀這些數字" : "How to read this"}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-graphite leading-[1.7]">
+            {[
+              {
+                name: "PINT (850 samples)",
+                verdict: locale === "zh"
+                  ? "ATR 在 PINT 的 850 個 MCP 對抗性樣本上達到 99.6% 精準度、0.25% FP——代表規則在真實 MCP 流量中幾乎不誤報。"
+                  : "ATR reaches 99.6% precision and 0.25% FP on PINT's 850 MCP adversarial samples — rules rarely fire on legitimate MCP traffic.",
+              },
+              {
+                name: "HackAPrompt (4,780 samples)",
+                verdict: locale === "zh"
+                  ? "ATR 在 4,780 個 HackAPrompt 競賽樣本上達到 66.2% 召回率、100% 精準度——每 3 次攻擊就能抓到 2 次，且不誤報。"
+                  : "ATR catches 66.2% of the 4,780 HackAPrompt competition samples at 100% precision — roughly 2-in-3 attacks caught with no false alarms.",
+              },
+              {
+                name: "SKILL.md (341 samples)",
+                verdict: locale === "zh"
+                  ? "ATR 在 341 個真實 SKILL.md 樣本上達到 100% 精準度、0% FP——對 MCP skill 定義的偵測沒有誤報。"
+                  : "ATR reaches 100% precision and 0% FP on 341 real-world SKILL.md samples — no false positives on legitimate MCP skill definitions.",
+              },
+              {
+                name: "garak (3,475 prompts)",
+                verdict: locale === "zh"
+                  ? "ATR 對 garak 社群 jailbreak 語料庫達到 97.1% 召回率——ATR 核心規則族群覆蓋了 garak 探測的 ~80% 以上。"
+                  : "ATR reaches 97.1% recall on garak's community jailbreak corpus — ATR-core rule families cover ~80%+ of what garak probes.",
+              },
+            ].map((item) => (
+              <div key={item.name}>
+                <div className="font-data text-xs text-blue font-semibold mb-1">{item.name}</div>
+                <p>{item.verdict}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
       {/* Summary cards */}
       <Reveal delay={0.3}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-fog mb-12">

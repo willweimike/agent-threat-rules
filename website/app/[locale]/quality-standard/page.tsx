@@ -266,6 +266,74 @@ export default async function QualityStandardPage({
         </div>
       </Reveal>
 
+      {/* ── PROVENANCE RATIO ───────────────────────────────── */}
+      <Reveal>
+        <div className="font-data text-xs font-medium text-stone tracking-[3px] uppercase mb-3">
+          {locale === "zh" ? "規則來源組成" : "Rule provenance breakdown"}
+        </div>
+        <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-1px] mb-2">
+          {locale === "zh"
+            ? "哪些規則是人工審核的，哪些是 LLM 生成的。"
+            : "What fraction is human-reviewed vs. LLM-generated."}
+        </h2>
+        <p className="text-sm text-stone mb-6 max-w-2xl">
+          {locale === "zh"
+            ? "ATR 公開這個數字，因為任何下游採用者都應該在評估信任度時知道它。"
+            : "ATR publishes this number because every downstream adopter should know it when evaluating trust."}
+        </p>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-fog border border-fog mb-6">
+          <div className="bg-paper p-5 md:p-6">
+            <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-2">
+              {locale === "zh" ? "人工審核" : "Human-reviewed"}
+            </div>
+            <div className="font-display text-3xl font-extrabold text-ink mb-1">~30%</div>
+            <p className="text-sm text-stone leading-relaxed">
+              {locale === "zh"
+                ? "規則創始時由人工撰寫，或已通過人工 review 升級到 stable。這些規則的 metadata_provenance 標記為 human-reviewed。"
+                : "Rules authored by humans at origin or promoted to stable via human review. These rules carry metadata_provenance: human-reviewed."}
+            </p>
+          </div>
+          <div className="bg-paper p-5 md:p-6">
+            <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-2">
+              {locale === "zh" ? "LLM 生成 + 雙重閘門驗證" : "LLM-generated + 2-gate validated"}
+            </div>
+            <div className="font-display text-3xl font-extrabold text-ink mb-1">~65%</div>
+            <p className="text-sm text-stone leading-relaxed">
+              {locale === "zh"
+                ? "由 LLM 草擬，通過語法關 + RFC-001 品質關 + 0 FP benign corpus 驗證。標記為 llm-generated，信心分數上限 70，直到人工 review。"
+                : "Drafted by LLM, passed syntax gate and RFC-001 quality gate, validated against benign corpus with 0 FP. Tagged llm-generated; confidence capped at 70 until human review."}
+            </p>
+          </div>
+          <div className="bg-paper p-5 md:p-6">
+            <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-2">
+              {locale === "zh" ? "語料庫指紋（保留為實驗性）" : "Corpus fingerprints (kept experimental)"}
+            </div>
+            <div className="font-display text-3xl font-extrabold text-ink mb-1">~5%</div>
+            <p className="text-sm text-stone leading-relaxed">
+              {locale === "zh"
+                ? "非常字面的模式，從特定語料庫取出。泛化這些規則會帶來無法接受的 FP。保留為 experimental，不用於生產封鎖，明確標注。"
+                : "Highly literal patterns extracted from specific corpora. Generalizing them would produce unacceptable FP. Kept as experimental, not used for production blocking, explicitly labeled."}
+            </p>
+          </div>
+        </div>
+      </Reveal>
+      <Reveal delay={0.2}>
+        <div className="bg-paper border border-fog p-5 md:p-6 mb-16">
+          <p className="text-sm text-ink leading-relaxed mb-3">
+            {locale === "zh"
+              ? "LLM 生成的規則為什麼可以信任？因為雙重閘門設計讓來源和信任度是分開追蹤的。LLM 生成的規則可以通過 experimental gate 快速迭代；升級到 stable（企業在生產環境封鎖的層級）需要人工 review。採用者可以自己決定：只部署 human-reviewed 規則、只部署 stable、或者兩者都用。"
+              : "Why trust LLM-generated rules? Because the two-dimensional compliance model tracks origin and trust separately. LLM-generated rules can pass the experimental gate for fast iteration; stable promotion requires human review. Adopters can decide: deploy only human-reviewed rules, only stable-tier rules, or both."}
+          </p>
+          <p className="text-sm text-stone leading-relaxed">
+            {locale === "zh"
+              ? "2026-05-12 的 75 條新規則大部分是 LLM 生成的（雙重閘門驗證）。這個數字會隨著人工 review 積累而增加。"
+              : "The 75 rules added on 2026-05-12 are mostly LLM-generated (2-gate validated). This ratio improves as human review accumulates over time."}
+          </p>
+        </div>
+      </Reveal>
+
       {/* ── THE FORMULA ────────────────────────────────────── */}
       <Reveal>
         <div className="font-data text-xs font-medium text-stone tracking-[3px] uppercase mb-3">

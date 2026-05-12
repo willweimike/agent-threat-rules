@@ -2,6 +2,34 @@
 
 All notable changes to ATR will be documented in this file.
 
+## [2.2.0] - 2026-05-12
+
+### Added
+
+- **75 new rules** across 5 categories (prompt-injection 57 + context-exfiltration 6 + tool-poisoning 4 + excessive-autonomy 2 + model-abuse 2). Total rule count: 344 → 419.
+- 5 new rule source integrations: HackAPrompt (EMNLP 2023, 4,780 samples, ATR-2026-00452..00456), NeMo-Guardrails + llm-guard + Promptfoo vendor test suites (94 samples combined, ATR-2026-00500..00505), PromptInject (NeurIPS 2022, ATR-2026-00506..00509), OWASP LLM Top 10 + MITRE ATLAS PoCs (8 standards-aligned rules ATR-2026-00510..00517).
+- 6-framework compliance metadata on all 75 new rules (OWASP / MITRE ATLAS / NIST AI RMF / EU AI Act / ISO 42001 / SAFE-MCP).
+- 53 rules with regex generalized from literal corpus fingerprints to multi-layer structural patterns.
+- 4 rules kept as KEPT-AS-IS corpus fingerprints (ATR-GARAK-a7fcb4e5 + 3 others): cannot generalize without unacceptable FP rate; marked experimental, not for production blocking.
+
+### Changed
+
+- Total rule count: 344 → 419 (357 stable + 62 experimental).
+- NVIDIA garak wrapped rule count: 293 → 419.
+
+### Metrics
+
+- HackAPrompt (4,780 samples): recall 28.6% → 66.2% (+37.6pp), 100% precision maintained.
+- garak (3,475 prompts): ATR-core families ~80%+; per-family breakdown: latentinjection 34.4%, sysprompt_extraction 67.9%, dan 90.2%.
+- PINT (850 samples): 0.25% FP maintained, 0 FP regression.
+- SKILL.md (341 samples): 100% precision, 0% FP, 0 FP regression.
+- 0 FP regression on benign corpus (432 real-world benign skills).
+
+### Scope
+
+- PyRIT Pliny L1B3RT4S: refused — Anthropic usage policy prevented subagent import.
+- AdvBench, HarmBench, JailbreakBench: reclassified to data/test-corpora/; describe target behaviors, not attack payloads.
+
 ## [2.1.4] - 2026-05-12
 
 ### Added

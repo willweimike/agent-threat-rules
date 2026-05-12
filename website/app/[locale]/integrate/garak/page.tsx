@@ -4,7 +4,7 @@ import { loadSiteStats } from '@/lib/stats';
 export const metadata: Metadata = {
   title: 'NVIDIA garak × ATR — ATR',
   description:
-    'Auto-convert NVIDIA garak red-team findings into ATR detection rules. Every probe that breaks a frontier model becomes a MIT-licensed defensive rule downstream.',
+    'Auto-convert NVIDIA garak red-team findings into ATR detection rules. 419 ATR rules wrapped as garak detectors (PR #1676, 97.1% recall on garak community jailbreak corpus). Every probe becomes a MIT-licensed defensive rule downstream.',
 };
 
 export default function GarakIntegratePage() {
@@ -34,7 +34,7 @@ export default function GarakIntegratePage() {
 ─────────────────                    ──────────────           ──────────
 Probes claude-3.7                    ${ruleCountStr}npm: agent-threat-rules
 Probes gpt-5                 ──▶     +auto-crystallised       PyPI: pyatr
-Probes gemini-2-pro                  from garak evidence      Cisco DefenseClaw
+Probes gemini-2-pro                  from garak evidence      Cisco AI Defense
 Writes report.jsonl                  canary 24h               OWASP Agentic Top 10
                                      auto-merge               your CI pipeline`}
         </pre>

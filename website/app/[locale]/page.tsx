@@ -88,12 +88,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </h1>
           </HeroEntrance>
 
-          {/* Subtitle — analogy framing */}
+          {/* Subtitle — risk-consequence framing */}
           <HeroEntrance delay={1.3}>
             <p className="text-base md:text-lg text-stone font-light mt-5 md:mt-6 max-w-[640px] mx-auto leading-relaxed">
               {zh
-                ? "Sigma 寫給 SIEM。CVE 編漏洞編號。ATR 寫給 AI Agent。MIT 永久,由社群維護。"
-                : "Detection rules for the systems that decide. The way Sigma is for SIEM. The way CVE is for vulnerabilities. ATR is for AI agents."}
+                ? "偵測 prompt 注入、工具下毒、agent 權限升級——在未授權動作發生前。Sigma 寫給 SIEM。ATR 寫給 AI Agent。MIT 永久,由社群維護。"
+                : "Detect prompt injection, tool poisoning, and agent privilege escalation before unauthorized action. The way Sigma is for SIEM. ATR is for AI agents. MIT forever."}
             </p>
           </HeroEntrance>
 
@@ -336,25 +336,127 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-[2px] bg-paper">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] bg-paper mb-[2px]">
+              {/* Row 1: quality + scale stats */}
               {[
                 { value: stats.ruleCount, suffix: "", label: zh ? "條偵測規則" : "detection rules", desc: zh ? `${stats.categoryCount} 個威脅類別` : `${stats.categoryCount} threat categories`, liveKey: undefined },
-                { value: stats.pintPrecision, suffix: "%", label: zh ? "MCP 精準度" : "MCP precision", desc: zh ? `recall ${stats.pintRecall}%` : `${stats.pintRecall}% recall`, liveKey: "pintPrecision" },
-                { value: stats.skillBenchRecall, suffix: "%", label: zh ? "SKILL.md 召回率" : "SKILL.md recall", desc: zh ? `${stats.skillBenchSamples} 個真實樣本` : `${stats.skillBenchSamples} real-world samples`, liveKey: undefined },
-                { value: stats.megaScanTotal, suffix: "", label: zh ? "skills 已掃描" : "skills scanned", desc: zh ? `${stats.megaScanFlagged.toLocaleString()} 個有風險` : `${stats.megaScanFlagged.toLocaleString()} flagged`, useComma: true, liveKey: "megaScanTotal" },
-                { value: 10, suffix: "/10", label: "OWASP Agentic", desc: zh ? "完整覆蓋" : "Full coverage", liveKey: undefined },
-                { value: 91.8, suffix: "%", label: "SAFE-MCP", desc: zh ? "MCP 安全框架" : "MCP security framework", liveKey: undefined },
+                { label: zh ? "HackAPrompt 召回率" : "HackAPrompt recall", rawValue: "66.2%", desc: zh ? "4,780 個對抗性樣本" : "4,780 adversarial samples" },
+                { value: stats.pintPrecision, suffix: "%", label: zh ? "PINT 精準度 (0.25% FP)" : "PINT precision (0.25% FP)", desc: zh ? `850 個樣本` : `850 samples`, liveKey: "pintPrecision" },
+                { label: "npm", rawValue: "23K", desc: zh ? "月下載量 (30d)" : "monthly downloads (30d)" },
               ].map((item, i) => (
                 <Reveal key={i} delay={0.1 + i * 0.05}>
                   <div className="bg-ash p-5 md:p-10">
                     <div className="font-data text-[clamp(28px,5vw,56px)] font-bold text-ink leading-none">
-                      <CountUp target={item.value} suffix={item.suffix} useComma={item.useComma} liveKey={item.liveKey} />
+                      {"rawValue" in item ? item.rawValue : <CountUp target={(item as {value: number; suffix: string; liveKey?: string}).value} suffix={(item as {value: number; suffix: string; liveKey?: string}).suffix} liveKey={(item as {value: number; suffix: string; liveKey?: string}).liveKey} />}
                     </div>
                     <div className="font-data text-sm text-stone mt-2 md:mt-3">{item.label}</div>
                     <div className="text-xs text-mist mt-1 leading-relaxed">{item.desc}</div>
                   </div>
                 </Reveal>
               ))}
+            </div>
+            {/* Row 2: integration tiers — split clearly */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px] bg-paper">
+              <Reveal delay={0.3}>
+                <div className="bg-ash p-5 md:p-8">
+                  <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">
+                    {zh ? "已在生產環境" : "In production"}
+                  </div>
+                  <div className="font-data text-[clamp(28px,4vw,48px)] font-bold text-ink leading-none mb-2">2</div>
+                  <div className="text-sm text-graphite leading-[1.7]">
+                    {zh
+                      ? "Microsoft Agent Governance Toolkit · Cisco AI Defense"
+                      : "Microsoft Agent Governance Toolkit · Cisco AI Defense"}
+                  </div>
+                  <div className="text-xs text-mist mt-2">
+                    {zh ? "已合併 PR，已進入生產部署" : "Merged PRs, deployed in production"}
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal delay={0.35}>
+                <div className="bg-ash p-5 md:p-8">
+                  <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">
+                    {zh ? "正在整合" : "Integrating"}
+                  </div>
+                  <div className="font-data text-[clamp(28px,4vw,48px)] font-bold text-ink leading-none mb-2">5</div>
+                  <div className="text-sm text-graphite leading-[1.7]">
+                    {zh
+                      ? "NVIDIA garak · MISP taxonomies + galaxy · OWASP A-S-R-H · NIST OSCAL Path 1"
+                      : "NVIDIA garak · MISP taxonomies + galaxy · OWASP A-S-R-H · NIST OSCAL Path 1"}
+                  </div>
+                  <div className="text-xs text-mist mt-2">
+                    {zh ? "審查中或已接受" : "Under review or accepted"}
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Scene 3.3: Microsoft Copilot Loop Case Study ── */}
+      <section className="py-14 md:py-[100px] px-5 md:px-6">
+        <div className="max-w-[980px] mx-auto">
+          <Reveal>
+            <div className="font-data text-[11px] md:text-xs font-medium text-stone tracking-[1.5px] md:tracking-[3px] uppercase mb-5 md:mb-6">
+              {zh ? "生產環境閉環案例" : "Production loop — case study"}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="font-display text-[24px] md:text-[clamp(28px,4vw,48px)] font-extrabold tracking-[-1.5px] md:tracking-[-2px] leading-[1.1] text-ink max-w-[820px] mb-6">
+              {zh
+                ? <>Microsoft 自己的 AI 工程師把 ATR 當成內建的。</>
+                : <>Microsoft&apos;s own autonomous AI engineer treats ATR as built-in.</>}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-fog mb-8">
+              {[
+                {
+                  time: zh ? "2026-05-07" : "2026-05-07",
+                  label: zh ? "CVE 公開" : "CVE disclosed",
+                  desc: zh
+                    ? "MSRC 發布 Semantic Kernel CVE-2026-26030 + CVE-2026-25592"
+                    : "MSRC publishes Semantic Kernel CVE-2026-26030 + CVE-2026-25592",
+                },
+                {
+                  time: zh ? "2026-05-11 06:07 UTC" : "2026-05-11 06:07 UTC",
+                  label: zh ? "Microsoft Copilot 開 PR" : "Microsoft Copilot opens PR",
+                  desc: zh
+                    ? "Microsoft Copilot SWE Agent 開 AGT#1981，regression-test fixtures 預設 ATR 偵測已存在"
+                    : "Microsoft Copilot SWE Agent opens AGT#1981 with regression-test fixtures presuming ATR detection coverage",
+                },
+                {
+                  time: zh ? "2026-05-11 08:24 UTC" : "2026-05-11 08:24 UTC",
+                  label: zh ? "ATR v2.1.2 發布" : "ATR v2.1.2 ships",
+                  desc: zh
+                    ? "ATR-2026-00440 + ATR-2026-00441 發布到 npm。CVE 公開到規則發布：2 小時 16 分鐘"
+                    : "ATR-2026-00440 + ATR-2026-00441 published on npm. CVE disclosure to rule publish: 2h 16m",
+                },
+              ].map((item) => (
+                <div key={item.time} className="bg-paper p-6 md:p-8">
+                  <div className="font-data text-[10px] text-stone tracking-[2px] uppercase mb-2">{item.time}</div>
+                  <div className="font-display text-sm font-bold text-ink mb-2">{item.label}</div>
+                  <p className="text-sm text-graphite leading-[1.7]">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="bg-ash border-l-2 border-blue p-5 md:p-6 max-w-[820px]">
+              <p className="text-sm md:text-base text-graphite leading-[1.8]">
+                {zh
+                  ? "這不是人工安排的整合。Microsoft 的自主 AI 工程師在開 PR 時預設 ATR 已覆蓋——這個假設正確。規則在 2 小時 16 分鐘內驗證並發布。"
+                  : "This was not a manually arranged integration. Microsoft's autonomous AI engineer opened the PR assuming ATR coverage existed — and the assumption was correct. Rules were validated and published within 2h 16m."}
+              </p>
+              <a
+                href="https://github.com/microsoft/agent-governance-toolkit/issues/1981"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-data text-xs text-blue hover:underline inline-block mt-3"
+              >
+                {zh ? "查看 AGT#1981 →" : "View AGT#1981 →"}
+              </a>
             </div>
           </Reveal>
         </div>

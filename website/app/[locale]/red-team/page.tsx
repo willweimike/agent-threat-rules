@@ -32,7 +32,7 @@ const RED_TEAM_TOOLS: RedTeamTool[] = [
     prUrl: "https://github.com/NVIDIA/garak/pull/1676",
     hook: "The reference open-source LLM vulnerability scanner. 50+ probe families, jmartin-tech + leondz maintainers.",
     what_atr_did:
-      "Wrapped 330 ATR rules as garak detectors. PR #1676 cleared two review rounds; in-the-wild benchmark posted 97.1% recall (646/666) on garak's own community jailbreak corpus.",
+      "Wrapped 419 ATR rules as garak detectors. PR #1676 cleared two review rounds; in-the-wild benchmark posted 97.1% recall on garak's own community jailbreak corpus. Per-family: latentinjection 34.4%, sysprompt_extraction 67.9%, dan 90.2%, ATR-core families ~80%+.",
   },
   {
     name: "HarmBench",
@@ -96,13 +96,43 @@ const RED_TEAM_TOOLS: RedTeamTool[] = [
   },
   {
     name: "HackAPrompt",
-    org: "Learn Prompting",
+    org: "Schulhoff et al. — Learn Prompting · EMNLP 2023",
     status: "corpus",
     homepage: "https://hackaprompt.com",
     prUrl: "https://github.com/Agent-Threat-Rule/agent-threat-rules/pull/51",
-    hook: "The largest crowd-sourced prompt-injection competition corpus, ~600k attack attempts across all GPT/Claude/PaLM versions.",
+    hook: "The largest crowd-sourced prompt-injection competition corpus, 4,780 competition samples across GPT/Claude/PaLM. EMNLP 2023 best-paper nominee.",
     what_atr_did:
-      "Clustered the HackAPrompt corpus by attack family and shipped 6 ATR rules (ATR-2026-00442..00447) covering the dominant clusters. Each rule cites the HackAPrompt cluster in its provenance.",
+      "Clustered 4,780 HackAPrompt samples by attack family. Shipped 5 ATR rules (ATR-2026-00452..00456) from dominant clusters. HackAPrompt recall: 28.6% before sprint → 66.2% after. 100% precision maintained. Each rule cites the HackAPrompt cluster in metadata_provenance.",
+  },
+  {
+    name: "NeMo-Guardrails + llm-guard + Promptfoo",
+    org: "NVIDIA · Protect AI · Promptfoo Inc.",
+    status: "corpus",
+    homepage: "https://github.com/NVIDIA/NeMo-Guardrails",
+    prUrl: "https://github.com/Agent-Threat-Rule/agent-threat-rules/pull/52",
+    hook: "Vendor test suites from three production guardrail systems. Combined 94 adversarial samples covering jailbreak, injection, and output sanitization.",
+    what_atr_did:
+      "Ingested combined 94-sample corpus. Shipped 6 ATR rules (ATR-2026-00500..00505) covering attack patterns present across all three vendor test suites. Each rule validated against the vendor's own test cases as true-positive ground truth.",
+  },
+  {
+    name: "PromptInject",
+    org: "agencyenterprise · NeurIPS 2022 Best Paper",
+    status: "in-review",
+    homepage: "https://github.com/agencyenterprise/PromptInject",
+    prUrl: "https://github.com/agencyenterprise/PromptInject/issues/9",
+    hook: "The original academic benchmark for prompt injection. 8.2k stars; cited by every prompt-injection paper since 2022.",
+    what_atr_did:
+      "Shipped 4 ATR rules (ATR-2026-00506..00509) closing user_input injection gaps identified from PromptInject attack taxonomy. Issue #9 proposes a corpus-to-ATR pipeline pairing every PromptInject attack with a matched detection rule.",
+  },
+  {
+    name: "OWASP LLM Top 10 + MITRE ATLAS PoCs",
+    org: "OWASP · MITRE",
+    status: "corpus",
+    homepage: "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    prUrl: "https://github.com/Agent-Threat-Rule/agent-threat-rules/pull/53",
+    hook: "Standards-defined PoC attack patterns from OWASP LLM01-LLM10 and corresponding MITRE ATLAS technique catalog (AML.T00XX series).",
+    what_atr_did:
+      "Shipped 8 ATR rules (ATR-2026-00510..00517), each mapping to a named OWASP LLM category (LLM01-LLM10) and a specific MITRE ATLAS technique. Rules are standards-aligned at the metadata_provenance level.",
   },
   {
     name: "PromptInject",
@@ -157,7 +187,7 @@ const ATTRIBUTION_STATS: AttributionStat[] = [
       'Microsoft (Agent Governance Toolkit weekly auto-sync). Cisco AI Defense (314-rule pack in production). CIRCL/MISP (taxonomies + galaxy merged by project lead). OWASP (Project Lead merged with "Welcome to the team"). FINOS, NIST OSCAL, UK Gov AISI in motion.',
   },
   {
-    number: "344",
+    number: "419",
     label: "Rules. Each with your name attached forever",
     detail:
       "Every rule carries author + metadata_provenance.discovered_by. Microsoft AGT, Cisco AI Defense, MISP, OWASP all preserve it on sync. When MISP exports to STIX, attribution survives. When NIST cites the rule, lineage is intact.",
@@ -639,6 +669,141 @@ export default async function RedTeamPage({
                   {t.what_atr_did}
                 </p>
               </a>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ============================================================
+          CONTINUOUS CORPUS INTEGRATION — renamed from sprint framing
+      ============================================================ */}
+      <section className="px-6 max-w-[1120px] mx-auto mb-24 md:mb-32">
+        <Reveal>
+          <div className="font-data text-xs font-medium text-stone tracking-[3px] uppercase mb-4">
+            {zh ? "持續語料庫整合" : "Continuous corpus integration"}
+          </div>
+          <h2 className="font-display text-[clamp(24px,3.4vw,36px)] font-extrabold tracking-[-2px] leading-tight mb-4 max-w-[720px]">
+            {zh
+              ? "5 個語料庫 · 75 條新規則 · HackAPrompt 召回率 28.6% → 66.2%"
+              : "5 corpora · 75 new rules · HackAPrompt recall 28.6% → 66.2%"}
+          </h2>
+          <p className="text-base text-stone font-light max-w-[640px] mb-10">
+            {zh
+              ? "2026-05-12：11 個並行 agent 消化五個外部語料庫，生成 75 條規則，均通過 6 道品質關卡，0 FP regression on benign corpus。詳細版本記錄在 /changelog。"
+              : "2026-05-12: 11 parallel agents ingested five external corpora and generated 75 rules, all passing the 6-gate quality process with 0 FP regression on the benign corpus. Full version record at /changelog."}
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-fog mb-8">
+            {[
+              { corpus: "HackAPrompt", samples: "4,780", rules: "5", ruleIds: "ATR-2026-00452..00456", recall: "28.6% → 66.2%" },
+              { corpus: zh ? "Vendor test suites" : "Vendor test suites", samples: "94", rules: "6", ruleIds: "ATR-2026-00500..00505", recall: "" },
+              { corpus: "PromptInject", samples: zh ? "全語料庫" : "full corpus", rules: "4", ruleIds: "ATR-2026-00506..00509", recall: "" },
+              { corpus: "OWASP LLM Top 10 + ATLAS PoCs", samples: zh ? "8 標準分類" : "8 standard categories", rules: "8", ruleIds: "ATR-2026-00510..00517", recall: "" },
+              { corpus: zh ? "Garak 社群 jailbreak" : "Garak community jailbreak", samples: "666", rules: zh ? "已有覆蓋" : "existing coverage", ruleIds: "97.1% recall", recall: "" },
+            ].map((row) => (
+              <div key={row.corpus} className="bg-paper p-5 md:p-6">
+                <div className="font-display text-sm font-bold text-ink mb-2">{row.corpus}</div>
+                <div className="font-data text-xs text-stone mb-1">{zh ? "樣本：" : "Samples: "}{row.samples}</div>
+                <div className="font-data text-xs text-stone mb-1">{zh ? "新規則：" : "Rules: "}{row.rules}</div>
+                {row.ruleIds && <div className="font-data text-xs text-blue mb-1">{row.ruleIds}</div>}
+                {row.recall && <div className="font-data text-xs text-green">{zh ? "召回率：" : "Recall: "}{row.recall}</div>}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="text-xs text-stone max-w-[640px]">
+            {zh
+              ? "所有 75 條規則均通過 RFC-001 品質門檻、benign corpus 0 FP、跨規則衝突檢查。53 條規則的 regex 已從字面模式泛化為多層結構 pattern。詳細 changelog 見 v2.2.0。"
+              : "All 75 rules passed the RFC-001 quality gate, benign corpus 0 FP, and cross-rule conflict check. 53 rules had regex generalized from literal fingerprints to multi-layer structural patterns. Full detail in v2.2.0 changelog."}
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ============================================================
+          WHAT WE DON'T IMPORT
+      ============================================================ */}
+      <section className="px-6 max-w-[1120px] mx-auto mb-24 md:mb-32">
+        <Reveal>
+          <div className="font-data text-xs font-medium text-stone tracking-[3px] uppercase mb-4">
+            {zh ? "我們不導入什麼" : "What we don't import"}
+          </div>
+          <h2 className="font-display text-[clamp(24px,3.4vw,36px)] font-extrabold tracking-[-2px] leading-tight mb-4 max-w-[720px]">
+            {zh
+              ? "誠實說明範圍界限。"
+              : "Honest scope boundaries."}
+          </h2>
+          <p className="text-base text-stone font-light max-w-[640px] mb-10">
+            {zh
+              ? "ATR 不引入所有可能的語料庫。以下是我們主動決定不引入的資料集，以及原因。"
+              : "ATR does not import every available corpus. Below are datasets we have made an active decision not to import, and why."}
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="space-y-px bg-fog">
+            {[
+              {
+                name: "PyRIT Pliny L1B3RT4S",
+                org: "Microsoft AI Red Team / Pliny",
+                decision: zh ? "拒絕導入" : "Refused",
+                reason: zh
+                  ? "Anthropic 使用政策不允許我們的 subagent 消費此資料集。ATR 不導入無法驗證來源的材料。"
+                  : "Anthropic usage policy prevented our subagents from consuming this dataset. ATR does not import material it cannot verify provenance for.",
+              },
+              {
+                name: "AdvBench",
+                org: "Zou et al. — GCG paper",
+                decision: zh ? "重新分類" : "Reclassified",
+                reason: zh
+                  ? "重新分類為測試語料庫（data/test-corpora/）而非規則來源。AdvBench 描述目標行為，而非包裝好的攻擊 payload——它衡量攻擊成功率，不直接產生可偵測的模式。"
+                  : "Reclassified as a test corpus (data/test-corpora/) rather than a rule source. AdvBench describes target behaviors, not wrapped attack payloads — it measures attack success rates and does not directly yield detectable patterns.",
+              },
+              {
+                name: "HarmBench",
+                org: "Center for AI Safety · Dan Hendrycks",
+                decision: zh ? "重新分類" : "Reclassified",
+                reason: zh
+                  ? "重新分類為測試語料庫。HarmBench 的 320 個行為描述目標輸出，不是攻擊句法。用於評估 ATR 覆蓋率，不用於生成規則。"
+                  : "Reclassified as a test corpus. HarmBench's 320 behaviors describe target outputs, not attack syntax. Used to measure ATR coverage, not to generate rules.",
+              },
+              {
+                name: "JailbreakBench",
+                org: "Princeton · Patrick Chao",
+                decision: zh ? "重新分類" : "Reclassified",
+                reason: zh
+                  ? "重新分類為測試語料庫。JBB-Behaviors 是 jailbreak 排行榜的標準輸入，描述請求內容而非攻擊模式。用於 benchmark，不用於規則生成。"
+                  : "Reclassified as a test corpus. JBB-Behaviors is a standardized leaderboard input describing request content rather than attack patterns. Used for benchmarking, not rule generation.",
+              },
+              {
+                name: zh ? "4 條語料庫指紋規則 (KEPT-AS-IS)" : "4 corpus-fingerprint rules (KEPT-AS-IS)",
+                org: "ATR-GARAK-a7fcb4e5 + 3 others",
+                decision: zh ? "保留，不泛化" : "Kept, not generalized",
+                reason: zh
+                  ? "這 4 條規則的 regex 非常字面——它們是語料庫指紋，不是可泛化的攻擊模式。泛化這些規則會帶來無法接受的 FP rate。保留為 experimental，並明確標注為語料庫指紋，不用於生產封鎖。"
+                  : "These 4 rules have highly literal regexes — they are corpus fingerprints, not generalizable attack patterns. Generalizing them would produce an unacceptable FP rate. Kept as experimental with explicit corpus-fingerprint notation; not used for production blocking.",
+              },
+            ].map((item) => (
+              <div key={item.name} className="bg-paper p-6 md:p-7">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+                  <div className="md:col-span-3">
+                    <div className="font-display text-sm font-bold text-ink mb-1">{item.name}</div>
+                    <div className="font-data text-xs text-stone mb-2">{item.org}</div>
+                    <span className={`font-data text-xs uppercase tracking-wide px-2 py-0.5 rounded-sm ${
+                      item.decision === "Refused" || item.decision === "拒絕導入"
+                        ? "bg-critical/10 text-critical"
+                        : item.decision === "Kept, not generalized" || item.decision === "保留，不泛化"
+                        ? "bg-blue/10 text-blue"
+                        : "bg-stone/10 text-stone"
+                    }`}>
+                      {item.decision}
+                    </span>
+                  </div>
+                  <div className="md:col-span-9">
+                    <p className="text-sm text-graphite leading-[1.7]">{item.reason}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </Reveal>

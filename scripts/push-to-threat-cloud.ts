@@ -28,9 +28,25 @@ const getArg = (flag: string) => {
 };
 
 const inputPath = getArg('--input') ?? 'dynamic-audit-100.json';
-const tcUrl = (getArg('--tc-url') ?? 'http://localhost:8234').replace(/\/$/, '');
+// TC_URL precedence: --tc-url flag > TC_URL env var > localhost default.
+const tcUrl = (getArg('--tc-url') ?? process.env['TC_URL'] ?? 'http://localhost:8234').replace(/\/$/, '');
 // TC API key — env-only (never accept --key via CLI; argv leaks to ps).
 const tcApiKey = process.env['TC_API_KEY'] ?? '';
+
+// Clean no-op gate: if TC isn't configured (CI without TC_URL/TC_API_KEY set),
+// skip the push entirely with a clear log line rather than 401-spamming.
+// dry-run still runs so local testing without secrets works.
+const tcDefaulted = !getArg('--tc-url') && !process.env['TC_URL'];
+const tcSkip = !args.includes('--dry-run') && (tcDefaulted || !tcApiKey);
+if (tcSkip) {
+  const missing: string[] = [];
+  if (tcDefaulted) missing.push('TC_URL');
+  if (!tcApiKey) missing.push('TC_API_KEY');
+  console.error(`  [push-to-threat-cloud] Skipped: ${missing.join(' and ')} not set.`);
+  console.error(`  Set TC_URL (GitHub repo variable) and TC_API_KEY (GitHub repo secret) to enable Threat Cloud push.`);
+  console.error(`  See README block in repo for setup instructions.`);
+  process.exit(1);
+}
 const useLLM = args.includes('--llm');
 const llmApiUrl = getArg('--llm-url') ?? 'https://api.anthropic.com/v1/messages';
 const llmApiKey = getArg('--llm-key') ?? process.env['ANTHROPIC_API_KEY'] ?? '';

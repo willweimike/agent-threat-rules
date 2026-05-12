@@ -87,17 +87,20 @@ jobs:
             --output-dir data/exports
 
       # Step 5: Push to Threat Cloud (Layer 2 — detailed findings via API)
+      # Gate: only runs when TC_URL repo variable is set. The push script also
+      # exits non-zero with a clear log line if TC_URL or TC_API_KEY is missing,
+      # so a misconfigured run fails loudly instead of silently no-op'ing.
       # Falls back to TC_ADMIN_API_KEY if dedicated TC_API_KEY secret not set.
       - name: Push to Threat Cloud
         if: ${{ vars.TC_URL != '' }}
         env:
+          TC_URL: ${{ vars.TC_URL }}
           TC_API_KEY: ${{ secrets.TC_API_KEY != '' && secrets.TC_API_KEY || secrets.TC_ADMIN_API_KEY }}
         run: |
           BATCH_FILE="data/scan-batch-$(date +%Y%m%d).json"
           if [ -f "$BATCH_FILE" ]; then
             npx tsx scripts/push-to-threat-cloud.ts \
               --input "$BATCH_FILE" \
-              --tc-url "${{ vars.TC_URL }}" \
               --auto-propose
           fi
 

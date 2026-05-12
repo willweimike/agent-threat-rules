@@ -61,9 +61,12 @@ export function Footer({ locale }: { locale: Locale }) {
               <Link href={`${prefix}/contribute`} className="text-sm text-stone hover:text-ink transition-colors">
                 {zh ? "參與貢獻" : "Contribute"}
               </Link>
-              <a href="https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/main/GOVERNANCE.md" target="_blank" rel="noopener noreferrer" className="text-sm text-stone hover:text-ink transition-colors">
-                Governance
-              </a>
+              <Link href={`${prefix}/governance`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "治理" : "Governance"}
+              </Link>
+              <Link href={`${prefix}/responsible-use`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "負責任使用" : "Responsible Use"}
+              </Link>
               <a href="https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/main/CONTRIBUTORS.md" target="_blank" rel="noopener noreferrer" className="text-sm text-stone hover:text-ink transition-colors">
                 Contributors
               </a>
@@ -114,6 +117,14 @@ export function Footer({ locale }: { locale: Locale }) {
           </a>
           <span className="font-data text-xs text-stone">
             {zh ? "MIT 授權 · npm 可安裝 · 開源" : "MIT Licensed · Available on npm · Open Source"}
+          </span>
+          <span className="font-data text-xs text-fog">·</span>
+          <span className="font-data text-xs text-stone">
+            {zh ? "需要企業 SLA 與合規證據：" : "Enterprise deployment with SLAs and compliance evidence:"}
+            {" "}
+            <a href="https://panguard.ai" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">
+              PanGuard AI
+            </a>
           </span>
         </div>
 

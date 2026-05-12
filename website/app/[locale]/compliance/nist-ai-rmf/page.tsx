@@ -114,6 +114,36 @@ export default async function NistAiRmfPage({
         </p>
       </Reveal>
 
+      {/* OSCAL Path 1 acceptance — first-class section */}
+      <Reveal delay={0.14}>
+        <div className="bg-blue/5 border border-blue/30 p-5 md:p-6 mt-8 mb-4">
+          <div className="font-data text-xs text-blue tracking-[2px] uppercase mb-2">
+            {zh ? "NIST OSCAL Path 1 接受" : "NIST OSCAL Path 1 acceptance"}
+          </div>
+          <p className="text-sm md:text-base text-graphite leading-[1.8] mb-3">
+            {zh
+              ? "ATR 的 OSCAL 版本 AI RMF 目錄（ai-rmf-oscal-catalog，72 個控制項 + 31 個交叉參照連結）已通過 NIST OSCAL Path 1 接受驗證。這個目錄在 CC0 授權下發布於 Agent-Threat-Rule/ai-rmf-oscal-catalog。"
+              : "ATR's OSCAL-version AI RMF catalog (ai-rmf-oscal-catalog, 72 controls + 31 cross-reference links) passed NIST OSCAL Path 1 acceptance validation. The catalog is published under CC0 at Agent-Threat-Rule/ai-rmf-oscal-catalog."}
+          </p>
+          <div className="bg-paper border border-fog p-4 text-sm text-stone leading-[1.7]">
+            <span className="font-data text-xs text-stone tracking-[2px] uppercase block mb-2">
+              {zh ? "重要說明" : "Important clarification"}
+            </span>
+            {zh
+              ? "Path 1 接受意味著 ATR 目錄通過了 NIST OSCAL schema 驗證，並且被 NIST OSCAL 工作組作為社群貢獻接受。這不等同於官方 NIST 背書或 NIST AI RMF 合規認證。這是技術標準接受，不是政策認可。"
+              : "Path 1 acceptance means the ATR catalog passed NIST OSCAL schema validation and was accepted by the NIST OSCAL working group as a community contribution. This is not an official NIST endorsement or NIST AI RMF compliance certification. It is technical standard acceptance, not policy endorsement."}
+          </div>
+          <a
+            href="https://github.com/Agent-Threat-Rule/ai-rmf-oscal-catalog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-data text-xs text-blue hover:underline inline-block mt-3"
+          >
+            {zh ? "查看 OSCAL 目錄 →" : "View OSCAL catalog on GitHub →"}
+          </a>
+        </div>
+      </Reveal>
+
       {/* Top-line stats */}
       <Reveal delay={0.16}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
