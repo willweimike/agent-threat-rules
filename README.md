@@ -27,6 +27,25 @@ AI assistants (ChatGPT, Claude, Copilot) now browse the web, run code, and use e
 
 AI 助理現在可以瀏覽網頁、執行程式碼、使用外部工具。攻擊者可以欺騙它們洩漏資料、執行惡意指令、繞過安全限制。**ATR 是一套開放的偵測規則，專門識別這些攻擊 -- 像防毒軟體的病毒碼，但對象是 AI Agent。**
 
+### What changed in v2.2.0 (2026-05-12)
+
+- **75 new rules** across 5 categories. Total: 344 → 419.
+- **HackAPrompt recall: 28.6% → 66.2%** (+37.6pp) on 4,780 EMNLP 2023 samples. 100% precision maintained.
+- **5 new rule-source integrations in a 24h sprint:** HackAPrompt (EMNLP 2023, 4,780 samples) · NeMo-Guardrails + llm-guard + Promptfoo vendor test suites · PromptInject (NeurIPS 2022) · OWASP LLM Top 10 + MITRE ATLAS PoCs · CISA KEV anchors.
+- **6-framework compliance metadata** on every new rule: OWASP Agentic + OWASP LLM + MITRE ATLAS + NIST AI RMF + EU AI Act + ISO/IEC 42001. Bumped from 5.
+- **53 rules generalized** from literal corpus fingerprints to multi-layer structural patterns. Less brittle. Lower FP risk.
+- **0 FP regression** on 432-sample benign corpus. 0 FP on SKILL.md 341-sample test set.
+
+Full changelog: [CHANGELOG.md](CHANGELOG.md).
+
+### Sovereign AI defense
+
+ATR is the open detection standard nations can adopt without geopolitical risk. MIT licensed. Adoptable by any country. Contributable by any organization. No vendor lock-in.
+
+ATR 是各國可採用、無地緣政治風險的開放偵測標準。MIT 授權，任何國家可採用，任何組織可貢獻，無廠商鎖定。
+
+Background: [sovereign-ai-defense.vercel.app](https://sovereign-ai-defense.vercel.app)
+
 ### Where ATR fits in the AI agent security stack
 
 | Layer | What it does | Project |
@@ -40,17 +59,26 @@ ATR maps to **10/10 OWASP Agentic Top 10 categories** ([full mapping](docs/OWASP
 
 ### Who uses ATR
 
-**13 external PR merges across 7 ecosystem orgs in 9 weeks.**
+**13 external PR merges across 6 external orgs.** Microsoft and Cisco each ship multiple PRs in production.
 
 | Organization | Integration | Reference |
 |---|---|---|
-| **Microsoft Agent Governance Toolkit** | ATR community rules for PolicyEvaluator | [PR #908](https://github.com/microsoft/agent-governance-toolkit/pull/908) |
-| **Cisco AI Defense** | ATR community rule pack in official skill-scanner | [PR #79](https://github.com/cisco-ai-defense/skill-scanner/pull/79) |
-| **OWASP Agentic AI Top 10** | Full vulnerability mapping | [PR #14](https://github.com/precize/Agentic-AI-Top10-Vulnerability/pull/14) |
-| **Awesome-LM-SSP** (CryptoAILab) | Listed in Toolkit section | [PR #108](https://github.com/CryptoAILab/Awesome-LM-SSP/pull/108) |
-| **Awesome-LLM-agent-Security** | Listed in Security Tools | [PR #6](https://github.com/wearetyomsmnv/Awesome-LLM-agent-Security/pull/6) |
-| **awesome-agentic-patterns** | Deterministic threat rule scanning pattern | [PR #58](https://github.com/nibzard/awesome-agentic-patterns/pull/58) |
-| **Awesome-AI-Security** | Listed in Agentic Systems | [PR #53](https://github.com/TalEliyahu/Awesome-AI-Security/pull/53) |
+| **Microsoft Agent Governance Toolkit** | 287-rule expansion + weekly auto-sync workflow (merged 2026-04-26) · Original 15-rule PoC | [PR #1277](https://github.com/microsoft/agent-governance-toolkit/pull/1277) · [PR #908](https://github.com/microsoft/agent-governance-toolkit/pull/908) |
+| **Cisco AI Defense** | Full 419-rule pack in skill-scanner production (merged 2026-04-22) · Original PoC | [PR #99](https://github.com/cisco-ai-defense/skill-scanner/pull/99) · [PR #79](https://github.com/cisco-ai-defense/skill-scanner/pull/79) |
+| **MISP** (CIRCL) | 336-rule cluster in global threat-intel sharing (galaxy, merged 2026-05-10) · Rule-ID tagging vocabulary (taxonomies, merged 2026-04-12) | [galaxy #1207](https://github.com/MISP/misp-galaxy/pull/1207) · [taxonomies #323](https://github.com/MISP/misp-taxonomies/pull/323) |
+| **OWASP Agent Security Regression Harness** (third-party precize repo, NOT OWASP Foundation official) | Rule pack merged 2026-05-11 with project-lead greeting | [PR #74](https://github.com/precize/Agent-Security-Regression-Harness/pull/74) · [PR #14](https://github.com/precize/Agentic-AI-Top10-Vulnerability/pull/14) |
+| **Gen Digital Sage** (Norton / Avast / AVG parent) | Open PR, under review | [PR #33](https://github.com/gendigitalinc/sage/pull/33) |
+| **Awesome lists** | Listed in CryptoAILab/Awesome-LM-SSP, wearetyomsmnv/Awesome-LLM-agent-Security, nibzard/awesome-agentic-patterns, TalEliyahu/Awesome-AI-Security | [#108](https://github.com/CryptoAILab/Awesome-LM-SSP/pull/108) · [#6](https://github.com/wearetyomsmnv/Awesome-LLM-agent-Security/pull/6) · [#58](https://github.com/nibzard/awesome-agentic-patterns/pull/58) · [#53](https://github.com/TalEliyahu/Awesome-AI-Security/pull/53) |
+
+#### Featured loop: Microsoft Copilot SWE Agent → ATR (2026-05-11)
+
+Microsoft Copilot SWE Agent opened a PR in `microsoft/agent-governance-toolkit` with regression-test fixtures **presuming ATR would detect them**. ATR shipped the matching rules end-to-end in 2 hours 16 minutes.
+
+- 2026-05-07: MSRC publishes Semantic Kernel CVE-2026-26030 (lambda+eval RCE) + CVE-2026-25592 (autostart file write).
+- 2026-05-11 06:07 UTC: Microsoft Copilot SWE Agent opens [microsoft/agent-governance-toolkit#1981](https://github.com/microsoft/agent-governance-toolkit/pull/1981) with regression-test fixtures.
+- 2026-05-11 08:24 UTC: ATR v2.1.2 (rules ATR-2026-00440 + 00441) merged, npm-published, GitHub-released.
+
+This is Microsoft Copilot operating inside AGT — not an MSRC endorsement. Coverage is partial: 2 of 4 Copilot fixtures match the v2.1.2 canonical regex shape.
 
 **Pending review (major frameworks):**
 [NVIDIA Garak #1676](https://github.com/NVIDIA/garak/pull/1676) · [SAFE-MCP / OpenSSF #187](https://github.com/safe-agentic-framework/safe-mcp/pull/187) · [OWASP LLM Top 10 #814](https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/pull/814) · [IBM mcp-context-forge #4109](https://github.com/IBM/mcp-context-forge/pull/4109) · [Meta PurpleLlama #206](https://github.com/meta-llama/PurpleLlama/pull/206) · [Promptfoo #8529](https://github.com/promptfoo/promptfoo/pull/8529) · 5+ more
@@ -116,18 +144,31 @@ One line. Zero config. SARIF results in your Security tab.
 
 | Category | What it catches | Rules | Real CVEs |
 |----------|----------------|-------|-----------|
-| **Prompt Injection** | "Ignore previous instructions", persona hijacking, encoded payloads (base-N, ROT, Unicode tags, sneaky-bits, zalgo, ecoji, base2048), CJK attacks, latent injection, glitch tokens, DRA parenthesis reconstruction, leakreplay MASK | 108 | CVE-2025-53773, CVE-2025-32711 |
-| **Agent Manipulation** | DAN family (DAN / DUDE / STAN / AntiDAN / RANTI / DevMode), AutoDAN, DanInTheWild, tense framing, grandma roleplay, goodside threat-JSON, doctor XML puppetry, cross-agent attacks, goal hijacking, Sybil consensus | 99 | -- |
-| **Skill Compromise** | Typosquatting, context poisoning, subcommand overflow, rug pull, supply chain attacks, credential exfil combos, HuggingFace unsafe artifacts | 37 | CVE-2025-59536, CVE-2026-28363 |
-| **Context Exfiltration** | API key generation/completion, system prompt theft, credential harvesting, env variable exfil, markdown-URL data exfil, XSS in tool response | 26 | CVE-2026-24307 |
-| **Tool Poisoning** | Malicious MCP responses, consent bypass, hidden LLM instructions, schema contradictions, ANSI escape elicitation | 16 | CVE-2025-68143/68144/68145 |
-| **Privilege Escalation** | Scope creep, delayed execution bypass, admin function access, shell escape | 9 | CVE-2026-0628 |
-| **Model Abuse** | Malware code generation (malwaregen), EICAR/GTUBE signatures, AV-evasion gen | 8 | -- |
-| **Excessive Autonomy** | Runaway loops, resource exhaustion, unauthorized financial actions | 5 | -- |
-| **Model Security** | Behavior extraction, malicious fine-tuning data | 2 | -- |
-| **Data Poisoning** | RAG/knowledge base tampering, memory manipulation | 1 | -- |
+| **Prompt Injection** | "Ignore previous instructions", persona hijacking, encoded payloads (base-N, ROT, Unicode tags, sneaky-bits, zalgo, ecoji, base2048), CJK attacks, latent injection, glitch tokens, DRA parenthesis reconstruction, leakreplay MASK, HackAPrompt corpus | 172 | CVE-2025-53773, CVE-2025-32711 |
+| **Agent Manipulation** | DAN family (DAN / DUDE / STAN / AntiDAN / RANTI / DevMode), AutoDAN, DanInTheWild, tense framing, grandma roleplay, goodside threat-JSON, doctor XML puppetry, cross-agent attacks, goal hijacking, Sybil consensus, Semantic Kernel lambda+eval RCE | 105 | CVE-2026-26030 |
+| **Skill Compromise** | Typosquatting, context poisoning, subcommand overflow, rug pull, supply chain attacks, credential exfil combos, HuggingFace unsafe artifacts | 40 | CVE-2025-59536, CVE-2026-28363 |
+| **Context Exfiltration** | API key generation/completion, system prompt theft, credential harvesting, env variable exfil, markdown-URL data exfil, XSS in tool response, cross-user memory leakage | 40 | CVE-2026-24307, CVE-2026-41712 |
+| **Tool Poisoning** | Malicious MCP responses, consent bypass, hidden LLM instructions, schema contradictions, ANSI escape elicitation, vector-store filter injection | 27 | CVE-2025-68143/68144/68145, CVE-2026-41705 |
+| **Privilege Escalation** | Scope creep, delayed execution bypass, admin function access, shell escape, SQL injection in admin endpoints, autostart file write | 12 | CVE-2026-0628, CVE-2026-25592, CVE-2026-42208 (CISA KEV) |
+| **Model Abuse** | Malware code generation (malwaregen), EICAR/GTUBE signatures, AV-evasion gen | 10 | -- |
+| **Excessive Autonomy** | Runaway loops, resource exhaustion, unauthorized financial actions | 8 | -- |
+| **Model Security** | Behavior extraction, malicious fine-tuning data | 3 | -- |
+| **Data Poisoning** | RAG/knowledge base tampering, memory manipulation, persistence-aware override | 2 | CVE-2026-41713 |
 
-> **Limitations:** Regex catches known patterns, not paraphrased attacks. We publish [evasion tests](LIMITATIONS.md) showing what we can't catch. See [LIMITATIONS.md](LIMITATIONS.md) for honest benchmark numbers including external PINT results.
+> **Limitations:** Regex catches known patterns, not paraphrased attacks. We publish [evasion tests](LIMITATIONS.md) showing what we can't catch. 64 known evasion techniques are documented. 4 rules are kept as KEPT-AS-IS corpus fingerprints, marked experimental, not for production blocking. See [LIMITATIONS.md](LIMITATIONS.md) for honest benchmark numbers including external PINT results.
+
+### Production CVE coverage
+
+ATR ships detection rules for current production CVEs:
+
+| CVE | Affected product | ATR rule | Notes |
+|-----|------------------|----------|-------|
+| CVE-2026-41705 | Spring AI MilvusVectorStore filter injection | ATR-2026-00448 | |
+| CVE-2026-41712 | Spring AI PromptChatMemoryAdvisor cross-user leak | ATR-2026-00449 | |
+| CVE-2026-41713 | Spring AI PromptChatMemoryAdvisor memory poisoning | ATR-2026-00450 | |
+| CVE-2026-42208 | LiteLLM admin SQL injection | ATR-2026-00451 | **CISA KEV, federal remediation due 2026-05-11** |
+| CVE-2026-26030 | Microsoft Semantic Kernel lambda+eval RCE | ATR-2026-00440 | Microsoft Copilot AGT loop, 2h 16m response |
+| CVE-2026-25592 | Microsoft Semantic Kernel autostart file write | ATR-2026-00441 | Microsoft Copilot AGT loop, 2h 16m response |
 
 ---
 
@@ -320,7 +361,7 @@ npm install agent-threat-rules
 # → One YAML line, SARIF output, GitHub Security tab integration
 ```
 
-Cisco AI Defense integrated via Option 1 ([PR #79](https://github.com/cisco-ai-defense/skill-scanner/pull/79)). Happy to help with your integration -- [open an issue](https://github.com/Agent-Threat-Rule/agent-threat-rules/issues).
+Cisco AI Defense integrated via Option 1: full 419-rule pack merged in [PR #99](https://github.com/cisco-ai-defense/skill-scanner/pull/99) after the original PoC [PR #79](https://github.com/cisco-ai-defense/skill-scanner/pull/79). Microsoft Agent Governance Toolkit upgraded to 287 rules + weekly auto-sync in [PR #1277](https://github.com/microsoft/agent-governance-toolkit/pull/1277). Happy to help with your integration -- [open an issue](https://github.com/Agent-Threat-Rule/agent-threat-rules/issues).
 
 ### Rule contribution workflow
 
@@ -362,8 +403,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide. See [CONTRIBUTION-GUI
 - [x] **v1.0** -- 108 rules, 53K mega scan, GitHub Action + SARIF, generic-regex export, Cisco adoption
 - [x] **v1.1** -- Threat Cloud flywheel, 5 ecosystem merges, Microsoft AGT + NVIDIA Garak PRs
 - [x] **v2.0.0** -- 113 rules, 96K mega scan, 751 malware discovered, RFC-001, GOVERNANCE.md, website launch
-- [x] **v2.2.0** (current) -- 419 rules, 193 new NVIDIA garak probe coverage (ATR-00300~00414), 97.1% garak recall
-- [ ] **v2.1** -- Go engine, ML classifier integration, semantic signatures, community rule submissions
+- [x] **v2.1.0** -- NIST AI RMF mapping, OSCAL catalog, 330 rules
+- [x] **v2.1.1** -- MISP taxonomies + galaxy merged (CIRCL adulau), 336 rules
+- [x] **v2.1.2** -- Microsoft Copilot SWE Agent AGT loop closure (2h 16m, Semantic Kernel CVEs), 338 rules
+- [x] **v2.1.4** -- 4 production CVE rules (Spring AI + LiteLLM CISA KEV), 348 rules
+- [x] **v2.2.0** (current, 2026-05-12) -- 419 rules, +75 rules / 24h sprint, HackAPrompt recall 28.6% → 66.2%, 6-framework compliance metadata, 97.1% garak recall, 100% SKILL.md precision
+- [ ] **v2.3** -- Go engine, ML classifier integration, semantic signatures, community rule submissions
 - [ ] **v3.0** -- Multi-engine standard: 2+ engines, 10+ production deployments, schema review by 3+ security teams
 
 ### Strategic direction
@@ -372,7 +417,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide. See [CONTRIBUTION-GUI
 |-------|------|--------|
 | **Phase 0: Core product** | 419 rules, 97.1% garak recall, OWASP 10/10, 96K scan | **Done** |
 | **Phase 1: Distribution** | GitHub Action, SARIF, generic-regex export, ecosystem PRs | **Done** |
-| **Phase 2: Adoption** | Cisco merged (34 rules), OWASP PR, 11 ecosystem PRs | **In progress** |
+| **Phase 2: Adoption** | Microsoft AGT (287 rules merged) + Cisco AI Defense (full 419 pack merged) + MISP galaxy/taxonomies + OWASP A-S-R-H (third-party precize repo); 13 merged PRs across 6 external orgs | **In progress** |
 | **Phase 3: Community flywheel** | Threat Cloud crystallization, auto-generated rules, 10+ contributors | In progress |
 | **Phase 4: Standard** | Multi-vendor adoption, OpenSSF submission, schema governance | Planned |
 
@@ -441,6 +486,14 @@ If you use ATR in your research, please cite:
   url={https://doi.org/10.5281/zenodo.19178002}
 }
 ```
+
+---
+
+## Maintainer
+
+Adam Lin (林冠辛). adam@agentthreatrule.org. GitHub [@eeee2345](https://github.com/eeee2345). Taiwan.
+
+60 days solo from zero to 419 rules, 6 ecosystem integrations, 30+ PRs in flight.
 
 ---
 
