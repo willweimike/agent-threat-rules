@@ -67,7 +67,7 @@ ATR maps to **10/10 OWASP Agentic Top 10 categories** ([full mapping](docs/OWASP
 | **Cisco AI Defense** | Full 419-rule pack in skill-scanner production (merged 2026-04-22) · Original PoC | [PR #99](https://github.com/cisco-ai-defense/skill-scanner/pull/99) · [PR #79](https://github.com/cisco-ai-defense/skill-scanner/pull/79) |
 | **MISP** (CIRCL) | 336-rule cluster in global threat-intel sharing (galaxy, merged 2026-05-10) · Rule-ID tagging vocabulary (taxonomies, merged 2026-04-12) | [galaxy #1207](https://github.com/MISP/misp-galaxy/pull/1207) · [taxonomies #323](https://github.com/MISP/misp-taxonomies/pull/323) |
 | **OWASP Agent Security Regression Harness** (third-party precize repo, NOT OWASP Foundation official) | Rule pack merged 2026-05-11 with project-lead greeting | [PR #74](https://github.com/precize/Agent-Security-Regression-Harness/pull/74) · [PR #14](https://github.com/precize/Agentic-AI-Top10-Vulnerability/pull/14) |
-| **Gen Digital Sage** (Norton / Avast / AVG parent) | Open PR, under review | [PR #33](https://github.com/gendigitalinc/sage/pull/33) |
+| **Gen Digital Sage** (Norton / Avast / AVG parent) | Merged 2026-05-11 by @vaclavbelak | [PR #33](https://github.com/gendigitalinc/sage/pull/33) |
 | **Awesome lists** | Listed in CryptoAILab/Awesome-LM-SSP, wearetyomsmnv/Awesome-LLM-agent-Security, nibzard/awesome-agentic-patterns, TalEliyahu/Awesome-AI-Security | [#108](https://github.com/CryptoAILab/Awesome-LM-SSP/pull/108) · [#6](https://github.com/wearetyomsmnv/Awesome-LLM-agent-Security/pull/6) · [#58](https://github.com/nibzard/awesome-agentic-patterns/pull/58) · [#53](https://github.com/TalEliyahu/Awesome-AI-Security/pull/53) |
 
 #### Featured loop: Microsoft Copilot SWE Agent → ATR (2026-05-11)
@@ -200,9 +200,26 @@ ATR maps to established AI security frameworks so teams can go from "understand 
 
 | Framework | Coverage | Mapping |
 |-----------|----------|---------|
-| [OWASP Agentic Top 10](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) | **10/10 categories** | [OWASP-MAPPING.md](docs/OWASP-MAPPING.md) |
+| [OWASP Agentic Top 10 (2026)](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) v1.0 (Dec 2025) | **10/10 categories**, 488 rule mappings across 403 tagged rules | [OWASP-AGENTIC-MAPPING.md](docs/OWASP-AGENTIC-MAPPING.md) |
 | [SAFE-MCP](https://openssf.org/) (OpenSSF) | **78/85 techniques (91.8%)** | [SAFE-MCP-MAPPING.md](docs/SAFE-MCP-MAPPING.md) |
 | [MITRE ATLAS](https://atlas.mitre.org/) | Rule-level references | Per-rule `mitre_ref` field |
+
+OWASP Agentic Top 10 v1.0 shipped December 2025 and defines ASI01-ASI10 risk categories without executable detections. ATR is the published mapping with runnable YAML rules for every category. Coverage breakdown:
+
+| ASI | Title | ATR rules | Strength |
+|---|---|---|---|
+| ASI01 | Agent Goal Hijack | 279 | STRONG |
+| ASI02 | Tool Misuse and Exploitation | 15 | STRONG |
+| ASI03 | Identity and Privilege Abuse | 39 | STRONG |
+| ASI04 | Agentic Supply Chain Vulnerabilities | 46 | STRONG |
+| ASI05 | Unexpected Code Execution (RCE) | 28 | STRONG |
+| ASI06 | Memory & Context Poisoning | 28 | STRONG |
+| ASI07 | Insecure Inter-Agent Communication | 13 | STRONG |
+| ASI08 | Cascading Failures | 21 | STRONG |
+| ASI09 | Human-Agent Trust Exploitation | 12 | STRONG |
+| ASI10 | Rogue Agents | 7 | MODERATE |
+
+Ecosystem signal: rule pack merged into the OWASP Agent Security Regression Harness (third-party precize repo, NOT OWASP Foundation official) via [PR #74](https://github.com/precize/Agent-Security-Regression-Harness/pull/74) on 2026-05-11 with project-lead greeting.
 
 **Paper:** Pan, Y. (2026). *Agent Threat Rules: A Community-Driven Detection Standard for AI Agent Security Threats.* Zenodo. [doi:10.5281/zenodo.19178002](https://doi.org/10.5281/zenodo.19178002)
 

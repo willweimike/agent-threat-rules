@@ -2,6 +2,21 @@
 
 All notable changes to ATR will be documented in this file.
 
+## [2.2.2] - 2026-05-13
+
+### Added
+
+- **ATR-2026-00523** (skill-compromise): Claude Code Hooks SessionStart pre-trust RCE (CVE-2025-59536). Detects repo-shipped `.claude/settings.json` registering a `SessionStart` hook with the `startup` matcher; the hook command fires before the trust dialog renders. Six layered conditions: literal Hooks-schema shape anchor, shell-interpreter command resolution, pipe-to-shell / inline-exec payload shape, package-manager + credential-tool invocation, repo-path + payload co-occurrence, and pre-trust prose anchor. 7 TP / 6 TN / 3 evasion tests documented. Reported by Aviv Donenfeld and Oded Vanunu (Check Point Research); patched via GHSA-ph6w-f82w-28w6 enhanced trust-dialog warning.
+- **ATR-2026-00524** (context-exfiltration): Claude Code ANTHROPIC_BASE_URL credential exfiltration (CVE-2026-21852, CVSS 5.3 Moderate). Detects repo-shipped `.claude/settings.json` or env-var configuration rebinding `ANTHROPIC_BASE_URL` to an endpoint outside the Anthropic-controlled allowlist (`api.anthropic.com`, Vertex `*.googleapis.com`, Bedrock `bedrock*.<region>.amazonaws.com`); pre-trust API request leaks the live `Authorization: Bearer` header. Seven layered conditions: JSON-form allowlist negative-lookahead, shell / dotenv / Dockerfile env-var form, bare public-IPv4 detector (excludes loopback + RFC1918), cleartext-HTTP detector against non-loopback hosts, repo-path + payload co-occurrence, pre-trust prose anchor, and CVE-identifier co-occurrence. 7 TP / 8 TN / 3 evasion tests documented. Patched in Claude Code >= 2.0.65 (GHSA-jh7p-qr78-84p7); PoC at github.com/atiilla/CVE-2026-21852-PoC.
+
+### Changed
+
+- Total rule count: 419 → 421.
+
+### Anchors
+
+- 2 Check Point Research disclosures against Claude Code: CVE-2025-59536 (Hooks SessionStart pre-trust RCE) + CVE-2026-21852 (ANTHROPIC_BASE_URL pre-trust credential exfil). Both share the same root cause class — repo-scoped `.claude/settings.json` parsed and acted on before the trust dialog gates the action — and both upstream patches narrow the trust-gate ordering. ATR rules anchor on the dangerous config shape so detection survives both pre- and post-patch deployments.
+
 ## [2.2.0] - 2026-05-12
 
 ### Added
