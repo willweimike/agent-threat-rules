@@ -1,25 +1,29 @@
-## Daily Scan Summary (2026-05-12)
+## Daily Scan Summary (2026-05-13)
 - Scanned: 50 packages
-- CRITICAL: 8
-- HIGH: 1
-- CLEAN/LOW: 37
+- CRITICAL: 10
+- HIGH: 3
+- CLEAN/LOW: 34
 
 ### Flagged Packages:
-- [CRITICAL] @askexenow/exe-create-mcp (score: 100)
-- [CRITICAL] @hz-abyssal-heart/a2amarket-mcp-server (score: 100)
-- [CRITICAL] @kage-core/kage-graph-mcp (score: 100)
-- [CRITICAL] @leadloadz/mcp-server (score: 100)
-- [HIGH] @lerianstudio/lerian-mcp-server (score: 40)
-- [CRITICAL] @linkforty/mcp-server (score: 80)
-- [CRITICAL] @microsoft/agentos-mcp-server (score: 76)
-- [CRITICAL] @midscene/harmony-mcp (score: 100)
-- [CRITICAL] @midscene/mcp (score: 100)
+- [CRITICAL] @0xshariq/email-mcp-server (score: 100)
+- [CRITICAL] @agimon-ai/workflow-mcp (score: 80)
+- [CRITICAL] @arguslog/mcp-server (score: 100)
+- [HIGH] @doquflow/server (score: 45)
+- [CRITICAL] @gscdump/cli (score: 100)
+- [CRITICAL] @jackywinter/cobbler-mcp (score: 70)
+- [CRITICAL] @jayarrowz/mcp-figma (score: 100)
+- [HIGH] @juvantlabs/m365-graph-mcp-server (score: 45)
+- [CRITICAL] @komexa/kickoff-mcp (score: 100)
+- [HIGH] @mergeguide/mcp-server (score: 60)
+- [CRITICAL] @mirrai/mcp-server (score: 100)
+- [CRITICAL] @modesty/fluent-mcp (score: 100)
+- [CRITICAL] @moneyforward_i/admina-mcp-server (score: 100)
 
 ### Cumulative:
-- Total scanned: 1460
-  - CLEAN: 858
-  - CRITICAL: 157
+- Total scanned: 1510
+  - CLEAN: 885
+  - CRITICAL: 167
   - ERROR: 1
-  - HIGH: 130
-  - LOW: 167
-  - MEDIUM: 147
+  - HIGH: 133
+  - LOW: 174
+  - MEDIUM: 150
