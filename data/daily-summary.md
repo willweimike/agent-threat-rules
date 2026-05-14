@@ -1,29 +1,26 @@
-## Daily Scan Summary (2026-05-13)
+## Daily Scan Summary (2026-05-14)
 - Scanned: 50 packages
-- CRITICAL: 10
+- CRITICAL: 7
 - HIGH: 3
-- CLEAN/LOW: 34
+- CLEAN/LOW: 35
 
 ### Flagged Packages:
-- [CRITICAL] @0xshariq/email-mcp-server (score: 100)
-- [CRITICAL] @agimon-ai/workflow-mcp (score: 80)
-- [CRITICAL] @arguslog/mcp-server (score: 100)
-- [HIGH] @doquflow/server (score: 45)
-- [CRITICAL] @gscdump/cli (score: 100)
-- [CRITICAL] @jackywinter/cobbler-mcp (score: 70)
-- [CRITICAL] @jayarrowz/mcp-figma (score: 100)
-- [HIGH] @juvantlabs/m365-graph-mcp-server (score: 45)
-- [CRITICAL] @komexa/kickoff-mcp (score: 100)
-- [HIGH] @mergeguide/mcp-server (score: 60)
-- [CRITICAL] @mirrai/mcp-server (score: 100)
-- [CRITICAL] @modesty/fluent-mcp (score: 100)
-- [CRITICAL] @moneyforward_i/admina-mcp-server (score: 100)
+- [CRITICAL] @ai.to.design/figma-connector (score: 100)
+- [CRITICAL] @alisaitteke/photoshop-mcp (score: 100)
+- [CRITICAL] @deepsql/mcp (score: 85)
+- [HIGH] @filepad/mcp-server (score: 55)
+- [CRITICAL] @gurulu/mcp-server (score: 100)
+- [CRITICAL] @lanyuey/dbsql-mcp (score: 100)
+- [HIGH] @mailerlite/canny-mcp-server (score: 40)
+- [CRITICAL] @missionsquad/mcp-github (score: 100)
+- [HIGH] @moralisweb3/api-mcp-server (score: 60)
+- [CRITICAL] @mtop-devtools/mcp-server (score: 80)
 
 ### Cumulative:
-- Total scanned: 1510
-  - CLEAN: 885
-  - CRITICAL: 167
+- Total scanned: 1560
+  - CLEAN: 915
+  - CRITICAL: 174
   - ERROR: 1
-  - HIGH: 133
-  - LOW: 174
-  - MEDIUM: 150
+  - HIGH: 136
+  - LOW: 179
+  - MEDIUM: 155
