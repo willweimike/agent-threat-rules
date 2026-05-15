@@ -1,26 +1,24 @@
-## Daily Scan Summary (2026-05-14)
+## Daily Scan Summary (2026-05-15)
 - Scanned: 50 packages
-- CRITICAL: 7
-- HIGH: 3
-- CLEAN/LOW: 35
+- CRITICAL: 3
+- HIGH: 5
+- CLEAN/LOW: 38
 
 ### Flagged Packages:
-- [CRITICAL] @ai.to.design/figma-connector (score: 100)
-- [CRITICAL] @alisaitteke/photoshop-mcp (score: 100)
-- [CRITICAL] @deepsql/mcp (score: 85)
-- [HIGH] @filepad/mcp-server (score: 55)
-- [CRITICAL] @gurulu/mcp-server (score: 100)
-- [CRITICAL] @lanyuey/dbsql-mcp (score: 100)
-- [HIGH] @mailerlite/canny-mcp-server (score: 40)
-- [CRITICAL] @missionsquad/mcp-github (score: 100)
-- [HIGH] @moralisweb3/api-mcp-server (score: 60)
-- [CRITICAL] @mtop-devtools/mcp-server (score: 80)
+- [HIGH] @chrbailey/promptspeak-mcp-server (score: 50)
+- [CRITICAL] @iflow-mcp/cursor-mcp (score: 80)
+- [CRITICAL] @iflow-mcp/jochenyang-devmind-mcp (score: 100)
+- [HIGH] @itkmoon/mysql-mcp (score: 65)
+- [HIGH] @jaumemory/mcp-server (score: 60)
+- [HIGH] @kakedashi/md-to-article-mcp (score: 50)
+- [HIGH] @kalendis/mcp (score: 40)
+- [CRITICAL] @kind-ling/twig (score: 100)
 
 ### Cumulative:
-- Total scanned: 1560
-  - CLEAN: 915
-  - CRITICAL: 174
+- Total scanned: 1610
+  - CLEAN: 949
+  - CRITICAL: 177
   - ERROR: 1
-  - HIGH: 136
-  - LOW: 179
-  - MEDIUM: 155
+  - HIGH: 141
+  - LOW: 183
+  - MEDIUM: 159
