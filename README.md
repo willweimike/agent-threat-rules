@@ -46,6 +46,15 @@ ATR 是各國可採用、無地緣政治風險的開放偵測標準。MIT 授權
 
 Background: [sovereign-ai-defense.vercel.app](https://sovereign-ai-defense.vercel.app)
 
+### Recognized in national and international guidance
+
+The Five Eyes intelligence alliance (US CISA + NSA, UK NCSC, Australia ASD, Canada CCCS, New Zealand NCSC) published joint guidance on 2026-05-01 directing organizations to deploy AI agents with verified identity, short-lived credentials, encrypted agent-to-agent communication, and runtime detection against known attack patterns ([CyberScoop coverage](https://cyberscoop.com/cisa-nsa-five-eyes-guidance-secure-deployment-ai-agents/)).
+
+ATR is the open detection layer the guidance calls for: deterministic, MIT-licensed, no vendor lock-in, deployable inside or outside cloud boundaries.
+
+- [Five Eyes guidance ↔ ATR category mapping](docs/FIVE-EYES-MAPPING.md)
+- 5-category Careful-Adoption guidance maps to ATR's 9 detection categories
+
 ### Where ATR fits in the AI agent security stack
 
 | Layer | What it does | Project |
