@@ -37,7 +37,7 @@ meeting the criteria in Section 6.
 
 ### Current BDFL
 
-KUAN-HSIN LIN (林冠鑫), GitHub: @eeee2345
+KUAN-HSIN LIN (林冠辛), GitHub: @eeee2345, email: adam@agentthreatrule.org
 
 Designation: Transitional BDFL. This role exists until the TSC is constituted (see
 Section 4). At that point, BDFL authority transfers to the TSC by supermajority vote.
@@ -61,34 +61,43 @@ The BDFL may NOT:
 
 ---
 
-## Technical Steering Committee (TSC) — Target: End 2027
+## Technical Steering Committee (TSC) — Target: Q3 2026 (Founding Three)
 
-The TSC will replace the single-maintainer authority model when the project reaches
-the scale where community governance is operationally feasible.
+The TSC replaces the single-maintainer authority model. The detailed
+charter for the TSC, including voting thresholds, term length, public
+meeting cadence, conflict-of-interest policy, and resignation /
+replacement procedures, is in [`TSC-CHARTER.md`](../TSC-CHARTER.md). On
+matters where this document and TSC-CHARTER.md disagree, the Charter
+governs for the v1.1 (Founding Three) phase and onward.
 
-### TSC composition target
+### Initial composition (v1.1 Founding Three)
 
-5 members representing:
-- AI security practitioner community (independent researcher or academia)
-- Enterprise security ecosystem (CISO or security engineering org)
-- AI framework ecosystem (model provider or agent framework vendor)
-- Government / standards body equivalent (CISA, NIST, national CERT)
-- Community contributor (top contributor by merged PRs, elected by community)
+3 seats:
+- Maintainer (BDFL, transitional)
+- Industry (external maintainer at an organization shipping ATR in production)
+- Community / Threat-Intel (external maintainer at a standards body or open threat-intel project)
+
+### Expanded composition (v1.2, Target Q1 2027)
+
+The TSC expands to 5 seats by adding:
+- Academic / Research seat (independent AI security researcher)
+- Government / standards-body seat (CISA, NIST, ENISA, or national CERT equivalent)
 
 ### TSC authority
 
-Once constituted, the TSC takes over:
-- Numbering Authority (ID assignment by TSC majority vote)
-- RFC amendments (TSC majority vote + 14-day public comment period)
-- Enterprise Member admissions (TSC majority vote)
-- BDFL succession (TSC supermajority — 4/5 — required)
+Once constituted, the TSC takes over the authorities enumerated in
+[`TSC-CHARTER.md §2.1`](../TSC-CHARTER.md#21-what-the-tsc-decides), with
+voting thresholds per [`TSC-CHARTER.md §5.1`](../TSC-CHARTER.md#51-vote-thresholds).
 
-### Transition criteria
+### Founding criteria (supersedes the 2027 thresholds previously in this section)
 
-The BDFL will initiate TSC formation when ALL of the following are true:
-- ATR has at least 500 rules in the official corpus
-- At least 3 organizations have contributed merged rules
-- At least 2 Enterprise Members have been active for 12+ months
+The Founding Three TSC is seated when:
+- A maintainer seat-holder accepts (BDFL by default)
+- Both an industry seat-holder and a community / threat-intel seat-holder accept in writing
+- The TSC-CHARTER.md is published and ratified by the seated TSC at its first meeting
+
+The 500-rules / 3-orgs / 2-Enterprise-Member thresholds in the prior
+draft are retained as soft guidance for the v1.2 expansion only.
 
 ---
 

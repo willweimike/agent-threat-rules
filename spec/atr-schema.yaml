@@ -1,15 +1,15 @@
 # ATR Rule Schema -- Agent Threat Rules
-# Version: 0.1.0-draft
 #
-# Inspired by Sigma rule format, extended for AI Agent attack surfaces.
-# This schema defines the structure for all ATR detection rules.
+# Machine-readable form of the rule structure defined in SPEC.md
+# (Section 5). When the two disagree, SPEC.md is normative.
 #
-# Status: RFC (Request for Comments)
+# Status: Draft (tracks SPEC.md v1.0)
 # License: MIT
+# Canonical reference: https://github.com/Agent-Threat-Rule/agent-threat-rules/blob/main/SPEC.md
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 title: ATR Rule Schema
-description: Schema for Agent Threat Rules (ATR) detection rules
+description: Schema for Agent Threat Rules (ATR) detection rules. Tracks SPEC.md v1.0.
 version: "1.0.0"
 
 type: object
