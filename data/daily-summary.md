@@ -1,24 +1,24 @@
-## Daily Scan Summary (2026-05-17)
+## Daily Scan Summary (2026-05-18)
 - Scanned: 50 packages
 - CRITICAL: 6
 - HIGH: 2
-- CLEAN/LOW: 39
+- CLEAN/LOW: 38
 
 ### Flagged Packages:
-- [CRITICAL] @1key4ai/mcp-review (score: 100)
-- [CRITICAL] @bitsbound/mcp-server (score: 100)
-- [CRITICAL] @cfcs/core (score: 90)
-- [CRITICAL] @cubie-ai/solana-mcp (score: 100)
-- [HIGH] @dahawa/hawa-computer-use (score: 50)
-- [HIGH] @gabriel3615/claude-stock-analysis-mcp (score: 50)
-- [CRITICAL] @growi/mcp-server (score: 100)
-- [CRITICAL] @hubnote-mcp/server (score: 100)
+- [CRITICAL] @getnote/mcp (score: 100)
+- [HIGH] @hexsleeves/tailscale-mcp-server (score: 60)
+- [CRITICAL] @matillion/mcp-server (score: 95)
+- [HIGH] @mzxrai/mcp-webresearch (score: 45)
+- [CRITICAL] @n24q02m/better-email-mcp (score: 100)
+- [CRITICAL] @n24q02m/better-notion-mcp (score: 100)
+- [CRITICAL] @nbakka/mcp-appium (score: 95)
+- [CRITICAL] @ncukondo/mcp-server-pubmed (score: 80)
 
 ### Cumulative:
-- Total scanned: 1710
-  - CLEAN: 1029
-  - CRITICAL: 185
+- Total scanned: 1760
+  - CLEAN: 1063
+  - CRITICAL: 191
   - ERROR: 1
-  - HIGH: 143
-  - LOW: 188
-  - MEDIUM: 164
+  - HIGH: 145
+  - LOW: 192
+  - MEDIUM: 168
