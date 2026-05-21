@@ -1,27 +1,30 @@
-## Daily Scan Summary (2026-05-20)
+## Daily Scan Summary (2026-05-21)
 - Scanned: 50 packages
-- CRITICAL: 7
+- CRITICAL: 10
 - HIGH: 4
-- CLEAN/LOW: 34
+- CLEAN/LOW: 25
 
 ### Flagged Packages:
-- [CRITICAL] @agonx402/gateway-mcp (score: 100)
-- [CRITICAL] @azrtydxb/novamem-mcp (score: 90)
-- [CRITICAL] @b10cks/mcp-server (score: 100)
-- [CRITICAL] @comparedge/mcp-server (score: 75)
-- [CRITICAL] @delightfulchorus/mcp (score: 75)
-- [HIGH] @dragoscirjan/mcp-tuikit-snapshot (score: 50)
-- [HIGH] @dragoscirjan/mcp-tuikit-terminals (score: 50)
-- [HIGH] @fragile.app/mcp (score: 50)
-- [HIGH] @fragments-sdk/mcp (score: 60)
-- [CRITICAL] @itzfaisal/mcp-cli (score: 90)
-- [CRITICAL] @kazuph/mcp-raindrop (score: 80)
+- [CRITICAL] @locofy/mcp (score: 100)
+- [HIGH] @membank/mcp (score: 40)
+- [CRITICAL] @munition/mcp (score: 100)
+- [HIGH] @near-mcp/aitp-mcp-server (score: 50)
+- [CRITICAL] @niledatabase/nile-mcp-server (score: 75)
+- [HIGH] @nirvana-labs/nirvana-mcp (score: 60)
+- [CRITICAL] @nitansde/mcp (score: 100)
+- [CRITICAL] @nocobase/plugin-mcp-server (score: 100)
+- [HIGH] @node-in-layers/mcp-server (score: 60)
+- [CRITICAL] @noditlabs/nodit-mcp-server (score: 70)
+- [CRITICAL] @noleemits/vision-builder-control-mcp (score: 100)
+- [CRITICAL] @nookplot/mcp (score: 100)
+- [CRITICAL] @occam-scaly/mcp-server (score: 100)
+- [CRITICAL] @odyssey365/mcp-server (score: 70)
 
 ### Cumulative:
-- Total scanned: 1860
-  - CLEAN: 1117
-  - CRITICAL: 208
-  - ERROR: 1
-  - HIGH: 151
-  - LOW: 204
-  - MEDIUM: 179
+- Total scanned: 1910
+  - CLEAN: 1138
+  - CRITICAL: 218
+  - ERROR: 2
+  - HIGH: 155
+  - LOW: 208
+  - MEDIUM: 189
