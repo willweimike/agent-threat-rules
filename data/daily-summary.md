@@ -1,28 +1,32 @@
-## Daily Scan Summary (2026-05-22)
+## Daily Scan Summary (2026-05-23)
 - Scanned: 50 packages
-- CRITICAL: 9
-- HIGH: 3
-- CLEAN/LOW: 31
+- CRITICAL: 12
+- HIGH: 4
+- CLEAN/LOW: 30
 
 ### Flagged Packages:
-- [CRITICAL] @dashclaw/mcp-server (score: 100)
-- [HIGH] @essentialai/cogent-bridge (score: 40)
-- [CRITICAL] @hualinge/relay-mcp-server (score: 80)
-- [HIGH] @liveauth-labs/mcp-server (score: 55)
-- [CRITICAL] @oneforma/mcp-server (score: 100)
-- [CRITICAL] @oneuptime/mcp-server (score: 100)
-- [CRITICAL] @openape/apes (score: 100)
-- [CRITICAL] @opencapstack/mcp-server (score: 95)
-- [CRITICAL] @openjiuwen/relay-mcp-server (score: 80)
-- [CRITICAL] @optiqcode/cli (score: 70)
-- [CRITICAL] @orderly.network/sdk-docs (score: 70)
-- [HIGH] @overpod/mcp-telegram (score: 50)
+- [CRITICAL] @eikaramba/puppeteer-real-browser-mcp-server (score: 90)
+- [CRITICAL] @img-src/mcp-server (score: 100)
+- [CRITICAL] @iqai/mcp-polymarket (score: 100)
+- [HIGH] @kaicnunes/whats-mcp (score: 55)
+- [CRITICAL] @macnishio/zoho-mcp-server1 (score: 75)
+- [CRITICAL] @mhalder/qdrant-mcp-server (score: 95)
+- [CRITICAL] @noteplanco/noteplan-mcp (score: 100)
+- [CRITICAL] @patternfly/patternfly-mcp (score: 100)
+- [HIGH] @payloadcms/plugin-mcp (score: 50)
+- [CRITICAL] @peaka/mcp-server-peaka (score: 100)
+- [CRITICAL] @phrase/phrase-mcp-server (score: 100)
+- [CRITICAL] @piekstras/newrelic-mcp-server (score: 90)
+- [HIGH] @pimzino/spec-workflow-mcp (score: 50)
+- [HIGH] @piotr-agier/google-drive-mcp (score: 65)
+- [CRITICAL] @pmxt/mcp (score: 75)
+- [CRITICAL] @policyrisk/mcp-server (score: 100)
 
 ### Cumulative:
-- Total scanned: 1960
-  - CLEAN: 1160
-  - CRITICAL: 227
+- Total scanned: 2010
+  - CLEAN: 1184
+  - CRITICAL: 239
   - ERROR: 2
-  - HIGH: 158
-  - LOW: 217
-  - MEDIUM: 196
+  - HIGH: 162
+  - LOW: 223
+  - MEDIUM: 200
