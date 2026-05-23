@@ -589,7 +589,7 @@ atr migrate --source snort --input ./rules.snort --output ./atr-out`}</code>
           />
           <ContribItem
             strong="NIST AI RMF："
-            text={zh ? "415 / 421 規則對應 · 16 個 subcategory 跨 GV / MP / MS / MG · NIST OSCAL Path 1 已接受" : "415 of 421 rules mapped · 16 subcategories across GV / MP / MS / MG · NIST OSCAL Path 1 accepted"}
+            text={zh ? "415 / 421 規則對應 · 16 個 subcategory 跨 GV / MP / MS / MG · 社群 OSCAL catalog 已發布(CC0),usnistgov/oscal-content#333 審查中" : "415 of 421 rules mapped · 16 subcategories across GV / MP / MS / MG · community OSCAL catalog published (CC0); submission to usnistgov/oscal-content#333 in maintainer review"}
           />
           <ContribItem
             strong="ISO/IEC 42001："

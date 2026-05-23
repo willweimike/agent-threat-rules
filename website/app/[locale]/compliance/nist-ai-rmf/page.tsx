@@ -115,33 +115,48 @@ export default async function NistAiRmfPage({
         </p>
       </Reveal>
 
-      {/* OSCAL Path 1 acceptance — first-class section */}
+      {/* Community OSCAL contribution — submission status (honest framing) */}
       <Reveal delay={0.14}>
-        <div className="bg-blue/5 border border-blue/30 p-5 md:p-6 mt-8 mb-4">
-          <div className="font-data text-xs text-blue tracking-[2px] uppercase mb-2">
-            {zh ? "NIST OSCAL Path 1 接受" : "NIST OSCAL Path 1 acceptance"}
+        <div className="bg-paper border border-fog p-5 md:p-6 mt-8 mb-4">
+          <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-2">
+            {zh ? "社群 OSCAL 貢獻 · 目前狀態" : "Community OSCAL contribution · current status"}
           </div>
           <p className="text-sm md:text-base text-graphite leading-[1.8] mb-3">
             {zh
-              ? "ATR 的 OSCAL 版本 AI RMF 目錄（ai-rmf-oscal-catalog，72 個控制項 + 31 個交叉參照連結）已通過 NIST OSCAL Path 1 接受驗證。這個目錄在 CC0 授權下發布於 Agent-Threat-Rule/ai-rmf-oscal-catalog。"
-              : "ATR's OSCAL-version AI RMF catalog (ai-rmf-oscal-catalog, 72 controls + 31 cross-reference links) passed NIST OSCAL Path 1 acceptance validation. The catalog is published under CC0 at Agent-Threat-Rule/ai-rmf-oscal-catalog."}
+              ? "ATR 維護者把 NIST AI RMF 整理成 OSCAL 格式的社群 catalog(72 個控制項 + 31 個交叉參照連結),以 CC0 授權發布在 Agent-Threat-Rule/ai-rmf-oscal-catalog。這份 catalog 是「社群自發整理」,不是 NIST 官方產出。"
+              : "The ATR maintainers transcribed NIST AI RMF into an OSCAL-format community catalog (72 controls + 31 cross-reference links), published under CC0 at Agent-Threat-Rule/ai-rmf-oscal-catalog. This catalog is a community contribution, NOT a NIST publication."}
           </p>
-          <div className="bg-paper border border-fog p-4 text-sm text-stone leading-[1.7]">
+          <p className="text-sm md:text-base text-graphite leading-[1.8] mb-3">
+            {zh
+              ? "我們進一步把 catalog 作為 PR 提交給 NIST 官方的 usnistgov/oscal-content 倉庫(#333),目前 OPEN、由 NIST OSCAL maintainer review 中。Maintainer 已回應「方向需要對齊我們的 approach,內容需要 rework」。我們已寄信 oscal@nist.gov 詢問方向,等待 NIST 團隊指引中。"
+              : "The catalog was further submitted as a PR to NIST's official usnistgov/oscal-content repo (PR #333). The PR is OPEN and under NIST OSCAL maintainer review. The maintainer has commented that the contribution needs to align with their approach and would require rework. We have emailed oscal@nist.gov asking for direction; awaiting their response."}
+          </p>
+          <div className="bg-ash/40 border border-fog p-4 text-sm text-stone leading-[1.7]">
             <span className="font-data text-xs text-stone tracking-[2px] uppercase block mb-2">
-              {zh ? "重要說明" : "Important clarification"}
+              {zh ? "我們不主張的事項" : "What this is NOT"}
             </span>
             {zh
-              ? "Path 1 接受意味著 ATR 目錄通過了 NIST OSCAL schema 驗證，並且被 NIST OSCAL 工作組作為社群貢獻接受。這不等同於官方 NIST 背書或 NIST AI RMF 合規認證。這是技術標準接受，不是政策認可。"
-              : "Path 1 acceptance means the ATR catalog passed NIST OSCAL schema validation and was accepted by the NIST OSCAL working group as a community contribution. This is not an official NIST endorsement or NIST AI RMF compliance certification. It is technical standard acceptance, not policy endorsement."}
+              ? "這不是 NIST 官方背書、不是 NIST AI RMF 合規認證、不是任何 NIST issuance 的「接受層級」。ATR 是 MIT 授權的獨立開放標準。任何在 NIST 一側的正式採用,以 NIST 自己的公告為準,不以這個頁面為準。"
+              : "This is not a NIST official endorsement, not a NIST AI RMF compliance certification, and not any NIST-issued 'acceptance tier'. ATR is an independent MIT-licensed open standard. Any formal adoption on NIST's side will be announced by NIST itself, not by this page."}
           </div>
-          <a
-            href="https://github.com/Agent-Threat-Rule/ai-rmf-oscal-catalog"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-data text-xs text-blue hover:underline inline-block mt-3"
-          >
-            {zh ? "查看 OSCAL 目錄 →" : "View OSCAL catalog on GitHub →"}
-          </a>
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
+            <a
+              href="https://github.com/Agent-Threat-Rule/ai-rmf-oscal-catalog"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-data text-xs text-blue hover:underline"
+            >
+              {zh ? "查看社群 catalog (CC0)" : "Community catalog (CC0)"} &rarr;
+            </a>
+            <a
+              href="https://github.com/usnistgov/oscal-content/pull/333"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-data text-xs text-blue hover:underline"
+            >
+              {zh ? "查看 NIST 一側的 PR #333(審查中)" : "PR #333 on NIST side (in review)"} &rarr;
+            </a>
+          </div>
         </div>
       </Reveal>
 

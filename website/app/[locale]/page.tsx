@@ -380,30 +380,30 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                   <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">
                     {zh ? "已在生產環境" : "In production"}
                   </div>
-                  <div className="font-data text-[clamp(28px,4vw,48px)] font-bold text-ink leading-none mb-2">2</div>
+                  <div className="font-data text-[clamp(28px,4vw,48px)] font-bold text-ink leading-none mb-2">3</div>
                   <div className="text-sm text-graphite leading-[1.7]">
                     {zh
-                      ? "Microsoft Agent Governance Toolkit · Cisco AI Defense"
-                      : "Microsoft Agent Governance Toolkit · Cisco AI Defense"}
+                      ? "Cisco AI Defense · Microsoft AGT · Gen Digital Sage"
+                      : "Cisco AI Defense · Microsoft AGT · Gen Digital Sage"}
                   </div>
                   <div className="text-xs text-mist mt-2">
-                    {zh ? "已合併 PR，已進入生產部署" : "Merged PRs, deployed in production"}
+                    {zh ? "已合併 PR、已進入生產部署" : "Merged PRs, deployed in production"}
                   </div>
                 </div>
               </Reveal>
               <Reveal delay={0.35}>
                 <div className="bg-ash p-5 md:p-8">
                   <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">
-                    {zh ? "正在整合" : "Integrating"}
+                    {zh ? "標準同儕 / 整合中" : "Standards bodies / in review"}
                   </div>
-                  <div className="font-data text-[clamp(28px,4vw,48px)] font-bold text-ink leading-none mb-2">5</div>
+                  <div className="font-data text-[clamp(28px,4vw,48px)] font-bold text-ink leading-none mb-2">4</div>
                   <div className="text-sm text-graphite leading-[1.7]">
                     {zh
-                      ? "NVIDIA garak · MISP taxonomies + galaxy · OWASP A-S-R-H · NIST OSCAL Path 1"
-                      : "NVIDIA garak · MISP taxonomies + galaxy · OWASP A-S-R-H · NIST OSCAL Path 1"}
+                      ? "MISP/CIRCL(已合併)· OWASP A-S-R-H(已合併)· NIST AI RMF(社群 OSCAL · oscal-content#333 審查中)· OpenTelemetry GenAI SIG(#165 審查中)"
+                      : "MISP/CIRCL (merged) · OWASP A-S-R-H (merged) · NIST AI RMF (community OSCAL · oscal-content#333 in review) · OpenTelemetry GenAI SIG (#165 in review)"}
                   </div>
                   <div className="text-xs text-mist mt-2">
-                    {zh ? "審查中或已接受" : "Under review or accepted"}
+                    {zh ? "兩件已合併,兩件 maintainer 審查中" : "Two merged, two under maintainer review"}
                   </div>
                 </div>
               </Reveal>
@@ -683,7 +683,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 {[
                   { name: "MISP / CIRCL", detail: zh ? "Taxonomy + Galaxy 已合併 2026-05-10" : "Taxonomy + Galaxy merged 2026-05-10", href: "https://github.com/MISP/misp-galaxy/pull/1207" },
                   { name: "OWASP A-S-R-H", detail: zh ? "已合併 2026-05-11" : "Merged 2026-05-11", href: "https://github.com/OWASP/agent-security-regression-harness/pull/74" },
-                  { name: "NIST AI RMF (OSCAL)", detail: zh ? "社群 profile · 已接受 2026-05-10" : "Community profile · accepted 2026-05-10", href: "https://github.com/Agent-Threat-Rule/ai-rmf-oscal-catalog" },
+                  { name: "NIST AI RMF (OSCAL)", detail: zh ? "社群 catalog 已發布 · oscal-content#333 審查中" : "Community catalog published · oscal-content#333 in review", href: "https://github.com/usnistgov/oscal-content/pull/333" },
                   { name: "OpenTelemetry GenAI SIG", detail: zh ? "agent.threat.detection.* 審查中" : "agent.threat.detection.* in review", href: "https://github.com/open-telemetry/semantic-conventions-genai/pull/165" },
                 ].map((item) => (
                   <a

@@ -30,9 +30,9 @@ const FRAMEWORKS = [
   },
   {
     id: "NIST AI RMF",
-    coverage: "100%",
-    desc_en: "All rules carry NIST AI RMF subcategory mappings. 16 subcategories across GV/MP/MS/MG. OSCAL catalog accepted under Path 1.",
-    desc_zh: "所有規則均帶有 NIST AI RMF subcategory 對應，涵蓋 GV/MP/MS/MG 四大 function。OSCAL 目錄已通過 Path 1 接受。",
+    coverage: "98.6%",
+    desc_en: "415 of 421 rules carry NIST AI RMF subcategory mappings, spanning 16 subcategories across GV/MP/MS/MG. A community OSCAL catalog (CC0) is self-published; submission PR usnistgov/oscal-content#333 is in maintainer review (not yet a NIST endorsement).",
+    desc_zh: "421 條規則中 415 條帶有 NIST AI RMF subcategory 對應,涵蓋 GV/MP/MS/MG 四大 function 的 16 個 subcategory。社群版 OSCAL catalog 已自 publish(CC0);submission PR usnistgov/oscal-content#333 由 NIST maintainer 審查中(尚未是 NIST 官方背書)。",
     link: "nist-ai-rmf",
   },
   {

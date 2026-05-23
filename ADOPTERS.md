@@ -65,13 +65,13 @@ Adopters whose adoption is itself a public-good interoperability artefact
 - **Since**: 2026-05-11
 - **Status**: shipped
 
-### NIST AI RMF — OSCAL Path 1
-- **Org**: NIST (informal acceptance pathway)
+### NIST AI RMF — community OSCAL catalog (submission in review)
+- **Org**: ATR maintainers (community contribution; NOT a NIST publication)
 - **Type**: reference
-- **Integration**: Community OSCAL profile cross-references ATR rule IDs to AI RMF controls
-- **Evidence**: <https://github.com/Agent-Threat-Rule/ai-rmf-oscal-catalog>
-- **Since**: 2026-05-10
-- **Status**: shipped
+- **Integration**: Community-authored OSCAL catalog covering NIST AI RMF (72 controls + 31 cross-reference links), CC0-licensed, self-published at Agent-Threat-Rule/ai-rmf-oscal-catalog. The catalog has been submitted to the NIST OSCAL team as PR usnistgov/oscal-content#333; the PR is OPEN, the NIST OSCAL maintainer has flagged that scope alignment needs rework, and the ATR maintainers are awaiting NIST direction. Listed here for transparency about the submission, NOT as evidence of NIST endorsement.
+- **Evidence**: <https://github.com/usnistgov/oscal-content/pull/333>
+- **Since**: 2026-05-10 (community catalog published; PR opened 2026-05-21)
+- **Status**: in-review
 
 ### OpenTelemetry — semantic-conventions-genai
 - **Org**: CNCF / OpenTelemetry GenAI SIG
