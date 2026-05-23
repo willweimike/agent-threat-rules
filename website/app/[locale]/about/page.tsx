@@ -99,6 +99,61 @@ const MILESTONES: Milestone[] = [
       zh: "新增 193 條規則，涵蓋完整 NVIDIA garak probe corpus（總計 311 條）。garak in-the-wild jailbreak 基準召回率：97.1%（646/666）。",
     },
   },
+  {
+    date: "2026-04-22",
+    title: {
+      en: "Cisco AI Defense production rollout (PR #99)",
+      zh: "Cisco AI Defense production 上線 (PR #99)",
+    },
+    detail: {
+      en: "Follow-up production PR after the 34-rule PoC. Lands the full ATR rule pack inside Cisco AI Defense's skill-scanner. ATR now ships in two Cisco production paths: rule-packs CLI and skill-scanner.",
+      zh: "34 條 PoC 之後的 production 跟進 PR,把完整 ATR 規則集送進 Cisco AI Defense 的 skill-scanner。ATR 同時走兩條 Cisco production 路徑:rule-packs CLI + skill-scanner。",
+    },
+  },
+  {
+    date: "2026-04-26",
+    title: {
+      en: "Microsoft AGT 287-rule expansion + weekly auto-sync (PR #1277)",
+      zh: "Microsoft AGT 287 條規則擴張 + 每週自動同步 (PR #1277)",
+    },
+    detail: {
+      en: "Follow-up to PR #908's 15-rule PoC. Adds 272 more rules (287 total) and a workflow that auto-syncs ATR upstream releases every week. First standards-grade auto-sync pipeline.",
+      zh: "PR #908 (15 條 PoC) 的 production 跟進。新增 272 條規則 (合計 287 條),並加上每週自動同步 ATR 上游釋出版本的 workflow。第一條標準級自動同步管線。",
+    },
+  },
+  {
+    date: "2026-05-10",
+    title: {
+      en: "MISP / CIRCL taxonomy + galaxy merged",
+      zh: "MISP / CIRCL taxonomy + galaxy 合併",
+    },
+    detail: {
+      en: "Alexandre Dulaunoy (CIRCL) merged ATR rule-ID taxonomy (misp-taxonomies #323) and threat-intel galaxy (misp-galaxy #1207) into MISP's core distribution. First neutral standards-body adoption.",
+      zh: "Alexandre Dulaunoy (CIRCL) 把 ATR rule-ID taxonomy (misp-taxonomies #323) 跟 threat-intel galaxy (misp-galaxy #1207) 合進 MISP 主分發。第一個中立標準機構採用。",
+    },
+  },
+  {
+    date: "2026-05-11",
+    title: {
+      en: "OWASP Agent Security Regression Harness (#74) + Gen Digital Sage (#33) both merged",
+      zh: "OWASP Agent Security Regression Harness (#74) 與 Gen Digital Sage (#33) 同日合併",
+    },
+    detail: {
+      en: "OWASP Foundation's regression-harness project references ATR as its canonical agent-threat detection ruleset (PR #74, merged by Mert Satilmaz). On the same day, Gen Digital (Norton / Avast / LifeLock parent) merged the full ATR rule pack into the Sage agentic-AI risk-scoring layer (PR #33).",
+      zh: "OWASP Foundation 的 regression-harness 專案把 ATR 列為標準 agent-threat 偵測 ruleset (PR #74, Mert Satilmaz 合併)。同一天,Gen Digital (Norton / Avast / LifeLock 母集團) 把完整 ATR 規則集合進 Sage agentic-AI 風險評分層 (PR #33)。",
+    },
+  },
+  {
+    date: "2026-05-22",
+    title: {
+      en: "ATR website standards-form rewrite",
+      zh: "ATR 官網標準體裁重寫",
+    },
+    detail: {
+      en: "Hero, footer, and information architecture rewritten to match peer-format positioning (Sigma / YARA / ATT&CK / NIST AI RMF). Integration intake pipeline shipped: structured issue form, auto-triage workflow, ADOPTERS.md as machine-readable source of truth.",
+      zh: "Hero、footer、資訊架構全面改寫為標準體裁,與 Sigma / YARA / ATT&CK / NIST AI RMF 對齊。Integration intake 管線上線:結構化 issue form、自動 triage workflow、ADOPTERS.md 作為機器可讀來源。",
+    },
+  },
 ];
 
 export default async function AboutPage({
@@ -207,8 +262,8 @@ export default async function AboutPage({
         </p>
         <p className="text-sm md:text-base text-graphite leading-[1.8] mt-4">
           {zh
-            ? "目前的外部貢獻來自 Cisco AI Defense（PR #79，34 條規則）與 Microsoft AGT（PR #908，15 條規則）工程師——這種「企業把鞋帶綁緊就提 PR」的採用模式，是 ATR 想要的治理質感。"
-            : "External contributions to date come from engineers at Cisco AI Defense (PR #79, 34 rules) and Microsoft AGT (PR #908, 15 rules). This pattern — enterprises integrating via pull request instead of private forks — is the governance texture ATR is built for."}
+            ? "目前的外部貢獻來自三條 Fortune-500 production deployments(Cisco AI Defense 完整規則集進 skill-scanner、Microsoft AGT 287 條規則加每週自動同步、Gen Digital Sage 整套規則包),以及四個標準同儕的引用(MISP/CIRCL、OWASP A-S-R-H、NIST AI RMF OSCAL profile、OpenTelemetry GenAI SIG)——這種「企業把鞋帶綁緊就提 PR」的採用模式,是 ATR 想要的治理質感。"
+            : "External contributions to date come from three Fortune-500 production deployments (Cisco AI Defense's full rule pack in skill-scanner, Microsoft AGT's 287 rules plus weekly auto-sync, Gen Digital Sage's integrated pack) and four peer-standard references (MISP / CIRCL, OWASP A-S-R-H, NIST AI RMF OSCAL community profile, OpenTelemetry GenAI SIG). This pattern — enterprises integrating via pull request instead of private forks — is the governance texture ATR is built for."}
         </p>
         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
           <a

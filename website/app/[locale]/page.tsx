@@ -584,57 +584,127 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-display text-[20px] md:text-[clamp(24px,3.5vw,48px)] font-extrabold tracking-[-1px] md:tracking-[-2px] leading-[1.35] max-w-[800px]">
+            <h2 className="font-display text-[20px] md:text-[clamp(24px,3.5vw,48px)] font-extrabold tracking-[-1px] md:tracking-[-2px] leading-[1.35] max-w-[820px]">
               <span className="text-blue">Cisco AI Defense</span>
               {zh
-                ? <><br className="md:hidden" />將 34 條 ATR 規則<br className="sm:hidden" />作為上游依賴。</>
-                : <><br className="md:hidden" /> ships 34 ATR rules<br className="sm:hidden" /> as upstream.</>}
+                ? <><br className="md:hidden" />將完整 ATR 規則集<br className="sm:hidden" />作為 skill-scanner 上游。</>
+                : <><br className="md:hidden" /> ships the full ATR rule pack<br className="sm:hidden" /> as skill-scanner upstream.</>}
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-sm md:text-base text-graphite max-w-[560px] mt-3 md:mt-4 leading-[1.7]">
+            <p className="text-sm md:text-base text-graphite max-w-[640px] mt-3 md:mt-4 leading-[1.7]">
               {zh
-                ? "他們的工程師提了 PR，我們審查完 3 天合併，1,272 行新增。然後他們專門建了 CLI 來消費 ATR 規則。"
-                : "Their engineer submitted a PR. We reviewed it. Merged in 3 days. 1,272 additions. Then they built a CLI specifically to consume ATR rules."}
+                ? "2026-04-03,他們的工程師提了 PR #79(34 條 PoC 規則),3 天合併。2026-04-22,production PR #99 把整套 ATR 規則送進 Cisco AI Defense 的 skill-scanner 生產環境。他們專門建了 --rule-packs CLI 把 ATR 當作第一級規則來源。"
+                : "On 2026-04-03 their engineer submitted PR #79 with a 34-rule PoC and it merged in 3 days. On 2026-04-22 the production PR #99 landed the full ATR rule pack inside Cisco AI Defense's skill-scanner. They built a --rule-packs CLI specifically to consume ATR as a first-class rule source."}
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <a
-              href="https://github.com/cisco-ai-defense/skill-scanner/pull/79"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-data text-xs md:text-sm text-blue hover:underline inline-block mt-3 md:mt-4"
-            >
-              {zh ? "在 GitHub 查看 PR #79 →" : "View PR #79 on GitHub →"}
-            </a>
-          </Reveal>
-
-          <Reveal delay={0.35}>
-            <div className="mt-8 md:mt-10 border-t border-fog pt-6 md:pt-8 max-w-[560px]">
-              <h3 className="font-display text-lg md:text-xl font-semibold text-ink tracking-[-0.5px] leading-[1.3]">
-                <span className="text-blue">Microsoft AGT</span>
-                {zh ? " 合併了 15 條 ATR 規則。" : " merged 15 ATR rules."}
-              </h3>
-              <p className="text-sm md:text-base text-graphite mt-2 md:mt-3 leading-[1.7]">
-                {zh
-                  ? "改寫為 AGT 的 PolicyDocument 格式，554 行新增。"
-                  : "Adapted as PolicyDocument, AGT's native policy format. 554 additions."}
-              </p>
+            <div className="mt-3 md:mt-4 flex flex-wrap gap-x-5 gap-y-2">
               <a
-                href="https://github.com/microsoft/agent-governance-toolkit/pull/908"
+                href="https://github.com/cisco-ai-defense/skill-scanner/pull/79"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-data text-xs md:text-sm text-blue hover:underline inline-block mt-3"
+                className="font-data text-xs md:text-sm text-blue hover:underline"
               >
-                {zh ? "在 GitHub 查看 PR #908 →" : "View PR #908 on GitHub →"}
+                {zh ? "PR #79 (PoC, 34 rules) →" : "PR #79 (PoC, 34 rules) →"}
+              </a>
+              <a
+                href="https://github.com/cisco-ai-defense/skill-scanner/pull/99"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-data text-xs md:text-sm text-blue hover:underline"
+              >
+                {zh ? "PR #99 (production, 完整規則集) →" : "PR #99 (production, full pack) →"}
               </a>
             </div>
           </Reveal>
 
+          <Reveal delay={0.35}>
+            <div className="mt-8 md:mt-10 border-t border-fog pt-6 md:pt-8 max-w-[680px]">
+              <h3 className="font-display text-lg md:text-xl font-semibold text-ink tracking-[-0.5px] leading-[1.3]">
+                <span className="text-blue">Microsoft Agent Governance Toolkit</span>
+                {zh ? " 從 15 條規則擴張到 287 條,每週自動同步。" : " expanded from 15 to 287 ATR rules with a weekly auto-sync workflow."}
+              </h3>
+              <p className="text-sm md:text-base text-graphite mt-2 md:mt-3 leading-[1.7]">
+                {zh
+                  ? "2026-04-13 的 PR #908 先合併 15 條規則作為 PolicyDocument 格式 PoC。2026-04-26 的 production PR #1277 擴張到 287 條規則,並加上每週自動同步 ATR 上游釋出版本的 workflow。"
+                  : "PR #908 (2026-04-13) merged the 15-rule PolicyDocument PoC. PR #1277 (2026-04-26) brought it to 287 rules and added a workflow that auto-syncs ATR upstream releases every week."}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                <a
+                  href="https://github.com/microsoft/agent-governance-toolkit/pull/908"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-data text-xs md:text-sm text-blue hover:underline"
+                >
+                  {zh ? "PR #908 (PoC, 15 rules) →" : "PR #908 (PoC, 15 rules) →"}
+                </a>
+                <a
+                  href="https://github.com/microsoft/agent-governance-toolkit/pull/1277"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-data text-xs md:text-sm text-blue hover:underline"
+                >
+                  {zh ? "PR #1277 (production, 287 rules + auto-sync) →" : "PR #1277 (production, 287 rules + auto-sync) →"}
+                </a>
+              </div>
+            </div>
+          </Reveal>
+
           <Reveal delay={0.4}>
+            <div className="mt-8 md:mt-10 border-t border-fog pt-6 md:pt-8 max-w-[680px]">
+              <h3 className="font-display text-lg md:text-xl font-semibold text-ink tracking-[-0.5px] leading-[1.3]">
+                <span className="text-blue">Gen Digital Sage</span>
+                {zh ? " 在 Norton/Avast/LifeLock 母公司的 agentic-AI 風險評分層採用完整 ATR rule pack。" : " ships the full ATR rule pack in the Sage agentic-AI risk-scoring layer (Norton/Avast/LifeLock parent)."}
+              </h3>
+              <p className="text-sm md:text-base text-graphite mt-2 md:mt-3 leading-[1.7]">
+                {zh
+                  ? "2026-05-11 合併,Norton/Avast/LifeLock 母集團的 Sage 平台把 ATR 規則作為 agentic-AI 安全的判斷基礎。"
+                  : "Merged 2026-05-11. The Sage platform — under the Norton/Avast/LifeLock parent — uses ATR rules as the substrate for its agentic-AI security scoring."}
+              </p>
+              <a
+                href="https://github.com/gendigitalinc/sage/pull/33"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-data text-xs md:text-sm text-blue hover:underline inline-block mt-3"
+              >
+                {zh ? "PR #33 →" : "PR #33 →"}
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Standards bodies row — peer-format trust signal */}
+          <Reveal delay={0.45}>
+            <div className="mt-8 md:mt-10 border-t border-fog pt-6 md:pt-8">
+              <div className="font-data text-[11px] md:text-xs text-stone tracking-[1.5px] md:tracking-[2px] uppercase mb-3">
+                {zh ? "標準同儕也採用 ATR" : "Standards bodies referencing ATR"}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-fog">
+                {[
+                  { name: "MISP / CIRCL", detail: zh ? "Taxonomy + Galaxy 已合併 2026-05-10" : "Taxonomy + Galaxy merged 2026-05-10", href: "https://github.com/MISP/misp-galaxy/pull/1207" },
+                  { name: "OWASP A-S-R-H", detail: zh ? "已合併 2026-05-11" : "Merged 2026-05-11", href: "https://github.com/OWASP/agent-security-regression-harness/pull/74" },
+                  { name: "NIST AI RMF (OSCAL)", detail: zh ? "社群 profile · 已接受 2026-05-10" : "Community profile · accepted 2026-05-10", href: "https://github.com/Agent-Threat-Rule/ai-rmf-oscal-catalog" },
+                  { name: "OpenTelemetry GenAI SIG", detail: zh ? "agent.threat.detection.* 審查中" : "agent.threat.detection.* in review", href: "https://github.com/open-telemetry/semantic-conventions-genai/pull/165" },
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-paper p-4 md:p-5 hover:bg-ash/40 transition-colors block"
+                  >
+                    <div className="font-display text-sm font-semibold text-ink mb-1">{item.name}</div>
+                    <p className="font-data text-xs text-stone leading-relaxed">{item.detail}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.5}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-fog mt-10 md:mt-12">
               {[
-                { num: "34", label: zh ? "條規則已合併" : "rules merged", sub: "Cisco AI Defense" },
+                { num: "3", label: zh ? "個 Fortune-500 採用" : "Fortune-500 deployments", sub: zh ? "Cisco · Microsoft · Gen Digital" : "Cisco · Microsoft · Gen Digital" },
                 { num: String(stats.ruleCount), label: zh ? "條偵測規則" : "detection rules", sub: zh ? `跨 ${stats.categoryCount} 個類別` : `across ${stats.categoryCount} categories` },
                 { num: stats.megaScanTotal.toLocaleString(), label: zh ? "skills 已掃描" : "skills scanned", sub: zh ? "跨多個 registry" : "across registries" },
                 { num: `${mergedCount}/${stats.ecosystemIntegrations.length}`, label: zh ? "生態系 PR" : "ecosystem PRs", sub: zh ? "已合併" : "merged" },

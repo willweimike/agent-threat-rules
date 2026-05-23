@@ -288,8 +288,8 @@ jobs:
               </p>
               <p className="text-xs text-mist mt-2 leading-[1.7]">
                 {locale === "zh"
-                  ? "採用形式不只 GitHub Action——Cisco AI Defense (PR #79) 以 rule-packs CLI 方式整合，Microsoft AGT (PR #908) 以 PolicyDocument 方式整合。這兩筆算「上游採用」，不屬於 Action 使用統計。"
-                  : "Adoption forms vary — Cisco AI Defense (PR #79) integrates via a rule-packs CLI; Microsoft AGT (PR #908) integrates as PolicyDocument. These count as upstream adoption, separate from Action usage."}
+                  ? "採用形式不只 GitHub Action——Cisco AI Defense (PR #79 PoC + PR #99 production) 以 rule-packs CLI 整合完整規則集;Microsoft AGT (PR #908 PoC + PR #1277 production) 以 PolicyDocument 格式整合 287 條規則並每週自動同步;Gen Digital Sage (PR #33) 整套規則包進 agentic-AI 風險評分層。這三筆算「上游採用」,不屬於 Action 使用統計。"
+                  : "Adoption forms vary — Cisco AI Defense (PR #79 PoC + PR #99 production) integrates the full rule pack via a rule-packs CLI; Microsoft AGT (PR #908 PoC + PR #1277 production) integrates 287 rules as PolicyDocument with a weekly auto-sync workflow; Gen Digital Sage (PR #33) ships the rule pack inside the agentic-AI risk-scoring layer. These three count as upstream adoption, separate from Action usage."}
               </p>
             </div>
           </div>
@@ -424,7 +424,7 @@ jobs:
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-fog">
             {[
-              { label: "Cisco AI Defense", detail: locale === "zh" ? "34 條 ATR 規則上游整合" : "34 ATR rules as upstream", highlight: true },
+              { label: "Cisco AI Defense", detail: locale === "zh" ? "完整 ATR 規則包 · skill-scanner production (PR #99)" : "Full ATR rule pack · skill-scanner production (PR #99)", highlight: true },
               { label: locale === "zh" ? `${stats.ruleCount} 條偵測規則` : `${stats.ruleCount} detection rules`, detail: locale === "zh" ? `${stats.categoryCount} 個威脅類別` : `${stats.categoryCount} threat categories`, highlight: false },
               { label: locale === "zh" ? `${stats.megaScanTotal.toLocaleString()} 已掃描` : `${stats.megaScanTotal.toLocaleString()} skills scanned`, detail: locale === "zh" ? "6 個 registry · 751 惡意軟體" : "6 registries · 751 malware", highlight: false },
               { label: locale === "zh" ? `${stats.ecosystemIntegrations.length} 個生態系整合` : `${stats.ecosystemIntegrations.length} ecosystem integrations`, detail: `${stats.ecosystemIntegrations.filter(e => e.type === "merged").length} merged · ${stats.ecosystemIntegrations.filter(e => e.type === "open").length} under review`, highlight: false },
@@ -520,30 +520,33 @@ jobs:
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <div className="font-data text-3xl font-bold text-ink mb-1">34</div>
-              <div className="text-sm text-stone">{locale === "zh" ? "條 ATR 規則已合併" : "ATR rules merged"}</div>
+              <div className="font-data text-3xl font-bold text-ink mb-1">{locale === "zh" ? "完整規則包" : "full pack"}</div>
+              <div className="text-sm text-stone">{locale === "zh" ? "在 skill-scanner production" : "in skill-scanner production"}</div>
             </div>
             <div>
-              <div className="font-data text-3xl font-bold text-ink mb-1">1,272</div>
-              <div className="text-sm text-stone">{locale === "zh" ? "行程式碼加入 Cisco AI Defense" : "lines added to Cisco AI Defense"}</div>
+              <div className="font-data text-3xl font-bold text-ink mb-1">{locale === "zh" ? "2 PR" : "2 PRs"}</div>
+              <div className="text-sm text-stone">{locale === "zh" ? "PoC (#79) → production (#99)" : "PoC (#79) → production (#99)"}</div>
             </div>
             <div>
               <div className="font-data text-3xl font-bold text-ink mb-1">{locale === "zh" ? "3 天" : "3 days"}</div>
-              <div className="text-sm text-stone">{locale === "zh" ? "從提交 PR 到合併" : "from PR submission to merge"}</div>
+              <div className="text-sm text-stone">{locale === "zh" ? "首次提交到合併" : "first PR to merge"}</div>
             </div>
           </div>
           <div className="px-6 pb-6">
             <p className="text-sm text-graphite leading-relaxed mb-4">
               {locale === "zh"
-                ? <>Cisco 的 DefenseClaw 團隊將 ATR 規則整合為上游依賴。他們的工程師提交了 PR #79，我們審查後 3 天內合併。隨後他們建置了 <span className="font-data">--rule-packs</span> CLI 功能（PR #80），專門將 ATR 作為第一級規則來源使用。</>
-                : <>Cisco&apos;s DefenseClaw team integrated ATR rules as an upstream dependency. Their engineer submitted PR #79, we reviewed it, and it merged in 3 days. They then built a <span className="font-data">--rule-packs</span> CLI feature (PR #80) specifically to consume ATR as a first-class rule source.</>}
+                ? <>Cisco 的 AI Defense 團隊把 ATR 規則整合為上游依賴。第一個 PR #79(2026-04-03)合併 34 條 PoC 規則,3 天內 merge。隨後 PR #80 建置 <span className="font-data">--rule-packs</span> CLI 把 ATR 作為第一級規則來源。production PR #99(2026-04-22)把完整 ATR 規則集送進 Cisco AI Defense 的 skill-scanner 生產環境。</>
+                : <>Cisco&apos;s AI Defense team integrated ATR rules as an upstream dependency. The first PR #79 (2026-04-03) merged a 34-rule PoC in three days. Follow-up PR #80 built the <span className="font-data">--rule-packs</span> CLI to consume ATR as a first-class rule source. Production PR #99 (2026-04-22) landed the full ATR rule pack inside Cisco AI Defense&apos;s skill-scanner.</>}
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               <a href="https://github.com/cisco-ai-defense/skill-scanner/pull/79" target="_blank" rel="noopener noreferrer" className="font-data text-sm text-blue hover:underline">
-                PR #79: Rules integration &rarr;
+                PR #79: PoC (34 rules) &rarr;
               </a>
               <a href="https://github.com/cisco-ai-defense/skill-scanner/pull/80" target="_blank" rel="noopener noreferrer" className="font-data text-sm text-blue hover:underline">
-                PR #80: Rule-packs CLI &rarr;
+                PR #80: rule-packs CLI &rarr;
+              </a>
+              <a href="https://github.com/cisco-ai-defense/skill-scanner/pull/99" target="_blank" rel="noopener noreferrer" className="font-data text-sm text-blue hover:underline">
+                PR #99: production &rarr;
               </a>
             </div>
           </div>
