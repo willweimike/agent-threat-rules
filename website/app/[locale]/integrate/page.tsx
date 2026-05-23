@@ -49,7 +49,7 @@ if result.outcome == "deny":
     title: "Raw YAML (any language)",
     cmd: "git submodule add https://github.com/Agent-Threat-Rule/agent-threat-rules.git",
     code: `# Point your scanner at rules/ directory
-# Each .yaml file follows ATR schema v2.0
+# Each .yaml file follows ATR-SPEC-v1 schema
 # Parse with any YAML library
 # Schema: spec/atr-schema.yaml
 
@@ -311,7 +311,7 @@ jobs:
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
-                  <div className="font-display text-sm font-semibold mb-1">ATR Schema v2.0 ({locale === "zh" ? "目前版本" : "current"})</div>
+                  <div className="font-display text-sm font-semibold mb-1">ATR-SPEC-v1 ({locale === "zh" ? "穩定版" : "stable"})</div>
                   <p className="text-sm text-stone leading-[1.6]">
                     {locale === "zh"
                       ? "已發布且穩定。所有新增欄位皆為選填。現有欄位不會在主版本升級前被移除或重新命名。"

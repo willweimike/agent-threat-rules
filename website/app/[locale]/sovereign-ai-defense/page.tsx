@@ -99,15 +99,15 @@ export default async function SovereignAIDefensePage({
         <p className="text-sm md:text-base text-graphite leading-[1.55] max-w-[720px] mt-3">
           {zh ? (
             <>
-              這不是疏忽，這是<strong className="text-ink">系統性漏洞</strong>。
-              今天，這個缺口有了第一個開放、可運作、由社群治理的答案——
-              MIT License、344 條行為規則、已在 Cisco、Microsoft、NVIDIA、Meta、IBM 的資安堆疊中運作。
+              這不是疏忽,這是<strong className="text-ink">系統性漏洞</strong>。
+              今天,這個缺口有了第一個開放、可運作、由社群治理的答案——
+              MIT License、421 條行為規則、已在 Cisco AI Defense、Microsoft AGT、Gen Digital Sage 生產環境運作,並被 MISP、OWASP、NIST AI RMF 引用。
             </>
           ) : (
             <>
               This is not an oversight. It is a <strong className="text-ink">structural vulnerability</strong>.
               Today, that gap has its first open, operational, community-governed answer —
-              MIT-licensed, 344 behavioral rules, already shipping in Cisco, Microsoft, NVIDIA, Meta, and IBM security stacks.
+              MIT-licensed, 421 behavioral rules, shipping in production at Cisco AI Defense, Microsoft AGT, and Gen Digital Sage, and referenced by MISP, OWASP, and NIST AI RMF.
             </>
           )}
         </p>
@@ -298,8 +298,8 @@ export default async function SovereignAIDefensePage({
         </h2>
         <p className="text-sm md:text-base text-graphite leading-[1.8]">
           {zh
-            ? "MIT License · 344 條行為規則 · Protocol-agnostic · Behavioral-based。從真實攻擊情資產生，對應 NVIDIA garak、OWASP Agentic、MITRE ATLAS 三大標準 taxonomy。任何國家可採用，任何組織可貢獻，沒有地緣政治風險，沒有 vendor lock-in。"
-            : "MIT License · 344 behavioral rules · protocol-agnostic · behavior-based. Derived from real attack corpora, classified to NVIDIA garak / OWASP Agentic / MITRE ATLAS taxonomies. Adoptable by any country, contributable by any organization. No geopolitical risk. No vendor lock-in."}
+            ? "MIT License · 421 條行為規則 · Protocol-agnostic · Behavioral-based。從真實攻擊情資產生,對應 NVIDIA garak、OWASP Agentic、MITRE ATLAS 三大標準 taxonomy。任何國家可採用,任何組織可貢獻,沒有地緣政治風險,沒有 vendor lock-in。"
+            : "MIT License · 421 behavioral rules · protocol-agnostic · behavior-based. Derived from real attack corpora, classified to NVIDIA garak / OWASP Agentic / MITRE ATLAS taxonomies. Adoptable by any country, contributable by any organization. No geopolitical risk. No vendor lock-in."}
         </p>
         <p className="text-sm md:text-base text-graphite leading-[1.8] mt-4">
           {zh ? (
@@ -589,7 +589,7 @@ atr migrate --source snort --input ./rules.snort --output ./atr-out`}</code>
           />
           <ContribItem
             strong="NIST AI RMF："
-            text={zh ? "100% 規則覆蓋率 · 16 個 subcategory 跨 GV / MP / MS / MG · v2.1.0 已發布" : "100% rule coverage · 16 subcategories across GV / MP / MS / MG · shipped in v2.1.0"}
+            text={zh ? "415 / 421 規則對應 · 16 個 subcategory 跨 GV / MP / MS / MG · NIST OSCAL Path 1 已接受" : "415 of 421 rules mapped · 16 subcategories across GV / MP / MS / MG · NIST OSCAL Path 1 accepted"}
           />
           <ContribItem
             strong="ISO/IEC 42001："
@@ -691,25 +691,25 @@ atr migrate --source snort --input ./rules.snort --output ./atr-out`}</code>
             org="Cisco AI Defense"
             status={zh ? "已出貨" : "Shipping"}
             statusClass="bg-green/10 text-green"
-            desc={zh ? "PR #99 已合併 · 344 條完整規則集於 skill-scanner 生產環境（2026-04-22）" : "PR #99 merged · Full 344-rule library shipping in skill-scanner (2026-04-22)"}
+            desc={zh ? "PR #99 已合併 · 完整 ATR 規則集於 skill-scanner 生產環境（2026-04-22）" : "PR #99 merged · Full ATR rule pack shipping in skill-scanner (2026-04-22)"}
           />
           <TractionRow
             org="Microsoft"
             status={zh ? "PR 已合併" : "PR Merged"}
             statusClass="bg-blue/10 text-blue"
-            desc={zh ? "agent-governance-toolkit · 344 條規則自動同步" : "agent-governance-toolkit · 344-rule auto-sync"}
+            desc={zh ? "agent-governance-toolkit · PR #1277 · 287 條規則 + 每週自動同步 ATR 上游釋出" : "agent-governance-toolkit · PR #1277 · 287 rules + weekly auto-sync of ATR upstream releases"}
           />
           <TractionRow
             org="NVIDIA garak"
             status={zh ? "整合中" : "Integrating"}
             statusClass="bg-medium/10 text-medium"
-            desc={zh ? "PR #1676 · v2.1.3 · 344 rules · 已通過兩輪 review" : "PR #1676 · v2.1.3 · 344 rules · 2 review rounds passed"}
+            desc={zh ? "PR #1676 · 完整 ATR 規則集 · 兩輪 review 通過,等待 maintainer 終審" : "PR #1676 · Full ATR rule pack · Two review rounds passed, awaiting maintainer final review"}
           />
           <TractionRow
             org="Gen Digital Sage"
-            status="Open PR"
-            statusClass="bg-ash text-stone"
-            desc={zh ? "PR #33 · 27 patterns · vaclavbelak (Norton/Avast 母公司) 主動邀請" : "PR #33 · 27 patterns · vaclavbelak (Norton/Avast parent) maintainer-invited"}
+            status={zh ? "已合併" : "Merged"}
+            statusClass="bg-green/10 text-green"
+            desc={zh ? "PR #33 已合併（2026-05-11）· 完整 ATR 規則集於 Norton/Avast/LifeLock 母集團的 Sage 風險評分層" : "PR #33 merged (2026-05-11) · Full ATR rule pack in the Sage risk-scoring layer under the Norton/Avast/LifeLock parent"}
           />
           <TractionRow
             org="IBM"
@@ -726,8 +726,8 @@ atr migrate --source snort --input ./rules.snort --output ./atr-out`}</code>
         </div>
         <p className="text-xs md:text-sm text-stone mt-5">
           {zh
-            ? "60 天 solo · 0 → 344 條規則 · 6 個 ecosystem integrations · 30+ PRs 進行中 · Apache 2.0 學術版 · "
-            : "60 days solo · 0 → 344 rules · 6 ecosystem integrations · 30+ PRs in flight · Apache 2.0 academic edition · "}
+            ? "0 → 421 條規則 · 3 個 Fortune-500 production deployments · 4 個標準同儕引用 · 20+ adopters 在 ADOPTERS.md · MIT 永久授權 · "
+            : "0 → 421 rules · 3 Fortune-500 production deployments · 4 peer-standard references · 20+ adopters in ADOPTERS.md · MIT licensed · "}
           <a href="https://doi.org/10.5281/zenodo.19178002" className="text-blue hover:underline">
             DOI 10.5281/zenodo.19178002
           </a>
@@ -952,7 +952,7 @@ atr migrate --source snort --input ./rules.snort --output ./atr-out`}</code>
               agentthreatrule.org
             </a>
             <div className="font-data text-[11px] text-mist tracking-[1px] uppercase mt-3">
-              v2.1.3 · 344 Rules · 100% NIST AI RMF mapped
+              421 Rules · 415 carry NIST AI RMF mappings · Spec v1.0
             </div>
           </div>
         </div>

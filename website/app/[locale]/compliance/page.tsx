@@ -23,9 +23,9 @@ const FRAMEWORKS = [
   },
   {
     id: "MITRE ATLAS",
-    coverage: "100%",
-    desc_en: "All 113 ATR rules carry MITRE ATLAS technique references. Grouped by tactic in the rule explorer.",
-    desc_zh: "113 條 ATR 規則均帶有 MITRE ATLAS 技術參照，在規則瀏覽器中依戰術分組。",
+    coverage: "95.5%",
+    desc_en: "402 of 421 ATR rules carry MITRE ATLAS technique references. Grouped by tactic in the rule explorer.",
+    desc_zh: "421 條 ATR 規則中 402 條帶有 MITRE ATLAS 技術參照,在規則瀏覽器中依戰術分組。",
     link: null,
   },
   {

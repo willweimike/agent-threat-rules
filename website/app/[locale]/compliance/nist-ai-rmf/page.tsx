@@ -19,8 +19,8 @@ export async function generateMetadata({
       ? "ATR × NIST AI RMF — 100% 規則對應"
       : "ATR × NIST AI RMF — 100% rule coverage",
     description: zh
-      ? "ATR v2.1.0 全部 330 條規則,皆已對應 NIST AI RMF subcategory。16 個 subcategory,跨 GV / MP / MS / MG 四大 function。MIT License。"
-      : "ATR v2.1.0 — all 330 rules carry NIST AI RMF subcategory mappings. 16 subcategories spanning all four functions (GV / MP / MS / MG). MIT License.",
+      ? "ATR 421 條規則中 415 條對應 NIST AI RMF subcategory。16 個 subcategory,跨 GV / MP / MS / MG 四大 function。MIT License。"
+      : "ATR — 415 of 421 rules carry NIST AI RMF subcategory mappings. 16 subcategories spanning all four functions (GV / MP / MS / MG). MIT License.",
   };
 }
 
@@ -81,9 +81,9 @@ export default async function NistAiRmfPage({
       {/* H1 */}
       <Reveal delay={0.05}>
         <h1 className="font-display text-[clamp(32px,5vw,52px)] font-extrabold tracking-[-2px] md:tracking-[-3px] leading-[1.08] text-ink">
-          {zh ? "ATR 全部 330 條規則" : "All 330 ATR rules now carry"}
+          {zh ? "ATR 415 條規則 (of 421)" : "415 of 421 ATR rules carry"}
           <br />
-          <span className="text-blue">{zh ? "皆對應 NIST AI RMF。" : "NIST AI RMF mappings."}</span>
+          <span className="text-blue">{zh ? "對應 NIST AI RMF。" : "NIST AI RMF mappings."}</span>
         </h1>
       </Reveal>
 
@@ -97,13 +97,14 @@ export default async function NistAiRmfPage({
         <p className="text-[18px] md:text-[21px] font-medium text-ink leading-[1.55] max-w-[720px]">
           {zh ? (
             <>
-              ATR v2.1.0 於 2026-05-09 發布——全部 330 條規則皆帶有
-              <strong> compliance.nist_ai_rmf </strong>metadata。
+              首版於 2026-05-09 隨 ATR v2.1.0 發布,當時 330 條規則全部對應。隨著 corpus 成長到 421 條,
+              <strong> compliance.nist_ai_rmf </strong>metadata 同步擴張到 415 條規則(98.6%)。
             </>
           ) : (
             <>
-              ATR v2.1.0 was released on 2026-05-09 — every one of the 330 rules now carries
-              <strong> compliance.nist_ai_rmf </strong>metadata.
+              First shipped 2026-05-09 with ATR v2.1.0 — all 330 rules then in the corpus carried{" "}
+              <strong>compliance.nist_ai_rmf</strong> metadata. As the corpus has grown to 421 rules,
+              the NIST AI RMF metadata now covers 415 of them (98.6%).
             </>
           )}
         </p>
@@ -147,9 +148,9 @@ export default async function NistAiRmfPage({
       {/* Top-line stats */}
       <Reveal delay={0.16}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
-          <StatCell label="Coverage" value="100" unit="%" note={zh ? "330 / 330 條規則" : "330 / 330 rules"} valueColor="blue" />
+          <StatCell label="Coverage" value="98.6" unit="%" note={zh ? "415 / 421 條規則" : "415 / 421 rules"} valueColor="blue" />
           <StatCell label="Subcategories" value="16" unit="" note={zh ? "跨 GV / MP / MS / MG" : "across GV / MP / MS / MG"} />
-          <StatCell label="Mappings" value="1,566" unit="" note={zh ? "522 primary + 1,044 secondary" : "522 primary + 1,044 secondary"} />
+          <StatCell label="Mappings" value="587" unit="" note={zh ? "primary + secondary 合計" : "primary + secondary combined"} />
           <StatCell label="License" value="MIT" unit="" note={zh ? "永久免費,可 fork" : "Forever free, forkable"} />
         </div>
       </Reveal>
@@ -195,8 +196,8 @@ export default async function NistAiRmfPage({
       <Section label={zh ? "02 · Subcategory 分布" : "02 · Subcategory distribution"} delay={0.08}>
         <p className="text-sm md:text-base text-graphite leading-[1.8] mb-5">
           {zh
-            ? "16 個 subcategory,涵蓋 NIST AI RMF 的 4 個 function:GV / MP / MS / MG。每條規則可同時對應多個 subcategory(primary + secondary strength),330 條規則共產生 1,566 個 mapping。"
-            : "16 subcategories spanning all 4 NIST AI RMF functions (GV / MP / MS / MG). Each rule can map to multiple subcategories (primary + secondary strength). The 330 rules produce 1,566 mappings in total."}
+            ? "16 個 subcategory,涵蓋 NIST AI RMF 的 4 個 function:GV / MP / MS / MG。每條規則可同時對應多個 subcategory(primary + secondary strength),目前 415 條 mapped 規則共產生 587 個 subcategory entry。"
+            : "16 subcategories spanning all 4 NIST AI RMF functions (GV / MP / MS / MG). Each rule can map to multiple subcategories (primary + secondary strength). The 415 mapped rules currently produce 587 subcategory entries in total."}
         </p>
         <div className="bg-paper border border-fog rounded">
           <div className="grid grid-cols-[110px_70px_1fr_70px] gap-3 px-4 py-2.5 border-b border-fog font-data text-[10.5px] tracking-[1.2px] uppercase text-stone">
@@ -267,8 +268,8 @@ export default async function NistAiRmfPage({
             </span>
             <span>
               {zh
-                ? "330 條 ATR rule YAML(detection patterns、test cases、既有 metadata)、NIST AI RMF 1.0 reference、GenAI Profile、手寫 5-shot 範例。"
-                : "330 ATR rule YAMLs (detection patterns, test cases, existing metadata), NIST AI RMF 1.0 reference, GenAI Profile, hand-written 5-shot examples."}
+                ? "v2.1.0 當時的 330 條 ATR rule YAML(detection patterns、test cases、既有 metadata)、NIST AI RMF 1.0 reference、GenAI Profile、手寫 5-shot 範例。新規則的 mapping 沿用同一 batch pipeline 補上。"
+                : "The 330 ATR rule YAMLs that existed in v2.1.0 (detection patterns, test cases, existing metadata), NIST AI RMF 1.0 reference, GenAI Profile, hand-written 5-shot examples. Mappings for new rules added to the corpus since v2.1.0 use the same batch pipeline."}
             </span>
           </li>
           <li className="grid grid-cols-[130px_1fr] gap-5 max-md:grid-cols-1 max-md:gap-1.5">

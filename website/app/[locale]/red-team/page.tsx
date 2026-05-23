@@ -335,14 +335,14 @@ export default async function RedTeamPage({
             {zh ? (
               <>
                 Microsoft Copilot SWE Agent 自己會開 PR 預設 ATR 存在。Cisco AI
-                Defense production 內建 314 條規則。MISP 全部 export 到 STIX
+                Defense production 內建完整 ATR 規則集。MISP 全部 export 到 STIX
                 帶你的署名。NeurIPS 2024 的 HarmBench / AgentDojo /
                 JailbreakBench 下一個 wave 接進來。
               </>
             ) : (
               <>
                 Microsoft&apos;s Copilot SWE Agent already opens PRs presuming
-                ATR exists. Cisco AI Defense ships 314 of our rules by default.
+                ATR exists. Cisco AI Defense ships the full ATR rule pack by default.
                 MISP exports them to STIX with your name on them. NeurIPS
                 2024&apos;s HarmBench, AgentDojo, JailbreakBench wire through
                 next.
