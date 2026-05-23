@@ -27,6 +27,25 @@ jobs:
         env:
           VITEST_POOL_WORKER_COMMUNICATION_TIMEOUT: 300000
 
+      # Measurement-layer integrity checks BEFORE eval. The order matters:
+      #
+      #   verify  → assert every committed measurement file parses cleanly
+      #             (catches accidental hand-edits of immutable files)
+      #   --check → assert stats.json benchmarks[] matches every latest.json
+      #             on disk (catches PR author forgetting to run sync-stats
+      #             after updating a measurement)
+      #
+      # Both run BEFORE `npm run eval` so the assertions are against what
+      # the PR ships, not against what running the eval would mutate. (Running
+      # them after eval would always 'fail' because a fresh eval produces a
+      # new measurement with today's timestamp that the committed stats.json
+      # cannot have predicted.)
+      - name: Verify measurement schemas
+        run: npx tsx scripts/measurement/verify.ts --quiet
+
+      - name: Check stats.json benchmarks freshness
+        run: npx tsx scripts/sync-stats-from-measurements.ts --check
+
       - name: Eval
         run: npm run eval
 
@@ -39,4 +58,12 @@ jobs:
         with:
           name: eval-report
           path: data/eval-report.json
+          if-no-files-found: ignore
+
+      - name: Upload measurement (atr-self-test fresh run)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atr-self-test-measurement
+          path: data/measurements/atr-self-test/
           if-no-files-found: ignore

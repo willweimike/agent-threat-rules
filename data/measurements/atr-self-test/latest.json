@@ -1,0 +1,14 @@
+{
+  "source": "atr-self-test",
+  "file": "2026-05-23_atr-self-test-internal_atr-3-0-0-alpha-0.json",
+  "measured_at": "2026-05-23T16:17:14.166Z",
+  "metrics": {
+    "recall": 0.8940809968847352,
+    "precision": 1,
+    "f1": 0.944078947368421,
+    "fp_rate": 0
+  },
+  "source_version": "internal",
+  "atr_version": "3.0.0-alpha.0",
+  "samples": 341
+}
