@@ -1,32 +1,22 @@
-## Daily Scan Summary (2026-05-23)
+## Daily Scan Summary (2026-05-24)
 - Scanned: 50 packages
-- CRITICAL: 12
-- HIGH: 4
-- CLEAN/LOW: 30
+- CRITICAL: 3
+- HIGH: 3
+- CLEAN/LOW: 35
 
 ### Flagged Packages:
-- [CRITICAL] @eikaramba/puppeteer-real-browser-mcp-server (score: 90)
-- [CRITICAL] @img-src/mcp-server (score: 100)
-- [CRITICAL] @iqai/mcp-polymarket (score: 100)
-- [HIGH] @kaicnunes/whats-mcp (score: 55)
-- [CRITICAL] @macnishio/zoho-mcp-server1 (score: 75)
-- [CRITICAL] @mhalder/qdrant-mcp-server (score: 95)
-- [CRITICAL] @noteplanco/noteplan-mcp (score: 100)
-- [CRITICAL] @patternfly/patternfly-mcp (score: 100)
-- [HIGH] @payloadcms/plugin-mcp (score: 50)
-- [CRITICAL] @peaka/mcp-server-peaka (score: 100)
-- [CRITICAL] @phrase/phrase-mcp-server (score: 100)
-- [CRITICAL] @piekstras/newrelic-mcp-server (score: 90)
-- [HIGH] @pimzino/spec-workflow-mcp (score: 50)
-- [HIGH] @piotr-agier/google-drive-mcp (score: 65)
-- [CRITICAL] @pmxt/mcp (score: 75)
-- [CRITICAL] @policyrisk/mcp-server (score: 100)
+- [CRITICAL] @hypothesi/tauri-mcp-server (score: 100)
+- [CRITICAL] @jason.today/webmcp (score: 100)
+- [HIGH] @k8ika0s/mcp-tmux (score: 50)
+- [HIGH] @likec4/mcp (score: 55)
+- [HIGH] @markdownai/mcp (score: 45)
+- [CRITICAL] @modelcontextprotocol/conformance (score: 100)
 
 ### Cumulative:
-- Total scanned: 2010
-  - CLEAN: 1184
-  - CRITICAL: 239
+- Total scanned: 2060
+  - CLEAN: 1212
+  - CRITICAL: 242
   - ERROR: 2
-  - HIGH: 162
-  - LOW: 223
-  - MEDIUM: 200
+  - HIGH: 165
+  - LOW: 230
+  - MEDIUM: 209
