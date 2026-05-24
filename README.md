@@ -17,6 +17,7 @@ AI Agent 威脅偵測規則的開放格式
 [![Categories](https://img.shields.io/badge/categories-10-blue?style=flat-square)](#7-coverage)
 [![OWASP Agentic](https://img.shields.io/badge/OWASP_Agentic_Top_10-10%2F10-brightgreen?style=flat-square)](#7-coverage)
 [![SAFE-MCP](https://img.shields.io/badge/SAFE--MCP-91.8%25-brightgreen?style=flat-square)](#7-coverage)
+[![Sponsor](https://img.shields.io/badge/sponsor-Open%20Collective-7FADF2?style=flat-square&logo=opencollective&logoColor=white)](https://opencollective.com/agent-threat-rules)
 
 </div>
 
@@ -49,9 +50,10 @@ This document is bilingual where the section title benefits from it. Section bod
 - [11. Contributing](#11-contributing)
 - [12. Citation](#12-citation)
 - [13. Maintainers](#13-maintainers)
-- [14. License](#14-license)
-- [15. Acknowledgments](#15-acknowledgments)
-- [16. References](#16-references)
+- [14. Sponsorship](#14-sponsorship)
+- [15. License](#15-license)
+- [16. Acknowledgments](#16-acknowledgments)
+- [17. References](#17-references)
 
 ---
 
@@ -429,17 +431,35 @@ Machine-readable citation metadata is available in [CITATION.cff](CITATION.cff) 
 
 The TSC seating process is open per [GOVERNANCE.md](GOVERNANCE.md).
 
-## 14. License
+## 14. Sponsorship
+
+ATR's rules, engine, and pipeline are MIT licensed in perpetuity. Maintenance — CVE-class response, weekly cross-ecosystem sync, the auto-review pipeline — runs on community sponsorship through [Open Source Collective, Inc.](https://opencollective.com/opensource) (501(c)(6), EIN 81-1567737).
+
+**Sponsor page: [opencollective.com/agent-threat-rules](https://opencollective.com/agent-threat-rules)**
+
+Five public tiers (Backer $5 / Friend $25 / Bronze $200 / Silver $1,000 / Gold $5,000 per month). Every dollar visible on the page; every payout in the public ledger.
+
+Three funding milestones make the trajectory concrete:
+
+| Monthly | What unlocks |
+|---|---|
+| $2,000 | Keep the lights on — CI, npm + PyPI distribution, domain, single-maintainer minimum stipend |
+| $8,000 | Second maintainer joins — bus factor goes from one to two, the #1 risk every enterprise sponsor calls out |
+| $25,000 | Quarterly threat-research releases — CVE-to-detection pipeline, agentic adversarial corpus, public benchmarks |
+
+For organizations running ATR in production at scale, **Strategic Partner** is the contract-backed engagement: named maintainer contact on a dedicated channel, 24-hour SLA on CVE-class updates, co-authored rules attributed to your organization, and sovereign / on-prem / air-gapped deployment terms negotiated per partner. Reference range US $20,000 – US $200,000+ per year, invoiced through Open Source Collective. See [panguard.ai/sponsor](https://panguard.ai/sponsor) or email <adam@agentthreatrule.org>.
+
+## 15. License
 
 ATR is released under the [MIT License](LICENSE). All contributions are MIT-licensed by submission.
 
-## 15. Acknowledgments
+## 16. Acknowledgments
 
 ATR's design draws on prior work in: [Sigma](https://github.com/SigmaHQ/sigma) (SIEM detection format), [YARA](https://github.com/VirusTotal/yara) (malware signature format), [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/), [OWASP Agentic Top 10](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), [MITRE ATLAS](https://atlas.mitre.org/), [NVIDIA garak](https://github.com/NVIDIA/garak), [Invariant Labs PINT](https://invariantlabs.ai/), [Meta LlamaFirewall](https://ai.meta.com/research/publications/llamafirewall-an-open-source-guardrail-system-for-building-secure-ai-agents/), and [SAFE-MCP (OpenSSF)](https://github.com/safe-agentic-framework/safe-mcp).
 
 The 96,096-skill ecosystem scan was made possible by the maintainers of OpenClaw, Skills.sh, Hermes Agent, and ClawHub publishing their registries openly.
 
-## 16. References
+## 17. References
 
 ### Normative
 
