@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write  # required by `npm publish --provenance`
 
 jobs:
   publish:
@@ -129,7 +130,7 @@ jobs:
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+        run: npm publish --access public --provenance
 
       - name: Count rules for release notes
         id: rules
