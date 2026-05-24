@@ -130,7 +130,17 @@ jobs:
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public --provenance
+        run: |
+          # Auto-detect dist-tag from prerelease identifier so 3.0.0-alpha.X
+          # doesn't accidentally take over the `latest` tag (which represents
+          # the stable release line).
+          TAG=$(node -e "
+            const v = require('./package.json').version;
+            const m = v.match(/-([a-zA-Z]+)/);
+            console.log(m ? m[1] : 'latest');
+          ")
+          echo "Publishing with dist-tag: $TAG"
+          npm publish --access public --provenance --tag "$TAG"
 
       - name: Count rules for release notes
         id: rules
