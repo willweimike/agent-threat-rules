@@ -29,7 +29,7 @@ ATR (Agent Threat Rules) is an open detection rule format for AI agent security 
 
 ## Status of This Document
 
-ATR is published as a **Working Draft** at version `3.0.0-alpha.0`. The rule format defined in `ATR-SPEC-v1.md` is stable and shipped in production at two Fortune 500 organizations (Microsoft, Cisco) and one standards-body deployment (MISP / CIRCL); full list with PR links in [§6 Adoption](#6-adoption). Governance is currently single-maintainer (BDFL) transitioning to a Technical Steering Committee per [GOVERNANCE.md](GOVERNANCE.md).
+ATR is published as a **Working Draft** at version `3.0.0-alpha.1`. The rule format defined in `ATR-SPEC-v1.md` is stable and shipped in production at two Fortune 500 organizations (Microsoft, Cisco) and one standards-body deployment (MISP / CIRCL); full list with PR links in [§6 Adoption](#6-adoption). Governance is currently single-maintainer (BDFL) transitioning to a Technical Steering Committee per [GOVERNANCE.md](GOVERNANCE.md).
 
 All numbers in this document are sourced from [`data/stats.json`](data/stats.json), which is the canonical record of the project's current state. Where this README and `stats.json` disagree, `stats.json` is authoritative.
 
@@ -333,7 +333,7 @@ Aggregated into [`data/stats.json`](data/stats.json) under `benchmarks[]`.
 
 Two `garak` rows are deliberate: the headline `garak` source tracks NVIDIA's
 in-the-wild jailbreak corpus (narrow, the 98% number ATR cites publicly,
-refreshed 2026-05-23 against ATR 3.0.0-alpha.0), while `garak-full` tracks
+refreshed 2026-05-23 against ATR 3.0.0-alpha.1), while `garak-full` tracks
 every probe family in upstream garak (broad, includes families like
 `badchars`, `dra`, `encoding` that ATR's regex layer intentionally does
 not target). Both are valid measurements against different corpora; they
