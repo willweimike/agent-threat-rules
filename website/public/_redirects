@@ -1,4 +1,6 @@
-/ /en 302
-/sovereign      /zh/sovereign-ai-defense 302
-/sovereign/en   /en/sovereign-ai-defense 302
-/sovereign/zh   /zh/sovereign-ai-defense 302
+# Cloudflare Pages redirects for ATR website.
+# /ecosystem → /implementers (old marketing page renamed to standards-body
+# Implementer Report).
+/en/ecosystem      /en/implementers       301
+/zh/ecosystem      /zh/implementers       301
+/ecosystem         /en/implementers       301
