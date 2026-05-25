@@ -35,6 +35,21 @@ All numbers in this document are sourced from [`data/stats.json`](data/stats.jso
 
 This document is bilingual where the section title benefits from it. Section bodies are English-only to keep the normative content unambiguous.
 
+## Standardization Status (added 2026-05-25)
+
+ATR is publishing proposal-stage standardization scaffolding ahead of OASIS Open Project submission. New directories on the repo file tree:
+
+- [`governance/`](governance/) — proposed 9-seat TSC charter (v2.0) and standard threat model
+- [`spec/atr-event-v1.0.md`](spec/atr-event-v1.0.md), [`atr-profile-v1.0.md`](spec/atr-profile-v1.0.md), [`atr-correlation-v1.0.md`](spec/atr-correlation-v1.0.md), [`atr-language-detection-v1.0.md`](spec/atr-language-detection-v1.0.md) — proposed v1.0 spec layer with JSON schemas
+- [`spec/conformance/`](spec/conformance/) — proposed conformance corpus structure (L1/L2/L3)
+- [`legal/`](legal/) — proposed DCO, trademark policy, jurisdiction notes
+- [`certification/`](certification/) — proposed ATR-Certified™ program guide
+- [`engines/`](engines/) — Python and Go reference impl interface contracts (TypeScript is the existing engine at `src/`)
+
+**All scaffolding is tagged PROPOSED v1.0 / v2.0 and is NOT ratified.** The 9-seat TSC has not been formed. The trust marks are not registered. Existing v1.1 governance ([`GOVERNANCE.md`](GOVERNANCE.md)) continues to operate. The rule format, npm package, TypeScript engine API, and all 421 rules are unchanged — existing ecosystem integrations (Microsoft AGT, Cisco AI Defense, MISP CIRCL, OWASP A-S-R-H, precize, Sage) work without modification.
+
+See [`STANDARDIZATION-STATUS.md`](STANDARDIZATION-STATUS.md) for the full status matrix mapping every new artifact to `{STABLE IN PRODUCTION, PROPOSED, SKELETON, PRELIMINARY}` and timeline for OASIS submission, community comment, and ratification.
+
 ## Table of Contents
 
 - [1. Background](#1-background)
