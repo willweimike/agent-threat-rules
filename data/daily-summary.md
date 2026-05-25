@@ -1,22 +1,29 @@
-## Daily Scan Summary (2026-05-24)
+## Daily Scan Summary (2026-05-25)
 - Scanned: 50 packages
-- CRITICAL: 3
-- HIGH: 3
-- CLEAN/LOW: 35
+- CRITICAL: 9
+- HIGH: 4
+- CLEAN/LOW: 30
 
 ### Flagged Packages:
-- [CRITICAL] @hypothesi/tauri-mcp-server (score: 100)
-- [CRITICAL] @jason.today/webmcp (score: 100)
-- [HIGH] @k8ika0s/mcp-tmux (score: 50)
-- [HIGH] @likec4/mcp (score: 55)
-- [HIGH] @markdownai/mcp (score: 45)
-- [CRITICAL] @modelcontextprotocol/conformance (score: 100)
+- [HIGH] @botcommunity/mcp-server (score: 40)
+- [CRITICAL] @buygit/mcp-server (score: 100)
+- [HIGH] @costlens/mcp-server (score: 40)
+- [HIGH] @nbiish/ai-tool-mcp (score: 40)
+- [CRITICAL] @neruva/mcp (score: 100)
+- [CRITICAL] @omnidim-ai/mcp-server (score: 100)
+- [CRITICAL] @porkbunllc/mcp-server (score: 100)
+- [CRITICAL] @processon/mcp-server-processon-node (score: 70)
+- [CRITICAL] @projectsflow/mcp-server (score: 100)
+- [HIGH] @proto-bridge/mcp-server (score: 50)
+- [CRITICAL] @r-huijts/strava-mcp-server (score: 70)
+- [CRITICAL] @rad-security/mcp-server (score: 100)
+- [CRITICAL] @ranger-testing/playwright (score: 100)
 
 ### Cumulative:
-- Total scanned: 2060
-  - CLEAN: 1212
-  - CRITICAL: 242
+- Total scanned: 2110
+  - CLEAN: 1238
+  - CRITICAL: 251
   - ERROR: 2
-  - HIGH: 165
-  - LOW: 230
-  - MEDIUM: 209
+  - HIGH: 169
+  - LOW: 234
+  - MEDIUM: 216
