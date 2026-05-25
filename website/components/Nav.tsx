@@ -22,18 +22,18 @@ export function Nav({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const prefix = `/${locale}`;
   const otherLocale = locale === "en" ? "zh" : "en";
+  // Primary nav: spec authority first, then implementer-facing,
+  // then contributor-facing. Standards-document order, not marketing order.
   const pages = [
+    "spec",
     "rules",
-    "threats",
-    "coverage",
+    "implementers",
+    "conformance",
     "integrate",
-    "ecosystem",
-    "red-team",
-    "contribute",
+    "governance",
     "research",
-    "about",
     "changelog",
-    "quality-standard",
+    "about",
   ] as const;
 
   return (

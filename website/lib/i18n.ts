@@ -231,9 +231,146 @@ export const messages: Record<Locale, Record<string, string>> = {
     "contribute.sub":
       "No proprietary tooling. No telemetry. No CLA. Community-maintained and governed as an open standard.",
 
-    // Footer
-    "footer.note":
-      "ATR is a community-maintained open standard. MIT License. Not affiliated with any vendor.",
+    // ── Standards site additions ───────────────────────────────
+    // Document Status banner
+    "spec.canonical": "canonical",
+    "spec.version": "version",
+    "spec.date": "updated",
+    "spec.editor": "editor",
+    "spec.status_aria": "Document status",
+    "spec.toc": "Table of Contents",
+    "spec.toc_aria": "Specification table of contents",
+    "spec.read_full": "Read the full specification",
+    "spec.implementer_report": "Implementer Report",
+    "cite.tablist_aria": "Citation format selector",
+
+    // Nav additions (kept short)
+    "nav.spec": "Specification",
+    "nav.implementers": "Implementers",
+    "nav.conformance": "Conformance",
+    "nav.governance": "Governance",
+    "nav.community": "Community",
+    "nav.charter": "Charter",
+    "nav.glossary": "Glossary",
+    "nav.errata": "Errata",
+    "nav.citations": "Cite",
+
+    // Homepage rewrite (standards-document hero)
+    "home.title": "ATR — Agent Threat Rules",
+    "home.subtitle":
+      "An open detection rule format for AI agent security threats — vendor-neutral, machine-readable, peer-reviewable.",
+    "home.abstract":
+      "Agent Threat Rules (ATR) is an open detection rule format for AI agent security threats. Rules are written as YAML documents conforming to a versioned schema, identified by the public ATR-YYYY-NNNNN scheme, and evaluated by any conforming engine. ATR is to AI-agent threat detection what Sigma is to SIEM detection and YARA is to malware signatures: a vendor-neutral, machine-readable, peer-reviewable rule format.",
+    "home.cta.spec": "Read the Specification (§3)",
+    "home.cta.schema": "View the JSON Schema",
+    "home.cta.implementers": "See who has implemented ATR",
+    "home.section.overview": "Overview",
+    "home.section.adoption": "Adoption in Production",
+    "home.section.get": "Get the specification",
+    "home.adoption.intro":
+      "ATR is in production at the organizations listed below. Each row links to the merged pull request or integration commit that constitutes the public adoption record.",
+    "home.get.intro":
+      "The specification is published in three forms. The Markdown rendering is canonical; the JSON Schema and citation block are derived artifacts.",
+    "home.get.markdown": "Markdown — canonical",
+    "home.get.schema": "JSON Schema — machine-readable",
+    "home.get.cite": "Citation — BibTeX / DOI",
+
+    // Spec page
+    "spec.title": "ATR Specification",
+    "spec.subtitle":
+      "Open detection rule format for AI agent security threats. Working Draft toward a community standard maintained by the ATR Community.",
+    "spec.abstract.h": "Abstract",
+    "spec.status.h": "Status of This Document",
+    "spec.status.body":
+      "This document is a Working Draft published by the ATR Community. Although the rule format has been shipping in production for over a year, the surrounding governance is still transitioning from a single-maintainer model (BDFL) to a Technical Steering Committee. Discussion of this document takes place on the public GitHub repository.",
+
+    // Implementers page
+    "implementers.title": "Implementer Report",
+    "implementers.subtitle":
+      "Organizations that have shipped ATR in production. Self-declared via pull request to the ADOPTERS.md registry.",
+    "implementers.col.org": "Organization",
+    "implementers.col.role": "Conformance",
+    "implementers.col.version": "Spec Version",
+    "implementers.col.date": "Integration Date",
+    "implementers.col.ref": "Public Reference",
+    "implementers.tier.engine": "L1 Engine",
+    "implementers.tier.publisher": "L2 Publisher",
+    "implementers.tier.citation": "L1 Citation",
+    "implementers.tier.galaxy": "L1 Galaxy",
+    "implementers.tier.accepted": "Path 1 Accepted",
+    "implementers.empty":
+      "No entries yet. Open a PR against ADOPTERS.md to add your organization.",
+
+    // Conformance page
+    "conformance.title": "Conformance",
+    "conformance.subtitle":
+      "Three conformance levels define what it means to claim that a system implements ATR. Each level has an associated test suite published as YAML fixtures in the repository.",
+    "conformance.l1.title": "L1 Engine Conformance",
+    "conformance.l1.body":
+      "An L1 engine MUST parse every rule that validates against spec/atr-schema.yaml, MUST evaluate detection.conditions with the semantics defined in §3.5, and MUST honor scan_target and status semantics. L1 engines MAY refuse rules outside their declared scan_target.",
+    "conformance.l2.title": "L2 Publisher Conformance",
+    "conformance.l2.body":
+      "An L2 publisher publishes rules in a vendor-prefixed sub-range (e.g., ACME-YYYY-NNNNN) that follow all ATR semantics. L2 publishers MUST honor the deprecation policy in §3.7 and SHOULD include test_cases for every published rule.",
+    "conformance.l3.title": "L3 Sub-range Authority",
+    "conformance.l3.body":
+      "An L3 sub-range authority is a national or organizational body that mints rules under a sovereign prefix (e.g., ATR-TW-2026-NNNNN). Authority is granted by the ATR TSC following the procedure in /charter §5.",
+    "conformance.testsuite.h": "Test Suite",
+    "conformance.testsuite.body":
+      "The L1 engine test suite consists of YAML fixtures stored under spec/conformance/ in the main repository. Each fixture pairs a rule with its expected evaluation outcome on a fixed event. An implementation passes if every fixture evaluates as declared.",
+    "conformance.self.h": "Self-Certification",
+    "conformance.self.body":
+      "Implementations self-certify by running the test suite locally and opening a pull request against ADOPTERS.md with the integration metadata. The TSC may verify a self-certification at any time by re-running the suite against a published artifact.",
+
+    // Errata page
+    "errata.title": "Errata",
+    "errata.subtitle":
+      "Errors discovered in published versions of the ATR specification. Each entry identifies the affected version, the location of the error, the corrective text, and the date the correction was published.",
+    "errata.empty":
+      "No errata reported for the current Working Draft. If you discover an error in this document, please open an issue on the repository.",
+    "errata.col.version": "Affected Version",
+    "errata.col.section": "Section",
+    "errata.col.summary": "Summary",
+    "errata.col.date": "Published",
+
+    // Glossary
+    "glossary.title": "Glossary",
+    "glossary.subtitle":
+      "Definitions for key terms used throughout the specification. Where a term has a precise technical meaning that differs from common usage, the technical meaning takes precedence within the spec.",
+
+    // Charter
+    "charter.title": "Project Charter",
+    "charter.subtitle":
+      "The charter defines what ATR is, what it is not, how decisions are made, and how the Technical Steering Committee is seated.",
+    "charter.mission.h": "Mission",
+    "charter.mission.body":
+      "ATR exists to give the AI-agent security community a single shared format for declaring, exchanging, and evaluating detection rules — so that defenders working in different organizations and countries can compose their work without re-inventing the rule format each time.",
+    "charter.scope.h": "Scope",
+    "charter.scope.in":
+      "In scope: the rule format, the reference engine, the rule schema, conformance levels, and the cross-framework mappings (OWASP, MITRE ATLAS, NIST AI RMF, SAFE-MCP).",
+    "charter.scope.out":
+      "Out of scope: vendor-specific tooling, commercial integrations, runtime enforcement policy, and incident response coordination — these belong to downstream implementers, not to the standard itself.",
+    "charter.governance.h": "Governance",
+    "charter.governance.body":
+      "ATR is governed by a single maintainer (BDFL) transitioning to a Technical Steering Committee. The transition criteria and the TSC seating process are defined in GOVERNANCE.md and docs/BDFL-charter.md.",
+    "charter.ip.h": "Intellectual Property",
+    "charter.ip.body":
+      "ATR is released under the MIT License. All contributions are MIT-licensed by submission. There is no CLA. The DOI for citation is 10.5281/zenodo.19178002.",
+
+    // Citations
+    "citations.title": "Citation",
+    "citations.subtitle":
+      "If you use ATR in academic work, security research, or institutional documentation, please cite the specification using one of the formats below.",
+
+    // Mission articulation (used on /, /about, /charter)
+    "mission.title": "Mission",
+    "mission.body":
+      "Defenders work in different organizations, in different countries, against the same AI-agent attack surface. ATR exists so that work composes — so that a rule written in Taipei detects an attack first reported in Seattle without anyone re-implementing the rule format.",
+    "mission.tagline":
+      "One open format. One peer-reviewable schema. One canonical URL.",
+
+    "vision.title": "Long-term Vision",
+    "vision.body":
+      "The maturity of AI-agent security as a discipline is rate-limited by the absence of a shared rule format. ATR provides that format. The goal is for ATR to occupy the same architectural slot for AI-agent runtimes that Sigma occupies for SIEM detection and YARA occupies for malware signatures — neutral, peer-reviewable, and free for any party to implement, extend, or cite.",
   },
   zh: {
     // Nav
@@ -481,6 +618,136 @@ export const messages: Record<Locale, Record<string, string>> = {
     // Footer
     "footer.note":
       "ATR \u662F\u793E\u7FA4\u7DAD\u8B77\u7684\u958B\u653E\u6A19\u6E96\u3002MIT \u6388\u6B0A\u3002\u4E0D\u96B8\u5C6C\u65BC\u4EFB\u4F55\u5EE0\u5546\u3002",
+
+    // \u2500\u2500 Standards site additions \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+    "spec.canonical": "\u6B63\u5F0F\u7DB2\u5740",
+    "spec.version": "\u7248\u672C",
+    "spec.date": "\u66F4\u65B0\u65BC",
+    "spec.editor": "\u7DE8\u8F2F",
+    "spec.status_aria": "\u6587\u4EF6\u72C0\u614B",
+    "spec.toc": "\u76EE\u9304",
+    "spec.toc_aria": "\u898F\u683C\u76EE\u9304",
+    "spec.read_full": "\u95B1\u8B80\u5B8C\u6574\u898F\u683C",
+    "spec.implementer_report": "\u5BE6\u4F5C\u8005\u5831\u544A (Implementer Report)",
+    "cite.tablist_aria": "\u5F15\u7528\u683C\u5F0F\u9078\u64C7\u5668",
+
+    "nav.spec": "\u898F\u683C (Specification)",
+    "nav.implementers": "\u5BE6\u4F5C\u8005 (Implementers)",
+    "nav.conformance": "\u7B26\u898F (Conformance)",
+    "nav.governance": "\u6CBB\u7406 (Governance)",
+    "nav.community": "\u793E\u7FA4 (Community)",
+    "nav.charter": "\u7AE0\u7A0B (Charter)",
+    "nav.glossary": "\u8A5E\u5F59 (Glossary)",
+    "nav.errata": "\u52D8\u8AA4 (Errata)",
+    "nav.citations": "\u5F15\u7528 (Cite)",
+
+    "home.title": "ATR \u2014 Agent Threat Rules",
+    "home.subtitle":
+      "AI Agent \u5B89\u5168\u5A01\u8105\u7684\u958B\u653E\u5075\u6E2C\u898F\u5247\u683C\u5F0F \u2500\u2500 \u5EE0\u5546\u4E2D\u7ACB\u3001\u6A5F\u5668\u53EF\u8B80\u3001\u53EF\u540C\u5115\u5BE9\u67E5 (peer-reviewable)\u3002",
+    "home.abstract":
+      "Agent Threat Rules (ATR) \u662F AI Agent \u5B89\u5168\u5A01\u8105\u7684\u958B\u653E\u5075\u6E2C\u898F\u5247\u683C\u5F0F\u3002\u898F\u5247\u4EE5 YAML \u64B0\u5BEB,\u9075\u5FAA\u7248\u672C\u5316 schema,\u4F7F\u7528\u516C\u958B\u7684 ATR-YYYY-NNNNN \u8B58\u5225\u78BC\u65B9\u6848,\u53EF\u7531\u4EFB\u4F55\u7B26\u898F\u5F15\u64CE\u8A55\u4F30\u3002ATR \u4E4B\u65BC AI Agent \u5A01\u8105\u5075\u6E2C,\u5982\u540C Sigma \u4E4B\u65BC SIEM \u5075\u6E2C\u3001YARA \u4E4B\u65BC\u60E1\u610F\u7A0B\u5F0F\u7C3D\u7AE0 \u2500\u2500 \u4E00\u500B\u5EE0\u5546\u4E2D\u7ACB\u3001\u6A5F\u5668\u53EF\u8B80\u3001\u53EF\u540C\u5115\u5BE9\u67E5\u7684\u898F\u5247\u683C\u5F0F\u3002",
+    "home.cta.spec": "\u95B1\u8B80\u898F\u683C (\u00A73)",
+    "home.cta.schema": "\u67E5\u770B JSON Schema",
+    "home.cta.implementers": "\u67E5\u770B\u5BE6\u4F5C\u8005\u5217\u8868",
+    "home.section.overview": "Overview",
+    "home.section.adoption": "Production \u63A1\u7528",
+    "home.section.get": "\u53D6\u5F97\u898F\u683C",
+    "home.adoption.intro":
+      "ATR \u5728\u4E0B\u8868\u5217\u51FA\u7684\u7D44\u7E54\u4E2D\u5DF2\u90E8\u7F72\u65BC\u751F\u7522\u74B0\u5883\u3002\u6BCF\u4E00\u5217\u9023\u7D50\u5230\u69CB\u6210\u516C\u958B\u63A1\u7528\u7D00\u9304\u7684\u5408\u4F75 pull request \u6216\u6574\u5408 commit\u3002",
+    "home.get.intro":
+      "\u898F\u683C\u4EE5\u4E09\u7A2E\u5F62\u5F0F\u767C\u5E03\u3002Markdown \u6E32\u67D3\u70BA\u6B63\u672C (canonical);JSON Schema \u8207\u5F15\u7528 (citation) \u70BA\u884D\u751F\u7522\u7269 (derived artifact)\u3002",
+    "home.get.markdown": "Markdown \u2014 \u6B63\u672C",
+    "home.get.schema": "JSON Schema \u2014 \u6A5F\u5668\u53EF\u8B80",
+    "home.get.cite": "\u5F15\u7528 \u2014 BibTeX / DOI",
+
+    "spec.title": "ATR \u898F\u683C (Specification)",
+    "spec.subtitle":
+      "AI Agent \u5B89\u5168\u5A01\u8105\u7684\u958B\u653E\u5075\u6E2C\u898F\u5247\u683C\u5F0F\u3002Working Draft,\u671D\u5411\u7531 ATR \u793E\u7FA4\u7DAD\u8B77\u7684\u793E\u7FA4\u6A19\u6E96\u524D\u9032\u3002",
+    "spec.abstract.h": "\u6458\u8981 (Abstract)",
+    "spec.status.h": "\u672C\u6587\u4EF6\u72C0\u614B (Status of This Document)",
+    "spec.status.body":
+      "\u672C\u6587\u4EF6\u70BA ATR \u793E\u7FA4\u767C\u5E03\u7684 Working Draft\u3002\u5118\u7BA1\u898F\u5247\u683C\u5F0F\u5DF2\u5728\u751F\u7522\u74B0\u5883\u904B\u884C\u8D85\u904E\u4E00\u5E74,\u5468\u908A\u6CBB\u7406\u4ECD\u8655\u65BC\u5F9E\u55AE\u4E00\u7DAD\u8B77\u8005\u6A21\u578B (BDFL) \u904E\u6E21\u5230\u6280\u8853\u6307\u5C0E\u59D4\u54E1\u6703 (TSC) \u7684\u968E\u6BB5\u3002\u672C\u6587\u4EF6\u7684\u8A0E\u8AD6\u65BC\u516C\u958B GitHub repository \u9032\u884C\u3002",
+
+    "implementers.title": "Implementer Report",
+    "implementers.subtitle":
+      "\u5DF2\u5728\u751F\u7522\u74B0\u5883\u90E8\u7F72 ATR \u7684\u7D44\u7E54\u3002\u900F\u904E pull request \u5C0D ADOPTERS.md registry \u81EA\u6211\u5BA3\u544A (self-declaration)\u3002",
+    "implementers.col.org": "\u7D44\u7E54",
+    "implementers.col.role": "\u7B26\u898F\u7B49\u7D1A",
+    "implementers.col.version": "\u898F\u683C\u7248\u672C",
+    "implementers.col.date": "\u6574\u5408\u65E5\u671F",
+    "implementers.col.ref": "\u516C\u958B\u6191\u64DA",
+    "implementers.tier.engine": "L1 Engine",
+    "implementers.tier.publisher": "L2 Publisher",
+    "implementers.tier.citation": "L1 Citation",
+    "implementers.tier.galaxy": "L1 Galaxy",
+    "implementers.tier.accepted": "Path 1 Accepted",
+    "implementers.empty":
+      "\u76EE\u524D\u7121\u7D00\u9304\u3002\u5C0D ADOPTERS.md \u958B PR \u5373\u53EF\u52A0\u5165\u4F60\u7684\u7D44\u7E54\u3002",
+
+    "conformance.title": "\u7B26\u898F (Conformance)",
+    "conformance.subtitle":
+      "\u4E09\u500B\u7B26\u898F\u7B49\u7D1A\u5B9A\u7FA9\u300C\u5BE6\u4F5C ATR\u300D\u4EE3\u8868\u7684\u610F\u6DB5\u3002\u6BCF\u4E00\u7B49\u7D1A\u5728 repository \u4E2D\u4EE5 YAML fixture \u5F62\u5F0F\u767C\u5E03\u5C0D\u61C9\u7684\u6E2C\u8A66\u5957\u4EF6 (test suite)\u3002",
+    "conformance.l1.title": "L1 Engine Conformance",
+    "conformance.l1.body":
+      "L1 engine MUST \u80FD\u89E3\u6790\u4EFB\u4F55\u901A\u904E spec/atr-schema.yaml \u9A57\u8B49\u7684\u898F\u5247,MUST \u4EE5 \u00A73.5 \u5B9A\u7FA9\u7684\u8A9E\u610F\u8A55\u4F30 detection.conditions,\u4E26 MUST \u9075\u5B88 scan_target \u8207 status \u7684\u8A9E\u610F\u3002L1 engine MAY \u62D2\u7D55\u843D\u5728\u5176\u5BA3\u544A scan_target \u7BC4\u570D\u5916\u7684\u898F\u5247\u3002",
+    "conformance.l2.title": "L2 Publisher Conformance",
+    "conformance.l2.body":
+      "L2 publisher \u5728\u5EE0\u5546\u524D\u7DB4 (vendor-prefixed) \u7684\u5B50\u7BC4\u570D (\u4F8B\u5982 ACME-YYYY-NNNNN) \u5167\u767C\u5E03\u7B26\u5408 ATR \u8A9E\u610F\u7684\u898F\u5247\u3002L2 publisher MUST \u9075\u5B88 \u00A73.7 \u7684\u5EE2\u68C4\u653F\u7B56,SHOULD \u70BA\u6BCF\u4E00\u689D\u767C\u5E03\u898F\u5247\u9644\u4E0A test_cases\u3002",
+    "conformance.l3.title": "L3 Sub-range Authority",
+    "conformance.l3.body":
+      "L3 sub-range authority \u662F\u570B\u5BB6\u7D1A\u6216\u7D44\u7E54\u7D1A\u7684\u4E3B\u9AD4,\u5728\u4E3B\u6B0A (sovereign) \u524D\u7DB4\u4E0B\u9444\u9020\u898F\u5247 (\u4F8B\u5982 ATR-TW-2026-NNNNN)\u3002\u6388\u6B0A\u7531 ATR TSC \u4F9D /charter \u00A75 \u7A0B\u5E8F\u6838\u767C\u3002",
+    "conformance.testsuite.h": "\u6E2C\u8A66\u5957\u4EF6 (Test Suite)",
+    "conformance.testsuite.body":
+      "L1 engine \u6E2C\u8A66\u5957\u4EF6\u7531\u4E3B repository \u4E2D spec/conformance/ \u4E0B\u7684 YAML fixture \u7D44\u6210\u3002\u6BCF\u500B fixture \u914D\u5C0D\u4E00\u689D\u898F\u5247\u8207\u5176\u5728\u56FA\u5B9A\u4E8B\u4EF6 (event) \u4E0A\u7684\u9810\u671F\u8A55\u4F30\u7D50\u679C\u3002\u5BE6\u4F5C\u901A\u904E\u7684\u689D\u4EF6\u662F:\u6BCF\u500B fixture \u90FD\u5982\u5BA3\u544A\u822C\u8A55\u4F30\u3002",
+    "conformance.self.h": "\u81EA\u6211\u8A8D\u8B49 (Self-Certification)",
+    "conformance.self.body":
+      "\u5BE6\u4F5C\u8005\u5728\u672C\u5730\u57F7\u884C\u6E2C\u8A66\u5957\u4EF6,\u4E26\u5C0D ADOPTERS.md \u958B\u7ACB pull request \u52A0\u5165\u6574\u5408 metadata,\u5373\u53EF\u81EA\u6211\u8A8D\u8B49 (self-certify)\u3002TSC \u53EF\u96A8\u6642\u5C0D\u4EFB\u4E00\u5DF2\u767C\u5E03\u7522\u7269\u91CD\u8DD1\u6E2C\u8A66\u5957\u4EF6\u4EE5\u9A57\u8B49\u81EA\u6211\u8A8D\u8B49\u3002",
+
+    "errata.title": "\u52D8\u8AA4 (Errata)",
+    "errata.subtitle":
+      "ATR \u898F\u683C\u5DF2\u767C\u5E03\u7248\u672C\u4E2D\u767C\u73FE\u7684\u932F\u8AA4\u3002\u6BCF\u4E00\u7B46\u7D00\u9304\u6A19\u793A\u53D7\u5F71\u97FF\u7248\u672C\u3001\u932F\u8AA4\u6240\u5728\u4F4D\u7F6E\u3001\u66F4\u6B63\u6587\u5B57\u3001\u4EE5\u53CA\u66F4\u6B63\u767C\u5E03\u65E5\u671F\u3002",
+    "errata.empty":
+      "\u76EE\u524D Working Draft \u7121\u52D8\u8AA4\u7D00\u9304\u3002\u82E5\u4F60\u767C\u73FE\u672C\u6587\u4EF6\u4E2D\u7684\u932F\u8AA4,\u8ACB\u65BC repository \u958B issue\u3002",
+    "errata.col.version": "\u53D7\u5F71\u97FF\u7248\u672C",
+    "errata.col.section": "\u7AE0\u7BC0",
+    "errata.col.summary": "\u6458\u8981",
+    "errata.col.date": "\u767C\u5E03\u65E5\u671F",
+
+    "glossary.title": "\u8A5E\u5F59\u8868 (Glossary)",
+    "glossary.subtitle":
+      "\u898F\u683C\u4E2D\u95DC\u9375\u8853\u8A9E\u7684\u5B9A\u7FA9\u3002\u7576\u8853\u8A9E\u5728 spec \u4E2D\u7684\u7CBE\u78BA\u6280\u8853\u610F\u6DB5\u8207\u4E00\u822C\u7528\u6CD5\u4E0D\u540C\u6642,\u4EE5 spec \u4E2D\u7684\u6280\u8853\u610F\u6DB5\u70BA\u6E96\u3002",
+
+    "charter.title": "\u5C08\u6848\u7AE0\u7A0B (Project Charter)",
+    "charter.subtitle":
+      "\u7AE0\u7A0B\u5B9A\u7FA9 ATR \u662F\u4EC0\u9EBC\u3001\u4E0D\u662F\u4EC0\u9EBC\u3001\u6C7A\u7B56\u5982\u4F55\u505A\u6210\u3001\u4EE5\u53CA\u6280\u8853\u6307\u5C0E\u59D4\u54E1\u6703 (TSC) \u5982\u4F55\u5C31\u4EFB\u3002",
+    "charter.mission.h": "\u4F7F\u547D",
+    "charter.mission.body":
+      "ATR \u70BA AI Agent \u5B89\u5168\u793E\u7FA4\u63D0\u4F9B\u4E00\u500B\u5171\u540C\u7684\u5075\u6E2C\u898F\u5247\u683C\u5F0F \u2500\u2500 \u8B93\u4E0D\u540C\u7D44\u7E54\u3001\u4E0D\u540C\u570B\u5BB6\u7684\u9632\u79A6\u8005\u80FD\u7D44\u5408\u5F7C\u6B64\u7684\u5DE5\u4F5C,\u800C\u4E0D\u5FC5\u6BCF\u6B21\u90FD\u91CD\u65B0\u767C\u660E\u898F\u5247\u683C\u5F0F\u3002",
+    "charter.scope.h": "\u7BC4\u570D (Scope)",
+    "charter.scope.in":
+      "\u7BC4\u570D\u5167:\u898F\u5247\u683C\u5F0F\u3001reference engine\u3001rule schema\u3001\u7B26\u898F\u7B49\u7D1A\u3001\u8DE8\u6846\u67B6\u5C0D\u61C9 (OWASP\u3001MITRE ATLAS\u3001NIST AI RMF\u3001SAFE-MCP)\u3002",
+    "charter.scope.out":
+      "\u7BC4\u570D\u5916:\u5EE0\u5546\u5C08\u5C6C\u5DE5\u5177\u3001\u5546\u696D\u6574\u5408\u3001runtime enforcement \u653F\u7B56\u3001\u4E8B\u4EF6\u56DE\u61C9\u5354\u8ABF \u2500\u2500 \u9019\u4E9B\u5C6C\u65BC\u4E0B\u6E38\u5BE6\u4F5C\u8005,\u4E0D\u5C6C\u65BC\u6A19\u6E96\u672C\u8EAB\u3002",
+    "charter.governance.h": "\u6CBB\u7406 (Governance)",
+    "charter.governance.body":
+      "ATR \u73FE\u7531\u55AE\u4E00\u7DAD\u8B77\u8005\u6CBB\u7406 (BDFL),\u6B63\u904E\u6E21\u81F3\u6280\u8853\u6307\u5C0E\u59D4\u54E1\u6703 (TSC)\u3002\u904E\u6E21\u689D\u4EF6\u8207 TSC \u5C31\u4EFB\u7A0B\u5E8F\u5B9A\u7FA9\u65BC GOVERNANCE.md \u8207 docs/BDFL-charter.md\u3002",
+    "charter.ip.h": "\u667A\u6167\u8CA1\u7522 (Intellectual Property)",
+    "charter.ip.body":
+      "ATR \u63A1 MIT License \u767C\u5E03\u3002\u6240\u6709\u8CA2\u737B\u7686\u4EE5 MIT License \u63D0\u4EA4\u3002\u7121 CLA\u3002\u5F15\u7528 DOI \u70BA 10.5281/zenodo.19178002\u3002",
+
+    "citations.title": "\u5F15\u7528 (Citation)",
+    "citations.subtitle":
+      "\u82E5\u4F60\u5728\u5B78\u8853\u5DE5\u4F5C\u3001\u5B89\u5168\u7814\u7A76\u6216\u6A5F\u69CB\u6587\u4EF6\u4E2D\u4F7F\u7528 ATR,\u8ACB\u4F9D\u4E0B\u5217\u4EFB\u4E00\u683C\u5F0F\u5F15\u7528\u672C\u898F\u683C\u3002",
+
+    "mission.title": "\u4F7F\u547D",
+    "mission.body":
+      "\u9632\u79A6\u8005\u5728\u4E0D\u540C\u7D44\u7E54\u3001\u4E0D\u540C\u570B\u5BB6\u5DE5\u4F5C,\u9762\u5C0D\u540C\u4E00 AI Agent \u653B\u64CA\u9762\u3002ATR \u5B58\u5728\u7684\u7406\u7531,\u662F\u8B93\u5DE5\u4F5C\u80FD\u5F7C\u6B64\u7D44\u5408 \u2500\u2500 \u8B93\u53F0\u5317\u5BEB\u7684\u4E00\u689D\u898F\u5247\u80FD\u5075\u6E2C\u9996\u5148\u5728\u897F\u96C5\u5716\u88AB\u901A\u5831\u7684\u653B\u64CA,\u800C\u4E0D\u5FC5\u6709\u4EBA\u91CD\u65B0\u5BE6\u4F5C\u898F\u5247\u683C\u5F0F\u3002",
+    "mission.tagline":
+      "\u4E00\u500B\u958B\u653E\u683C\u5F0F\u3002\u4E00\u500B\u53EF\u540C\u5115\u5BE9\u67E5\u7684 schema\u3002\u4E00\u500B\u6B63\u5F0F\u7DB2\u5740 (canonical URL)\u3002",
+
+    "vision.title": "\u9577\u671F\u9858\u666F",
+    "vision.body":
+      "AI Agent \u5B89\u5168\u4F5C\u70BA\u4E00\u500B\u5B78\u79D1,\u5176\u6210\u719F\u5EA6\u53D7\u5236\u65BC\u7F3A\u4E4F\u5171\u540C\u7684\u898F\u5247\u683C\u5F0F\u3002ATR \u63D0\u4F9B\u9019\u500B\u683C\u5F0F\u3002\u6211\u5011\u7684\u76EE\u6A19\u662F\u8B93 ATR \u5728 AI Agent runtime \u7684\u67B6\u69CB\u4F4D\u7F6E\u4E2D,\u4F54\u64DA Sigma \u5728 SIEM \u5075\u6E2C\u3001YARA \u5728\u60E1\u610F\u7A0B\u5F0F\u7C3D\u7AE0\u4E2D\u7684\u540C\u7B49\u4F4D\u7F6E \u2500\u2500 \u4E2D\u7ACB\u3001\u53EF\u540C\u5115\u5BE9\u67E5\u3001\u4EFB\u4F55\u55AE\u4F4D\u7686\u53EF\u81EA\u7531\u5BE6\u4F5C\u3001\u5EF6\u4F38\u6216\u5F15\u7528\u3002",
   },
 };
 

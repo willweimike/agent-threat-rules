@@ -16,6 +16,33 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="border-t border-fog py-12 px-6">
       <div className="max-w-[1120px] mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 mb-10">
+          {/* Specification */}
+          <div>
+            <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">
+              {zh ? "規格" : "Specification"}
+            </div>
+            <div className="flex flex-col gap-2">
+              <Link href={`${prefix}/spec`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "完整規格" : "Specification"}
+              </Link>
+              <Link href={`${prefix}/conformance`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "符規" : "Conformance"}
+              </Link>
+              <Link href={`${prefix}/charter`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "章程" : "Charter"}
+              </Link>
+              <Link href={`${prefix}/errata`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "勘誤" : "Errata"}
+              </Link>
+              <Link href={`${prefix}/glossary`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "詞彙表" : "Glossary"}
+              </Link>
+              <Link href={`${prefix}/citations`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "引用" : "Citation"}
+              </Link>
+            </div>
+          </div>
+
           {/* Project */}
           <div>
             <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">
@@ -30,6 +57,9 @@ export function Footer({ locale }: { locale: Locale }) {
               </Link>
               <Link href={`${prefix}/research`} className="text-sm text-stone hover:text-ink transition-colors">
                 {zh ? "研究" : "Research"}
+              </Link>
+              <Link href={`${prefix}/changelog`} className="text-sm text-stone hover:text-ink transition-colors">
+                {zh ? "版本歷程" : "Changelog"}
               </Link>
             </div>
           </div>
@@ -122,8 +152,8 @@ export function Footer({ locale }: { locale: Locale }) {
           <span className="font-data text-xs text-stone">
             {zh ? "商業實作:" : "Commercial implementations:"}
             {" "}
-            <Link href={`${prefix}/ecosystem`} className="text-stone hover:text-ink underline-offset-2 hover:underline">
-              {zh ? "見生態系" : "see ecosystem"}
+            <Link href={`${prefix}/implementers`} className="text-stone hover:text-ink underline-offset-2 hover:underline">
+              {zh ? "見實作者報告" : "see implementer report"}
             </Link>
           </span>
         </div>
@@ -137,13 +167,17 @@ export function Footer({ locale }: { locale: Locale }) {
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-data text-xs text-mist">
-            <Link href={`${prefix}/quality-standard`} className="hover:text-stone transition-colors">
-              {zh ? "規範 v1.0" : "Spec v1.0"}
+            <Link href={`${prefix}/spec`} className="hover:text-stone transition-colors">
+              {zh ? "規格" : "Spec"} 3.0.0-alpha.1
             </Link>
             <span className="text-fog">·</span>
+            <Link href={`${prefix}/citations`} className="hover:text-stone transition-colors">
+              DOI 10.5281/zenodo.19178002
+            </Link>
+            <span className="text-fog hidden sm:inline">|</span>
             <span>{stats.ruleCount} {zh ? "條規則" : "rules"}</span>
             <span className="text-fog hidden sm:inline">|</span>
-            <span>{zh ? "更新於" : "Updated"} {lastUpdated}</span>
+            <span>{zh ? "ISO 8601" : "ISO 8601"} {lastUpdated}</span>
           </div>
         </div>
       </div>

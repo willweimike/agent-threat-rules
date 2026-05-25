@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono, Source_Serif_4, Noto_Serif_TC } from "next/font/google";
 import { loadSiteStats } from "@/lib/stats";
 import "./globals.css";
 
@@ -20,6 +20,24 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+});
+
+// Serif for spec body — gives W3C / IETF document feel.
+// Applied via `font-spec` utility on .spec-document wrappers.
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+});
+
+// Traditional Chinese serif companion (used on zh-TW spec pages).
+const notoSerifTC = Noto_Serif_TC({
+  variable: "--font-noto-serif-tc",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -129,7 +147,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${interTight.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${inter.variable} ${interTight.variable} ${jetbrainsMono.variable} ${sourceSerif.variable} ${notoSerifTC.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased">
         <script

@@ -575,8 +575,8 @@ export default async function RedTeamPage({
           </h2>
           <p className="text-base text-stone font-light max-w-[640px] mb-12">
             {zh
-              ? "這些是真的紅隊工具（offensive testing）。防禦端框架在 /ecosystem。"
-              : "These are red-team tools — offensive testing frameworks and adversarial corpora. Defensive frameworks live on /ecosystem."}
+              ? "這些是真的紅隊工具（offensive testing）。防禦端框架在 /implementers。"
+              : "These are red-team tools — offensive testing frameworks and adversarial corpora. Defensive frameworks live on /implementers."}
           </p>
         </Reveal>
 
@@ -952,12 +952,12 @@ export default async function RedTeamPage({
                 {zh ? "看 repo →" : "Read the repo →"}
               </a>
               <a
-                href={`/${locale}/ecosystem`}
+                href={`/${locale}/implementers`}
                 className="border border-fog text-ink px-7 py-3 rounded-sm text-base font-semibold hover:bg-ash/40 transition-colors"
               >
                 {zh
-                  ? "防禦端在 /ecosystem →"
-                  : "Defensive side at /ecosystem →"}
+                  ? "防禦端在 /implementers →"
+                  : "Defensive side at /implementers →"}
               </a>
             </div>
           </div>
