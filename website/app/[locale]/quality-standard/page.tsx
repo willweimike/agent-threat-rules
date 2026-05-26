@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { DocumentStatus } from "@/components/spec/DocumentStatus";
 import { locales, t, type Locale } from "@/lib/i18n";
 import type { Metadata } from "next";
 
@@ -230,6 +231,14 @@ export default async function QualityStandardPage({
             ? "每條規則都有可計算的信心分數。每個對應都有可審計的來源。沒有黑箱、沒有鎖定,只有公開的公式、開源的程式碼、以及真實世界的資料。"
             : "Every rule has a confidence score you can compute yourself. Every mapping has a provenance you can audit. No black boxes, no vendor lock-in — just a public formula, open-source code, and wild-validated data."}
         </p>
+      </Reveal>
+      {/* DocumentStatus banner — keeps this RFC-001 page visually aligned
+          with /spec, /implementers, /conformance, etc. Section anchor lets
+          readers know this document covers §RFC-001 of the spec family. */}
+      <Reveal delay={0.25}>
+        <div className="mb-6">
+          <DocumentStatus locale={locale} sectionHref="/rfc-001" />
+        </div>
       </Reveal>
       <Reveal delay={0.3}>
         <div className="flex flex-wrap items-center gap-4 mb-16">

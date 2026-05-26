@@ -87,7 +87,9 @@ export function Nav({ locale }: { locale: Locale }) {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden flex flex-col gap-1.5 p-2 min-w-[44px] min-h-[44px] items-center justify-center -mr-2"
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-drawer"
           >
             <span
               className={`block w-5 h-px bg-ink transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[3.5px]" : ""}`}
@@ -102,14 +104,22 @@ export function Nav({ locale }: { locale: Locale }) {
         </div>
       </nav>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — proper dialog semantics so screen readers
+          announce open/close. Drawer body is scrollable for tall menus. */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div
+          id="mobile-nav-drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-label={locale === "zh" ? "主選單" : "Main menu"}
+          className="fixed inset-0 z-40 md:hidden"
+        >
           <div
             className="absolute inset-0 bg-ink/10"
             onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
           />
-          <div className="absolute top-16 right-0 w-72 bg-paper border-l border-fog shadow-lg p-6 flex flex-col gap-4">
+          <div className="absolute top-16 right-0 w-72 max-h-[calc(100vh-4rem)] overflow-y-auto bg-paper border-l border-fog shadow-lg p-6 flex flex-col gap-4">
             {pages.map((page) => (
               <Link
                 key={page}

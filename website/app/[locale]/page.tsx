@@ -89,6 +89,15 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </h1>
           </HeroEntrance>
 
+          {/* Mission tagline — short, italic, between H1 and subtitle. */}
+          <HeroEntrance delay={1.2}>
+            <p className="mt-4 md:mt-5 text-sm md:text-base italic text-stone font-light max-w-[640px] mx-auto leading-relaxed">
+              {zh
+                ? "在台北寫的一條規則,能偵測在西雅圖首次通報的攻擊 ── 不必任何人重新發明規則格式。"
+                : "Built so a rule written in Taipei catches an attack first reported in Seattle — without anyone reinventing the rule format."}
+            </p>
+          </HeroEntrance>
+
           {/* Subtitle — definitional, not outcome */}
           <HeroEntrance delay={1.3}>
             <p className="text-base md:text-lg text-stone font-light mt-5 md:mt-6 max-w-[640px] mx-auto leading-relaxed">
@@ -109,11 +118,32 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </div>
           </HeroEntrance>
 
+          {/* Document Status strip — W3C-style version + status + canonical URL.
+              Sits as a thin row below the stats; signals "this is a versioned
+              standard" without disrupting the hero's marketing identity. */}
+          <HeroEntrance delay={1.6}>
+            <Link
+              href={`${prefix}/spec`}
+              className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-data text-[10px] md:text-[11px] tracking-[0.08em] uppercase text-stone hover:text-ink transition-colors px-3 py-1.5 border border-fog rounded-[2px] group"
+              aria-label={zh ? "規格 Working Draft 3.0.0-alpha.1" : "Specification Working Draft 3.0.0-alpha.1"}
+            >
+              <span className="text-ink font-semibold">{zh ? "Working Draft" : "Working Draft"}</span>
+              <span className="text-fog">·</span>
+              <span>3.0.0-alpha.1</span>
+              <span className="text-fog">·</span>
+              <span>{zh ? "正式網址" : "canonical"} <span className="text-ink group-hover:underline">/spec</span></span>
+            </Link>
+          </HeroEntrance>
+
           {/* CTAs — procedural, standards-form */}
           <HeroEntrance delay={1.7}>
             <div className="flex gap-3 justify-center flex-wrap mt-7 md:mt-8">
+              {/* Primary CTA now points to the canonical specification at /spec.
+                  Previously linked /quality-standard, but that page is RFC-001
+                  (rule promotion criteria), not the format spec — confusing
+                  button-vs-destination mismatch fixed. */}
               <Link
-                href={`${prefix}/quality-standard`}
+                href={`${prefix}/spec`}
                 className="bg-blue text-white px-8 md:px-10 py-3.5 md:py-4 rounded-[2px] text-sm font-semibold hover:bg-blue-hover transition-colors"
               >
                 {zh ? "讀規範" : "Read the spec"}
@@ -129,6 +159,19 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 className="text-ink px-8 md:px-10 py-3.5 md:py-4 text-sm font-medium border border-fog hover:border-stone transition-colors rounded-[2px]"
               >
                 {zh ? "投規則" : "Submit a rule"}
+              </Link>
+            </div>
+          </HeroEntrance>
+
+          {/* Secondary text link — keeps the RFC-001 quality standard
+              discoverable now that the primary CTA points elsewhere. */}
+          <HeroEntrance delay={1.8}>
+            <div className="mt-3 text-xs text-stone">
+              <Link
+                href={`${prefix}/quality-standard`}
+                className="hover:text-ink underline-offset-4 hover:underline transition-colors"
+              >
+                {zh ? "規則晉升標準 (RFC-001) →" : "Quality standard (RFC-001) →"}
               </Link>
             </div>
           </HeroEntrance>
