@@ -134,7 +134,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
           {/* PINT */}
           <div className="bg-paper p-6">
             <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-4">{t(locale, "research.pint")}</div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <div className="font-data text-2xl font-bold text-ink"><CountUp target={stats.pintPrecision} suffix="%" liveKey="pintPrecision" /></div>
                 <div className="text-xs text-stone">{t(locale, "research.precision")}</div>
@@ -153,7 +153,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
           {/* Self-test */}
           <div className="bg-paper p-6">
             <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-4">{t(locale, "research.self")}</div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <div className="font-data text-2xl font-bold text-ink"><CountUp target={stats.selfTestPrecision} suffix="%" liveKey="selfTestPrecision" /></div>
                 <div className="text-xs text-stone">Precision</div>
@@ -193,7 +193,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-4">
               {locale === "zh" ? "整體表現" : "Overall Performance"}
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <div className="font-data text-2xl font-bold text-ink"><CountUp target={stats.skillBenchRecall} suffix="%" /></div>
                 <div className="text-xs text-stone">Recall</div>
@@ -269,7 +269,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">{locale === "zh" ? "生態系掃描（6 個 Registry）" : "Ecosystem Scan (6 Registries)"}</div>
             <div className="font-data text-3xl font-bold text-ink mb-1"><CountUp target={stats.megaScanTotal} useComma liveKey="megaScanTotal" /></div>
             <div className="text-sm text-stone mb-3">{locale === "zh" ? "個 skill 已掃描" : "skills scanned"}</div>
-            <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
               <div>
                 <div className="font-data text-lg font-bold text-critical"><CountUp target={stats.megaScanCritical} useComma liveKey="megaScanCritical" /></div>
                 <div className="text-xs text-stone">CRITICAL</div>
@@ -288,7 +288,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             <div className="font-data text-xs text-stone tracking-[2px] uppercase mb-3">ClawHub Registry Scan</div>
             <div className="font-data text-3xl font-bold text-ink mb-1"><CountUp target={stats.clawHubCrawled} useComma /></div>
             <div className="text-sm text-stone mb-3">{locale === "zh" ? "個 skill 已爬取" : "skills crawled"}</div>
-            <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
               <div>
                 <div className="font-data text-lg font-bold text-critical"><CountUp target={stats.clawHubCritical} /></div>
                 <div className="text-xs text-stone">CRITICAL</div>

@@ -546,7 +546,13 @@ export default async function SpecPage({
                   <NormativeBadge className="ml-2 align-middle" />
                 ) : null}
               </h2>
-              <div dangerouslySetInnerHTML={{ __html: s[locale].body }} />
+              {/* Wrapper allows section content (which can include wide
+                  tables or long URLs) to scroll horizontally on mobile
+                  instead of pushing the entire page wider than the viewport. */}
+              <div
+                className="spec-body min-w-0 overflow-x-auto -mx-2 px-2"
+                dangerouslySetInnerHTML={{ __html: s[locale].body }}
+              />
             </section>
           ))}
 

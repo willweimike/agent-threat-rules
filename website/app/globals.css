@@ -304,12 +304,34 @@ html:not(.js-ready) .speed-line {
   padding-left: 0.3rem;
 }
 
+/* On mobile, wide tables become independently scrollable so they don't
+   push the entire page wider than the viewport. The block + overflow-x
+   pair is the standard fix; we keep the table semantics intact for
+   screen readers. */
 .spec-document table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.4rem 0;
   font-size: 0.92rem;
   font-family: var(--font-body), system-ui, sans-serif;
+}
+
+@media (max-width: 640px) {
+  .spec-document table,
+  .spec-body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .spec-document tbody,
+  .spec-document thead,
+  .spec-body tbody,
+  .spec-body thead {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+  }
 }
 
 .spec-document thead {
