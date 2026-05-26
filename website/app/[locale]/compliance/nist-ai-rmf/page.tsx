@@ -215,7 +215,7 @@ export default async function NistAiRmfPage({
             : "16 subcategories spanning all 4 NIST AI RMF functions (GV / MP / MS / MG). Each rule can map to multiple subcategories (primary + secondary strength). The 415 mapped rules currently produce 587 subcategory entries in total."}
         </p>
         <div className="bg-paper border border-fog rounded">
-          <div className="grid grid-cols-[110px_70px_1fr_70px] gap-3 px-4 py-2.5 border-b border-fog font-data text-[10.5px] tracking-[1.2px] uppercase text-stone">
+          <div className="grid grid-cols-[80px_55px_minmax(0,1fr)_55px] sm:grid-cols-[110px_70px_minmax(0,1fr)_70px] gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 border-b border-fog font-data text-[10.5px] tracking-[1.2px] uppercase text-stone">
             <div>{zh ? "Subcategory" : "Subcategory"}</div>
             <div>{zh ? "Function" : "Function"}</div>
             <div>{zh ? "對應內容" : "What it covers"}</div>
@@ -224,7 +224,7 @@ export default async function NistAiRmfPage({
           {SUBCATEGORIES.map((s) => (
             <div
               key={s.id}
-              className="grid grid-cols-[110px_70px_1fr_70px] gap-3 px-4 py-3 border-b border-fog last:border-b-0 text-sm items-baseline"
+              className="grid grid-cols-[80px_55px_minmax(0,1fr)_55px] sm:grid-cols-[110px_70px_minmax(0,1fr)_70px] gap-2 sm:gap-3 px-3 sm:px-4 py-3 border-b border-fog last:border-b-0 text-sm items-baseline"
             >
               <div className={`font-data font-semibold ${FUNCTION_COLORS[s.function]}`}>{s.id}</div>
               <div className="font-data text-[11.5px] text-graphite">{zh ? s.fn_label_zh : s.fn_label_en}</div>

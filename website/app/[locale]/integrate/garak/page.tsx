@@ -50,12 +50,12 @@ Writes report.jsonl                  canary 24h               OWASP Agentic Top 
           </li>
           <li>
             Fetch the pipe script: it lives in the ATR repo.{' '}
-            <code className="rounded bg-neutral-800 px-1">
+            <code className="rounded bg-neutral-800 px-1 break-all">
               curl -O https://raw.githubusercontent.com/Agent-Threat-Rule/agent-threat-rules/main/scripts/garak-to-tc.py
             </code>
           </li>
           <li>Set the key in your environment:{' '}
-            <code className="rounded bg-neutral-800 px-1">export ATR_PARTNER_KEY=…</code>
+            <code className="rounded bg-neutral-800 px-1 break-all">export ATR_PARTNER_KEY=…</code>
           </li>
         </ol>
       </section>

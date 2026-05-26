@@ -105,7 +105,7 @@ export default async function CompliancePage({
               href="https://github.com/Agent-Threat-Rule/agent-threat-rules/releases/latest"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-blue-hover transition-colors text-center whitespace-nowrap"
+              className="bg-blue text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-blue-hover transition-colors text-center"
             >
               {zh ? "下載合規映射包 (GitHub Releases) →" : "Download compliance mapping (GitHub Releases) →"}
             </a>
