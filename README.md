@@ -13,7 +13,7 @@ AI Agent 威脅偵測規則的開放格式
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-ATR%20Scan-2ea44f?style=flat-square&logo=github)](https://github.com/marketplace/actions/atr-scan)
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square)](LICENSE)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19178002-blue?style=flat-square)](https://doi.org/10.5281/zenodo.19178002)
-[![Rules](https://img.shields.io/badge/rules-433-blue?style=flat-square)](#5-specification)
+[![Rules](https://img.shields.io/badge/rules-444-blue?style=flat-square)](#5-specification)
 [![Categories](https://img.shields.io/badge/categories-10-blue?style=flat-square)](#7-coverage)
 [![OWASP Agentic](https://img.shields.io/badge/OWASP_Agentic_Top_10-10%2F10-brightgreen?style=flat-square)](#7-coverage)
 [![SAFE-MCP](https://img.shields.io/badge/SAFE--MCP-91.8%25-brightgreen?style=flat-square)](#7-coverage)
@@ -46,7 +46,7 @@ ATR is publishing proposal-stage standardization scaffolding ahead of OASIS Open
 - [`certification/`](certification/) — proposed ATR-Certified™ program guide
 - [`engines/`](engines/) — Python and Go reference impl interface contracts (TypeScript is the existing engine at `src/`)
 
-**All scaffolding is tagged PROPOSED v1.0 / v2.0 and is NOT ratified.** The 9-seat TSC has not been formed. The trust marks are not registered. Existing v1.1 governance ([`GOVERNANCE.md`](GOVERNANCE.md)) continues to operate. The rule format, npm package, TypeScript engine API, and all 433 rules are unchanged — existing ecosystem integrations (Microsoft AGT, Cisco AI Defense, MISP CIRCL, OWASP A-S-R-H, precize, Sage) work without modification.
+**All scaffolding is tagged PROPOSED v1.0 / v2.0 and is NOT ratified.** The 9-seat TSC has not been formed. The trust marks are not registered. Existing v1.1 governance ([`GOVERNANCE.md`](GOVERNANCE.md)) continues to operate. The rule format, npm package, TypeScript engine API, and all 444 rules are unchanged — existing ecosystem integrations (Microsoft AGT, Cisco AI Defense, MISP CIRCL, OWASP A-S-R-H, precize, Sage) work without modification.
 
 See [`STANDARDIZATION-STATUS.md`](STANDARDIZATION-STATUS.md) for the full status matrix mapping every new artifact to `{STABLE IN PRODUCTION, PROPOSED, SKELETON, PRELIMINARY}` and timeline for OASIS submission, community comment, and ratification.
 

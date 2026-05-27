@@ -1,8 +1,8 @@
 {
   "version": "3.0.0-alpha.1",
-  "generatedAt": "2026-05-27T04:28:29.173Z",
+  "generatedAt": "2026-05-27T20:18:21.973Z",
   "rules": {
-    "total": 433,
+    "total": 444,
     "categories": 10,
     "byCategory": {
       "agent-manipulation": 105,
@@ -11,10 +11,10 @@
       "excessive-autonomy": 8,
       "model-abuse": 10,
       "model-security": 3,
-      "privilege-escalation": 13,
+      "privilege-escalation": 16,
       "prompt-injection": 173,
       "skill-compromise": 43,
-      "tool-poisoning": 35
+      "tool-poisoning": 43
     }
   },
   "ecosystem": {
@@ -255,5 +255,5 @@
       "measurement_file": "data/measurements/wild-scan/2026-04-14_wild-scan-corpus-2026-04-14_atr-2-0-0.json"
     }
   ],
-  "benchmarks_generated_at": "2026-05-24T08:19:24.735Z"
+  "benchmarks_generated_at": "2026-05-27T20:17:15.895Z"
 }
