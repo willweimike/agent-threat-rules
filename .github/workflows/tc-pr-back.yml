@@ -40,7 +40,13 @@ jobs:
       - name: Pull confirmed rules from TC
         env:
           TC_URL: ${{ vars.TC_URL || 'https://tc.panguard.ai' }}
-          TC_ADMIN_API_KEY: ${{ secrets.TC_ADMIN_API_KEY }}
+          # GET /api/atr-rules accepts any valid static key — no admin
+          # privilege needed. The CLI's auth fallback chain (see
+          # src/cli/tc-pipeline.ts) picks TC_ADMIN_API_KEY first then
+          # TC_API_KEY. Passing both means either secret can satisfy
+          # the call. Letting only TC_API_KEY remain lets us avoid the
+          # admin-key sync drift that bit us 2026-05-27.
+          TC_API_KEY: ${{ secrets.TC_API_KEY }}
         run: node dist/cli.js tc pull
 
       - name: Count rules after
