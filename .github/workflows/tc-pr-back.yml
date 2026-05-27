@@ -28,6 +28,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate TC API key
+        env:
+          TC_API_KEY: ${{ secrets.TC_API_KEY }}
+          TC_URL: ${{ vars.TC_URL || 'https://tc.panguard.ai' }}
+        run: |
+          if [ -z "$TC_API_KEY" ]; then
+            echo "::error::TC_API_KEY secret is not set."
+            echo "Go to: Settings → Secrets and variables → Actions → New repository secret"
+            echo "Name: TC_API_KEY   Value: your key from ${TC_URL}/settings"
+            exit 1
+          fi
+          echo "TC_API_KEY is configured (${#TC_API_KEY} chars). Proceeding."
+
       - name: Build
         run: npm run build
 
