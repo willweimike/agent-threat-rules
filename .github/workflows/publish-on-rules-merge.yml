@@ -80,6 +80,9 @@ jobs:
           Previous: v${{ steps.bump.outputs.old }}
           Trigger: auto-merge from tc-pr-back
           Commit: ${{ github.sha }}"
+          # Remove orphaned tag from previous failed runs before re-creating
+          git tag -d "v${{ steps.bump.outputs.new }}" 2>/dev/null || true
+          git push origin :refs/tags/v${{ steps.bump.outputs.new }} 2>/dev/null || true
           git tag "v${{ steps.bump.outputs.new }}"
           git push origin main --tags
 
