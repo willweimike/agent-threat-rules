@@ -339,6 +339,27 @@ Rules MAY declare `references.oscal_assessment_objective` to act as an evidence 
 
 This is the bridge from runtime detection into compliance assessment workflows. Operators running OSCAL-based audit pipelines (e.g., FedRAMP automation, NIST AI RMF assessment) can consume ATR matches as machine-readable evidence without reauthoring rules in OSCAL's component-definition vocabulary.
 
+### 9.2 Probe Binding (Red-Team Coverage)
+
+Rules MAY declare `references.probe_id` to bind the Rule to one or more adversarial probes (red-team generators) whose output the Rule is designed to detect. Format is `<framework>:<probe-name>`, e.g., `pyrit:indirect_pi_v2` or `garak:promptinject.HijackHateHumans`.
+
+This explicit pairing closes the loop between adversarial generation and detection:
+
+- A red-team harness running probe `P` MUST be able to query the Rule corpus for all Rules with `probe_id` containing `P`, and run them against the probe's output to measure detection coverage.
+- A Rule author MAY claim coverage of probe `P` by binding to it; the claim is testable by any party with access to the probe runner.
+- The Engine SHOULD report per-probe detection rate as part of evaluation metadata when the operator supplies a probe identifier with the input.
+
+This is the inverse direction of §6.5's calibration workflow: §6.5 ensures the Judge prompt holds up over time; §9.2 ensures the rule survives against newly-generated adversarial input.
+
+### 9.3 NIST CSF 2.0 / ETSI TS 104 223 Crosswalks
+
+Rules MAY declare `references.nist_csf` and `references.etsi_ts_104223` to align with the two major sovereign cybersecurity frameworks for AI agents:
+
+- `nist_csf`: NIST CSF 2.0 subcategory IDs (e.g., `DE.CM-09`, `PR.IR-01`). Required for citation in NIST IR 8596 Cyber AI Profile Informative References.
+- `etsi_ts_104223`: ETSI TS 104 223 principle/sub-principle IDs (e.g., `P4.3`). ETSI TS 104 223 upstreamed UK NCSC's AI Cyber Code of Practice; this binding lets ATR Rules be cited in NCSC Implementation Guides.
+
+Both fields are arrays of strings to permit multi-framework alignment per Rule.
+
 ## 10. Security and Privacy Considerations
 
 ### 10.1 Semantic Method: Judge Input Confidentiality

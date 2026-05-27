@@ -142,6 +142,31 @@ properties:
           OSCAL Assessment Plan/Result objective IDs or component-definition UUIDs
           this Rule supplies evidence for. Lets the rule act as an evidence source
           beneath an OSCAL-driven assessment. See atr-method-v1.1.md §9.
+      nist_csf:
+        type: array
+        items:
+          type: string
+        description: >
+          NIST CSF 2.0 subcategory identifiers (e.g., DE.CM-09, PR.IR-01).
+          Required for citation in NIST IR 8596 Cyber AI Profile Informative References.
+      etsi_ts_104223:
+        type: array
+        items:
+          type: string
+        description: >
+          ETSI TS 104 223 principle / sub-principle identifiers (e.g., P4.3).
+          The ETSI standard upstreamed UK NCSC's AI Cyber Code of Practice (Jan 2025);
+          maps ATR Rules to the 13 principles / 72 sub-principles.
+      probe_id:
+        type: array
+        items:
+          type: string
+        description: >
+          Identifier of the adversarial probe (red-team generator) whose output this
+          Rule is designed to detect. Format: "<framework>:<probe-name>" e.g.
+          "pyrit:indirect_pi_v2" or "garak:promptinject.HijackHateHumans". Lets a
+          Rule pair with its generating probe so detection coverage can be measured
+          end-to-end against adversarial test suites. See atr-method-v1.1.md §9.2.
       research:
         type: array
         items:
