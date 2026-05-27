@@ -1,6 +1,10 @@
-# ATR Schema Specification
+# ATR Schema Specification — SUPERSEDED
 
-Version: 0.1
+> **STATUS: SUPERSEDED 2026-05-16**. The normative specification is now
+> [`SPEC.md`](../SPEC.md) v1.0.0 (Draft). The canonical machine-readable
+> schema remains [`spec/atr-schema.yaml`](../spec/atr-schema.yaml). This
+> document is retained for historical context and MUST NOT be cited as
+> normative.
 
 This document defines every field in the ATR (Agent Threat Rules) schema. The canonical schema file is `spec/atr-schema.yaml`.
 

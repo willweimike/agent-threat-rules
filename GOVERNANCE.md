@@ -177,23 +177,48 @@ Merged rules are automatically:
 
 ## Roadmap
 
-### v1.1 — Technical Advisory Group (Q2 2026)
+### v1.1 — Technical Steering Committee, Founding Three (Target: Q3 2026)
 
-- [ ] Establish TAG with representatives from 2-3 external organizations
-      (target: Cisco AI Defense, NVIDIA garak team, one additional)
-- [ ] TAG members gain PR-approve rights (not merge — merge stays with
-      numbering authority)
-- [ ] Publish annual "ATR Threat Landscape Report" authored by TAG
+Single-maintainer governance is the project's primary structural risk. The
+Founding Three TSC composition resolves bus-factor=1 and converts ATR from
+a project into a standards body.
 
-### v2.0 — Multi-Stakeholder Governance (2027)
+Target seats (subject to candidate confirmation):
 
-- [ ] Transition numbering authority to a multi-stakeholder committee
-- [ ] Consider submission to a standards body (OWASP working group,
-      Linux Foundation, or CSA Agentic AI Foundation)
+- **Maintainer seat** — Adam Lin (林冠辛), BDFL transitional, ATR project
+- **Industry seat** — Vineeth Sai, Cisco AI Defense (PRs #79, #99 merged)
+- **Community / threat-intel seat** — Alexandre Dulaunoy, MISP / CIRCL
+  (taxonomies #323 and galaxy #1207 merged)
+
+Authority of the Founding Three (once seated):
+- Numbering Authority: ID assignment by 2-of-3 majority vote.
+- Spec amendments: 2-of-3 majority + 14-day public comment.
+- New category admission: 2-of-3 majority + Spec PR.
+- Enterprise Member admissions: 2-of-3 majority.
+
+Seat-3 succession on resignation: TSC supermajority (3-of-3) selects the
+replacement; no veto by any single seat.
+
+Public meeting cadence: bi-weekly open call, minutes posted to repo.
+
+### v1.2 — Expanded TSC (Target: Q1 2027)
+
+Expand to 5 seats by adding:
+
+- Academic / research seat (independent AI security researcher)
+- Government / standards-body seat (CISA, NIST, ENISA, national CERT equivalent)
+
+### v2.0 — Multi-Stakeholder Governance and Standards-Body Submission (2027)
+
+- [ ] Submit ATR Spec v1.0 to a standards body as an Internet-Draft
+      (IETF SECEVENT WG candidate) and/or as an OASIS Technical Committee
+      contribution; track IANA media-type registration in parallel.
 - [ ] Federated Threat Cloud: multiple TC instances sync rules through
-      a shared protocol
-- [ ] ATR Engine Conformance Test Suite: any engine must pass to claim
-      "ATR-compatible"
+      a shared protocol.
+- [x] ATR Engine Conformance Test Suite v1.0 in `conformance/` (Spec §12);
+      "ATR-Compatible L1/L2/L3" badge program live (suite skeleton shipped
+      2026-05-16; first three independent engines passing L2 still
+      open).
 
 ---
 

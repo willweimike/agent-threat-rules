@@ -72,9 +72,28 @@ jobs:
           echo "new=$NEW" >> "$GITHUB_OUTPUT"
           echo "Bumped ($BUMP): $OLD → $NEW"
 
+      - name: Update stats.json (version + rule count)
+        run: |
+          NEW_VERSION="${{ steps.bump.outputs.new }}"
+          NEW_COUNT=$(find rules -name "*.yaml" -type f -exec grep -l "^id: ATR-" {} \; | wc -l | tr -d ' ')
+          TODAY=$(date -u +%Y-%m-%d)
+          node -e "
+            const fs = require('fs');
+            const stats = JSON.parse(fs.readFileSync('stats.json','utf8'));
+            stats.previousVersion = stats.version;
+            stats.version = '$NEW_VERSION';
+            stats.lastUpdated = '$TODAY';
+            stats.ruleCount.total = $NEW_COUNT;
+            fs.writeFileSync('stats.json', JSON.stringify(stats, null, 2) + '\n');
+            console.log('stats.json: v' + stats.previousVersion + ' -> v' + stats.version + ', rules=' + stats.ruleCount.total);
+          "
+
+      - name: Sync derived surfaces from stats.json
+        run: npx tsx scripts/sync-stats.ts
+
       - name: Commit version bump
         run: |
-          git add package.json package-lock.json
+          git add package.json package-lock.json stats.json README.md CITATION.cff docs/quick-start.md 2>/dev/null || true
           git commit -m "chore(release): v${{ steps.bump.outputs.new }} — auto-publish TC-crystallized rules
 
           Previous: v${{ steps.bump.outputs.old }}

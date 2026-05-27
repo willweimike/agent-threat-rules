@@ -1,6 +1,13 @@
-# ATR Rule Format Specification v1.0
+# ATR Rule Format Specification v1.0 — SUPERSEDED by SPEC.md
 
-**Status**: Draft
+> **STATUS: SUPERSEDED 2026-05-16**. The normative specification is now
+> [`SPEC.md`](SPEC.md) v1.0.0 (Draft). This document was the pre-1.0
+> design exploration. SPEC.md adopted its rule-identifier format, scan
+> target distinction, and YAML-first design principle, and added RFC 2119
+> normative language, conformance levels L1/L2/L3, SemVer contract, and
+> IANA media-type registration requests.
+
+**Status**: Superseded
 **Date**: 2026-04-05
 **License**: MIT
 
