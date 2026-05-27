@@ -280,10 +280,16 @@ compliance:
   owasp_llm: [LLM01]
   mitre_atlas: [AML.T0051.000]
   nist_ai_rmf: [MS-2.6, MG-2.2]
+  oscal_assessment_objective: [ar-objective-mcp-tool-screening-1]
   iso_iec_42001: [A.6.2.1]
   eu_ai_act: [Art.15]
   safe_mcp: [SAFE-T1101]
 ```
+
+`oscal_assessment_objective` lets a Rule act as an evidence source beneath an
+OSCAL-driven assessment. Engines that emit OSCAL Assessment Results (per
+`spec/atr-event-v1.0.md` mapping) MAY cite the Rule's match output as evidence
+for the referenced objective.
 
 Identifiers MUST come from the authoritative source for each framework. Where
 ambiguity exists, Rule authors SHOULD include a `references` entry pointing to

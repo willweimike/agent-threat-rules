@@ -134,6 +134,14 @@ properties:
         items:
           type: string
         description: "SAFE-MCP technique IDs (e.g., SMCP-T001)"
+      oscal_assessment_objective:
+        type: array
+        items:
+          type: string
+        description: >
+          OSCAL Assessment Plan/Result objective IDs or component-definition UUIDs
+          this Rule supplies evidence for. Lets the rule act as an evidence source
+          beneath an OSCAL-driven assessment. See atr-method-v1.1.md §9.
       research:
         type: array
         items:
@@ -223,12 +231,52 @@ properties:
           Detection method this rule uses. Defaults to "pattern" (regex/string match
           on text fields) for backward compatibility with v1.0 rules. Other methods
           require additional fields documented in spec/atr-method-v1.1.md:
-            - signature: hash/identity match (see §3 of method-v1.1)
-            - semantic:  LLM-as-judge intent classification (see §4)
-            - behavioral: metric threshold over a time window (see §5)
-            - trace:     declarative assertions over agent execution traces (see §6)
+            - signature: exact-match on hash / package_name / registry_url (see §5)
+            - semantic:  LLM-as-judge intent classification (see §6)
+            - behavioral: metric threshold over a time window (see §7)
+            - trace:     declarative assertions over agent execution traces (see §8)
           Engines that do not implement a given method MUST skip rules using it
           rather than fail closed on unknown method values.
+      signature:
+        type: object
+        description: >
+          REQUIRED when method=signature. See atr-method-v1.1.md §5.
+        required: [indicators]
+        properties:
+          indicators:
+            type: array
+            minItems: 1
+            description: "Non-empty list of indicator objects per §5.2.1"
+            items:
+              type: object
+              required: [type, value, target_field]
+              properties:
+                type:
+                  type: string
+                  enum: [sha256, sha512, blake2b-256, package_name, registry_url, skill_id]
+                  description: "Indicator type. Hash types require hex-encoded value (lowercase)."
+                value:
+                  type: string
+                  description: "Indicator value (hex hash or string identifier)"
+                target_field:
+                  type: string
+                  description: "Source field on the Input to match against (e.g., skill.content, skill.manifest.name)"
+                provenance:
+                  type: object
+                  description: "OPTIONAL forensic provenance metadata"
+                  properties:
+                    first_observed:
+                      type: string
+                      description: "ISO 8601 date when indicator was first attributed"
+                    source:
+                      type: string
+                    attribution:
+                      type: string
+          match_logic:
+            type: string
+            enum: [any, all]
+            default: any
+            description: "any = match if any indicator matches; all = match only if every indicator matches"
       semantic:
         type: object
         description: >

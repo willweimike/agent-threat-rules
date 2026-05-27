@@ -45,9 +45,123 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 Engines MUST implement `pattern` for any conformance level. Other methods are OPTIONAL; an Engine declaring conformance MUST declare which methods it implements.
 
+### 4.1 Runtime Profiles
+
+Engines MAY declare conformance against one of two Runtime Profiles, which group the methods by latency and operational characteristics:
+
+| Profile | Methods Included | Latency Budget | Use Case |
+|---------|------------------|----------------|----------|
+| `deterministic` | signature + pattern | < 5 ms total | Production hot path, sub-millisecond enforcement, no external dependencies |
+| `assisted` | semantic + behavioral + trace | up to 2 s | Sidecar / async path; may call LLM judge, ingest traces, or evaluate metric windows |
+
+A Rule's declared `detection.method` implies its profile. Engines that support only the `deterministic` profile MUST skip Rules whose method is in `assisted` (per §9), not reject them.
+
+This split is intended to let production policy engines (e.g., enterprise governance toolkits, in-line security scanners) load only deterministic Rules into their hot path while delegating assisted-tier Rules to an async sidecar. The same Rule corpus serves both deployment patterns; no Rule rewrite is required.
+
+Profile capability is declared as `atr/profile/deterministic` or `atr/profile/assisted` in the Engine's conformance statement.
+
 ## 5. Signature Method
 
-Section 5 of this document is reserved for the signature method. v1.1 leaves the signature method as a normative placeholder; the wire format will be specified before promotion to Final, based on the canonical hash field already in use by existing implementations.
+### 5.1 Purpose
+
+The Signature method detects known-bad artifacts by exact-match on stable identifiers (cryptographic hashes, package names, registry URLs). Unlike Pattern (which allows fuzzy text match) or Semantic (which infers intent), Signature requires an exact match against a canonical indicator. This is the fastest detection method (sub-millisecond), making it suitable for production hot paths.
+
+The method is modeled on Cyber Threat Intelligence Indicator-of-Compromise (IOC) practice, adapted for AI agent artifacts: skill files, MCP tool packages, agent configurations, and registry locations. Existing tools that ship YARA-based scanning (e.g., production skill scanners) can consume Signature Rules via the ATR→YARA compiler contract in §5.4.
+
+### 5.2 Required Fields
+
+A Rule with `method: signature` MUST declare `detection.signature` with:
+
+| Field | Type | Constraint |
+|-------|------|-----------|
+| `indicators` | array | Non-empty list of indicator objects (§5.2.1). |
+| `match_logic` | enum | One of `any` (Rule matches if any indicator matches) or `all` (Rule matches only if every indicator matches). Defaults to `any`. |
+
+#### 5.2.1 Indicator object
+
+| Field | Type | Constraint |
+|-------|------|-----------|
+| `type` | enum | One of: `sha256`, `sha512`, `blake2b-256`, `package_name`, `registry_url`, `skill_id`. |
+| `value` | string | Indicator value. Hash types MUST be hex-encoded (lowercase, no `0x` prefix). |
+| `target_field` | string | Source field to match against (e.g., `skill.content`, `skill.manifest.name`, `mcp.tool.source_url`). |
+| `provenance` | object | OPTIONAL. `{first_observed, source, attribution}` for forensic chain. |
+
+### 5.3 Evaluation Semantics
+
+For Input I and Rule R with method=signature:
+
+1. For each indicator `i` in `R.signature.indicators`:
+   - Compute or extract value `v` from `I[i.target_field]` per `i.type`:
+     - Hash types: compute the digest over `I[i.target_field]` bytes.
+     - String types (`package_name`, `registry_url`, `skill_id`): read `I[i.target_field]` as a UTF-8 string.
+   - Indicator matches iff `v == i.value` after the normalization rules in §5.3.1.
+2. Apply `match_logic`:
+   - `any`: Engine MUST emit a Match if ANY indicator matched.
+   - `all`: Engine MUST emit a Match only if EVERY indicator matched.
+
+Engines MUST treat unknown indicator `type` values as a graceful_error per SPEC §6, not as a silent no-match.
+
+#### 5.3.1 Normalization
+
+- Hash hex strings: lowercase, no separator, no `0x` prefix. Engines MUST normalize both sides before comparison.
+- `package_name` and `skill_id`: case-sensitive string equality.
+- `registry_url`: canonical form per RFC 3986 §6 (lowercase scheme + host, no trailing slash, no fragment). Engines MUST normalize both sides before comparison.
+
+### 5.4 ATR→YARA Compiler Compatibility
+
+Signature Rules are designed to be compilable to YARA rule format for ecosystems that already consume YARA (e.g., production skill scanners, VirusTotal-class infrastructure). A normative ATR→YARA compiler specification will be published as `spec/atr-compiler-yara-v1.0.md` in a follow-up. The compilation contract is:
+
+| ATR Indicator | YARA equivalent |
+|--------------|----------------|
+| `sha256` | `hash.sha256(0, filesize)` module condition with literal hash |
+| `sha512` | `hash.sha512(0, filesize)` module condition with literal hash |
+| `package_name` | `strings.$name = "<value>"` with `condition: $name` |
+| `registry_url` | `strings.$url = "<value>"` with `condition: $url` |
+| `skill_id` | `strings.$id = "<value>"` with `condition: $id` |
+| `match_logic: all` | YARA `condition: all of them` |
+| `match_logic: any` | YARA `condition: any of them` |
+
+The ATR→YARA compiler is OPTIONAL infrastructure; non-implementing engines do not lose conformance. Engines that publish YARA outputs MUST declare the `atr/compiler/yara@1.0` capability.
+
+### 5.5 Example
+
+```yaml
+id: ATR-YYYY-DRAFT-skill-malware-example
+title: "Known-bad skill: @malicious/persistence-rootkit"
+status: draft
+severity: critical
+tags:
+  category: skill-compromise
+  scan_target: skill
+detection:
+  method: signature
+  signature:
+    match_logic: any
+    indicators:
+      - type: sha256
+        value: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
+        target_field: skill.content
+        provenance:
+          first_observed: "2026-05-27"
+          source: "Wild scan corpus"
+          attribution: "Public skill registry"
+      - type: package_name
+        value: "@malicious/persistence-rootkit"
+        target_field: skill.manifest.name
+response:
+  actions: [block_request, log_alert]
+test_cases:
+  true_positives:
+    - input: { skill.content: "<full byte content matching hash>" }
+      expected: triggered
+  true_negatives:
+    - input: { skill.manifest.name: "@safe/normal-skill" }
+      expected: not_triggered
+```
+
+### 5.6 Provenance and Trust
+
+Signature Rules carry forensic weight: a hash match means "this exact artifact was previously confirmed malicious." Engines MUST preserve the `provenance` field in Match output (per SPEC §7) to permit downstream attribution and dispute resolution. Engines SHOULD NOT auto-block on a hash match without operator policy explicitly enabling it; the default response action SHOULD be `log_alert` until provenance is operator-trusted.
 
 ## 6. Semantic Method
 
@@ -211,10 +325,19 @@ This document does not alter SPEC.md §11 (Conformance Levels). It adds the foll
 | `atr/method/semantic` | OPTIONAL. | §6 evaluation. |
 | `atr/method/behavioral` | OPTIONAL. | §7 evaluation. |
 | `atr/method/trace` | OPTIONAL. | §8 evaluation. |
+| `atr/profile/deterministic` | OPTIONAL. Implies `atr/method/pattern` + `atr/method/signature`. | §4.1 — production hot-path engines. |
+| `atr/profile/assisted` | OPTIONAL. Implies `atr/method/semantic` + `atr/method/behavioral` + `atr/method/trace`. | §4.1 — sidecar / async engines. |
+| `atr/compiler/yara@1.0` | OPTIONAL. | §5.4 — emits YARA rules from Signature Rules. |
 
 An Engine MUST publish its capability set in any conformance claim.
 
 A Rule with `method: X` where X is not in the Engine's capability set MUST be skipped silently rather than rejected. Skipping MUST be reported in the per-evaluation metadata so operators can audit coverage.
+
+### 9.1 OSCAL Evidence Integration
+
+Rules MAY declare `references.oscal_assessment_objective` to act as an evidence source beneath an OSCAL-driven Assessment Plan / Result. An Engine that emits OSCAL Assessment Results (per `spec/atr-event-v1.0.md` OSCAL mapping) MUST include the Rule's match output as `observations[]` evidence for each referenced objective ID.
+
+This is the bridge from runtime detection into compliance assessment workflows. Operators running OSCAL-based audit pipelines (e.g., FedRAMP automation, NIST AI RMF assessment) can consume ATR matches as machine-readable evidence without reauthoring rules in OSCAL's component-definition vocabulary.
 
 ## 10. Security and Privacy Considerations
 
