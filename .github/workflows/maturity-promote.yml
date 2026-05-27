@@ -75,6 +75,8 @@ jobs:
           set -e
           DATE=$(date -u +%Y-%m-%d)
           BRANCH="maturity-promote/$DATE"
+          # Delete remote branch if it already exists (re-run idempotency)
+          git push origin --delete "$BRANCH" 2>/dev/null || true
           git checkout -b "$BRANCH"
           git commit -m "chore(maturity): auto-promote ${{ steps.promote.outputs.promoted }} rule(s) on $DATE"
           git push origin "$BRANCH"
