@@ -1,28 +1,19 @@
-## Daily Scan Summary (2026-05-26)
+## Daily Scan Summary (2026-05-27)
 - Scanned: 50 packages
-- CRITICAL: 5
-- HIGH: 7
-- CLEAN/LOW: 37
+- CRITICAL: 3
+- HIGH: 0
+- CLEAN/LOW: 43
 
 ### Flagged Packages:
-- [HIGH] @dankelleher/mcp-eval (score: 50)
-- [HIGH] @gbs-toolkit/mcp-server (score: 50)
-- [HIGH] @jhl8041/dooray-mcp (score: 60)
-- [CRITICAL] @mcp-ts/sdk (score: 100)
-- [HIGH] @mrprasadrsawant/meldep-mcp (score: 45)
-- [HIGH] @mux/mcp (score: 60)
-- [CRITICAL] @nuntly/sdk-mcp (score: 75)
-- [CRITICAL] @onyxsecurity/mcp-gateway (score: 100)
-- [CRITICAL] @opvs-ai/mcp (score: 100)
-- [CRITICAL] @plur-ai/mcp (score: 100)
-- [HIGH] @productbrain/mcp (score: 40)
-- [HIGH] @pubnub/mcp (score: 55)
+- [CRITICAL] @byimprint/mcp-server (score: 70)
+- [CRITICAL] @caputchin/mcp (score: 100)
+- [CRITICAL] @i18n-agent/mcp-client (score: 100)
 
 ### Cumulative:
-- Total scanned: 2160
-  - CLEAN: 1270
-  - CRITICAL: 256
+- Total scanned: 2210
+  - CLEAN: 1305
+  - CRITICAL: 259
   - ERROR: 2
   - HIGH: 176
-  - LOW: 239
-  - MEDIUM: 217
+  - LOW: 247
+  - MEDIUM: 221
