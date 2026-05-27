@@ -49,6 +49,7 @@ spec/
 ├── atr-event-v1.0.md                  ← (new) OTEL-compatible event format
 ├── atr-profile-v1.0.md                ← (new) rule-set composition for tiered conformance
 ├── atr-correlation-v1.0.md            ← (new) multi-event correlation rule format
+├── atr-method-v1.1.md                 ← (new) detection method extensions: signature/semantic/behavioral/trace
 │
 ├── category-registry/
 │   └── v1.0.yaml                      ← (new) versioned top-level category list
@@ -96,6 +97,10 @@ If you are **implementing an ATR engine**, read in this order:
    engine MUST pass.
 7. `spec/atr-profile-v1.0.md` + `spec/atr-correlation-v1.0.md` —
    RECOMMENDED for full conformance, optional for baseline.
+8. `spec/atr-method-v1.1.md` — OPTIONAL. Read only if your engine
+   implements detection methods beyond `pattern` (signature, semantic,
+   behavioral, or trace). v1.0 Pattern conformance does NOT require
+   this document.
 
 If you are **authoring rules**, read:
 

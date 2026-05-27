@@ -193,6 +193,7 @@ properties:
           - skill_lifecycle   # MCP skill registration, update, removal events
           - skill_permission  # Skill permission requests and boundary checks
           - skill_chain       # Multi-skill invocation sequences
+          - agent_trace       # Agent execution trace (OpenInference/OTel GenAI spans); see atr-method-v1.1.md
         description: Type of agent data stream to monitor
       framework:
         type: array
@@ -214,6 +215,71 @@ properties:
     type: object
     required: [conditions, condition]
     properties:
+      method:
+        type: string
+        enum: [pattern, signature, semantic, behavioral, trace]
+        default: pattern
+        description: >
+          Detection method this rule uses. Defaults to "pattern" (regex/string match
+          on text fields) for backward compatibility with v1.0 rules. Other methods
+          require additional fields documented in spec/atr-method-v1.1.md:
+            - signature: hash/identity match (see §3 of method-v1.1)
+            - semantic:  LLM-as-judge intent classification (see §4)
+            - behavioral: metric threshold over a time window (see §5)
+            - trace:     declarative assertions over agent execution traces (see §6)
+          Engines that do not implement a given method MUST skip rules using it
+          rather than fail closed on unknown method values.
+      semantic:
+        type: object
+        description: >
+          REQUIRED when method=semantic. See atr-method-v1.1.md §4.
+        properties:
+          judge_model_class:
+            type: string
+            description: "Class of judge model (e.g., gpt-4-class, llama-prompt-guard, claude-haiku)"
+          prompt_template:
+            type: string
+            description: "Prompt template with {{input}} placeholder"
+          output_schema:
+            type: object
+            description: "Expected JSON shape of judge output (category, confidence, evidence)"
+          threshold:
+            type: number
+            minimum: 0.0
+            maximum: 1.0
+            description: "Minimum confidence to trigger match"
+          cache_ttl:
+            type: integer
+            description: "Cache TTL in seconds for identical inputs"
+          judge_prompt_hash:
+            type: string
+            description: "SHA-256 hash of the canonical judge prompt for regression testing"
+          fallback_method:
+            type: string
+            enum: [pattern, none]
+            description: "Method to fall back to if judge is unavailable"
+      trace:
+        type: object
+        description: >
+          REQUIRED when method=trace. See atr-method-v1.1.md §6.
+        properties:
+          ingest_format:
+            type: string
+            enum: [openinference, otel_gen_ai]
+            default: openinference
+            description: "Trace ingest format the rule expects"
+          forbid:
+            type: array
+            description: "Span shapes that MUST NOT appear in the trace"
+            items: {type: object}
+          require:
+            type: array
+            description: "Span shapes that MUST appear (optionally with ordering constraints)"
+            items: {type: object}
+          invariant:
+            type: array
+            description: "Attributes that MUST hold across a set of spans"
+            items: {type: object}
       conditions:
         description: >
           Detection conditions. Supports two formats:

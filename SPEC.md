@@ -213,6 +213,22 @@ For a given Engine version, a given Rule, and a given Input, the Match outcome
 MUST be deterministic. Engines MUST NOT introduce non-determinism (e.g.,
 randomized sampling, time-of-day branching) into Rule evaluation.
 
+### 6.5 Extension Methods
+
+The selectors and operators in Sections 6.1-6.4 define the default detection
+method (`pattern`). A Rule MAY declare an optional `detection.method` field
+to opt into an alternative method defined by a Spec extension document.
+v1.0 defines `pattern` as the default; the canonical extension document
+[atr-method-v1.1.md](spec/atr-method-v1.1.md) defines four additional
+methods: `signature`, `semantic`, `behavioral`, and `trace`.
+
+Engines that do not implement a given method MUST skip Rules using it
+rather than fail closed on unknown method values. This permits gradual
+adoption of new methods without breaking existing conformance claims.
+
+Future extension methods MUST be introduced by Spec amendment per
+GOVERNANCE.md, not by individual Rule authors.
+
 ## 7. Match Output
 
 An Engine MUST emit Match output that includes, at minimum:
