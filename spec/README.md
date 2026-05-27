@@ -50,6 +50,9 @@ spec/
 ├── atr-profile-v1.0.md                ← (new) rule-set composition for tiered conformance
 ├── atr-correlation-v1.0.md            ← (new) multi-event correlation rule format
 ├── atr-method-v1.1.md                 ← (new) detection method extensions: signature/semantic/behavioral/trace
+├── mappings/                          ← (new 2026-05-28) ATR → external framework crosswalk documents
+│   ├── README.md                      ← mappings index
+│   └── atr-to-nist-csf-2.0.md         ← NIST CSF 2.0 (NIST IR 8596 Informative Reference draft)
 │
 ├── category-registry/
 │   └── v1.0.yaml                      ← (new) versioned top-level category list
