@@ -1,8 +1,8 @@
 {
   "version": "3.0.0-alpha.1",
-  "generatedAt": "2026-05-26T04:16:40.134Z",
+  "generatedAt": "2026-05-27T04:28:29.173Z",
   "rules": {
-    "total": 427,
+    "total": 433,
     "categories": 10,
     "byCategory": {
       "agent-manipulation": 105,
@@ -12,9 +12,9 @@
       "model-abuse": 10,
       "model-security": 3,
       "privilege-escalation": 13,
-      "prompt-injection": 172,
+      "prompt-injection": 173,
       "skill-compromise": 43,
-      "tool-poisoning": 30
+      "tool-poisoning": 35
     }
   },
   "ecosystem": {
