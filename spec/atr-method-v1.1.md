@@ -230,7 +230,52 @@ Rules MUST declare `detection.trace.ingest_format`. Engines MUST reject rules wh
 
 ### 8.3 Three Primitives
 
-A Trace Rule expresses one or more of three primitives, evaluated against the Trace as a span DAG:
+A Trace Rule expresses one or more of three primitives, evaluated against the Trace as a span DAG.
+
+#### Attribute matchers — predicate vocabulary
+
+Inside a primitive's `shape`, `target_shape`, or `must_be_preceded_by` blocks, attribute matchers MAY be either literal value matchers or richer predicate maps. The following predicates are normative for v1.1:
+
+| Predicate | Semantics |
+|-----------|-----------|
+| `<literal>` | Exact equality. e.g., `tool.name: email.send` matches iff `attributes["tool.name"] == "email.send"`. |
+| `in: [A, B, C]` | Set membership. Matches iff attribute value is in the list. |
+| `not_in: [A, B, C]` | Inverse of `in`. |
+| `equals: <value>` | Explicit equality (same as literal). |
+| `not_equals: <value>` | Inequality. |
+| `regex: "<pattern>"` | ECMAScript regex match on stringified attribute value. |
+| `exists: true\|false` | Attribute presence check. |
+
+#### Cross-attribute references
+
+A predicate value MAY contain the placeholder `${span.attributes.<path>}` to reference another attribute of the same span being matched. Engines MUST resolve the placeholder against the candidate span's attributes before evaluating the predicate. This permits within-span invariants such as "target identifier must equal active identifier":
+
+```yaml
+forbid:
+  - shape:
+      span.kind: "TOOL"
+      attributes:
+        tool.args.target_conversation_id:
+          not_equals: "${span.attributes.conversation.id}"
+```
+
+Cross-span placeholder references (`${trace.spans[N].attributes.X}`) are NOT permitted in v1.1; cross-span invariants MUST use the `invariant` primitive in §8.3.3.
+
+#### Shape disjunctions — `one_of_shapes`
+
+A `preceded_by` or `must_be_preceded_by` block MAY use `one_of_shapes` to express a disjunction of candidate shapes. The primitive matches if ANY shape in the list matches a preceding span. This is the only normative disjunction primitive in v1.1; engines MUST evaluate each shape independently and short-circuit on first match:
+
+```yaml
+must_be_preceded_by:
+  one_of_shapes:
+    - span.kind: "HUMAN"
+    - span.kind: "AGENT"
+      attributes:
+        human_approval: true
+  within_trace: true
+```
+
+Other disjunction forms (`any_of`, top-level `one_of`) are NOT defined in v1.1. Rules using them MUST be treated as malformed.
 
 #### 8.3.1 `forbid` — Span Shape That MUST NOT Appear
 

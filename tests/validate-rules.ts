@@ -25,13 +25,15 @@ const VALID_SEVERITIES = ['critical', 'high', 'medium', 'low', 'informational'];
 const VALID_CATEGORIES = [
   'prompt-injection', 'tool-poisoning', 'context-exfiltration',
   'agent-manipulation', 'privilege-escalation', 'excessive-autonomy',
-  'data-poisoning', 'model-abuse', 'skill-compromise',
+  'data-poisoning', 'model-abuse', 'model-security', 'skill-compromise',
 ];
 const VALID_SOURCE_TYPES = [
   'llm_io', 'tool_call', 'mcp_exchange', 'agent_behavior',
   'multi_agent_comm', 'context_window', 'memory_access',
   'skill_lifecycle', 'skill_permission', 'skill_chain',
+  'agent_trace',
 ];
+const VALID_METHODS = ['pattern', 'signature', 'semantic', 'behavioral', 'trace'];
 const VALID_ACTIONS = [
   'block_input', 'block_output', 'block_tool', 'quarantine_session',
   'reset_context', 'alert', 'snapshot', 'escalate', 'reduce_permissions',
@@ -121,11 +123,61 @@ function validateRule(filePath: string): ValidationResult {
     // Detection
     const detection = rule['detection'] as Record<string, unknown> | undefined;
     if (detection) {
-      if (!detection['conditions']) {
-        errors.push('Missing detection.conditions');
+      // v1.1: method-based detection. method defaults to "pattern" if absent.
+      const method = (detection['method'] as string | undefined) ?? 'pattern';
+      if (!VALID_METHODS.includes(method)) {
+        errors.push(`Invalid detection.method: ${method} (expected one of ${VALID_METHODS.join(', ')})`);
       }
-      if (!detection['condition']) {
-        errors.push('Missing detection.condition (boolean expression)');
+
+      if (method === 'pattern') {
+        // v1.0 pattern method: conditions + condition required.
+        if (!detection['conditions']) {
+          errors.push('Missing detection.conditions (required for method=pattern)');
+        }
+        if (!detection['condition']) {
+          errors.push('Missing detection.condition (boolean expression, required for method=pattern)');
+        }
+      } else if (method === 'signature') {
+        // §5: detection.signature.indicators required.
+        const sig = detection['signature'] as Record<string, unknown> | undefined;
+        if (!sig) {
+          errors.push('Missing detection.signature (required for method=signature)');
+        } else {
+          const indicators = sig['indicators'] as unknown[] | undefined;
+          if (!Array.isArray(indicators) || indicators.length === 0) {
+            errors.push('detection.signature.indicators must be a non-empty array');
+          }
+        }
+      } else if (method === 'semantic') {
+        // §6: detection.semantic.prompt_template + threshold + judge_model_class required.
+        const sem = detection['semantic'] as Record<string, unknown> | undefined;
+        if (!sem) {
+          errors.push('Missing detection.semantic (required for method=semantic)');
+        } else {
+          for (const field of ['judge_model_class', 'prompt_template', 'threshold']) {
+            if (sem[field] === undefined) {
+              errors.push(`Missing detection.semantic.${field}`);
+            }
+          }
+        }
+      } else if (method === 'trace') {
+        // §8: detection.trace with at least one of forbid/require/invariant.
+        const trace = detection['trace'] as Record<string, unknown> | undefined;
+        if (!trace) {
+          errors.push('Missing detection.trace (required for method=trace)');
+        } else {
+          const hasPrimitive = ['forbid', 'require', 'invariant'].some(
+            (p) => Array.isArray(trace[p]) && (trace[p] as unknown[]).length > 0
+          );
+          if (!hasPrimitive) {
+            errors.push('detection.trace requires at least one non-empty primitive (forbid/require/invariant)');
+          }
+        }
+      } else if (method === 'behavioral') {
+        // §7: behavioral method placeholder; accept any detection.behavioral block.
+        if (!detection['behavioral']) {
+          warnings.push('detection.behavioral block recommended for method=behavioral (spec §7 placeholder)');
+        }
       }
     }
 

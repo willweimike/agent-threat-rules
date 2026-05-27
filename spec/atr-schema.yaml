@@ -22,12 +22,14 @@ required:
   - author
   - date
   - severity
-  - detection_tier
   - maturity
   - tags
   - agent_source
   - detection
   - response
+# Note (v1.1): detection_tier is now OPTIONAL. It was required by the
+# pre-1.0 spec drafts but is superseded by detection.method (atr-method-v1.1.md §4).
+# Rules MAY still set detection_tier for backward compatibility with older engines.
 
 properties:
 
@@ -78,8 +80,12 @@ properties:
 
   detection_tier:
     type: string
-    enum: [pattern, behavioral, protocol]
-    description: Detection approach used by this rule
+    enum: [pattern, signature, semantic, behavioral, protocol, trace]
+    description: >
+      Detection approach used by this rule. OPTIONAL (v1.1: superseded by
+      detection.method). Kept for backward compatibility with older engines.
+      Aligned with the 5 method values in atr-method-v1.1.md plus the legacy
+      "protocol" value for v1.0 conformance.
 
   maturity:
     type: string
