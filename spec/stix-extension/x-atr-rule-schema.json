@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/Agent-Threat-Rule/agent-threat-rules/main/spec/stix-extension/x-atr-rule-schema.json",
   "title": "x-atr-rule",
-  "description": "STIX 2.1 custom SDO for an Agent Threat Rules detection rule.",
+  "description": "STIX 2.1 custom SDO for an Agent Threat Rules detection rule. v1.1 (2026-05-28) adds method/profile fields for the five-plane detection model defined in spec/atr-method-v1.1.md, and compliance crosswalks for NIST CSF 2.0, ETSI TS 104 223, and OSCAL.",
   "type": "object",
   "required": [
     "type",
@@ -51,7 +51,7 @@
     "atr_id": {
       "type": "string",
       "pattern": "^ATR-[0-9]{4}-[0-9]{5}$",
-      "description": "Canonical ATR rule identifier (e.g. ATR-2026-00431)."
+      "description": "Canonical ATR rule identifier (e.g. ATR-2026-00548)."
     },
     "atr_category": {
       "type": "string",
@@ -64,13 +64,24 @@
         "excessive-autonomy",
         "data-poisoning",
         "model-abuse",
+        "model-security",
         "skill-compromise"
       ],
-      "description": "One of nine ATR attack-class categories."
+      "description": "One of ten canonical ATR attack-class categories (SPEC.md §8). v1.1 added 'model-security'."
     },
     "atr_subcategory": {
       "type": "string",
-      "description": "Optional finer-grained subcategory (e.g. 'mcp-oauth-metadata-injection')."
+      "description": "Optional finer-grained subcategory (e.g. 'cross-agent-context-drift', 'missing-human-approval')."
+    },
+    "atr_method": {
+      "type": "string",
+      "enum": ["pattern", "signature", "semantic", "behavioral", "trace"],
+      "description": "Detection method (atr-method-v1.1.md §4). 'pattern' is the v1.0 default; other methods opt into method-specific payload fields. v1.1 addition."
+    },
+    "atr_runtime_profile": {
+      "type": "string",
+      "enum": ["deterministic", "assisted"],
+      "description": "Deployment profile (atr-method-v1.1.md §4.1). 'deterministic' = signature + pattern, sub-5ms hot path. 'assisted' = semantic + behavioral + trace, sidecar / async path. v1.1 addition."
     },
     "name": {
       "type": "string",
@@ -83,7 +94,8 @@
     },
     "maturity": {
       "type": "string",
-      "enum": ["experimental", "test", "stable", "deprecated"]
+      "enum": ["experimental", "test", "stable", "deprecated", "draft"],
+      "description": "Maturity tier. v1.1 added 'draft' to align with the on-disk rule status vocabulary."
     },
     "agent_source_type": {
       "type": "string",
@@ -97,12 +109,14 @@
         "memory_access",
         "skill_lifecycle",
         "skill_permission",
-        "skill_chain"
-      ]
+        "skill_chain",
+        "agent_trace"
+      ],
+      "description": "v1.1 added 'agent_trace' for trace-method rules ingesting OpenInference / OTel GenAI span DAGs."
     },
     "detection_patterns": {
       "type": "array",
-      "description": "Regex patterns extracted from the ATR rule's detection.conditions.",
+      "description": "Regex patterns extracted from the ATR rule's detection.conditions (method=pattern only).",
       "items": {
         "type": "object",
         "required": ["field", "pattern"],
@@ -114,6 +128,49 @@
         }
       }
     },
+    "signature_indicators": {
+      "type": "array",
+      "description": "v1.1: For method=signature rules. Mirrors detection.signature.indicators in atr-method-v1.1.md §5.",
+      "items": {
+        "type": "object",
+        "required": ["type", "value", "target_field"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["sha256", "sha512", "blake2b-256", "package_name", "registry_url", "skill_id"]
+          },
+          "value": { "type": "string" },
+          "target_field": { "type": "string" },
+          "provenance": { "type": "object" }
+        }
+      }
+    },
+    "semantic_judge": {
+      "type": "object",
+      "description": "v1.1: For method=semantic rules. Mirrors detection.semantic in atr-method-v1.1.md §6.",
+      "properties": {
+        "judge_model_class": { "type": "string" },
+        "prompt_template": { "type": "string" },
+        "threshold": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "judge_prompt_hash": { "type": "string" },
+        "fallback_method": { "type": "string", "enum": ["pattern", "none"] }
+      }
+    },
+    "trace_detection": {
+      "type": "object",
+      "description": "v1.1: For method=trace rules. Mirrors detection.trace in atr-method-v1.1.md §8.",
+      "properties": {
+        "ingest_format": { "type": "string", "enum": ["openinference", "otel_gen_ai"] },
+        "primitives": {
+          "type": "object",
+          "properties": {
+            "forbid": { "type": "array" },
+            "require": { "type": "array" },
+            "invariant": { "type": "array" }
+          }
+        }
+      }
+    },
     "response_actions": {
       "type": "array",
       "items": {
@@ -122,15 +179,24 @@
           "block_input",
           "block_output",
           "block_tool",
+          "block_request",
           "quarantine_session",
+          "quarantine_artifact",
           "reset_context",
           "alert",
+          "log_alert",
           "snapshot",
           "escalate",
+          "require_human_review",
+          "redact_match",
+          "rate_limit_source",
+          "revoke_credential",
+          "notify_operator",
           "reduce_permissions",
           "kill_agent"
         ]
-      }
+      },
+      "description": "v1.1: extended to include actions from SPEC.md Appendix A canonical action vocabulary."
     },
     "owasp_llm_refs": {
       "type": "array",
@@ -139,6 +205,11 @@
     "owasp_agentic_refs": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "owasp_ast_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "OWASP Agentic Skills Top 10 references (v1.1)."
     },
     "mitre_atlas_refs": {
       "type": "array",
@@ -155,13 +226,38 @@
         "pattern": "^CVE-[0-9]{4}-[0-9]+$"
       }
     },
+    "safe_mcp_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "SAFE-MCP technique IDs (v1.1)."
+    },
+    "probe_id_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "v1.1: Adversarial probe identifiers (format <framework>:<probe-name>, e.g. 'pyrit:indirect_pi_v2' or 'garak:promptinject.HijackHateHumans'). Lets STIX consumers measure detection coverage against red-team probe outputs."
+    },
     "compliance_refs": {
       "type": "object",
-      "description": "Mappings to compliance frameworks. Each value is an array of {control, context, strength}.",
+      "description": "Mappings to compliance frameworks. v1.1 added nist_csf, etsi_ts_104223, oscal_assessment_objective.",
       "properties": {
         "eu_ai_act": { "type": "array" },
         "nist_ai_rmf": { "type": "array" },
-        "iso_42001": { "type": "array" }
+        "iso_42001": { "type": "array" },
+        "nist_csf": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "NIST CSF 2.0 subcategory IDs (e.g., DE.CM-09, PR.IR-01). v1.1."
+        },
+        "etsi_ts_104223": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "ETSI TS 104 223 principle / sub-principle IDs (e.g., P4.3). v1.1."
+        },
+        "oscal_assessment_objective": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "OSCAL Assessment Plan / Result objective IDs this rule supplies evidence for. v1.1."
+        }
       },
       "additionalProperties": false
     },
