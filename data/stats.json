@@ -2,13 +2,13 @@
   "version": "3.0.1",
   "generatedAt": "2026-05-28T04:18:37.277Z",
   "rules": {
-    "total": 449,
+    "total": 450,
     "categories": 10,
     "byCategory": {
       "agent-manipulation": 106,
       "context-exfiltration": 42,
       "data-poisoning": 2,
-      "excessive-autonomy": 8,
+      "excessive-autonomy": 9,
       "model-abuse": 10,
       "model-security": 3,
       "privilege-escalation": 18,

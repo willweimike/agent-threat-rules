@@ -109,7 +109,7 @@ Engines MUST treat unknown indicator `type` values as a graceful_error per SPEC 
 
 ### 5.4 ATR→YARA Compiler Compatibility
 
-Signature Rules are designed to be compilable to YARA rule format for ecosystems that already consume YARA (e.g., production skill scanners, VirusTotal-class infrastructure). A normative ATR→YARA compiler specification will be published as `spec/atr-compiler-yara-v1.0.md` in a follow-up. The compilation contract is:
+Signature Rules are designed to be compilable to YARA rule format for ecosystems that already consume YARA (e.g., production skill scanners, VirusTotal-class infrastructure). A reference compiler is implemented at `scripts/compile-yara.ts` and exposed as `npm run compile:yara`; the compilation contract below is normative and the compiler version is `atr-to-yara@1.0.0`. The compilation contract is:
 
 | ATR Indicator | YARA equivalent |
 |--------------|----------------|
@@ -121,7 +121,7 @@ Signature Rules are designed to be compilable to YARA rule format for ecosystems
 | `match_logic: all` | YARA `condition: all of them` |
 | `match_logic: any` | YARA `condition: any of them` |
 
-The ATR→YARA compiler is OPTIONAL infrastructure; non-implementing engines do not lose conformance. Engines that publish YARA outputs MUST declare the `atr/compiler/yara@1.0` capability.
+The ATR→YARA compiler is OPTIONAL infrastructure; non-implementing engines do not lose conformance. Engines that publish YARA outputs MUST declare the `atr/compiler/yara@1.0` capability. The reference implementation at `scripts/compile-yara.ts` is tested via 11 unit tests at `tests/compile-yara.test.ts` covering single-indicator emission, multi-indicator any/all combinators, hash/string mixing, character escaping, hex normalization, and graceful_error on unknown indicator types per §5.3.
 
 ### 5.5 Example
 
@@ -209,7 +209,113 @@ Calibration methodology adapted from the Promptfoo `llm-rubric` workflow [PROMPT
 
 ## 7. Behavioral Method
 
-Section 7 is reserved for the behavioral method, which expresses metric thresholds over time windows (e.g., "tool_calls_per_session > 50 within 5m"). v1.1 leaves the wire format as a normative placeholder; the required fields will follow the named-map shape already in the schema's secondary detection format (`metric`, `operator`, `threshold`, `window`).
+### 7.1 Purpose
+
+The Behavioral method detects threats that manifest as deviation of an observable metric from a baseline or threshold over a bounded time window. Unlike Pattern (per-input regex) and Trace (per-trace span DAG assertion), Behavioral evaluates **aggregates** over many events: tool-call frequency, token-spend velocity, retry-loop counts, latency outliers, baseline-deviation on a continuous metric.
+
+Threat classes this method addresses:
+
+- **Runaway autonomy**: an agent that enters a tool-call loop and exceeds a per-session budget within seconds (excessive-autonomy category).
+- **Resource exhaustion / denial-of-wallet**: token-spend or compute velocity outside a configured envelope.
+- **Probing / reconnaissance**: an agent making a burst of read-only tool calls across unrelated namespaces within a short window — individually benign, aggregately anomalous.
+- **Slow-walk exfiltration**: small chunks of sensitive data sent across many sessions in a baseline-deviating cumulative pattern.
+
+The method is closest in shape to Sigma's correlation rules and SIEM time-window queries, adapted for agent event streams.
+
+### 7.2 Required Fields
+
+A Rule with `method: behavioral` MUST declare `detection.behavioral` with:
+
+| Field | Type | Constraint |
+|-------|------|-----------|
+| `metric` | string | Name of the metric being observed (e.g., `tool_calls_per_session`, `token_spend_usd`, `tool_distinct_namespaces`). |
+| `aggregation` | enum | One of: `count`, `sum`, `avg`, `max`, `distinct_count`, `rate`. How event values are aggregated into a single metric value over the window. |
+| `window` | string | ISO 8601 duration (e.g., `PT5M`, `PT1H`) or shorthand (`5m`, `1h`). |
+| `operator` | enum | One of: `gt`, `lt`, `gte`, `lte`, `eq`, `deviation_from_baseline`. |
+| `threshold` | number | Numeric value the aggregated metric is compared against. For `deviation_from_baseline`, expressed as standard-deviation multiplier or fractional change (see §7.4). |
+
+### 7.3 Optional Fields
+
+| Field | Type | Constraint |
+|-------|------|-----------|
+| `group_by` | array of string | Dimensions to partition the aggregation over (e.g., `["session.id"]` for per-session counts; `["user.id", "tool.name"]` for per-user-per-tool counts). Empty / absent = global aggregation. |
+| `filter` | object | Pre-aggregation event filter expressed as attribute matchers per §8.3 predicate vocabulary. Engine evaluates filter on each event before counting. |
+| `baseline` | object | Required only when `operator: deviation_from_baseline`. See §7.4. |
+| `min_events` | integer | Minimum event count in the window before the rule may fire (suppresses false positives at low sample sizes). |
+| `cooldown` | string | Duration the rule MUST NOT re-fire on the same `group_by` partition after a Match. ISO 8601 duration. |
+
+### 7.4 Baseline (for deviation_from_baseline operator)
+
+The `deviation_from_baseline` operator compares the current window's metric value against a baseline. The `baseline` block MUST declare:
+
+| Field | Type | Constraint |
+|-------|------|-----------|
+| `source` | enum | One of: `rolling_mean`, `historical_percentile`, `fixed`. |
+| `lookback` | string | For `rolling_mean` and `historical_percentile`: the duration to compute the baseline over (e.g., `P7D` = 7 days). |
+| `percentile` | number | For `historical_percentile`: value in (0, 100) — e.g., `95` for p95. |
+| `value` | number | For `fixed`: the literal baseline value. |
+| `deviation_unit` | enum | One of: `stddev` (threshold expresses how many standard deviations above baseline), `fraction` (threshold expresses fractional change, e.g., `2.0` = 200% of baseline). |
+
+### 7.5 Evaluation Semantics
+
+For event stream E and Rule R with method=behavioral:
+
+1. Engine maintains a time-windowed view per `group_by` partition of length `R.behavioral.window`.
+2. For each incoming event e, Engine evaluates `R.behavioral.filter` against e; if false, e is skipped.
+3. Otherwise e is folded into the appropriate partition via `R.behavioral.aggregation`.
+4. After each fold (or on a regular tick, per Engine policy), Engine computes the aggregated value `v` per partition.
+5. If `R.behavioral.min_events` is set and event count in the window is below it, no Match is emitted.
+6. Engine compares `v` to `R.behavioral.threshold` per `R.behavioral.operator`. For `deviation_from_baseline`, Engine first computes the baseline per §7.4 and the deviation `d = (v - baseline) / unit_divisor`, then compares `d` to `threshold`.
+7. On match, Engine emits a Match output (SPEC.md §7) and applies `cooldown` to the partition. Subsequent events within cooldown MUST NOT produce a new Match for the same partition.
+
+Engines MUST implement at least one of `count`, `sum`, `rate` aggregations and the operators `gt`, `lt`, `gte`, `lte` for L1 conformance of the behavioral method.
+
+### 7.6 Example
+
+```yaml
+id: ATR-YYYY-DRAFT-runaway-tool-loop
+title: "Runaway tool-call loop within a session"
+status: draft
+severity: high
+tags:
+  category: excessive-autonomy
+  scan_target: runtime
+agent_source:
+  type: agent_behavior
+  framework: [any]
+detection:
+  method: behavioral
+  behavioral:
+    metric: "tool_calls"
+    aggregation: count
+    window: "PT1M"
+    operator: gt
+    threshold: 100
+    group_by: ["session.id"]
+    min_events: 10
+    cooldown: "PT5M"
+    filter:
+      span.kind:
+        in: [TOOL]
+response:
+  actions: [alert, rate_limit_source, escalate]
+```
+
+This rule fires when any single session emits more than 100 tool calls within one minute, with a 5-minute cooldown to suppress duplicate alerts. The `min_events: 10` floor prevents the rule from firing on barely-active sessions in cold-start periods.
+
+### 7.7 Storage and Performance
+
+Behavioral evaluation requires the engine to maintain windowed state per `group_by` partition. Conformant engines:
+
+- SHOULD use a sliding-window implementation (not a fixed bucket clock-aligned tick) to avoid edge-of-window artifacts.
+- SHOULD bound per-partition memory consumption and document the per-rule memory ceiling.
+- SHOULD support reset of per-partition state on explicit operator command (e.g., after an incident review).
+
+A reference time-series backend is not specified normatively. Engines MAY use in-memory ring buffers (for short windows), Redis time-series, ClickHouse, Prometheus, or any other backend; the wire format and rule semantics are storage-agnostic.
+
+### 7.8 Profile Placement
+
+The Behavioral method belongs to the `assisted` runtime profile (§4.1). The aggregation latency is bounded at well below the 100 ms target only when the windowed state is hot in memory; cold-start partitions or remote time-series backends may exceed the latency target. Operators deploying behavioral rules in a deterministic-profile context MUST measure tail latency before promoting the rule to in-line enforcement.
 
 ## 8. Trace Method
 

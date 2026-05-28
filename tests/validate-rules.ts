@@ -35,9 +35,13 @@ const VALID_SOURCE_TYPES = [
 ];
 const VALID_METHODS = ['pattern', 'signature', 'semantic', 'behavioral', 'trace'];
 const VALID_ACTIONS = [
+  // v1.0 vocabulary
   'block_input', 'block_output', 'block_tool', 'quarantine_session',
   'reset_context', 'alert', 'snapshot', 'escalate', 'reduce_permissions',
   'kill_agent',
+  // SPEC.md Appendix A canonical action vocabulary (v1.0+)
+  'block_request', 'log_alert', 'quarantine_artifact', 'require_human_review',
+  'redact_match', 'rate_limit_source', 'revoke_credential', 'notify_operator',
 ];
 
 function collectYamlFiles(dir: string): string[] {
@@ -174,9 +178,27 @@ function validateRule(filePath: string): ValidationResult {
           }
         }
       } else if (method === 'behavioral') {
-        // §7: behavioral method placeholder; accept any detection.behavioral block.
-        if (!detection['behavioral']) {
-          warnings.push('detection.behavioral block recommended for method=behavioral (spec §7 placeholder)');
+        // §7: detection.behavioral requires metric, aggregation, window, operator, threshold.
+        const beh = detection['behavioral'] as Record<string, unknown> | undefined;
+        if (!beh) {
+          errors.push('Missing detection.behavioral (required for method=behavioral)');
+        } else {
+          for (const field of ['metric', 'aggregation', 'window', 'operator', 'threshold']) {
+            if (beh[field] === undefined) {
+              errors.push(`Missing detection.behavioral.${field}`);
+            }
+          }
+          const validAgg = ['count', 'sum', 'avg', 'max', 'distinct_count', 'rate'];
+          if (beh['aggregation'] && !validAgg.includes(beh['aggregation'] as string)) {
+            errors.push(`Invalid detection.behavioral.aggregation: ${beh['aggregation']}`);
+          }
+          const validOp = ['gt', 'lt', 'gte', 'lte', 'eq', 'deviation_from_baseline'];
+          if (beh['operator'] && !validOp.includes(beh['operator'] as string)) {
+            errors.push(`Invalid detection.behavioral.operator: ${beh['operator']}`);
+          }
+          if (beh['operator'] === 'deviation_from_baseline' && !beh['baseline']) {
+            errors.push('detection.behavioral.baseline required when operator=deviation_from_baseline');
+          }
         }
       }
     }

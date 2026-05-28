@@ -340,7 +340,7 @@ properties:
       trace:
         type: object
         description: >
-          REQUIRED when method=trace. See atr-method-v1.1.md §6.
+          REQUIRED when method=trace. See atr-method-v1.1.md §8.
         properties:
           ingest_format:
             type: string
@@ -359,6 +359,62 @@ properties:
             type: array
             description: "Attributes that MUST hold across a set of spans"
             items: {type: object}
+      behavioral:
+        type: object
+        description: >
+          REQUIRED when method=behavioral. See atr-method-v1.1.md §7.
+        required: [metric, aggregation, window, operator, threshold]
+        properties:
+          metric:
+            type: string
+            description: "Name of the metric being observed (e.g., tool_calls_per_session, token_spend_usd)"
+          aggregation:
+            type: string
+            enum: [count, sum, avg, max, distinct_count, rate]
+            description: "How event values aggregate into a single metric value over the window"
+          window:
+            type: string
+            description: "ISO 8601 duration (e.g., PT5M, PT1H) or shorthand (5m, 1h)"
+          operator:
+            type: string
+            enum: [gt, lt, gte, lte, eq, deviation_from_baseline]
+            description: "Comparison operator between aggregated metric and threshold"
+          threshold:
+            type: number
+            description: "Numeric value compared against the aggregated metric. For deviation_from_baseline, expressed as stddev multiplier or fractional change."
+          group_by:
+            type: array
+            items: {type: string}
+            description: "Dimensions to partition the aggregation over (e.g., session.id, user.id)"
+          filter:
+            type: object
+            description: "Pre-aggregation event filter using §8.3 predicate vocabulary"
+          baseline:
+            type: object
+            description: "Required only when operator=deviation_from_baseline"
+            properties:
+              source:
+                type: string
+                enum: [rolling_mean, historical_percentile, fixed]
+              lookback:
+                type: string
+                description: "Duration to compute baseline over (e.g., P7D)"
+              percentile:
+                type: number
+                minimum: 0
+                maximum: 100
+              value:
+                type: number
+              deviation_unit:
+                type: string
+                enum: [stddev, fraction]
+          min_events:
+            type: integer
+            minimum: 1
+            description: "Minimum event count in window before rule may fire"
+          cooldown:
+            type: string
+            description: "ISO 8601 duration the rule must not re-fire on same group_by partition after Match"
       conditions:
         description: >
           Detection conditions. Supports two formats:
@@ -466,6 +522,7 @@ properties:
         items:
           type: string
           enum:
+            # v1.0 vocabulary
             - block_input        # Reject the user/agent input
             - block_output       # Suppress the agent output
             - block_tool         # Prevent the tool call from executing
@@ -476,6 +533,15 @@ properties:
             - escalate           # Escalate to human reviewer
             - reduce_permissions # Reduce agent's available tools/capabilities
             - kill_agent         # Terminate the agent process
+            # SPEC.md Appendix A canonical action vocabulary (v1.0+)
+            - block_request          # Reject the originating request (generic)
+            - log_alert              # Emit a structured alert event without blocking
+            - quarantine_artifact    # Isolate a specific artifact (skill, tool, context blob)
+            - require_human_review   # Pause the action pending operator approval
+            - redact_match           # Hash or truncate matched substring in output
+            - rate_limit_source      # Apply rate limit to the source agent/user/session
+            - revoke_credential      # Revoke an active credential identified in the match
+            - notify_operator        # Out-of-band notification (paging, email, chat)
         description: Actions to take when the rule triggers
       auto_response_threshold:
         type: string
