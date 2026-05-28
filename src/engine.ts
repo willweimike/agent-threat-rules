@@ -23,11 +23,14 @@ import type {
   ScanResult,
   ScanType,
   ATRLanguage,
+  ATRSemanticJudge,
 } from './types.js';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { computeContentHash } from './content-hash.js';
 import { loadRulesFromDirectory, loadRuleFile } from './loader.js';
+import { evaluateTraceRule } from './trace-evaluator.js';
+import { evaluateSemanticRule } from './semantic-evaluator.js';
 import type { SessionTracker } from './session-tracker.js';
 import { computeVerdict } from './verdict.js';
 import type { ActionExecutor } from './action-executor.js';
@@ -426,6 +429,59 @@ export class ATREngine {
    */
   private evaluateRule(rule: ATRRule, event: AgentEvent): ATRMatch | null {
     const { detection } = rule;
+
+    // v1.1: method-based dispatch. Default is 'pattern' for backward compat.
+    const method = detection.method ?? 'pattern';
+
+    // method=trace — evaluate via trace-evaluator if event carries a trace.
+    if (method === 'trace') {
+      if (!event.trace) {
+        // Event does not carry trace; rule cannot evaluate. Per spec §9,
+        // engines without the capability skip silently rather than fail.
+        return null;
+      }
+      const result = evaluateTraceRule(rule, event.trace);
+      if (!result.matched) return null;
+      const baseConfidence = rule.tags.confidence === 'high' ? 0.9 : rule.tags.confidence === 'medium' ? 0.7 : 0.5;
+      return {
+        rule,
+        matchedConditions: result.matchedPrimitives.map((p) => `trace.${p}`),
+        matchedPatterns: result.violations,
+        confidence: baseConfidence,
+        timestamp: new Date().toISOString(),
+        scan_context: 'native' as const,
+      };
+    }
+
+    // method=semantic — async path is not used in the sync evaluate() API.
+    // Engines that implement semantic must use evaluateAsync (see below) or
+    // wire a synchronous judge. Pattern fallback applies here.
+    if (method === 'semantic') {
+      // If the rule has fallback_method=pattern AND conditions[] is populated,
+      // evaluate the pattern fallback synchronously. Otherwise skip.
+      if (detection.semantic?.fallback_method === 'pattern' && Array.isArray(detection.conditions) && detection.conditions.length > 0) {
+        const allMatchedPatterns: string[] = [];
+        return this.evaluateArrayConditions(rule, detection.conditions, detection.condition, event, allMatchedPatterns);
+      }
+      return null;
+    }
+
+    // method=signature — sub-millisecond exact-match path. For v1.1, we
+    // do a minimal in-engine check: walk indicators, hash-compare to
+    // event fields. Full impl is deferred; for now treat as non-matching
+    // unless caller has hashed event.fields appropriately.
+    if (method === 'signature') {
+      return this.evaluateSignatureMethod(rule, event);
+    }
+
+    // method=behavioral — windowed metric evaluation. Requires state across
+    // multiple events; the sync evaluate() API cannot maintain state.
+    // Skip silently; behavioral evaluation belongs in a separate streaming path.
+    if (method === 'behavioral') {
+      return null;
+    }
+
+    // Default: pattern method (v1.0 evaluation path).
     const conditions = detection.conditions;
     const allMatchedPatterns: string[] = [];
 
@@ -435,6 +491,70 @@ export class ATREngine {
     }
 
     return this.evaluateNamedConditions(rule, conditions, detection.condition, event, allMatchedPatterns);
+  }
+
+  /**
+   * Async variant that supports method=semantic with an injected judge.
+   * For trace/pattern/signature/behavioral methods, defers to the sync path.
+   */
+  async evaluateRuleAsync(
+    rule: ATRRule,
+    event: AgentEvent,
+    judge?: ATRSemanticJudge,
+  ): Promise<ATRMatch | null> {
+    const method = rule.detection.method ?? 'pattern';
+    if (method === 'semantic') {
+      const result = await evaluateSemanticRule(rule, event.content, { judge });
+      if (!result.matched) return null;
+      return {
+        rule,
+        matchedConditions: ['semantic'],
+        matchedPatterns: result.category ? [result.category] : [],
+        confidence: result.confidence ?? 0.5,
+        timestamp: new Date().toISOString(),
+        scan_context: 'native' as const,
+      };
+    }
+    // For non-semantic methods, fall back to sync path.
+    return this.evaluateRule(rule, event);
+  }
+
+  /**
+   * Minimal signature-method evaluator (atr-method-v1.1.md §5).
+   * Walks detection.signature.indicators against event.fields with the
+   * specified match_logic. Hash-typed indicators expect event.fields to
+   * contain pre-computed hex hashes at the indicated target_field.
+   */
+  private evaluateSignatureMethod(rule: ATRRule, event: AgentEvent): ATRMatch | null {
+    const sig = rule.detection.signature;
+    if (!sig || !Array.isArray(sig.indicators) || sig.indicators.length === 0) return null;
+    const matchLogic = sig.match_logic ?? 'any';
+
+    const matched: string[] = [];
+    for (const ind of sig.indicators) {
+      const actual = event.fields?.[ind.target_field];
+      if (actual === undefined) continue;
+      // Hash types: case-insensitive hex compare. Others: case-sensitive string compare.
+      const isHashType = ind.type === 'sha256' || ind.type === 'sha512' || ind.type === 'blake2b-256';
+      const a = isHashType ? actual.toLowerCase() : actual;
+      const b = isHashType ? ind.value.toLowerCase() : ind.value;
+      if (a === b) matched.push(`${ind.type}:${ind.value}`);
+    }
+
+    const violated = matchLogic === 'all'
+      ? matched.length === sig.indicators.length
+      : matched.length > 0;
+
+    if (!violated) return null;
+
+    return {
+      rule,
+      matchedConditions: matched.map((_, i) => String(i)),
+      matchedPatterns: matched,
+      confidence: 1.0, // exact match
+      timestamp: new Date().toISOString(),
+      scan_context: 'native' as const,
+    };
   }
 
   /**

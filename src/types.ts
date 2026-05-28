@@ -161,6 +161,112 @@ export interface ATRDetection {
   /** "any" = OR across all conditions, "all" = AND. For named format: boolean expression string. */
   condition: string;
   false_positives?: string[];
+  /** v1.1 detection method extension. Default "pattern" when absent. */
+  method?: "pattern" | "signature" | "semantic" | "behavioral" | "trace";
+  /** v1.1 signature method companion (atr-method-v1.1.md §5) */
+  signature?: ATRSignatureDetection;
+  /** v1.1 semantic method companion (atr-method-v1.1.md §6) */
+  semantic?: ATRSemanticDetection;
+  /** v1.1 behavioral method companion (atr-method-v1.1.md §7) */
+  behavioral?: ATRBehavioralDetection;
+  /** v1.1 trace method companion (atr-method-v1.1.md §8) */
+  trace?: ATRTraceDetection;
+}
+
+/** v1.1 signature method — exact-match indicators */
+export interface ATRSignatureDetection {
+  indicators: ATRSignatureIndicator[];
+  match_logic?: "any" | "all";
+}
+
+export interface ATRSignatureIndicator {
+  type: "sha256" | "sha512" | "blake2b-256" | "package_name" | "registry_url" | "skill_id";
+  value: string;
+  target_field: string;
+  provenance?: { first_observed?: string; source?: string; attribution?: string };
+}
+
+/** v1.1 semantic method — LLM-as-judge */
+export interface ATRSemanticDetection {
+  judge_model_class: string;
+  prompt_template: string;
+  threshold: number;
+  output_schema?: Record<string, unknown>;
+  cache_ttl?: number;
+  judge_prompt_hash?: string;
+  fallback_method?: "pattern" | "none";
+  consensus?: { n: number; agreement: number };
+}
+
+/** v1.1 behavioral method — metric threshold over time window */
+export interface ATRBehavioralDetection {
+  metric: string;
+  aggregation: "count" | "sum" | "avg" | "max" | "distinct_count" | "rate";
+  window: string;
+  operator: "gt" | "lt" | "gte" | "lte" | "eq" | "deviation_from_baseline";
+  threshold: number;
+  group_by?: string[];
+  filter?: Record<string, unknown>;
+  baseline?: {
+    source: "rolling_mean" | "historical_percentile" | "fixed";
+    lookback?: string;
+    percentile?: number;
+    value?: number;
+    deviation_unit?: "stddev" | "fraction";
+  };
+  min_events?: number;
+  cooldown?: string;
+}
+
+/** v1.1 trace method — declarative assertions over span DAG */
+export interface ATRTraceDetection {
+  ingest_format?: "openinference" | "otel_gen_ai";
+  forbid?: ATRTraceForbid[];
+  require?: ATRTraceRequire[];
+  invariant?: ATRTraceInvariant[];
+}
+
+/** Span shape matcher: span.kind + attributes (literal or predicate) */
+export type ATRSpanShape = {
+  ["span.kind"]?: string;
+  attributes?: Record<string, unknown>;
+};
+
+export interface ATRTraceForbid {
+  shape: ATRSpanShape;
+  preceded_by?: ATRSpanShape | { one_of_shapes: ATRSpanShape[] };
+  within_trace?: boolean;
+  description?: string;
+}
+
+export interface ATRTraceRequire {
+  target_shape: ATRSpanShape;
+  must_be_preceded_by: ATRSpanShape | { one_of_shapes: ATRSpanShape[] };
+  within_trace?: boolean;
+  description?: string;
+}
+
+export interface ATRTraceInvariant {
+  attribute: string;
+  across: "trace" | "agent.delegation_chain" | "session" | "conversation";
+  description?: string;
+}
+
+/** A single span in an OpenInference / OTel GenAI trace */
+export interface ATRSpan {
+  id: string;
+  ["span.kind"]?: string;
+  kind?: string; // accept either shape
+  attributes?: Record<string, unknown>;
+  start_time?: string;
+  end_time?: string;
+  parent_id?: string;
+}
+
+/** An agent execution trace — a temporally ordered set of spans */
+export interface ATRTrace {
+  trace_id?: string;
+  spans: ATRSpan[];
 }
 
 export interface ATRResponse {
@@ -254,7 +360,20 @@ export interface AgentEvent {
   /** Scan context: when 'skill', all rules fire regardless of agent_source.type,
    *  with cross-context confidence downweighting for MCP-only rules. */
   scanContext?: "mcp" | "skill";
+  /** v1.1 trace payload — for trace-method rule evaluation */
+  trace?: ATRTrace;
 }
+
+/** A semantic-judge invocation signature passed into the engine.
+ *  Engines that implement method=semantic accept this via dependency
+ *  injection. When absent, semantic rules with fallback_method='pattern'
+ *  degrade to pattern evaluation; rules with fallback_method='none' or
+ *  absent fallback skip silently. */
+export type ATRSemanticJudge = (args: {
+  prompt: string;
+  input: string;
+  judge_model_class: string;
+}) => Promise<{ category: string; confidence: number; evidence?: string }>;
 
 /** Result when an ATR rule matches an event */
 export type ScanContextType = "native" | "cross-context";
