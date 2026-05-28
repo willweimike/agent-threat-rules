@@ -1,19 +1,20 @@
-## Daily Scan Summary (2026-05-27)
+## Daily Scan Summary (2026-05-28)
 - Scanned: 50 packages
-- CRITICAL: 3
-- HIGH: 0
+- CRITICAL: 1
+- HIGH: 3
 - CLEAN/LOW: 43
 
 ### Flagged Packages:
-- [CRITICAL] @byimprint/mcp-server (score: 70)
-- [CRITICAL] @caputchin/mcp (score: 100)
-- [CRITICAL] @i18n-agent/mcp-client (score: 100)
+- [HIGH] @ainative/cody-for-chrome-mcp (score: 50)
+- [CRITICAL] @framingui/mcp-server (score: 80)
+- [HIGH] @iflow-mcp/garethcott_enhanced-postgres-mcp-server (score: 45)
+- [HIGH] @iflow-mcp/garethcott-enhanced-postgres-mcp-server (score: 45)
 
 ### Cumulative:
-- Total scanned: 2210
-  - CLEAN: 1305
-  - CRITICAL: 259
+- Total scanned: 2260
+  - CLEAN: 1345
+  - CRITICAL: 260
   - ERROR: 2
-  - HIGH: 176
-  - LOW: 247
-  - MEDIUM: 221
+  - HIGH: 179
+  - LOW: 250
+  - MEDIUM: 224
