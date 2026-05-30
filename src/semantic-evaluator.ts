@@ -27,6 +27,8 @@ export interface SemanticEvaluationResult {
   confidence?: number;
   /** Judge response category if returned */
   category?: string;
+  /** Judge response evidence if returned */
+  evidence?: string;
   /** Why the rule did not evaluate via judge (cache hit / fallback / error) */
   reason?: string;
   /** Set when judge unavailable AND fallback_method !== 'pattern' */
@@ -34,12 +36,12 @@ export interface SemanticEvaluationResult {
 }
 
 interface JudgeCache {
-  get(key: string): { confidence: number; category: string } | undefined;
-  set(key: string, value: { confidence: number; category: string; expires_at: number }): void;
+  get(key: string): { confidence: number; category: string; evidence?: string } | undefined;
+  set(key: string, value: { confidence: number; category: string; evidence?: string; expires_at: number }): void;
 }
 
 class InMemoryJudgeCache implements JudgeCache {
-  private store = new Map<string, { confidence: number; category: string; expires_at: number }>();
+  private store = new Map<string, { confidence: number; category: string; evidence?: string; expires_at: number }>();
   get(key: string) {
     const entry = this.store.get(key);
     if (!entry) return undefined;
@@ -47,9 +49,9 @@ class InMemoryJudgeCache implements JudgeCache {
       this.store.delete(key);
       return undefined;
     }
-    return { confidence: entry.confidence, category: entry.category };
+    return { confidence: entry.confidence, category: entry.category, evidence: entry.evidence };
   }
-  set(key: string, value: { confidence: number; category: string; expires_at: number }): void {
+  set(key: string, value: { confidence: number; category: string; evidence?: string; expires_at: number }): void {
     this.store.set(key, value);
   }
 }
@@ -93,6 +95,7 @@ export async function evaluateSemanticRule(
       matched: cached.confidence >= sem.threshold,
       confidence: cached.confidence,
       category: cached.category,
+      evidence: cached.evidence,
       reason: "cache_hit",
     };
   }
@@ -135,6 +138,7 @@ export async function evaluateSemanticRule(
     cache.set(key, {
       confidence: response.confidence,
       category: response.category,
+      evidence: response.evidence,
       expires_at: Date.now() + sem.cache_ttl * 1000,
     });
   }
@@ -143,6 +147,7 @@ export async function evaluateSemanticRule(
     matched: response.confidence >= sem.threshold,
     confidence: response.confidence,
     category: response.category,
+    evidence: response.evidence,
     reason: "judge_evaluated",
   };
 }
