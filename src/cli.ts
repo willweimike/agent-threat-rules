@@ -54,6 +54,7 @@ ${BOLD}Usage:${RESET}
   atr init [--global]                      Setup ATR guard hook for Claude Code
   atr mcp                                  Start MCP server (stdio transport)
   atr scaffold                             Interactive rule scaffolding
+  atr scaffold-semantic                    Interactive semantic rule scaffolding
   atr badge <package> [--data <audit.json>] [--svg] [--json]
                                            Generate ATR Scanned badge for a package
 
@@ -675,6 +676,113 @@ async function cmdScaffold(): Promise<void> {
   console.log(`\n${DIM}Copy this YAML to a .yaml file in rules/${category.trim()}/ and validate with: atr validate <file>${RESET}\n`);
 }
 
+async function cmdScaffoldSemantic(): Promise<void> {
+  const { createInterface } = await import('node:readline');
+  const { RuleScaffolder } = await import('./rule-scaffolder.js');
+
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+
+  const ask = (question: string): Promise<string> =>
+    new Promise((resolve) => rl.question(question, resolve));
+
+  console.log(`\n${BOLD}ATR Semantic Rule Scaffolder${RESET}`);
+  console.log(`${DIM}Generate a draft method=semantic ATR rule interactively.${RESET}\n`);
+
+  const title = await ask('Rule title: ');
+  if (!title.trim()) {
+    console.error(`${RED}Error: Title is required.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  const categories = [
+    'prompt-injection', 'tool-poisoning', 'context-exfiltration',
+    'agent-manipulation', 'privilege-escalation', 'excessive-autonomy',
+    'data-poisoning', 'model-abuse', 'skill-compromise',
+  ];
+  console.log(`\nCategories: ${categories.join(', ')}`);
+  const category = await ask('Category: ');
+  if (!categories.includes(category.trim())) {
+    console.error(`${RED}Error: Invalid category.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  const attackDescription = await ask('Attack description: ');
+  if (!attackDescription.trim()) {
+    console.error(`${RED}Error: Description is required.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  console.log('\nEnter malicious examples / true positives (one per line, empty line to finish):');
+  const positives: string[] = [];
+  while (true) {
+    const payload = await ask(`  Positive ${positives.length + 1}: `);
+    if (!payload.trim()) break;
+    positives.push(payload.trim());
+  }
+
+  if (positives.length === 0) {
+    console.error(`${RED}Error: At least one positive example is required.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  console.log('\nEnter benign examples / true negatives (one per line, empty line to finish):');
+  const negatives: string[] = [];
+  while (true) {
+    const payload = await ask(`  Negative ${negatives.length + 1}: `);
+    if (!payload.trim()) break;
+    negatives.push(payload.trim());
+  }
+
+  const severities = ['critical', 'high', 'medium', 'low', 'informational'];
+  const severity = await ask(`Severity [${severities.join('/')}] (default: medium): `);
+  const finalSeverity = severity.trim() && severities.includes(severity.trim())
+    ? severity.trim()
+    : 'medium';
+
+  const thresholdRaw = await ask('Semantic threshold 0.0-1.0 (default: 0.7): ');
+  const threshold = thresholdRaw.trim() ? Number.parseFloat(thresholdRaw.trim()) : 0.7;
+
+  const fallbackRaw = await ask('Use generated pattern fallback? [Y/n]: ');
+  const includePatternFallback = !['n', 'no'].includes(fallbackRaw.trim().toLowerCase());
+
+  rl.close();
+
+  const scaffolder = new RuleScaffolder();
+  const result = scaffolder.scaffoldSemantic({
+    title: title.trim(),
+    category: category.trim() as import('./types.js').ATRCategory,
+    attackDescription: attackDescription.trim(),
+    examplePayloads: positives,
+    negativePayloads: negatives,
+    severity: finalSeverity as import('./types.js').ATRSeverity,
+    detectionMethod: 'semantic',
+    semantic: {
+      threshold,
+      includePatternFallback,
+      fallbackMethod: includePatternFallback ? 'pattern' : 'none',
+    },
+  });
+
+  console.log(`\n${GREEN}Generated semantic rule ${result.id}:${RESET}\n`);
+  console.log(`${DIM}${'─'.repeat(60)}${RESET}`);
+  console.log(result.yaml);
+  console.log(`${DIM}${'─'.repeat(60)}${RESET}`);
+
+  if (result.warnings.length > 0) {
+    console.log(`\n${BOLD}Warnings:${RESET}`);
+    for (const w of result.warnings) {
+      console.log(`  - ${w}`);
+    }
+  }
+
+  console.log(`\n${DIM}Place draft YAML in proposals/semantic/ first, then validate with: atr validate <file>${RESET}`);
+  console.log(`${DIM}For live local-model smoke tests, run with --semantic and an Ollama/OpenAI-compatible judge.${RESET}\n`);
+}
+
 // --- INIT command ---
 
 function cmdInit(options: Record<string, string>): void {
@@ -985,6 +1093,9 @@ async function main(): Promise<void> {
       break;
     case 'scaffold':
       await cmdScaffold();
+      break;
+    case 'scaffold-semantic':
+      await cmdScaffoldSemantic();
       break;
     case 'badge':
       cmdBadge(target, options);

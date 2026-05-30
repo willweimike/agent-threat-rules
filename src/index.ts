@@ -66,7 +66,13 @@ export type { SemanticLayerConfig } from './layer-integration.js';
 
 // ── Tooling (rule authoring and coverage analysis) ──────────────
 export { RuleScaffolder } from './rule-scaffolder.js';
-export type { ScaffoldInput, ScaffoldResult, ScaffoldOptions } from './rule-scaffolder.js';
+export type {
+  ScaffoldDetectionMethod,
+  ScaffoldInput,
+  ScaffoldOptions,
+  ScaffoldResult,
+  SemanticScaffoldOptions,
+} from './rule-scaffolder.js';
 export { CoverageAnalyzer } from './coverage-analyzer.js';
 export type { CoverageGap, CoverageReport } from './coverage-analyzer.js';
 
