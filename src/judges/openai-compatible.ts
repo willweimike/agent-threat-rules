@@ -8,7 +8,7 @@
  * @module agent-threat-rules/judges/openai-compatible
  */
 
-import type { ATRSemanticJudge } from "../types.js";
+import type { ATRSemanticJudge, ATRSemanticJudgeResult } from "../types.js";
 
 export interface OpenAICompatibleJudgeConfig {
   /** API key sent as Bearer token. */
@@ -61,7 +61,7 @@ function clampConfidence(value: number): number {
   return Math.max(0, Math.min(1, value));
 }
 
-function normalizeJudgeResult(raw: unknown): Awaited<ReturnType<ATRSemanticJudge>> {
+function normalizeJudgeResult(raw: unknown): ATRSemanticJudgeResult {
   if (raw === null || typeof raw !== "object") {
     throw new Error("Judge result must be a JSON object");
   }
@@ -88,7 +88,7 @@ function normalizeJudgeResult(raw: unknown): Awaited<ReturnType<ATRSemanticJudge
   };
 }
 
-function parseJudgeContent(content: string): Awaited<ReturnType<ATRSemanticJudge>> {
+function parseJudgeContent(content: string): ATRSemanticJudgeResult {
   const cleaned = stripJsonFence(content);
   let parsed: unknown;
   try {

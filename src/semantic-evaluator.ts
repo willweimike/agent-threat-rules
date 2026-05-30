@@ -19,6 +19,7 @@ import type {
   ATRRule,
   ATRSemanticDetection,
   ATRSemanticJudge,
+  ATRSemanticJudgeResult,
 } from "./types.js";
 
 export interface SemanticEvaluationResult {
@@ -116,7 +117,7 @@ export async function evaluateSemanticRule(
 
   // Call judge
   const prompt = renderPrompt(sem.prompt_template, input);
-  let response: { category: string; confidence: number; evidence?: string };
+  let response: ATRSemanticJudgeResult;
   try {
     response = await options.judge({
       prompt,

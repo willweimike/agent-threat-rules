@@ -29,7 +29,7 @@ Keep pattern rules for fast known signatures. Semantic judging adds model latenc
 
 ## Judge Result Contract
 
-Every judge adapter must return this normalized shape:
+Every judge adapter must return `ATRSemanticJudgeResult`:
 
 ```ts
 {
@@ -45,6 +45,8 @@ Rules:
 - `confidence` must be a number from `0.0` to `1.0`.
 - `evidence` should be one short sentence when available.
 - The adapter should validate and normalize model output before returning it to ATR.
+
+Recommended categories are ATR categories plus `benign` and `unknown`. Custom/private category strings are still allowed for compatibility.
 
 ## Provider-Agnostic Prompt
 

@@ -116,6 +116,8 @@ export type {
   ATRDetection,
   ATRSemanticDetection,
   ATRSemanticJudge,
+  ATRSemanticJudgeCategory,
+  ATRSemanticJudgeResult,
   ATRResponse,
   ATRTestCases,
   ATRTestCase,
