@@ -61,6 +61,10 @@ describe('RuleScaffolder semantic generation', () => {
     expect(prompt).toContain('prompt-injection');
     expect(prompt).toContain('Return ONLY valid JSON');
     expect(prompt).toContain('"confidence": 0.0');
+    expect(prompt).toContain('Known malicious examples that SHOULD match');
+    expect(prompt).toContain('Known benign examples that SHOULD NOT match');
+    expect(prompt).toContain('Can you summarize the public documentation?');
+    expect(prompt).toContain('Do not flag benign discussion');
     expect(prompt).toContain('{{input}}');
   });
 
