@@ -68,6 +68,7 @@ export type { SemanticLayerConfig } from './layer-integration.js';
 export { RuleScaffolder } from './rule-scaffolder.js';
 export type {
   ScaffoldDetectionMethod,
+  ScaffoldEvasionTestInput,
   ScaffoldInput,
   ScaffoldOptions,
   ScaffoldResult,

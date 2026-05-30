@@ -715,7 +715,14 @@ async function cmdScaffoldSemantic(): Promise<void> {
     process.exit(1);
   }
 
-  console.log('\nEnter malicious examples / true positives (one per line, empty line to finish):');
+  const notDetectedDescription = await ask('What is NOT detected by this rule: ');
+  if (!notDetectedDescription.trim()) {
+    console.error(`${RED}Error: Non-detection scope is required for semantic rules.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  console.log('\nEnter malicious examples / true positives (at least 5, one per line, empty line to finish):');
   const positives: string[] = [];
   while (true) {
     const payload = await ask(`  Positive ${positives.length + 1}: `);
@@ -723,18 +730,82 @@ async function cmdScaffoldSemantic(): Promise<void> {
     positives.push(payload.trim());
   }
 
-  if (positives.length === 0) {
-    console.error(`${RED}Error: At least one positive example is required.${RESET}`);
+  if (positives.length < 5) {
+    console.error(`${RED}Error: At least 5 positive examples are required for promotion-ready semantic rules.${RESET}`);
     rl.close();
     process.exit(1);
   }
 
-  console.log('\nEnter benign examples / true negatives (one per line, empty line to finish):');
+  console.log('\nEnter benign examples / true negatives (at least 5, include near-misses, empty line to finish):');
   const negatives: string[] = [];
   while (true) {
     const payload = await ask(`  Negative ${negatives.length + 1}: `);
     if (!payload.trim()) break;
     negatives.push(payload.trim());
+  }
+
+  if (negatives.length < 5) {
+    console.error(`${RED}Error: At least 5 negative examples are required for promotion-ready semantic rules.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  console.log('\nEnter evasion tests (at least 3). Leave input empty after 3 to finish.');
+  const evasionTests: import('./rule-scaffolder.js').ScaffoldEvasionTestInput[] = [];
+  while (true) {
+    const input = await ask(`  Evasion ${evasionTests.length + 1} input: `);
+    if (!input.trim()) break;
+    const bypass = await ask('    bypass_technique: ');
+    if (!bypass.trim()) {
+      console.error(`${RED}Error: Each evasion test requires bypass_technique.${RESET}`);
+      rl.close();
+      process.exit(1);
+    }
+    const expected = await ask('    expected [triggered/not_triggered] (default: triggered): ');
+    const normalizedExpected = expected.trim() === 'not_triggered' ? 'not_triggered' : 'triggered';
+    const notes = await ask('    notes (optional): ');
+    evasionTests.push({
+      input: input.trim(),
+      expected: normalizedExpected,
+      bypass_technique: bypass.trim(),
+      ...(notes.trim() ? { notes: notes.trim() } : {}),
+    });
+  }
+
+  if (evasionTests.length < 3) {
+    console.error(`${RED}Error: At least 3 evasion tests are required for promotion-ready semantic rules.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  console.log('\nEnter known false-positive edge cases (at least 1, empty line to finish):');
+  const falsePositiveScenarios: string[] = [];
+  while (true) {
+    const scenario = await ask(`  False positive ${falsePositiveScenarios.length + 1}: `);
+    if (!scenario.trim()) break;
+    falsePositiveScenarios.push(scenario.trim());
+  }
+
+  if (falsePositiveScenarios.length === 0) {
+    console.error(`${RED}Error: At least one false-positive edge case is required.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  const owaspRefsRaw = await ask('OWASP refs, comma-separated (for example LLM01:2025, ASI01): ');
+  const owaspRefs = owaspRefsRaw.split(',').map((ref) => ref.trim()).filter(Boolean);
+  if (owaspRefs.length === 0) {
+    console.error(`${RED}Error: At least one OWASP reference is required.${RESET}`);
+    rl.close();
+    process.exit(1);
+  }
+
+  const mitreRefsRaw = await ask('MITRE refs, comma-separated (for example AML.T0051): ');
+  const mitreRefs = mitreRefsRaw.split(',').map((ref) => ref.trim()).filter(Boolean);
+  if (mitreRefs.length === 0) {
+    console.error(`${RED}Error: At least one MITRE reference is required.${RESET}`);
+    rl.close();
+    process.exit(1);
   }
 
   const severities = ['critical', 'high', 'medium', 'low', 'informational'];
@@ -756,8 +827,13 @@ async function cmdScaffoldSemantic(): Promise<void> {
     title: title.trim(),
     category: category.trim() as import('./types.js').ATRCategory,
     attackDescription: attackDescription.trim(),
+    notDetectedDescription: notDetectedDescription.trim(),
     examplePayloads: positives,
     negativePayloads: negatives,
+    evasionTests,
+    falsePositiveScenarios,
+    owaspRefs,
+    mitreRefs,
     severity: finalSeverity as import('./types.js').ATRSeverity,
     detectionMethod: 'semantic',
     semantic: {

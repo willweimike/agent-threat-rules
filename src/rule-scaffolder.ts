@@ -21,13 +21,23 @@ export interface SemanticScaffoldOptions {
   includePatternFallback?: boolean;
 }
 
+export interface ScaffoldEvasionTestInput {
+  input: string;
+  expected?: 'triggered' | 'not_triggered';
+  bypass_technique: string;
+  notes?: string;
+}
+
 export interface ScaffoldInput {
   title: string;
   category: ATRCategory;
   severity?: ATRSeverity;
   attackDescription: string;
+  notDetectedDescription?: string;
   examplePayloads: string[];
   negativePayloads?: string[];
+  evasionTests?: ScaffoldEvasionTestInput[];
+  falsePositiveScenarios?: string[];
   agentSourceType?: ATRSourceType;
   owaspRefs?: string[];
   mitreRefs?: string[];
@@ -231,6 +241,10 @@ function buildRegexPattern(payload: string, category?: ATRCategory): string {
   return `(?i)${keywords.map((k) => `(?=.*${escapeRegex(k)})`).join('')}`;
 }
 
+function buildExactPayloadPattern(payload: string): string {
+  return `(?i).*${escapeRegex(payload.trim())}.*`;
+}
+
 function generateId(existingIds: ReadonlySet<string> = new Set()): string {
   const year = new Date().getFullYear();
   const maxAttempts = 800;
@@ -305,7 +319,6 @@ Return ONLY valid JSON with this exact shape:
   "confidence": 0.0,
   "evidence": "one short sentence explaining the score"
 }
-
 Rules:
 - Do not include markdown.
 - Do not include code fences.
@@ -317,6 +330,13 @@ Rules:
 
 Input:
 {{input}}`;
+}
+
+function buildDescription(detects: string, doesNotDetect?: string): string {
+  const trimmedDetects = detects.trim();
+  const trimmedDoesNotDetect = doesNotDetect?.trim();
+  if (!trimmedDoesNotDetect) return trimmedDetects;
+  return `Detects: ${trimmedDetects}\n\nDoes not detect: ${trimmedDoesNotDetect}`;
 }
 
 export class RuleScaffolder {
@@ -454,8 +474,8 @@ export class RuleScaffolder {
       ? input.examplePayloads.map((payload, idx) => ({
           field,
           operator: 'regex',
-          value: buildRegexPattern(payload, input.category),
-          description: `Fallback pattern ${idx + 1}: detects "${payload.trim().slice(0, 80)}"`,
+          value: buildExactPayloadPattern(payload),
+          description: `Exact fallback ${idx + 1}: detects supplied TP "${payload.trim().slice(0, 80)}"`,
         }))
       : [];
 
@@ -464,20 +484,27 @@ export class RuleScaffolder {
 
     const truePositives = input.examplePayloads.map((payload) => ({
       input: payload.trim(),
-      expected: 'trigger' as const,
+      expected: 'triggered' as const,
     }));
 
     const trueNegatives = (input.negativePayloads && input.negativePayloads.length > 0)
       ? input.negativePayloads.map((payload) => ({
           input: payload.trim(),
-          expected: 'no_trigger' as const,
+          expected: 'not_triggered' as const,
         }))
       : [
           {
             input: 'TODO: Add benign input that should not trigger this semantic rule',
-            expected: 'no_trigger' as const,
+            expected: 'not_triggered' as const,
           },
         ];
+
+    const evasionTests = input.evasionTests?.map((test) => ({
+      input: test.input.trim(),
+      expected: test.expected ?? 'triggered',
+      bypass_technique: test.bypass_technique.trim(),
+      ...(test.notes && test.notes.trim().length > 0 ? { notes: test.notes.trim() } : {}),
+    }));
 
     const references: Record<string, string[]> = {};
     if (input.owaspRefs && input.owaspRefs.length > 0) {
@@ -492,6 +519,31 @@ export class RuleScaffolder {
         'No negative payloads supplied - add true negatives before promoting this semantic rule.',
       );
     }
+    if (input.examplePayloads.length < 5) {
+      warnings.push(
+        'Fewer than 5 true positives supplied - checklist promotion requires at least 5.',
+      );
+    }
+    if ((input.negativePayloads?.length ?? 0) < 5) {
+      warnings.push(
+        'Fewer than 5 true negatives supplied - checklist promotion requires at least 5.',
+      );
+    }
+    if ((input.evasionTests?.length ?? 0) < 3) {
+      warnings.push(
+        'Fewer than 3 evasion tests supplied - checklist promotion requires at least 3.',
+      );
+    }
+    if (!input.falsePositiveScenarios || input.falsePositiveScenarios.length === 0) {
+      warnings.push(
+        'No false-positive scenarios supplied - document known edge cases before promotion.',
+      );
+    }
+    if (!input.owaspRefs || input.owaspRefs.length === 0 || !input.mitreRefs || input.mitreRefs.length === 0) {
+      warnings.push(
+        'OWASP and MITRE references are both recommended before promotion.',
+      );
+    }
     if (fallbackMethod === 'none') {
       warnings.push(
         'Semantic rule has no pattern fallback - callers must configure a semantic judge to evaluate it.',
@@ -503,7 +555,7 @@ export class RuleScaffolder {
       id,
       schema_version: this.options.schemaVersion,
       status: 'draft',
-      description: input.attackDescription,
+      description: buildDescription(input.attackDescription, input.notDetectedDescription),
       author: this.options.author,
       date,
       severity,
@@ -538,7 +590,9 @@ export class RuleScaffolder {
           fallback_method: fallbackMethod,
         },
         false_positives: [
-          'TODO: Document known false positive scenarios for semantic judging',
+          ...(input.falsePositiveScenarios && input.falsePositiveScenarios.length > 0
+            ? input.falsePositiveScenarios.map((scenario) => scenario.trim())
+            : ['TODO: Document known false positive scenarios for semantic judging']),
         ],
       },
       response: {
@@ -549,6 +603,7 @@ export class RuleScaffolder {
         true_positives: truePositives,
         true_negatives: trueNegatives,
       },
+      ...(evasionTests && evasionTests.length > 0 ? { evasion_tests: evasionTests } : {}),
     };
 
     const yamlStr = yaml.dump(rule, {
