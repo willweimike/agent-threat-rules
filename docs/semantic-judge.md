@@ -141,6 +141,50 @@ Endpoint resolution accepts:
 
 The adapter sends `response_format: { type: "json_object" }` by default. Set `jsonMode: false` for endpoints that do not support JSON mode.
 
+## CLI And MCP Opt-In
+
+Semantic judging is disabled by default in CLI and MCP. Enabling it can make network or local model calls, so it must be explicit.
+
+CLI flags:
+
+```bash
+atr scan events.json \
+  --semantic \
+  --semantic-api-key "$LLM_API_KEY" \
+  --semantic-base-url "https://api.openai.com/v1" \
+  --semantic-model "gpt-4o-mini"
+```
+
+For local OpenAI-compatible endpoints that do not support JSON mode:
+
+```bash
+atr scan events.json \
+  --semantic \
+  --semantic-api-key "local-not-used" \
+  --semantic-base-url "http://localhost:11434/v1" \
+  --semantic-model "llama3.1" \
+  --semantic-no-json-mode
+```
+
+Environment variables:
+
+| Variable | Purpose |
+|---|---|
+| `ATR_SEMANTIC=1` | Enable semantic judging for CLI/MCP |
+| `ATR_SEMANTIC_API_KEY` or `LLM_API_KEY` | Judge API key |
+| `ATR_SEMANTIC_BASE_URL` or `LLM_BASE_URL` | OpenAI-compatible base URL |
+| `ATR_SEMANTIC_MODEL` or `LLM_MODEL` | Judge model |
+| `ATR_SEMANTIC_TIMEOUT_MS` | Judge timeout in milliseconds |
+
+MCP uses the environment configuration because `atr mcp` runs as a long-lived stdio server:
+
+```bash
+ATR_SEMANTIC=1 \
+ATR_SEMANTIC_API_KEY="$LLM_API_KEY" \
+ATR_SEMANTIC_MODEL="gpt-4o-mini" \
+atr mcp
+```
+
 ## Local Model Example
 
 For a local OpenAI-compatible gateway:

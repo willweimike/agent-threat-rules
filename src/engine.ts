@@ -1619,9 +1619,51 @@ export class ATREngine {
     return matches;
   }
 
+  /**
+   * Async SKILL.md scan that supports method=semantic rules through semanticJudge.
+   */
+  async scanSkillAsync(content: string): Promise<ATRMatch[]> {
+    const baseEvent = {
+      type: 'mcp_exchange' as const,
+      timestamp: new Date().toISOString(),
+      sessionId: 'skill-scan',
+      fields: {},
+      scanContext: 'skill' as const,
+    };
+
+    const matches = await this.evaluateAsync({ ...baseEvent, content });
+
+    const decodedBlocks = decodeBase64Blocks(content);
+    for (const block of decodedBlocks) {
+      const blockMatches = await this.evaluateAsync({ ...baseEvent, content: block });
+      for (const m of blockMatches) {
+        matches.push({
+          ...m,
+          matchedPatterns: [...m.matchedPatterns, '[decoded:base64]'],
+        });
+      }
+    }
+
+    return matches;
+  }
+
   /** Scan a SKILL.md file and return a unified ScanResult with content_hash. */
   scanSkillFull(content: string, filePath?: string): ScanResult {
     const matches = this.scanSkill(content);
+    return {
+      scan_type: 'skill',
+      content_hash: computeContentHash(content),
+      input_file: filePath,
+      timestamp: new Date().toISOString(),
+      rules_loaded: this.rules.length,
+      matches,
+      threat_count: matches.length,
+    };
+  }
+
+  /** Async SKILL.md scan result with semantic rule support. */
+  async scanSkillFullAsync(content: string, filePath?: string): Promise<ScanResult> {
+    const matches = await this.scanSkillAsync(content);
     return {
       scan_type: 'skill',
       content_hash: computeContentHash(content),
@@ -1637,6 +1679,23 @@ export class ATREngine {
   evaluateFull(event: AgentEvent, filePath?: string): ScanResult {
     const matches = this.evaluate(event);
     // Hash content + fields to distinguish tool-call events with same content but different args
+    const hashInput = event.fields
+      ? event.content + '\0' + JSON.stringify(event.fields)
+      : event.content;
+    return {
+      scan_type: 'mcp',
+      content_hash: computeContentHash(hashInput),
+      input_file: filePath,
+      timestamp: new Date().toISOString(),
+      rules_loaded: this.rules.length,
+      matches,
+      threat_count: matches.length,
+    };
+  }
+
+  /** Async MCP event scan result with semantic rule support. */
+  async evaluateFullAsync(event: AgentEvent, filePath?: string): Promise<ScanResult> {
+    const matches = await this.evaluateAsync(event);
     const hashInput = event.fields
       ? event.content + '\0' + JSON.stringify(event.fields)
       : event.content;

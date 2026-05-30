@@ -69,6 +69,12 @@ ${BOLD}Options:${RESET}
   --sarif          Output results as SARIF v2.1.0 (GitHub Security tab)
   --output <file>  Write output to file instead of stdout (convert)
   --severity <s>   Minimum severity to report (critical|high|medium|low|informational)
+  --semantic       Enable method=semantic rules using an OpenAI-compatible judge
+  --semantic-api-key <key>       Judge API key (or ATR_SEMANTIC_API_KEY / LLM_API_KEY)
+  --semantic-base-url <url>      Judge API base URL (or ATR_SEMANTIC_BASE_URL / LLM_BASE_URL)
+  --semantic-model <model>       Judge model (or ATR_SEMANTIC_MODEL / LLM_MODEL)
+  --semantic-timeout <ms>        Judge request timeout (or ATR_SEMANTIC_TIMEOUT_MS)
+  --semantic-no-json-mode        Do not send OpenAI JSON-mode response_format
   --no-report        Disable anonymous Threat Cloud reporting (enabled by default)
   --tc-url <url>     Threat Cloud endpoint (default: https://tc.panguard.ai)
   --dry-run        Log actions without executing (guard mode)
@@ -119,7 +125,7 @@ function parseArgs(argv: string[]): { command: string; target: string; options: 
   for (let i = 1; i < args.length; i++) {
     if (args[i].startsWith('--')) {
       const key = args[i].slice(2);
-      if (key === 'json' || key === 'sarif' || key === 'help' || key === 'dry-run' || key === 'fail-open' || key === 'global' || key === 'svg' || key === 'no-report' || key === 'report-to-cloud') {
+      if (key === 'json' || key === 'sarif' || key === 'help' || key === 'dry-run' || key === 'fail-open' || key === 'global' || key === 'svg' || key === 'no-report' || key === 'report-to-cloud' || key === 'semantic' || key === 'semantic-no-json-mode') {
         options[key] = 'true';
       } else {
         options[key] = args[++i] ?? '';
@@ -932,6 +938,12 @@ async function main(): Promise<void> {
         severity: options['severity'],
         reportToCloud: options['no-report'] !== 'true',
         tcUrl: options['tc-url'],
+        semantic: options['semantic'] === 'true',
+        semanticApiKey: options['semantic-api-key'],
+        semanticBaseUrl: options['semantic-base-url'],
+        semanticModel: options['semantic-model'],
+        semanticTimeout: options['semantic-timeout'],
+        semanticNoJsonMode: options['semantic-no-json-mode'] === 'true',
       });
       break;
     case 'scan-skill':
@@ -942,6 +954,12 @@ async function main(): Promise<void> {
         forceType: 'skill',
         reportToCloud: options['no-report'] !== 'true',
         tcUrl: options['tc-url'],
+        semantic: options['semantic'] === 'true',
+        semanticApiKey: options['semantic-api-key'],
+        semanticBaseUrl: options['semantic-base-url'],
+        semanticModel: options['semantic-model'],
+        semanticTimeout: options['semantic-timeout'],
+        semanticNoJsonMode: options['semantic-no-json-mode'] === 'true',
       });
       break;
     case 'validate':
