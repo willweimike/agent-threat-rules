@@ -1,6 +1,6 @@
 {
   "report": {
-    "timestamp": "2026-05-23T16:17:14.166Z",
+    "timestamp": "2026-05-30T01:49:37.274Z",
     "corpusSize": 341,
     "overall": {
       "precision": 1,
@@ -17,11 +17,11 @@
       "sampleCount": 341
     },
     "latency": {
-      "p50": 5.506834000000026,
-      "p95": 10.9665829999999,
-      "p99": 30.289999999999964,
-      "mean": 6.849934240469205,
-      "max": 140.98225000000002
+      "p50": 5.673291999999947,
+      "p95": 10.306375000000116,
+      "p99": 35.887833,
+      "mean": 7.404296434017596,
+      "max": 199.03320799999995
     },
     "byCategory": [
       {
@@ -314,7 +314,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.9414580000000115,
+        "latencyMs": 7.756457999999952,
         "difficulty": "medium",
         "tier": "regex"
       },
@@ -325,7 +325,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.9591669999999795,
+        "latencyMs": 5.23720800000001,
         "difficulty": "medium",
         "tier": "embedding"
       },
@@ -336,7 +336,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.46387500000003,
+        "latencyMs": 4.9542920000000095,
         "difficulty": "medium",
         "tier": "regex"
       },
@@ -347,7 +347,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.438957999999957,
+        "latencyMs": 4.848874999999907,
         "difficulty": "medium",
         "tier": "regex"
       },
@@ -358,7 +358,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.23804199999995,
+        "latencyMs": 6.23558300000002,
         "difficulty": "hard",
         "tier": "embedding"
       },
@@ -369,7 +369,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.226917000000071,
+        "latencyMs": 5.955041000000051,
         "difficulty": "hard",
         "tier": "embedding"
       },
@@ -380,7 +380,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.386707999999999,
+        "latencyMs": 7.557375000000093,
         "difficulty": "medium",
         "tier": "regex"
       },
@@ -391,7 +391,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.94341600000007,
+        "latencyMs": 6.889582999999902,
         "difficulty": "medium",
         "tier": "regex"
       },
@@ -402,7 +402,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.931041999999934,
+        "latencyMs": 5.991958000000068,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -413,7 +413,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.436416999999892,
+        "latencyMs": 6.825708000000077,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -424,7 +424,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.950624999999945,
+        "latencyMs": 7.179292000000032,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -435,7 +435,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.506834000000026,
+        "latencyMs": 8.80512500000009,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -446,7 +446,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.323000000000093,
+        "latencyMs": 8.653042000000141,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -457,7 +457,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.748209000000088,
+        "latencyMs": 9.504334000000199,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -468,7 +468,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.819582999999966,
+        "latencyMs": 5.282833999999639,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -479,7 +479,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.642790999999761,
+        "latencyMs": 4.998541000000387,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -490,7 +490,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.845166999999947,
+        "latencyMs": 6.752333999999792,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -501,7 +501,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.312666999999692,
+        "latencyMs": 6.041749999999865,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -512,7 +512,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.834249999999884,
+        "latencyMs": 7.073750000000018,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -523,7 +523,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.878917000000001,
+        "latencyMs": 6.346000000000004,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -534,7 +534,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.263000000000375,
+        "latencyMs": 6.5154999999999745,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -545,7 +545,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.180374999999913,
+        "latencyMs": 5.5694579999999405,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -556,7 +556,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.7409999999999854,
+        "latencyMs": 4.866999999999734,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -567,7 +567,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.396042000000307,
+        "latencyMs": 6.065750000000207,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -578,7 +578,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 7.597874999999931,
+        "latencyMs": 6.198249999999916,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -589,7 +589,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.947959000000083,
+        "latencyMs": 5.175499999999829,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -600,7 +600,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.8404169999998885,
+        "latencyMs": 5.886709000000337,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -611,7 +611,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 6.446666000000278,
+        "latencyMs": 6.48279199999979,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -622,7 +622,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.850957999999991,
+        "latencyMs": 5.228583999999955,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -633,7 +633,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.444250000000011,
+        "latencyMs": 5.6022909999996955,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -644,7 +644,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 4.964750000000095,
+        "latencyMs": 5.082707999999911,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -655,7 +655,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.401667000000089,
+        "latencyMs": 5.496374999999716,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -666,7 +666,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.6255419999997684,
+        "latencyMs": 5.5435419999998885,
         "difficulty": "easy",
         "tier": "any"
       },
@@ -677,7 +677,7 @@
         "actualDetection": false,
         "matchedRules": [],
         "confidence": 0,
-        "latencyMs": 5.192207999999937,
+        "latencyMs": 5.5622089999997115,
         "difficulty": "easy",
         "tier": "any"
       }
@@ -711,9 +711,9 @@
     }
   },
   "ruleQuality": {
-    "totalRulesEvaluated": 427,
+    "totalRulesEvaluated": 450,
     "rulesFired": 68,
-    "rulesNeverFired": 360,
+    "rulesNeverFired": 383,
     "topRules": [
       {
         "ruleId": "ATR-2026-00001",
@@ -1925,10 +1925,33 @@
       "ATR-2026-00527",
       "ATR-2026-00528",
       "ATR-2026-00529",
-      "ATR-2026-00530"
+      "ATR-2026-00530",
+      "ATR-2026-00531",
+      "ATR-2026-00532",
+      "ATR-2026-00533",
+      "ATR-2026-00534",
+      "ATR-2026-00535",
+      "ATR-2026-00536",
+      "ATR-2026-00537",
+      "ATR-2026-00538",
+      "ATR-2026-00539",
+      "ATR-2026-00540",
+      "ATR-2026-00541",
+      "ATR-2026-00542",
+      "ATR-2026-00543",
+      "ATR-2026-00544",
+      "ATR-2026-00545",
+      "ATR-2026-00546",
+      "ATR-2026-00547",
+      "ATR-2026-00548",
+      "ATR-2026-00549",
+      "ATR-2026-00550",
+      "ATR-2026-00551",
+      "ATR-2026-00552",
+      "ATR-2026-00553"
     ]
   },
-  "ruleCount": 427,
+  "ruleCount": 450,
   "engine": "ATREngine",
   "tiers": [
     "tier2-regex",
