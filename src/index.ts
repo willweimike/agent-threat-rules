@@ -24,6 +24,9 @@ export type { SessionStateSnapshot } from './session-tracker.js';
 export { computeContentHash } from './content-hash.js';
 export { redactMatchedValue, redactMatchedValues } from './redact.js';
 export type { RedactOptions } from './redact.js';
+export { evaluateSemanticRule } from './semantic-evaluator.js';
+export { createOpenAICompatibleJudge } from './judges/openai-compatible.js';
+export type { OpenAICompatibleJudgeConfig } from './judges/openai-compatible.js';
 
 // ── Tier 0: Invariant Enforcement (hard boundaries) ──────────────
 export { InvariantChecker } from './tier0-invariant.js';
@@ -111,6 +114,8 @@ export type {
   ATRTags,
   ATRAgentSource,
   ATRDetection,
+  ATRSemanticDetection,
+  ATRSemanticJudge,
   ATRResponse,
   ATRTestCases,
   ATRTestCase,
